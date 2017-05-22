@@ -125,7 +125,7 @@ bool SDLSystem::InitIMG() {
 bool SDLSystem::InitMixer() {
   INFO("Initializing Mixer");
 
-  int init = Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
+  int init = Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
   if (init != 0) {
     SDL_MIX_ERROR("SDLSystem::InitMixer() failed.");

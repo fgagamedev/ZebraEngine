@@ -4,6 +4,7 @@ void MainScene::OnActivation() {
   CreateLogo();
   CreatePlayButton();
   CreateQuitButton();
+  CreateMusic();
 }
 
 void MainScene::OnDeactivation() {}
@@ -52,4 +53,15 @@ void MainScene::CreateQuitButton() {
   auto script = new QuitButtonScript(quit);
 
   AddGameObject(quit);
+}
+
+
+void MainScene::CreateMusic(){
+
+  auto music = new GameObject("Music", new Vector(200, 200), 200, 100);
+
+  auto themeMusic = new UISound(music, "Music", "assets/Audio/beat.wav", false, true);
+
+  AddGameObject(music);
+
 }

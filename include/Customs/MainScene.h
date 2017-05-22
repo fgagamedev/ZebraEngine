@@ -3,6 +3,7 @@
 
 #include "Components/UIButton.h"
 #include "Components/UIText.h"
+#include "Components/UISound.h"
 #include "Customs/PlayButtonScript.h"
 #include "Customs/QuitButtonScript.h"
 #include "Engine/GameObject.h"
@@ -19,6 +20,7 @@ private:
   void CreateLogo();
   void CreatePlayButton();
   void CreateQuitButton();
+  void CreateMusic();
 };
 
 #endif
