@@ -26,7 +26,7 @@ void NakedManScript::ComponentUpdate() {
     animator->GetAnimation("Walk Side")->SetFlip(false, false);
     animator->PlayAnimation("Walk Side");
   } else {
-    animator->StopAllAnimations();
+      animator->StopAllAnimations();
   }
 
   if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
