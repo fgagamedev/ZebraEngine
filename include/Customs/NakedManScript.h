@@ -20,7 +20,7 @@ protected:
   void ComponentUpdate() override;
 
 private:
-  float walkSpeed = 3;
+  float walkSpeed = 7;
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
