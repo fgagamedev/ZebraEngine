@@ -1,5 +1,5 @@
 #include "Engine/CollisionSystem.h"
-
+#include <math.h>
 CollisionSystem *CollisionSystem::m_instance = nullptr;
 
 CollisionSystem::CollisionSystem() {}
@@ -91,31 +91,25 @@ void CollisionSystem::RectRect(RectangleCollider *r1, RectangleCollider *r2) {
 }
 
 void CollisionSystem::CircleRect(CircleCollider *c, RectangleCollider *r) {
-  int x[2], y[2];
-  bool collision = false;
-
-  x[0] = r->GetRectanglePoint().m_x;
-  x[1] = r->GetRectanglePoint().m_x + r->GetWidth();
-
-  y[0] = r->GetRectanglePoint().m_y;
-  y[1] = r->GetRectanglePoint().m_y + r->GetHeight();
-
-  Vector points[4];
-  points[0] = Vector(x[0], y[0]);
-  points[1] = Vector(x[0], y[1]);
-  points[2] = Vector(x[1], y[0]);
-  points[3] = Vector(x[1], y[1]);
-
-  auto circleCenter = c->GetCenter();
-
-  if (circleCenter.GetDistance(points[0]) <= c->GetRadius() ||
-      circleCenter.GetDistance(points[1]) <= c->GetRadius() ||
-      circleCenter.GetDistance(points[2]) <= c->GetRadius() ||
-      circleCenter.GetDistance(points[3]) <= c->GetRadius())
-    collision = true;
-
+    bool collision = false;
+    //Distance between centers in x-axis
+    double distX = abs(c->GetCenter().m_x - r->GetRectanglePoint().m_x - r->GetWidth()/2 );
+    //Distance between centers in y-axis
+    double distY = abs(c->GetCenter().m_y - r->GetRectanglePoint().m_y - r->GetHeight()/2 );
+    //Distance between centers  in x-axis
+    double dx=distX - r->GetWidth()/2;
+    double dy=distY - r->GetHeight()/2;
+    //Checks if the distance on x-axis between centers are greater than RectWidth/2 + CircleRadius,in that case
+    //there is no Collision.The same logic is used on y-axis
+     if (!((distX > (r->GetWidth()/2 + c->GetRadius())) || (distY > (r->GetHeight()/2 + c->GetRadius()) )))
+        /*verify if the distance between centers are lesser than rect width and height,
+         also checks if the hypotenuse(Line that connects both centers and crosses
+        the rect vertice) is lesser than circle radius^2,in that case,collision occurs.*/
+        if (((distX <= (r->GetWidth()/2)) || (distY <= (r->GetHeight()/2))) || (dx*dx + dy*dy <= (c->GetRadius()*c->GetRadius())))
+                collision=true;
   if (collision) {
     INFO("COLLIDED");
     INFO("RECT CIRCLE");
   }
+
 }
