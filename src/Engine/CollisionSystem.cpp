@@ -104,7 +104,7 @@ void CollisionSystem::CircleRect(CircleCollider *c, RectangleCollider *r) {
   points[0] = Vector(x[0], y[0]);
   points[1] = Vector(x[0], y[1]);
   points[2] = Vector(x[1], y[0]);
-  points[3] = Vector(x[1], x[1]);
+  points[3] = Vector(x[1], y[1]);
 
   auto circleCenter = c->GetCenter();
 

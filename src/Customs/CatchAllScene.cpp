@@ -31,7 +31,7 @@ void CatchAllScene::CreateObstacles() {
   auto obsCircle = new GameObject("ObsCircle", new Vector(400, 400), 40, 40, 1);
   auto obsCircleCircle = new CircleRenderer(obsCircle, Vector(0, 0), 20);
   obsCircleCircle->SetColor(255, 255, 255, 255);
-  auto colliderOffset = Vector(20, 20);
+  auto colliderOffset = Vector(0, 0);
   auto obsCircleCollider = new CircleCollider(obsCircle, colliderOffset, 20, 0);
   AddGameObject(obsCircle);
 }
