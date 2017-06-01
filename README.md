@@ -1,22 +1,43 @@
-# SquareOrDie
-----
-## Mechanics
-#### Movements
-Moving: W A S D <br>
-Special (if available in gamemode): Space <br>
+# ZebraEngine
+## About
 
-#### Keep moving!
-Yeah, if you stop moving you die. Keep moving.
+<p align="justify">
+Zebra Engine is a 2D personal engine made for learning.
+</p>
 
----
-### Gamemodes
-#### Catch All
-One of the players are randomly chose for being the killer and the rest will be the runners. Each runner the killer collides with he gets a point, if a runner survives he gets 2 points. <br>
-<i>Special: killer can get invisible for a certain amount of time</i>
+## Dependencies
 
-#### INCOMING!
-In this mode there's a missile that follows a random player, when it gets in a specific range of any player it will explode, if you are in this range, you die.
+<p align="justify">
+This project depends on
 
-----
-### About
-<p>This game is made by Vitor Falcao, software engineer student. The game uses as a base Move or Die, an excellent and really well recommended party game.</p>
+    SDL2
+    SDL2_image
+    SDL2_mixer
+    SDL2_TTF
+    CMake 3.5.1
+</p>
+
+### Ubuntu
+
+<p align="justify">
+For installing run:
+
+    sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+</p>
+
+## Compiling
+### Ubuntu
+
+<p align="justify">
+Go to the project folder and run:
+
+    cmake ./
+    make
+    ./ZebraEngine
+</p>
+
+### Windows
+
+<p align="justify">
+We still working on better ways to supporting Windows.
+</p>

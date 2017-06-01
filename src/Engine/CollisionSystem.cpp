@@ -77,19 +77,11 @@ void CollisionSystem::CircleCircle(CircleCollider *c1, CircleCollider *c2) {
 
 void CollisionSystem::RectRect(RectangleCollider *r1, RectangleCollider *r2) {
   bool collision = false;
-  int x1[2], x2[2], y1[2], y2[2];
+  auto posR1 = r1->GetRectanglePoint();
+  auto posR2 = r2->GetRectanglePoint();
 
-  x1[0] = r1->GetRectanglePoint().m_x;
-  x1[1] = r1->GetRectanglePoint().m_x + r2->GetWidth();
-  x2[0] = r2->GetRectanglePoint().m_x;
-  x2[1] = r2->GetRectanglePoint().m_x + r2->GetWidth();
-
-  y1[0] = r1->GetRectanglePoint().m_y + r2->GetHeight();
-  y1[1] = r1->GetRectanglePoint().m_y;
-  y2[0] = r2->GetRectanglePoint().m_y + r2->GetHeight();
-  y2[1] = r2->GetRectanglePoint().m_y;
-
-  if (x1[0] < x2[1] && x1[1] > x2[0] && y1[1] > y2[0] && y1[0] < y2[1])
+  if (abs(posR1.m_x - posR2.m_x) * 2 <= r1->GetWidth() + r2->GetWidth() &&
+      abs(posR1.m_y - posR2.m_y) * 2 <= r1->GetHeight() + r2->GetHeight())
     collision = true;
 
   if (collision) {

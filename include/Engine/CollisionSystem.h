@@ -1,6 +1,7 @@
 #ifndef __COLLISION_SYSTEM__
 #define __COLLISION_SYSTEM__
 
+#include <math.h>
 #include <vector>
 
 #include "Components/CircleCollider.h"
@@ -8,6 +9,7 @@
 #include "Components/RectangleCollider.h"
 #include "Engine/SceneManager.h"
 #include "Log/log.h"
+
 #include "Math/Vector.h"
 
 using namespace std;
