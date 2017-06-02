@@ -1,6 +1,7 @@
 #ifndef __SDLSYSTEM_H__
 #define __SDLSYSTEM_H__
 
+#include "Engine/CollisionSystem.h"
 #include "Engine/InputSystem.h"
 #include "Engine/SceneManager.h"
 #include "Engine/sdl2include.h"

@@ -3,6 +3,7 @@
 
 #include "Components/Script.h"
 #include "Components/UIButton.h"
+#include "Engine/GameObject.h"
 #include "Engine/SDLSystem.h"
 
 using namespace std;
@@ -15,7 +16,6 @@ public:
   void Start() override;
 
 private:
-  UIButton *buttonComp = nullptr;
+  UIButton *m_uiButton = nullptr;
 };
-
 #endif

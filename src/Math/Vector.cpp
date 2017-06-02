@@ -25,7 +25,9 @@ Vector Vector::operator/(float scalar) {
 }
 
 float Vector::GetLength() { return sqrt(m_x * m_x + m_y * m_y); }
-float Vector::GetLength(Vector &vec) { return sqrt(vec.m_x * vec.m_x + vec.m_y * vec.m_y); }
+float Vector::GetLength(Vector &vec) {
+  return sqrt((vec.m_x * vec.m_x) + (vec.m_y * vec.m_y));
+}
 
 Vector Vector::GetNormalized() {
   float l = GetLength();
@@ -36,7 +38,7 @@ Vector Vector::GetNormalized() {
   return Vector(0, 0);
 }
 
-float Vector::GetDistance(Vector &vec) {
+float Vector::GetDistance(Vector vec) {
   Vector subtraction = vec - *this;
   return GetLength(subtraction);
 }

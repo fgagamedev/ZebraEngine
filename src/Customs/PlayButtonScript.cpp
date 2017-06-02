@@ -3,17 +3,11 @@
 PlayButtonScript::PlayButtonScript(GameObject *owner) : Script(owner) {}
 
 void PlayButtonScript::Start() {
-  buttonComponent = (UIButton *)GetOwner()->GetComponent("UIButton");
+  m_uiButton = (UIButton *)GetOwner()->GetComponent("UIButton");
 }
 
 void PlayButtonScript::ComponentUpdate() {
-  if (buttonComponent->IsOver()) {
-    GetOwner()->SetSize(240, 120);
-  } else {
-    GetOwner()->SetSize(200, 100);
-  }
-
-  if (buttonComponent->IsClicked()) {
-    SceneManager::GetInstance()->SetCurrentScene("Gameplay");
+  if (m_uiButton->IsClicked()) {
+    SceneManager::GetInstance()->SetCurrentScene("CatchAll");
   }
 }

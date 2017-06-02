@@ -4,8 +4,8 @@
 #include <string>
 
 namespace EngineGlobals {
-const std::string engine_name = "ZebraEngine";
-const std::string engine_version = "1.0";
+const std::string engine_name = "SquareOrDie";
+const std::string engine_version = "0.1";
 const std::string window_title = engine_name + " " + engine_version;
 
 const int screen_width = 1024;

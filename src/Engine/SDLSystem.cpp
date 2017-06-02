@@ -1,7 +1,7 @@
 #include "Engine/SDLSystem.h"
 
 // load commons includes
-#include "Customs/GamePlayScene.h"
+#include "Customs/CatchAllScene.h"
 #include "Customs/MainScene.h"
 
 // static variables initialization
@@ -50,11 +50,15 @@ void SDLSystem::Run() {
     CalculateFramerate();
     InputSystem::GetInstance()->UpdateStates();
 
+    if (InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE))
+      break;
+
     // all updates but draw are called here
     SceneManager::GetInstance()->Update();
     if (SDL_GetTicks() - m_lastFixedUpdate >
         EngineGlobals::fixed_update_interval) {
       SceneManager::GetInstance()->FixedUpdate();
+      CollisionSystem::GetInstance()->Update();
       m_lastFixedUpdate = SDL_GetTicks();
     }
 
@@ -193,9 +197,15 @@ void SDLSystem::CalculateFramerate() {
 
 void SDLSystem::LoadCommons() {
   auto mainScene = new MainScene();
-  auto gameplayScene = new GamePlayScene();
+  auto catchAllScene = new CatchAllScene();
+
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
+<<<<<<< HEAD
   SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay", gameplayScene));
+=======
+  SceneManager::GetInstance()->AddScene(
+      std::make_pair("CatchAll", catchAllScene));
+>>>>>>> 4cbe71176793f4e124cf94241382d105fc8a0385
 }
 
 bool SDLSystem::FixFramerate() {

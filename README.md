@@ -21,7 +21,7 @@ This project depends on
 
 <p align="justify">
 For installing run:
-    
+
     sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
 </p>
 

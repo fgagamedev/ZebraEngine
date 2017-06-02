@@ -24,9 +24,11 @@ UIText::UIText(GameObject *owner, string message, string fontPath, int size,
 
 void UIText::Start() {}
 
+void UIText::SetOffset(Vector &offset) { m_offset = offset; }
+
 void UIText::ComponentUpdate() {
-  m_rect.x = GetOwner()->GetPosition()->m_x;
-  m_rect.y = GetOwner()->GetPosition()->m_y;
+  m_rect.x = GetOwner()->GetPosition()->m_x + m_offset.m_x;
+  m_rect.y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
   m_rect.w = GetOwner()->GetWidth();
   m_rect.h = GetOwner()->GetHeight();
 

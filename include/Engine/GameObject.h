@@ -30,6 +30,9 @@ public:
   void AddComponent(Component *component);
   void AddComponent(std::vector<Component *> components);
   Component *GetComponent(std::string name);
+  std::unordered_map<Uint32, std::vector<Component *>> GetAllComponents() {
+    return m_components;
+  };
   std::string GetName() { return m_name; };
   // getter and setter
   inline Vector *GetPosition() { return m_position; };

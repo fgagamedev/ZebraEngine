@@ -21,8 +21,10 @@ public:
   void FixedComponentUpdate() override;
   void ComponentUpdate() override;
   void SetText(string text);
+  void SetOffset(Vector &offset);
 
 private:
+  Vector m_offset = Vector(0, 0);
   Uint8 m_mode = 0;
   string m_message;
   SDL_Surface *m_surface = nullptr;

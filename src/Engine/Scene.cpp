@@ -18,6 +18,7 @@ void Scene::Update() {
 }
 
 void Scene::DrawUpdate() {
+  std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
   for (auto it : m_gameObjects)
     if (it->active)
       it->DrawUpdate();
