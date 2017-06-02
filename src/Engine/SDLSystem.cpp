@@ -40,8 +40,7 @@ void SDLSystem::Run() {
   m_isRunning = true;
 
   LoadCommons();
-  SceneManager::GetInstance()->SetCurrentScene(
-      "Main"); // must be called here but scene name can be changed
+  SceneManager::GetInstance()->SetCurrentScene("Main"); // must be called here but scene name can be changed
   SceneManager::GetInstance()->Start();
 
   while (m_isRunning) {
@@ -196,8 +195,7 @@ void SDLSystem::LoadCommons() {
   auto mainScene = new MainScene();
   auto gameplayScene = new GamePlayScene();
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
-  SceneManager::GetInstance()->AddScene(
-      std::make_pair("Gameplay", gameplayScene));
+  SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay", gameplayScene));
 }
 
 bool SDLSystem::FixFramerate() {

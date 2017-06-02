@@ -9,24 +9,46 @@ void NakedManScript::Start() {
 }
 
 void NakedManScript::ComponentUpdate() {
+static int lastDirection=1;
   // movement animation and input detection
   movements = movements & 0x00;
   if (input->GetKeyPressed(INPUT_W)) {
+    lastDirection=0;
     movements = movements | 0x08;
     animator->PlayAnimation("Walk Up");
+
   } else if (input->GetKeyPressed(INPUT_S)) {
+    lastDirection=1;
     movements = movements | 0x04;
     animator->PlayAnimation("Walk Down");
   } else if (input->GetKeyPressed(INPUT_A)) {
+    lastDirection=2;
     movements = movements | 0x02;
     animator->GetAnimation("Walk Side")->SetFlip(true, false);
     animator->PlayAnimation("Walk Side");
+    lastDirection=3;
   } else if (input->GetKeyPressed(INPUT_D)) {
+   lastDirection=3;
     movements = movements | 0x01;
     animator->GetAnimation("Walk Side")->SetFlip(false, false);
     animator->PlayAnimation("Walk Side");
   } else {
-      animator->StopAllAnimations();
+
+          if(lastDirection==0){
+          animator->PlayAnimation("Stop Up");
+          }
+          else if(lastDirection==1){
+          animator->PlayAnimation("Stop Down");
+          }
+          else if(lastDirection==2){
+          animator->PlayAnimation("Stop Left");
+          }
+          else if(lastDirection==3){
+          animator->PlayAnimation("Stop Right");
+          }
+
+    //  animator->StopAllAnimations();
+
   }
 
   if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
