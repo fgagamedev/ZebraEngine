@@ -16,11 +16,11 @@ void GamePlayScene::CreateNakedMan() {
   xPos =EngineGlobals::screen_width / 2 - 120;
   yPos =EngineGlobals::screen_height / 2 - 120;
 
-  auto nakedMan = new GameObject("NakedMan", new Vector(xPos, yPos), 120, 120, 1);
+  auto nakedMan = new GameObject("NakedMan", new Vector(xPos, yPos), 96, 96, 1);
 
   // renderer
-  auto nakedManImage = new Image("assets/player.png", 240, 240, 120, 120);
-  auto nakedManRenderer = new Renderer(nakedMan, nakedManImage);
+  auto nakedManImage = new Image("assets/player.png", 0, 128, 96, 96);
+  //auto nakedManRenderer = new Renderer(nakedMan, nakedManImage);
 
   // circle renderer
   // auto cr = new CircleRenderer(nakedMan, Vector(32, 32), 32);
@@ -29,26 +29,43 @@ void GamePlayScene::CreateNakedMan() {
   // auto rr = new RectangleRenderer(nakedMan, Vector(0, 0), 64, 64);
 
   // animations
-  auto nakedManSprite = new Image("assets/player.png", 0, 0, 1440, 480);
+  auto nakedManSprite = new Image("assets/player.png", 0, 0, 1664, 512);
+
+  auto StopDownAnimation = new Animation(nakedMan, nakedManSprite);
+    StopDownAnimation->AddFrame(new Frame(0, 256, 128, 128));
+
+  auto StopRightAnimation = new Animation(nakedMan, nakedManSprite);
+         StopRightAnimation->AddFrame(new Frame(0, 0, 128, 128));
+
+  auto StopLeftAnimation = new Animation(nakedMan, nakedManSprite);
+        StopLeftAnimation->AddFrame(new Frame(0, 128, 128, 128));
+
+  auto StopUpAnimation = new Animation(nakedMan, nakedManSprite);
+        StopUpAnimation->AddFrame(new Frame(0, 384, 128, 128));
 
   auto walkSideAnimation = new Animation(nakedMan, nakedManSprite);
-  for (int i = 0; i < 12; i++)
-    walkSideAnimation->AddFrame(new Frame(i * 120, 0, 120, 120));
+  for (int i = 1; i < 13; i++)
+    walkSideAnimation->AddFrame(new Frame(i * 128, 0, 128, 128));
 
   auto walkUpAnimation = new Animation(nakedMan, nakedManSprite);
-  for (int i = 0; i < 12; i++)
-    walkUpAnimation->AddFrame(new Frame(i * 120, 360, 120, 120));
+  for (int i = 1; i < 13; i++)
+    walkUpAnimation->AddFrame(new Frame(i * 128, 384, 128, 128));
 
   auto walkDownAnimation = new Animation(nakedMan, nakedManSprite);
-  for (int i = 0; i < 12; i++)
-    walkDownAnimation->AddFrame(new Frame(i * 120, 240, 120, 120));
+  for (int i = 1; i < 13; i++)
+    walkDownAnimation->AddFrame(new Frame(i * 128, 256, 128, 128));
 
   // animator
   auto nakedManAnimator = new Animator(nakedMan);
+
   nakedManAnimator->AddAnimation("Walk Side", walkSideAnimation);
   nakedManAnimator->AddAnimation("Walk Up", walkUpAnimation);
   nakedManAnimator->AddAnimation("Walk Down", walkDownAnimation);
 
+ nakedManAnimator->AddAnimation("Stop Down", StopDownAnimation);
+ nakedManAnimator->AddAnimation("Stop Up", StopUpAnimation);
+ nakedManAnimator->AddAnimation("Stop Left", StopLeftAnimation);
+ nakedManAnimator->AddAnimation("Stop Right", StopRightAnimation);
   // script
   auto nakedManScript = new NakedManScript(nakedMan);
 
@@ -59,7 +76,9 @@ void GamePlayScene::CreateNakedMan() {
 }
 
 void GamePlayScene::CreateMap() {
-  auto map = new GameObject("Map", new Vector(-3300 ,-2650),7623, 5717);
+//Original resolution is 2000/1500
+//6000,4500 = 3x
+  auto map = new GameObject("Map", new Vector(-2500 ,-2000),6000, 4500);
 
   // Renderer
   auto mapImage = new Image("assets/world.png", 0, 0, 2000, 1498);
