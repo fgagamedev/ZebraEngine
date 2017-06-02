@@ -3,6 +3,7 @@
 // load commons includes
 #include "Customs/CatchAllScene.h"
 #include "Customs/MainScene.h"
+#include "Customs/GamePlayScene.h"
 
 // static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
@@ -197,15 +198,15 @@ void SDLSystem::CalculateFramerate() {
 
 void SDLSystem::LoadCommons() {
   auto mainScene = new MainScene();
+   auto gameplayScene = new GamePlayScene();
   auto catchAllScene = new CatchAllScene();
 
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
-<<<<<<< HEAD
+
   SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay", gameplayScene));
-=======
-  SceneManager::GetInstance()->AddScene(
-      std::make_pair("CatchAll", catchAllScene));
->>>>>>> 4cbe71176793f4e124cf94241382d105fc8a0385
+
+  SceneManager::GetInstance()->AddScene(std::make_pair("CatchAll", catchAllScene));
+
 }
 
 bool SDLSystem::FixFramerate() {

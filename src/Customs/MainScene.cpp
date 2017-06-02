@@ -5,12 +5,12 @@ MainScene::MainScene() {}
 void MainScene::OnActivation() {
   m_width_middle = EngineGlobals::screen_width / 2;
   m_height_middle = EngineGlobals::screen_height / 2;
-
+  CreateLogo();
   CreatePlayButton();
   CreateQuitButton();
   CreateMusic();
-  CreateBackground();
-  CreateGamemodes();
+  //CreateBackground();
+  //CreateGamemodes();
 
 }
 
@@ -20,7 +20,50 @@ void MainScene::OnShown() {}
 
 void MainScene::OnHidden() {}
 
+
+void MainScene::CreateLogo() {
+  int xMiddle = EngineGlobals::screen_width / 2 - 100;
+
+  auto logo = new GameObject("Logo", new Vector(xMiddle, 100), 200, 100);
+
+  auto logoText =
+      new UIText(logo, "VoID", "assets/Archivo_Black/ArchivoBlack-Regular.ttf",
+                 200, 255, 255, 255, 255, 1);
+
+  AddGameObject(logo);
+}
+
 void MainScene::CreatePlayButton() {
+  int xMiddle = EngineGlobals::screen_width / 2 - 100;
+
+  auto play = new GameObject("Play", new Vector(xMiddle, 200), 200, 100);
+
+  auto playText = new UIText(play, "Play", "assets/Raleway/Raleway-Regular.ttf",
+                             200, 255, 255, 255, 150, 1);
+
+  auto playButton = new UIButton(play);
+
+  auto script = new PlayButtonScript(play);
+
+  AddGameObject(play);
+}
+
+void MainScene::CreateQuitButton() {
+  int xMiddle = EngineGlobals::screen_width / 2 - 100;
+
+  auto quit = new GameObject("Quit", new Vector(xMiddle, 300), 200, 100);
+
+  auto quitText = new UIText(quit, "Quit", "assets/Raleway/Raleway-Regular.ttf",
+                             200, 255, 255, 255, 150, 1);
+
+  auto quitButton = new UIButton(quit);
+
+  auto script = new QuitButtonScript(quit);
+
+  AddGameObject(quit);
+}
+
+/*void MainScene::CreatePlayButton() {
   auto playButton = new GameObject(
       "PlayButton", new Vector(m_width_middle - (190 * 1.4 / 2), 100),
       190 * 1.4, 45 * 1.4, 1);
@@ -121,7 +164,7 @@ void MainScene::CreateGamemodes() {
   missile_CBRenderer->active = true;
   AddGameObject(missile_CB);
 }
-
+*/
 
 void MainScene::CreateMusic(){
 

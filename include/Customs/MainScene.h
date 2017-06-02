@@ -5,12 +5,9 @@
 #include "Components/Renderer.h"
 #include "Components/UIButton.h"
 #include "Components/UIText.h"
-<<<<<<< HEAD
 #include "Components/UISound.h"
-=======
 #include "Customs/CatchAllButtonScript.h"
 #include "Customs/MissileButtonScript.h"
->>>>>>> 4cbe71176793f4e124cf94241382d105fc8a0385
 #include "Customs/PlayButtonScript.h"
 #include "Customs/QuitButtonScript.h"
 #include "Engine/Image.h"
@@ -28,15 +25,14 @@ public:
 private:
   int m_width_middle;
   int m_height_middle;
-
+  void CreateLogo();
   void CreatePlayButton();
   void CreateQuitButton();
-<<<<<<< HEAD
+
   void CreateMusic();
-=======
-  void CreateBackground();
-  void CreateGamemodes();
->>>>>>> 4cbe71176793f4e124cf94241382d105fc8a0385
+  //void CreateBackground();
+  //void CreateGamemodes();
+
 };
 
 #endif
