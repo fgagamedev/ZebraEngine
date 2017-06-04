@@ -59,6 +59,10 @@ static int lastDirection=1;
     var->SetText("Continue");
     SceneManager::GetInstance()->SetCurrentScene("Main");
   }
+     if (InputSystem::GetInstance()->GetKeyUp(INPUT_UP)) {
+        SceneManager::GetInstance()->SetCurrentScene("CatchAll");
+      }
+
 }
 
 void NakedManScript::FixedComponentUpdate() {

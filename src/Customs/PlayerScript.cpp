@@ -1,5 +1,5 @@
 #include "Customs/PlayerScript.h"
-
+#include "Components/UIText.h"
 PlayerScript::PlayerScript(GameObject *owner) : Script(owner){};
 
 void PlayerScript::ComponentUpdate() { HandleInput(); }
@@ -17,6 +17,15 @@ void PlayerScript::HandleInput() {
     m_movement.m_y -= 1;
 
   m_movement = m_movement.GetNormalized();
+
+  if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
+      auto var = (UIText *)SceneManager::GetInstance()
+                     ->GetScene("Main")
+                     ->GetGameObject("Play")
+                     ->GetComponent("UIText");
+      var->SetText("Continue");
+      SceneManager::GetInstance()->SetCurrentScene("Main");
+    }
 }
 
 void PlayerScript::FixedComponentUpdate() {

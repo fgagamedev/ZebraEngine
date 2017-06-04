@@ -18,7 +18,7 @@ void CatchAllScene::CreatePlayer() {
   // auto playerCollider = new CircleCollider(player, colliderOffset, 20, 0);
   auto playerCollider = new RectangleCollider(player, Vector(0, 0), 40, 40, 0);
   AddGameObject(player);
-}
+    }
 
 void CatchAllScene::CreateObstacles() {
   auto obsRect = new GameObject("ObsRect", new Vector(200, 200), 40, 40, 1);

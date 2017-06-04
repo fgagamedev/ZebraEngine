@@ -20,7 +20,7 @@ void GamePlayScene::CreateNakedMan() {
 
   // renderer
   auto nakedManImage = new Image("assets/player.png", 0, 128, 96, 96);
-  //auto nakedManRenderer = new Renderer(nakedMan, nakedManImage);
+//  auto nakedManRenderer = new Renderer(nakedMan, nakedManImage);
 
   // circle renderer
   // auto cr = new CircleRenderer(nakedMan, Vector(32, 32), 32);
@@ -78,10 +78,10 @@ void GamePlayScene::CreateNakedMan() {
 void GamePlayScene::CreateMap() {
 //Original resolution is 2000/1500
 //6000,4500 = 3x
-  auto map = new GameObject("Map", new Vector(-2500 ,-2000),6000, 4500);
+  auto map = new GameObject("Map", new Vector(-3555 ,-3850),8064, 8064);
 
   // Renderer
-  auto mapImage = new Image("assets/world.png", 0, 0, 2000, 1498);
+  auto mapImage = new Image("assets/world.png", 0, 0, 2048, 2048);
   auto mapRenderer = new Renderer(map, mapImage);
 
   // Script

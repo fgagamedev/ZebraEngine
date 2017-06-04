@@ -77,7 +77,7 @@ Component *GameObject::GetComponent(std::string name) {
         return value;
     }
   }
-  INFO("Looking for null component " << name);
+ // INFO("Looking for null component " << name);
   return nullptr;
 }
 
