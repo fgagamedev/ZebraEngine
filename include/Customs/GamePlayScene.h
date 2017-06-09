@@ -21,6 +21,7 @@ public:
 private:
   void CreateNakedMan();
   void CreateMap();
+
 };
 
 #endif

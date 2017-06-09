@@ -7,6 +7,7 @@
 #include "Engine/InputSystem.h"
 #include "Engine/SceneManager.h"
 #include "Globals/EngineGlobals.h"
+#include "Engine/CameraSystem.h"
 
 class NakedManScript : public Script {
 public:
@@ -24,7 +25,7 @@ private:
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
-  char movements = 0x00; // up down left right
+  int movements=0; //1=UP,2=DOWN,3=LEFT,RIGHT
   int deadzone_x = EngineGlobals::screen_width / 2 + 100;
   int deadzone_y = EngineGlobals::screen_height / 2 + 100;
 };

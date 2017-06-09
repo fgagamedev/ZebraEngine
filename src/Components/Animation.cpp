@@ -62,11 +62,11 @@ void Animation::DrawCurrentFrame() {
   Uint32 currentTicks = SDL_GetTicks();
   if (currentTicks - m_lastDraw < (Uint32)(1000 / m_framesPerSecond)) {
     GraphicsSystem::GetInstance()->DrawFrame(m_image, GetCurrentFrame(),
-                                             GetOwner()->GetPosition());
+                                             GetOwner()->GetPosition(),GetOwner()->GetWidth(),GetOwner()->GetHeight());
   } else {
     m_lastDraw = currentTicks;
     GraphicsSystem::GetInstance()->DrawFrame(m_image, GetCurrentFrame(),
-                                             GetOwner()->GetPosition());
+                                             GetOwner()->GetPosition(),GetOwner()->GetWidth(),GetOwner()->GetHeight());
     m_currentFrame = (m_currentFrame + 1) % m_framesQuantity;
   }
 }

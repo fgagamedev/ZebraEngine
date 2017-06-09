@@ -5,6 +5,7 @@
 #include "Customs/NakedManScript.h"
 #include "Engine/SceneManager.h"
 #include "Globals/EngineGlobals.h"
+#include "Engine/CameraSystem.h"
 
 class MapScript : public Script {
 public:
@@ -18,9 +19,17 @@ protected:
 
 private:
   GameObject *nakedMan = nullptr;
+  GameObject *map = nullptr;
   Vector *nakedManPosition = nullptr;
+  Vector *mapPosition = nullptr;
   NakedManScript *script = nullptr;
   char nakedManMovements;
+  int mapSize_x;
+  int mapSize_y;
+  int mapSpeed;
+  float proportion_x;
+  float proportion_y;
+
 };
 
 #endif

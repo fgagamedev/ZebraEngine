@@ -1,6 +1,9 @@
 #include "Customs/PlayerScript.h"
 #include "Components/UIText.h"
-PlayerScript::PlayerScript(GameObject *owner) : Script(owner){};
+PlayerScript::PlayerScript(GameObject *owner) : Script(owner){
+GetOwner()->GetPosition()->m_x=0;
+GetOwner()->GetPosition()->m_y=0;
+};
 
 void PlayerScript::ComponentUpdate() { HandleInput(); }
 

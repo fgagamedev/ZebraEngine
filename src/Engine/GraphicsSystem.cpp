@@ -41,10 +41,10 @@ void GraphicsSystem::Draw(Image *img, Vector *position,
     ERROR(SDL_GetError());
 }
 
-void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position) {
+void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,int destw,int desth) {
   SDL_Rect dest;
-  dest.w = frame->GetRect()->w;
-  dest.h = frame->GetRect()->h;
+  dest.w = destw;
+  dest.h = desth;
   dest.x = position->m_x;
   dest.y = position->m_y;
 
