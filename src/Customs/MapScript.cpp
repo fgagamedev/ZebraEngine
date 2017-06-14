@@ -1,5 +1,5 @@
 #include "Customs/MapScript.h"
-
+#include <stdio.h>
 MapScript::MapScript(GameObject *owner) : Script(owner) {}
 
 void MapScript::Start() {
@@ -30,11 +30,11 @@ void MapScript::ComponentUpdate() {}
 void MapScript::FixedComponentUpdate() {
 
   if(InputSystem::GetInstance()->GetKeyPressed(INPUT_DOWN) &&  map->GetWidth()>=3072 &&  map->GetHeight()>=3072 ){
-        CameraSystem::GetInstance()->ZoomOut(32,nakedMan);
+        CameraSystem::GetInstance()->ZoomOut(100,nakedMan);
     }
 
   if(InputSystem::GetInstance()->GetKeyPressed(INPUT_UP) &&  map->GetWidth()<=9216 &&  map->GetHeight()<=9216){
-       CameraSystem::GetInstance()->ZoomIn(32,nakedMan);
+       CameraSystem::GetInstance()->ZoomIn(100,nakedMan);
     }
 
     if(InputSystem::GetInstance()->GetKeyPressed(INPUT_I))

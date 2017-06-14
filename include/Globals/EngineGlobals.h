@@ -11,7 +11,7 @@ const std::string window_title = engine_name + " " + engine_version;
 const int screen_width = 1024;
 const int screen_height = 800;
 
-const float fixed_update_rate = 50;
+const float fixed_update_rate = 30;
 const float fixed_update_interval = 1000 / fixed_update_rate;
 
 const float update_rate = 60;
