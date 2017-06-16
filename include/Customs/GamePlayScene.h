@@ -12,6 +12,7 @@
 #include "Customs/NakedManScript.h"
 #include "Customs/SnowScript.h"
 #include "Customs/RainScript.h"
+#include "Customs/LightScript.h"
 
 
 class GamePlayScene : public Scene {
@@ -24,8 +25,10 @@ public:
 private:
   void CreateNakedMan();
   void CreateMap();
+  void CreateLight();
   void CreateRain();
   void CreateSnow();
+
 
 };
 

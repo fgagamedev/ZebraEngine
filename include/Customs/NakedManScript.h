@@ -29,6 +29,7 @@ private:
   int deadzone_x = EngineGlobals::screen_width / 2;
   int deadzone_y = EngineGlobals::screen_height / 2;
   bool shake=false;
+  bool cameraLock=true;
   static bool isZooming;
 
 };

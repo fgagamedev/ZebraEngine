@@ -1,8 +1,10 @@
 #include "Customs/GamePlayScene.h"
+#include "Globals/EngineGlobals.h"
 
 void GamePlayScene::OnActivation() {
   CreateNakedMan();
   CreateMap();
+  CreateLight();
   CreateRain();
   CreateSnow();
 }
@@ -37,16 +39,27 @@ void GamePlayScene::CreateMap() {
 }
 
 
+
 void GamePlayScene::CreateRain() {
 
-  auto rain = new GameObject("Rain", new Vector(0,0),1050,800,1);
+  auto rain = new GameObject("Rain", new Vector(0,0),1024,800,1);
   auto rainScript = new RainScript(rain);
   AddGameObject(rain);
 
 }
 void GamePlayScene::CreateSnow(){
-  auto snow = new GameObject("Snow", new Vector(-10,-10),1050,800,1);
+
+  auto snow = new GameObject("Snow", new Vector(-10,-10),1024,800,1);
   auto snowScript = new SnowScript(snow);
   AddGameObject(snow);
+
+}
+void GamePlayScene::CreateLight() {
+
+  auto light = new GameObject("Light", new Vector(0,0),2*1024,2*800,1);
+   //auto lightImage = new Image("assets/luz.png", 0, 0,682 ,512);
+   //auto lightRenderer = new Renderer(light, lightImage);
+  auto lightScript = new LightScript(light);
+  AddGameObject(light);
 
 }

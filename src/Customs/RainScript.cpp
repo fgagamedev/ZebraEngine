@@ -31,19 +31,12 @@ void RainScript::CreateAnimations(){
 
 void RainScript::ComponentUpdate() {
 
-
-printf("x = %f\n",position->m_x);
-printf("y = %f\n",position->m_y);
-printf("width = %d\n" ,GetOwner()->GetWidth());
-printf("heith = %d\n",GetOwner()->GetHeight());
-printf("play %d\n\n",play);
-
 if (input->GetKeyDown(INPUT_R) && play==0) {
       play=1;
     }
 else if(input->GetKeyDown(INPUT_R) && play==1){
  play=0;
- animator->StopAllAnimations();
+
 }
 
 }
@@ -56,4 +49,9 @@ void RainScript::FixedComponentUpdate() {
         animator->PlayAnimation("rainAnimation");
 
   }
+  if(play==0){
+
+           animator->StopAllAnimations();
+
+    }
 }

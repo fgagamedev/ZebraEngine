@@ -39,19 +39,4 @@ void MapScript::FixedComponentUpdate() {
   if(InputSystem::GetInstance()->GetKeyPressed(INPUT_UP) &&  map->GetWidth()<=18432 &&  map->GetHeight()<=18432){
        CameraSystem::GetInstance()->ZoomIn(100,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
     }
-
-    if(InputSystem::GetInstance()->GetKeyPressed(INPUT_I))
-        CameraSystem::GetInstance()->MoveUp(CameraSystem::GetInstance()->GetCameraSpeed(),SceneManager::GetInstance()->GetCurrentScene());
-
-    if(InputSystem::GetInstance()->GetKeyPressed(INPUT_J))
-        CameraSystem::GetInstance()->MoveLeft(CameraSystem::GetInstance()->GetCameraSpeed(),SceneManager::GetInstance()->GetCurrentScene());
-
-    if(InputSystem::GetInstance()->GetKeyPressed(INPUT_K))
-        CameraSystem::GetInstance()->MoveDown(CameraSystem::GetInstance()->GetCameraSpeed(),SceneManager::GetInstance()->GetCurrentScene());
-
-     if(InputSystem::GetInstance()->GetKeyPressed(INPUT_L))
-        CameraSystem::GetInstance()->MoveRight(CameraSystem::GetInstance()->GetCameraSpeed(),SceneManager::GetInstance()->GetCurrentScene());
-
-
-
 }

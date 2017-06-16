@@ -1,5 +1,5 @@
-#ifndef __SNOW_SCRIPT__
-#define __SNOW_SCRIPT__
+#ifndef __LIGHT_SCRIPT__
+#define __LIGHT_SCRIPT__
 
 #include "Components/Animator.h"
 #include "Engine/InputSystem.h"
@@ -7,16 +7,17 @@
 #include "Engine/GameObject.h"
 #include "Engine/SceneManager.h"
 #include "Engine/CameraSystem.h"
+#include "Math/Vector.h"
+
 #include <string>
 
-class SnowScript : public Script {
+class LightScript : public Script {
 
 public:
-  SnowScript(GameObject *owner);
-  std::string GetComponentName() override { return "SnowScript"; };
+  LightScript(GameObject *owner);
+  std::string GetComponentName() override { return "RainScript"; };
   void FixedComponentUpdate() override;
   void Start() override;
- // char GetMovement() { return movements; };
 
 protected:
   void ComponentUpdate() override;

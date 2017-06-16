@@ -8,7 +8,7 @@ void SnowScript::Start() {
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
  GetOwner()->SetZoomProportion(Vector(0,0));
-  play=0;
+
 
 }
 void SnowScript::CreateAnimations(){
@@ -35,10 +35,11 @@ void SnowScript::ComponentUpdate() {
 
 if (input->GetKeyDown(INPUT_T) && play==0) {
       play=1;
+
     }
 else if(input->GetKeyDown(INPUT_T) && play==1){
  play=0;
- animator->StopAllAnimations();
+
 }
 
 
@@ -49,10 +50,13 @@ void SnowScript::FixedComponentUpdate() {
 
 
   if(play==1){
-
-  animator->PlayAnimation("snowAnimation");
   position->m_x=0;
   position->m_y=0;
+   animator->PlayAnimation("snowAnimation");
 
   }
+  if(play==0){
+ animator->StopAllAnimations();
+
+    }
 }
