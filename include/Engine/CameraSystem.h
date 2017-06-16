@@ -2,8 +2,10 @@
 #define __CAMERA_H_SYSTEM__
 #include "Engine/GameObject.h"
 #include "Engine/SceneManager.h"
+#include "Engine/Scene.h"
 #include "Engine/Timer.h"
 #include "Globals/EngineGlobals.h"
+
 #include <math.h>
 #include <vector>
 class CameraSystem{
@@ -13,11 +15,10 @@ public:
   static CameraSystem *GetInstance();
 
   //Camera Movement
-  static void MoveRight(int speed);
-  static void MoveLeft(int speed);
-  static void MoveUp(int speed);
-  static void MoveDown(int speed);
-  static void CameraShake(int intensity,float duration);
+  void MoveRight(int speed,Scene * scene);
+  void MoveLeft(int speed,Scene * scene);
+  void MoveUp(int speed,Scene * scene);
+  void MoveDown(int speed,Scene * scene);
 
   void Reset();
   float GetPos_x();
@@ -25,32 +26,37 @@ public:
   int GetCameraSpeed();
 
   void SetCameraSpeed(int speed);
-  void SetPos_x(float x);
-  void SetPos_y(float y);
+ /*
+  void SetAndMovePos_x(float x,Scene * scene);
+  void SetAndMovePos_y(float y,Scene * scene);
+  */
+  void SetAndMovePos_x(float x);
+  void SetAndMovePos_y(float y);
 
   //Camera shake
-  static bool IsShaking();
+  bool IsShaking();
+  void CameraShake(int intensity,float duration,Scene * scene);
 
   //Zoom
-  void ZoomIn(int zoomSpeed,GameObject * objectToFollow);
-  void ZoomOut(int zoomSpeed,GameObject * objectToFollow);
+  void ZoomIn(int zoomSpeed,GameObject * objectToFollow,Scene * scene);
+  void ZoomOut(int zoomSpeed,GameObject * objectToFollow,Scene * scene);
 
   private:
   CameraSystem();
   ~CameraSystem();
-  static float  worldCamera_x;
-  static float  worldCamera_y;
+  float  worldCamera_x;
+  float  worldCamera_y;
   float proportion_x;
   float proportion_y;
   float x_pos_before;
   float y_pos_before;
   int cameraSpeed;
-  static bool isShaking;
-  static Timer timer;
-  static int current_x;
-  static int current_y;
+  bool isShaking;
+  Timer timer;
+  int current_x;
+  int current_y;
+  std::vector<GameObject *> m_gameObjects;
   static CameraSystem * m_instance;
-  static std::vector<GameObject *> m_gameObjects;
 };
 
 

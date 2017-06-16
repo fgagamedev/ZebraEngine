@@ -20,10 +20,11 @@ protected:
   void ComponentUpdate() override;
 
 private:
+  void CreateAnimations();
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
-  float walkSpeed = 17;
+  float walkSpeed = 15;
   int movements=0; //1=UP,2=DOWN,3=LEFT,RIGHT
   int deadzone_x = EngineGlobals::screen_width / 2;
   int deadzone_y = EngineGlobals::screen_height / 2;

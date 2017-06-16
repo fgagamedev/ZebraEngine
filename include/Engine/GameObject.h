@@ -37,8 +37,10 @@ public:
   // getter and setter
   inline Vector *GetPosition() { return m_position; };
   inline void SetPosition(Vector value) { *m_position = value; };
+  inline void SetZoomProportion(Vector value) { *zoomProportion = value;};
   inline int GetWidth() { return m_width; };
   inline int GetHeight() { return m_height; };
+  inline Vector *GetZoomProportion() { return zoomProportion; };
   void SetSize(int width, int height);
   inline Uint8 GetLayer() { return m_layer; };
   Vector GetVelocity();
@@ -55,6 +57,7 @@ private:
   Vector *m_position = new Vector(0, 0);
   int m_width = 0;
   int m_height = 0;
+  Vector *zoomProportion = new Vector(1,1);
   Uint8 m_layer;
   Vector *m_velocity;
 

@@ -1,71 +1,84 @@
 #include "Engine/CameraSystem.h"
 
-  // static variables initialization
-  CameraSystem *CameraSystem::m_instance = 0;
-  Timer CameraSystem::timer;
-  float CameraSystem::worldCamera_x=0;
-  float CameraSystem::worldCamera_y=0;
-  int CameraSystem::current_x=0;
-  int CameraSystem::current_y=0;
-  bool CameraSystem::isShaking=false;
-  std::vector<GameObject *> CameraSystem::m_gameObjects;
-
+CameraSystem *CameraSystem::m_instance = nullptr;
 
 CameraSystem::CameraSystem() {
-  this->worldCamera_x=0;
-  this->worldCamera_y=0;
   this->cameraSpeed=32;
 }
 
-void CameraSystem::MoveUp(int speed) {
-  m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
+void CameraSystem::MoveUp(int speed,Scene * scene) {
+
+  if(!scene)
+  return;
+
+  m_gameObjects = scene->GetAllGameObjects();
   if(m_gameObjects.empty())
     return;
 
-  //Move all objects of the current scene
+  //Move all scene objects
   for(auto it = m_gameObjects.begin();it!=m_gameObjects.end();it++)
     (*it)->SetPosition(Vector((*it)->GetPosition()->m_x ,(*it)->GetPosition()->m_y + speed));
 
   //Set a new position
   worldCamera_y= worldCamera_y - speed;
+
 }
 
-void CameraSystem::MoveDown(int speed) {
-  m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
+void CameraSystem::MoveDown(int speed,Scene * scene) {
+
+  if(!scene)
+  return;
+
+  m_gameObjects = scene->GetAllGameObjects();
   if(m_gameObjects.empty())
     return;
-  //Move all objects of the current scene
+  //Move all scene objects
   for(auto it = m_gameObjects.begin();it!=m_gameObjects.end();it++)
     (*it)->SetPosition(Vector((*it)->GetPosition()->m_x ,(*it)->GetPosition()->m_y - speed ));
 
   //Move the camera
   worldCamera_y+=speed;
+
 }
 
-void CameraSystem::MoveLeft(int speed) {
-  m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
+void CameraSystem::MoveLeft(int speed,Scene * scene) {
+
+  if(!scene)
+  return;
+
+  m_gameObjects = scene->GetAllGameObjects();
   if(m_gameObjects.empty())
     return;
-  //Move all objects of the current scene
+  //Move all scene objects
   for(auto it = m_gameObjects.begin();it!=m_gameObjects.end();it++)
     (*it)->SetPosition(Vector((*it)->GetPosition()->m_x + speed ,(*it)->GetPosition()->m_y ));
 
    //Set new position
    worldCamera_x-=speed;
+
 }
-void CameraSystem::MoveRight(int speed){
-  m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
+void CameraSystem::MoveRight(int speed,Scene * scene){
+
+  if(!scene)
+  return;
+
+  m_gameObjects = scene->GetAllGameObjects();
   if(m_gameObjects.empty())
     return;
-  //Move all objects of the current scene
+  //Move all scene objects
   for(auto it = m_gameObjects.begin();it!=m_gameObjects.end();it++)
     (*it)->SetPosition(Vector((*it)->GetPosition()->m_x - speed ,(*it)->GetPosition()->m_y ));
 
   //Move the camera
   worldCamera_x+=speed;
+
 }
 
-void CameraSystem::CameraShake(int intensity,float duration){
+void CameraSystem::CameraShake(int intensity,float duration,Scene * scene){
+
+  if(!scene)
+  return;
+
   static int last=0;
   timer.Update(EngineGlobals::fixed_update_interval);
   isShaking=true;
@@ -76,13 +89,13 @@ void CameraSystem::CameraShake(int intensity,float duration){
   }
 
   if(last==0){
-  MoveRight(intensity);
-  MoveUp(intensity);
+  MoveRight(intensity,scene);
+  MoveUp(intensity,scene);
   last=1;
   }
   else if(last==1){
-  MoveLeft(intensity);
-  MoveDown(intensity);
+  MoveLeft(intensity,scene);
+  MoveDown(intensity,scene);
   last=0;
 }
 
@@ -97,33 +110,9 @@ int CameraSystem::GetCameraSpeed(){return cameraSpeed;}
 
 void CameraSystem::SetCameraSpeed(int speed){cameraSpeed=speed;}
 
-void CameraSystem::SetPos_x(float x){
-  if( (x >= (worldCamera_x - 20)) && (x <= (worldCamera_x + 20)) )
-    return;
-  if(worldCamera_x!=0){
-    if((x - worldCamera_x) > 0)
-      MoveRight(x - worldCamera_x);
-    if((x - worldCamera_x) < 0)
-      MoveLeft((x - worldCamera_x)*-1);
-  }
-  else
-    worldCamera_x = x;
-}
+void CameraSystem::SetAndMovePos_x(float x){worldCamera_x = x;}
 
-void CameraSystem::SetPos_y(float y){
-  if( (y >= (worldCamera_y - 5)) && (y<= (worldCamera_y + 5)) )
-    return;
-
-  if(worldCamera_y!=0){
-    if((y - worldCamera_y) > 0)
-      MoveDown(y - worldCamera_y);
-    if((y - worldCamera_y) < 0)
-      MoveUp((y - worldCamera_y)*-1);
-  }
-  else
-    worldCamera_y = y;
-}
-
+void CameraSystem::SetAndMovePos_y(float y){worldCamera_y = y;}
 
 void CameraSystem::Reset(){
   worldCamera_x=0;
@@ -132,70 +121,82 @@ void CameraSystem::Reset(){
 
 
 
-void CameraSystem::ZoomIn(int zoomSpeed,GameObject * objectToFollow) {
+void CameraSystem::ZoomIn(int zoomSpeed,GameObject * objectToFollow,Scene * scene) {
+
   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
-  if(!map)
-    return;
-  x_pos_before = objectToFollow->GetPosition()->m_x;
-  y_pos_before = objectToFollow->GetPosition()->m_y;
-  this->cameraSpeed = zoomSpeed;
-  auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
-  for(auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++ ){
-    if((*it)->GetName()!="Map"){
-      proportion_x = 100*(((*it)->GetPosition()->m_x + worldCamera_x)/(map->GetWidth()));
-      proportion_y = 100*(((*it)->GetPosition()->m_y + worldCamera_y   )/(map->GetHeight()));
-      (*it)->SetSize(map->GetWidth()/64,map->GetHeight()/64);
-      (*it)->GetPosition()->m_x = ((proportion_x/100) * (map->GetWidth() + zoomSpeed)) - worldCamera_x;
-      (*it)->GetPosition()->m_y = ((proportion_y/100) * (map->GetHeight() + zoomSpeed)) - worldCamera_y;
+    if(!map)
+      return;
+    x_pos_before = objectToFollow->GetPosition()->m_x;
+    y_pos_before = objectToFollow->GetPosition()->m_y;
+    this->cameraSpeed = zoomSpeed;
+    auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
+    for(auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++ ){
+      if((*it)->GetName()!="Map"){
+        proportion_x = 100*(((*it)->GetPosition()->m_x + worldCamera_x)/(map->GetWidth()));
+        proportion_y = 100*(((*it)->GetPosition()->m_y + worldCamera_y   )/(map->GetHeight()));
+        //if getzoomProportion==(0,0) the object wont be affected by the zoom
+        if((*it)->GetZoomProportion()->m_x!=0,(*it)->GetZoomProportion()->m_y!=0){
+
+          (*it)->SetSize(map->GetWidth()/(*it)->GetZoomProportion()->m_x,map->GetHeight()/(*it)->GetZoomProportion()->m_y);
+          (*it)->GetPosition()->m_x = ((proportion_x/100) * (map->GetWidth() + zoomSpeed)) - worldCamera_x;
+          (*it)->GetPosition()->m_y = ((proportion_y/100) * (map->GetHeight() + zoomSpeed)) - worldCamera_y;
+        }
+      }
+
     }
 
-  }
+    map->SetSize(map->GetWidth() + zoomSpeed ,map->GetHeight() + zoomSpeed);
+    if(x_pos_before < objectToFollow->GetPosition()->m_x){
+      MoveRight(objectToFollow->GetPosition()->m_x - x_pos_before,scene);
+    }
+    else if(x_pos_before > objectToFollow->GetPosition()->m_x){
+      MoveLeft(x_pos_before - objectToFollow->GetPosition()->m_x,scene);
+    }
+    if(y_pos_before < objectToFollow->GetPosition()->m_y){
+      MoveDown(objectToFollow->GetPosition()->m_y - y_pos_before,scene);
+    }
+    else if(y_pos_before > objectToFollow->GetPosition()->m_y){
+      MoveDown(y_pos_before - objectToFollow->GetPosition()->m_y,scene);
+    }
 
-  map->SetSize(map->GetWidth() + zoomSpeed ,map->GetHeight() + zoomSpeed);
-  if(x_pos_before < objectToFollow->GetPosition()->m_x){
-    MoveRight(objectToFollow->GetPosition()->m_x - x_pos_before);
-  }
-  else if(x_pos_before > objectToFollow->GetPosition()->m_x){
-    MoveLeft(x_pos_before - objectToFollow->GetPosition()->m_x);
-  }
-  if(y_pos_before < objectToFollow->GetPosition()->m_y){
-    MoveDown(objectToFollow->GetPosition()->m_y - y_pos_before);
-  }
-  else if(y_pos_before > objectToFollow->GetPosition()->m_y){
-    MoveDown(y_pos_before - objectToFollow->GetPosition()->m_y);
-  }
 }
 
-void CameraSystem::ZoomOut(int zoomSpeed,GameObject * objectToFollow) {
+void CameraSystem::ZoomOut(int zoomSpeed,GameObject * objectToFollow,Scene * scene) {
   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
-  if(!map)
-  return;
-  x_pos_before = objectToFollow->GetPosition()->m_x;
-  y_pos_before = objectToFollow->GetPosition()->m_y;
-  auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
-  for(auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++ ){
-    if((*it)->GetName()!="Map"){
-      proportion_x = 100*(((*it)->GetPosition()->m_x + worldCamera_x)/(map->GetWidth()));
-      proportion_y = 100*(((*it)->GetPosition()->m_y + worldCamera_y   )/(map->GetHeight()));
-      (*it)->SetSize(map->GetWidth()/64,map->GetHeight()/64);
-      (*it)->GetPosition()->m_x = ((proportion_x/100) * (map->GetWidth() - zoomSpeed)) - worldCamera_x;
-      (*it)->GetPosition()->m_y = ((proportion_y/100) * (map->GetHeight() - zoomSpeed)) - worldCamera_y;
+    if(!map)
+    return;
+    x_pos_before = objectToFollow->GetPosition()->m_x;
+    y_pos_before = objectToFollow->GetPosition()->m_y;
+    auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
+    for(auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++ ){
+      if((*it)->GetName()!="Map"){
+
+        proportion_x = 100*(((*it)->GetPosition()->m_x + worldCamera_x)/(map->GetWidth()));
+        proportion_y = 100*(((*it)->GetPosition()->m_y + worldCamera_y   )/(map->GetHeight()));
+
+        if((*it)->GetZoomProportion()->m_x!=0,(*it)->GetZoomProportion()->m_y!=0){
+          (*it)->SetSize(map->GetWidth()/(*it)->GetZoomProportion()->m_x,map->GetHeight()/(*it)->GetZoomProportion()->m_y);
+          (*it)->GetPosition()->m_x = ((proportion_x/100) * (map->GetWidth() - zoomSpeed)) - worldCamera_x;
+          (*it)->GetPosition()->m_y = ((proportion_y/100) * (map->GetHeight() - zoomSpeed)) - worldCamera_y;
+        }
+      }
+
     }
 
-  }
-  map->SetSize(map->GetWidth() - zoomSpeed ,map->GetHeight() - zoomSpeed);
-  if(x_pos_before < objectToFollow->GetPosition()->m_x){
-    MoveRight(objectToFollow->GetPosition()->m_x - x_pos_before);
-  }
-  else if(x_pos_before > objectToFollow->GetPosition()->m_x){
-    MoveLeft(x_pos_before - objectToFollow->GetPosition()->m_x);
-  }
-  if(y_pos_before < objectToFollow->GetPosition()->m_y){
-    MoveUp(objectToFollow->GetPosition()->m_y - y_pos_before);
-  }
-  else if(y_pos_before > objectToFollow->GetPosition()->m_y){
-    MoveUp(y_pos_before - objectToFollow->GetPosition()->m_y);
-  }
+    map->SetSize(map->GetWidth() - zoomSpeed ,map->GetHeight() - zoomSpeed);
+    if(x_pos_before < objectToFollow->GetPosition()->m_x){
+      MoveRight(objectToFollow->GetPosition()->m_x - x_pos_before,scene);
+    }
+    else if(x_pos_before > objectToFollow->GetPosition()->m_x){
+      MoveLeft(x_pos_before - objectToFollow->GetPosition()->m_x,scene);
+    }
+    if(y_pos_before < objectToFollow->GetPosition()->m_y){
+      MoveUp(objectToFollow->GetPosition()->m_y - y_pos_before,scene);
+    }
+    else if(y_pos_before > objectToFollow->GetPosition()->m_y){
+      MoveUp(y_pos_before - objectToFollow->GetPosition()->m_y,scene);
+    }
+
 }
 
 bool CameraSystem::IsShaking(){return isShaking;}

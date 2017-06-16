@@ -1,17 +1,64 @@
 #include "Customs/NakedManScript.h"
+
 bool NakedManScript::isZooming=false;
 
 NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {}
 
 void NakedManScript::Start() {
+  CreateAnimations();
   position = GetOwner()->GetPosition();
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
+  GetOwner()->SetZoomProportion(Vector(128,128));
+  CameraSystem::GetInstance()->SetCameraSpeed(walkSpeed);
 }
 
+void NakedManScript::CreateAnimations(){
+
+ auto nakedManSprite = new Image("assets/player.png", 0, 0, 1664, 512);
+
+  auto StopDownAnimation = new Animation(GetOwner(), nakedManSprite);
+    StopDownAnimation->AddFrame(new Frame(0, 256, 128, 128));
+
+  auto StopRightAnimation = new Animation(GetOwner(), nakedManSprite);
+         StopRightAnimation->AddFrame(new Frame(0, 0, 128, 128));
+
+  auto StopLeftAnimation = new Animation(GetOwner(), nakedManSprite);
+        StopLeftAnimation->AddFrame(new Frame(0, 128, 128, 128));
+
+  auto StopUpAnimation = new Animation(GetOwner(), nakedManSprite);
+        StopUpAnimation->AddFrame(new Frame(0, 384, 128, 128));
+
+  auto walkSideAnimation = new Animation(GetOwner(), nakedManSprite);
+  for (int i = 1; i < 13; i++)
+    walkSideAnimation->AddFrame(new Frame(i * 128, 0, 128, 128));
+
+  auto walkUpAnimation = new Animation(GetOwner(), nakedManSprite);
+  for (int i = 1; i < 13; i++)
+    walkUpAnimation->AddFrame(new Frame(i * 128, 384, 128, 128));
+
+  auto walkDownAnimation = new Animation(GetOwner(), nakedManSprite);
+  for (int i = 1; i < 13; i++)
+    walkDownAnimation->AddFrame(new Frame(i * 128, 256, 128, 128));
+
+  // animator
+  auto nakedManAnimator = new Animator(GetOwner());
+
+  nakedManAnimator->AddAnimation("Walk Side", walkSideAnimation);
+  nakedManAnimator->AddAnimation("Walk Up", walkUpAnimation);
+  nakedManAnimator->AddAnimation("Walk Down", walkDownAnimation);
+  nakedManAnimator->AddAnimation("Stop Down", StopDownAnimation);
+  nakedManAnimator->AddAnimation("Stop Up", StopUpAnimation);
+  nakedManAnimator->AddAnimation("Stop Left", StopLeftAnimation);
+  nakedManAnimator->AddAnimation("Stop Right", StopRightAnimation);
+}
+
+
+
 void NakedManScript::ComponentUpdate() {
+
   static int lastDirection=1;
-  // movement animation and input detection
+
   movements = 0;
 
   if((input->GetKeyPressed(INPUT_DOWN)) || (input->GetKeyPressed(INPUT_UP)))
@@ -70,25 +117,19 @@ void NakedManScript::ComponentUpdate() {
   if (input->GetKeyPressed(INPUT_P))
     shake=true;
 
-
-
 }
 
 void NakedManScript::FixedComponentUpdate() {
-
-
   if(shake){
     //CameraShake(intensity,duration in seconds)
-    CameraSystem::CameraShake(4,0.3);
-    if(!CameraSystem::IsShaking())
+    CameraSystem::GetInstance()->CameraShake(8,1,SceneManager::GetInstance()->GetCurrentScene());
+    if(!CameraSystem::GetInstance()->IsShaking())
     shake=false;
   }
 
-
-
- if (movements==1){
-   position->m_y -= walkSpeed;
- }
+  if (movements==1){
+    position->m_y -= walkSpeed;
+  }
 
   else if (movements==2){
     position->m_y += walkSpeed;
@@ -102,43 +143,40 @@ void NakedManScript::FixedComponentUpdate() {
     position->m_x += walkSpeed;
   }
 
-
-
-
   if (position->m_x + SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("NakedMan")->GetWidth() >= deadzone_x){
     if(isZooming){
-      CameraSystem::GetInstance()->MoveRight(2);
+      CameraSystem::GetInstance()->MoveRight(2,SceneManager::GetInstance()->GetCurrentScene());
       }
     else{
-      CameraSystem::GetInstance()->MoveRight(walkSpeed);
+      CameraSystem::GetInstance()->MoveRight(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
      }
   }
 
   if (position->m_x <= deadzone_x){
     if(isZooming){
-      CameraSystem::GetInstance()->MoveLeft(2);
+      CameraSystem::GetInstance()->MoveLeft(2,SceneManager::GetInstance()->GetCurrentScene());
     }
     else{
-      CameraSystem::GetInstance()->MoveLeft(walkSpeed);
+      CameraSystem::GetInstance()->MoveLeft(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
     }
 
   }
 
    if (position->m_y + SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("NakedMan")->GetHeight()>= deadzone_y){
      if(isZooming){
-       CameraSystem::GetInstance()->MoveDown(2);
+       CameraSystem::GetInstance()->MoveDown(2,SceneManager::GetInstance()->GetCurrentScene());
      }
      else{
-       CameraSystem::GetInstance()->MoveDown(walkSpeed);
+       CameraSystem::GetInstance()->MoveDown(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
      }
    }
 
    if (position->m_y <= deadzone_y){
      if(isZooming){
-       CameraSystem::GetInstance()->MoveUp(2);
+       CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
      }
      else{
-       CameraSystem::GetInstance()->MoveUp(walkSpeed);
+       CameraSystem::GetInstance()->MoveUp(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
      }
 
    }
