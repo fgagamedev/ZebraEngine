@@ -19,8 +19,12 @@ void LightScript::CreateAnimations(){
         lightAnimation->AddFrame(new Frame(0,0, 682, 512));
         lightAnimation->AddFrame(new Frame(0,0, 682, 512));
         lightAnimation->AddFrame(new Frame(0,0, 682, 512));
-
-
+        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
+        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
+        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
+        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
+        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
+        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
      // animator
       auto lightAnimator = new Animator(GetOwner());
       lightAnimator->AddAnimation("lightAnimation", lightAnimation);

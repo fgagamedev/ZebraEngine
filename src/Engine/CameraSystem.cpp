@@ -10,7 +10,7 @@ void CameraSystem::MoveUp(int speed,Scene * scene) {
 
   if(!scene)
   return;
-
+//Get all scene game objects
   m_gameObjects = scene->GetAllGameObjects();
   if(m_gameObjects.empty())
     return;

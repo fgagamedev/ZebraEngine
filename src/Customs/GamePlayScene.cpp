@@ -49,7 +49,7 @@ void GamePlayScene::CreateRain() {
 }
 void GamePlayScene::CreateSnow(){
 
-  auto snow = new GameObject("Snow", new Vector(-10,-10),1024,800,1);
+  auto snow = new GameObject("Snow", new Vector(0,0),1024,800,1);
   auto snowScript = new SnowScript(snow);
   AddGameObject(snow);
 
@@ -57,8 +57,8 @@ void GamePlayScene::CreateSnow(){
 void GamePlayScene::CreateLight() {
 
   auto light = new GameObject("Light", new Vector(0,0),2*1024,2*800,1);
-   //auto lightImage = new Image("assets/luz.png", 0, 0,682 ,512);
-   //auto lightRenderer = new Renderer(light, lightImage);
+ //auto lightImage = new Image("assets/luz.png",0,0,682, 512);
+ //auto mapRenderer = new Renderer(light, lightImage);
   auto lightScript = new LightScript(light);
   AddGameObject(light);
 
