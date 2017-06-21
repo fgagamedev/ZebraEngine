@@ -31,8 +31,8 @@ animator->PlayAnimation("firstBossCentralAnimation1");
 }
 void FirstBossCentralEffectScript::FixedComponentUpdate() {
  position->m_x  =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss")->GetPosition()->m_x +
-   SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss")->GetWidth()/2;
+   SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss")->GetWidth()/2-30;
  position->m_y  =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss")->GetPosition()->m_y +
- SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss")->GetHeight()/2 - 30;
+ SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss")->GetHeight()/2 - 20;
 
 }

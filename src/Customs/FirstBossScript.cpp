@@ -8,7 +8,7 @@ void FirstBossScript::Start() {
   position = GetOwner()->GetPosition();
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
-  GetOwner()->SetZoomProportion(Vector(13,18));
+  GetOwner()->SetZoomProportion(Vector(18,13));
 
 }
 void FirstBossScript::CreateAnimations(){
