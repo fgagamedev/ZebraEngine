@@ -13,6 +13,8 @@
 #include "Customs/SnowScript.h"
 #include "Customs/RainScript.h"
 #include "Customs/LightScript.h"
+#include "Customs/FirstBossScript.h"
+#include "Customs/FirstBossCentralEffectScript.h"
 
 
 class GamePlayScene : public Scene {
@@ -24,10 +26,12 @@ public:
 
 private:
   void CreateNakedMan();
+  void CreateFirstBoss();
   void CreateMap();
   void CreateLight();
   void CreateRain();
   void CreateSnow();
+
 
 
 };

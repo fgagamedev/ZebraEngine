@@ -3,10 +3,12 @@
 
 void GamePlayScene::OnActivation() {
   CreateNakedMan();
+  CreateFirstBoss();
   CreateMap();
   CreateLight();
   CreateRain();
   CreateSnow();
+
 }
 
 void GamePlayScene::OnDeactivation() {}
@@ -24,6 +26,21 @@ void GamePlayScene::CreateNakedMan() {
   // Script
   auto nakedManScript = new NakedManScript(nakedMan);
   AddGameObject(nakedMan);
+}
+
+
+void GamePlayScene::CreateFirstBoss() {
+ //auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect", new Vector(0,0),70 , 70, 1);
+   //   auto firstBossCentralEffectScript = new  FirstBossCentralEffectScript(FirstBossCentralEffect);
+     // AddGameObject(FirstBossCentralEffect);
+
+  auto FirstBoss = new GameObject("FirstBoss", new Vector(0,0),930 , 690, 1);
+  // Script
+  auto firstBossScript = new  FirstBossScript(FirstBoss);
+  AddGameObject(FirstBoss);
+
+
+
 }
 
 void GamePlayScene::CreateMap() {

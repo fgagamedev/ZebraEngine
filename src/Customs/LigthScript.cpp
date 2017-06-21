@@ -17,14 +17,7 @@ void LightScript::CreateAnimations(){
 
   auto  lightAnimation= new Animation(GetOwner(),lightImage );
         lightAnimation->AddFrame(new Frame(0,0, 682, 512));
-        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
-        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
-        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
-        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
-        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
-        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
-        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
-        lightAnimation->AddFrame(new Frame(0,0, 682, 512));
+
      // animator
       auto lightAnimator = new Animator(GetOwner());
       lightAnimator->AddAnimation("lightAnimation", lightAnimation);
@@ -36,25 +29,16 @@ void LightScript::CreateAnimations(){
 
 void LightScript::ComponentUpdate() {
 
+    if(play==1)
+     animator->PlayAnimation("lightAnimation");
 
-if (input->GetKeyDown(INPUT_Y) && play==0) {
-      play=1;
-
+    if(input->GetKeyDown(INPUT_Y) && play==0){
+    play=1;
     }
-    else if(input->GetKeyDown(INPUT_Y) && play==1){
-     play=0;
+    else if(input->GetKeyDown(INPUT_Y) && play==1)
+    play=0;
     }
-
-}
 void LightScript::FixedComponentUpdate() {
-
-  if(play==1){
-
         position->m_x  =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan")->GetPosition()->m_x -  GetOwner()->GetWidth()/2 + 40;
         position->m_y  =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan")->GetPosition()->m_y -  GetOwner()->GetHeight()/2 + 40;
-         animator->PlayAnimation("lightAnimation");
-  }
-  else{
-       animator->StopAllAnimations();
-      }
 }

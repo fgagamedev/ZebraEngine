@@ -30,33 +30,22 @@ void SnowScript::CreateAnimations(){
 
 void SnowScript::ComponentUpdate() {
 
+ if(play==1)
+     animator->PlayAnimation("snowAnimation");
 
-
-
-if (input->GetKeyDown(INPUT_T) && play==0) {
-      play=1;
-
+    if(input->GetKeyDown(INPUT_T) && play==0){
+   // animator->StopAllAnimations();
+    play=1;
     }
-else if(input->GetKeyDown(INPUT_T) && play==1){
- play=0;
-
-}
-
-
+    else if(input->GetKeyDown(INPUT_T) && play==1){
+    play=0;
+    animator->StopAllAnimations();
+    }
 
 }
 void SnowScript::FixedComponentUpdate() {
 
-
-
-  if(play==1){
   position->m_x=0;
   position->m_y=0;
-   animator->PlayAnimation("snowAnimation");
 
-  }
-  if(play==0){
- animator->StopAllAnimations();
-
-    }
 }

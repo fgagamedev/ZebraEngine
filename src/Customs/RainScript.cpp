@@ -9,8 +9,6 @@ void RainScript::Start() {
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
   GetOwner()->SetZoomProportion(Vector(0,0));
-  play=0;
-
 
 }
 void RainScript::CreateAnimations(){
@@ -31,27 +29,24 @@ void RainScript::CreateAnimations(){
 
 void RainScript::ComponentUpdate() {
 
-if (input->GetKeyDown(INPUT_R) && play==0) {
-      play=1;
-    }
-else if(input->GetKeyDown(INPUT_R) && play==1){
- play=0;
+    if(play==1)
+     animator->PlayAnimation("rainAnimation");
 
-}
+    if(input->GetKeyDown(INPUT_R) && play==0){
+   // animator->StopAllAnimations();
+    play=1;
+    }
+    else if(input->GetKeyDown(INPUT_R) && play==1){
+    play=0;
+    animator->StopAllAnimations();
+    }
 
 }
 void RainScript::FixedComponentUpdate() {
 
-  if(play==1){
 
         position->m_x=0;
         position->m_y=0;
-        animator->PlayAnimation("rainAnimation");
 
-  }
-  if(play==0){
 
-           animator->StopAllAnimations();
-
-    }
 }

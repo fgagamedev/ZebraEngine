@@ -1,5 +1,5 @@
-#ifndef __LIGHT_SCRIPT__
-#define __LIGHT_SCRIPT__
+#ifndef _BOSS_1_CENTRAL_SCRIPT__
+#define _BOSS_1_CENTRAL_SCRIPT__
 
 #include "Components/Animator.h"
 #include "Engine/InputSystem.h"
@@ -11,11 +11,11 @@
 
 #include <string>
 
-class LightScript : public Script {
+class FirstBossCentralEffectScript : public Script {
 
 public:
-  LightScript(GameObject *owner);
-  std::string GetComponentName() override { return "RainScript"; };
+  FirstBossCentralEffectScript(GameObject *owner);
+  std::string GetComponentName() override { return "FirstBossCentralEffectScript"; };
   void FixedComponentUpdate() override;
   void Start() override;
 
@@ -26,7 +26,7 @@ private:
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
-  int play=0;
+
 
 };
 
