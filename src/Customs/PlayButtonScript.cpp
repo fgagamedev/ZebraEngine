@@ -7,7 +7,21 @@ void PlayButtonScript::Start() {
 }
 
 void PlayButtonScript::ComponentUpdate() {
+
+	auto textButton = (UIText *)GetOwner()->GetComponent("UIText");
+  auto soundButton = (UISound *)GetOwner()->GetComponent("UISound");
   if (m_uiButton->IsClicked()) {
+    soundButton->Play(0, -1);
     SceneManager::GetInstance()->SetCurrentScene("Gameplay");
+  }
+
+  if (m_uiButton->IsOver()) {
+    
+  	textButton->SetColor(160,160,160, 255);
+    
+
+  }else{
+  	
+  	textButton->SetColor(255,255,255, 255);
   }
 }

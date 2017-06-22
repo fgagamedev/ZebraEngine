@@ -21,6 +21,7 @@ public:
   void FixedComponentUpdate() override;
   void ComponentUpdate() override;
   void SetText(string text);
+  void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
   void SetOffset(Vector &offset);
 
 private:

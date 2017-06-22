@@ -22,13 +22,12 @@ void MainScene::OnHidden() {}
 
 
 void MainScene::CreateLogo() {
-  int xMiddle = EngineGlobals::screen_width / 2 - 100;
+  int xMiddle = EngineGlobals::screen_width / 2 - 240;
 
-  auto logo = new GameObject("Logo", new Vector(xMiddle, 100), 200, 100);
+  auto logo = new GameObject("Logo", new Vector(xMiddle, 100), 500, 325);
 
-  auto logoText =
-      new UIText(logo, "VoID", "assets/Archivo_Black/ArchivoBlack-Regular.ttf",
-                 200, 255, 255, 255, 255, 1);
+  auto logoImage = new Image("assets/logo.png", 0, 0, 2048, 2048);
+  auto logoRenderer = new Renderer(logo, logoImage);
 
   AddGameObject(logo);
 }
@@ -36,12 +35,14 @@ void MainScene::CreateLogo() {
 void MainScene::CreatePlayButton() {
   int xMiddle = EngineGlobals::screen_width / 2 - 100;
 
-  auto play = new GameObject("Play", new Vector(xMiddle, 200), 200, 100);
+  auto play = new GameObject("Play", new Vector(xMiddle, 400), 200, 100);
 
-  auto playText = new UIText(play, "Play", "assets/Raleway/Raleway-Regular.ttf",
+  auto playText = new UIText(play, "Play", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                              200, 255, 255, 255, 150, 1);
 
   auto playButton = new UIButton(play);
+
+  auto playSound = new UISound(play, "playSound", "assets/Audio/Button/MusicButton1.wav", false, false);
 
   auto script = new PlayButtonScript(play);
 
@@ -51,12 +52,14 @@ void MainScene::CreatePlayButton() {
 void MainScene::CreateQuitButton() {
   int xMiddle = EngineGlobals::screen_width / 2 - 100;
 
-  auto quit = new GameObject("Quit", new Vector(xMiddle, 300), 200, 100);
+  auto quit = new GameObject("Quit", new Vector(xMiddle, 500), 200, 100);
 
-  auto quitText = new UIText(quit, "Quit", "assets/Raleway/Raleway-Regular.ttf",
+  auto quitText = new UIText(quit, "Quit", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                              200, 255, 255, 255, 150, 1);
 
   auto quitButton = new UIButton(quit);
+
+  auto quitSound = new UISound(quit, "playSound", "assets/Audio/Button/MusicButton1.wav", false, false);
 
   auto script = new QuitButtonScript(quit);
 
@@ -170,7 +173,7 @@ void MainScene::CreateMusic(){
 
   auto music = new GameObject("Music", new Vector(200, 200), 200, 100);
 
-  auto themeMusic = new UISound(music, "Music", "assets/Audio/beat.wav", false, true);
+  auto themeMusic = new UISound(music, "Music", "assets/Audio/Menu/musicMenu1.wav", false, true);
 
   AddGameObject(music);
 

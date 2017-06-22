@@ -62,3 +62,8 @@ void UIText::SetText(string text) {
   m_message = text;
   OnPropertyChange();
 }
+
+void UIText::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+  m_color = {r, g, b, a};
+  OnPropertyChange();
+}

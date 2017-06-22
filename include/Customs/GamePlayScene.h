@@ -14,6 +14,7 @@
 #include "Customs/RainScript.h"
 #include "Customs/LightScript.h"
 #include "Customs/FirstBossScript.h"
+#include "Customs/FirstBossAttackScript.h"
 #include "Customs/FirstBossCentralEffectScript.h"
 
 
@@ -31,6 +32,7 @@ private:
   void CreateLight();
   void CreateRain();
   void CreateSnow();
+  void CreateFirstBossAttack();
 
 
 

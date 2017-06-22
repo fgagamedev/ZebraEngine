@@ -4,6 +4,7 @@
 void GamePlayScene::OnActivation() {
   CreateNakedMan();
   CreateFirstBoss();
+  CreateFirstBossAttack();
   CreateMap();
   CreateLight();
   CreateRain();
@@ -39,7 +40,14 @@ void GamePlayScene::CreateFirstBoss() {
   auto firstBossScript = new  FirstBossScript(FirstBoss);
   AddGameObject(FirstBoss);
 
+}
 
+void GamePlayScene::CreateFirstBossAttack() {
+
+  auto FirstBossAttack = new GameObject("FirstBossAttack", new Vector(400,100),39,147, 1);
+  // Script
+  auto firstBossAttackScript = new  FirstBossAttackScript(FirstBossAttack);
+  AddGameObject(FirstBossAttack);
 
 }
 
