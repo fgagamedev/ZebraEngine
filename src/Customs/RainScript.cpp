@@ -24,13 +24,18 @@ void RainScript::CreateAnimations(){
       weatherAnimator->AddAnimation("rainAnimation", rainAnimation);
 
 
+
+  
+
+
 }
 
 
 void RainScript::ComponentUpdate() {
 
     if(play==1)
-     animator->PlayAnimation("rainAnimation");
+      animator->PlayAnimation("rainAnimation");
+      
 
     if(input->GetKeyDown(INPUT_R) && play==0){
    // animator->StopAllAnimations();

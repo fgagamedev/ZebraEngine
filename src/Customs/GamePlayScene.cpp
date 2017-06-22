@@ -9,6 +9,8 @@ void GamePlayScene::OnActivation() {
   CreateLight();
   CreateRain();
   CreateSnow();
+  CreateThunder();
+  CreatePlayerAttack();
 
 }
 
@@ -35,21 +37,31 @@ void GamePlayScene::CreateFirstBoss() {
  //auto firstBossCentralEffectScript = new  FirstBossCentralEffectScript(FirstBossCentralEffect);
  //AddGameObject(FirstBossCentralEffect);
 
-  auto FirstBoss = new GameObject("FirstBoss", new Vector(500,100),690,930, 1);
+  auto firstBoss = new GameObject("FirstBoss", new Vector(500,100),690,930, 1);
   // Script
-  auto firstBossScript = new  FirstBossScript(FirstBoss);
-  AddGameObject(FirstBoss);
+  auto firstBossScript = new  FirstBossScript(firstBoss);
+  AddGameObject(firstBoss);
 
 }
 
 void GamePlayScene::CreateFirstBossAttack() {
 
-  auto FirstBossAttack = new GameObject("FirstBossAttack", new Vector(400,100),39,147, 1);
+  auto firstBossAttack = new GameObject("FirstBossAttack", new Vector(400,100),39,147, 1);
   // Script
-  auto firstBossAttackScript = new  FirstBossAttackScript(FirstBossAttack);
-  AddGameObject(FirstBossAttack);
+  auto firstBossAttackScript = new  FirstBossAttackScript(firstBossAttack);
+  AddGameObject(firstBossAttack);
 
 }
+
+void GamePlayScene::CreatePlayerAttack() {
+
+  auto playerAttack = new GameObject("PlayerAttack", new Vector(0,0),15,15, 1);
+  // Script
+  auto playerAttackScript = new  PlayerAttackScript(playerAttack);
+  AddGameObject(playerAttack);
+
+}
+
 
 void GamePlayScene::CreateMap() {
   //Original resolution is 2048/2048
@@ -72,6 +84,17 @@ void GamePlayScene::CreateRain() {
   AddGameObject(rain);
 
 }
+
+
+void GamePlayScene::CreateThunder() {
+
+  auto thunder = new GameObject("Rain", new Vector(200,0),113,267,1);
+  auto thunderScript = new ThunderScript(thunder);
+  AddGameObject(thunder);
+
+}
+
+
 void GamePlayScene::CreateSnow(){
 
   auto snow = new GameObject("Snow", new Vector(0,0),1024,800,1);

@@ -13,6 +13,8 @@
 #include "Customs/SnowScript.h"
 #include "Customs/RainScript.h"
 #include "Customs/LightScript.h"
+#include "Customs/ThunderScript.h"
+#include "Customs/PlayerAttackScript.h"
 #include "Customs/FirstBossScript.h"
 #include "Customs/FirstBossAttackScript.h"
 #include "Customs/FirstBossCentralEffectScript.h"
@@ -27,12 +29,15 @@ public:
 
 private:
   void CreateNakedMan();
+  void CreatePlayerAttack();
   void CreateFirstBoss();
   void CreateMap();
   void CreateLight();
   void CreateRain();
   void CreateSnow();
+  void CreateThunder();
   void CreateFirstBossAttack();
+
 
 
 
