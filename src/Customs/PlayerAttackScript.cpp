@@ -9,6 +9,7 @@ void PlayerAttackScript::Start() {
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
   GetOwner()->SetZoomProportion(Vector(0,0));
+  player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
 
 }
 void PlayerAttackScript::CreateAnimations(){
@@ -38,46 +39,36 @@ void PlayerAttackScript::CreateAnimations(){
 
 void PlayerAttackScript::ComponentUpdate() {
 
-   
-      
+     player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
+     if(player){
+         playerPosition.m_x  =  player->GetPosition()->m_x +  player->GetWidth()/2;
+         playerPosition.m_y  =  player->GetPosition()->m_y +  player->GetHeight()/2;
 
-    if(input->GetKeyDown(INPUT_SPACE)){
-      //animator->PlayAnimation("thunderBlueAnimation");
-
-
-      //Get player position
-      Vector *playerPosition = SceneManager::GetInstance()
-                                    ->GetScene("Gameplay")
-                                    ->GetGameObject("NakedMan")
-                                    ->GetPosition();
-
-      //Get mouse position
-      std::pair<int, int> mousePosition =InputSystem::GetInstance()->GetMousePosition();
+         mousePosition.m_x = input->GetMousePosition().first;
+         mousePosition.m_y = input->GetMousePosition().second;
 
 
-      //Move Bullet to player position
-      position->m_x=playerPosition->m_x;
-      position->m_y=playerPosition->m_y;
-      shoot = true;
+        if(input->GetKeyDown(INPUT_SPACE)){
 
+          angle = playerPosition.GetAngleRadians(mousePosition);
+          bulletVelocity.m_x = bulletSpeed * cos(angle);
+          bulletVelocity.m_y = bulletSpeed * sin(angle);
+          position->m_x = playerPosition.m_x;
+          position->m_y = playerPosition.m_y;
+          shoot = true;
+        }
     }
 
-  
-
-    else{
+    if(shoot==false){
     //animator->StopAllAnimations();
     }
 
 }
 void PlayerAttackScript::FixedComponentUpdate() { 
+//printf("%f\n",bulletVelocity.m_x);
+printf("%f\n",angle);
+    bulletSpeed = bulletSpeed;
+    position->m_y += bulletVelocity.m_y;
+    position->m_x += bulletVelocity.m_x;
 
-  if(shoot == true){ 
-
-    //TODO calcular vetor da bala e aplicar a velocidade
-
-    //bulletSpeed = bulletSpeed*0.70710;
-    //position->m_y -= walkSpeed;
-    //position->m_x += walkSpeed;
-
-  }
 }

@@ -33,9 +33,10 @@ void GamePlayScene::CreateNakedMan() {
 
 
 void GamePlayScene::CreateFirstBoss() {
- //auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect", new Vector(0,0),180, 180, 1);
- //auto firstBossCentralEffectScript = new  FirstBossCentralEffectScript(FirstBossCentralEffect);
- //AddGameObject(FirstBossCentralEffect);
+
+ auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect", new Vector(0,0),211.86,211.86, 1);
+ auto firstBossCentralEffectScript = new  FirstBossCentralEffectScript(FirstBossCentralEffect);
+ AddGameObject(FirstBossCentralEffect);
 
   auto firstBoss = new GameObject("FirstBoss", new Vector(500,100),690,930, 1);
   // Script

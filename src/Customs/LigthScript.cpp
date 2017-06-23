@@ -28,17 +28,24 @@ void LightScript::CreateAnimations(){
 
 
 void LightScript::ComponentUpdate() {
+    player = SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
+    if(player){
+        if(play==1)
+         animator->PlayAnimation("lightAnimation");
 
-    if(play==1)
-     animator->PlayAnimation("lightAnimation");
+        if(input->GetKeyDown(INPUT_Y) && play==0){
+        play=1;
+        }
+        else if(input->GetKeyDown(INPUT_Y) && play==1)
+        play=0;
 
-    if(input->GetKeyDown(INPUT_Y) && play==0){
-    play=1;
+
     }
-    else if(input->GetKeyDown(INPUT_Y) && play==1)
-    play=0;
-    }
+}
+
 void LightScript::FixedComponentUpdate() {
-        position->m_x  =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan")->GetPosition()->m_x -  GetOwner()->GetWidth()/2 + 40;
-        position->m_y  =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan")->GetPosition()->m_y -  GetOwner()->GetHeight()/2 + 40;
+  if(player){
+    position->m_x  =  player->GetPosition()->m_x -  GetOwner()->GetWidth()/2 + 40;
+    position->m_y  =  player->GetPosition()->m_y -  GetOwner()->GetHeight()/2 + 40;
+  }
 }

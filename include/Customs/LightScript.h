@@ -26,6 +26,7 @@ private:
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
+  GameObject *player = nullptr;
   int play=0;
 
 };

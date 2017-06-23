@@ -25,6 +25,7 @@ Vector Vector::operator/(float scalar) {
 }
 
 float Vector::GetLength() { return sqrt(m_x * m_x + m_y * m_y); }
+
 float Vector::GetLength(Vector &vec) {
   return sqrt((vec.m_x * vec.m_x) + (vec.m_y * vec.m_y));
 }
@@ -36,6 +37,70 @@ Vector Vector::GetNormalized() {
     return normalized;
   }
   return Vector(0, 0);
+}
+
+float Vector::GetAngleDegrees(Vector &vec){
+float angle  = atan((vec.m_y - m_y)/(vec.m_x - m_x))*180/3.14;
+
+
+//1 quadrante
+  if(vec.m_x >=m_x && vec.m_y <= m_y ){
+  angle = angle;
+  }
+    //angle = angle*-1;
+  //2 quadrante
+  if(vec.m_x<m_x && vec.m_y> m_y){
+  angle = 180 + angle;
+  }
+    //angle =180 - angle;
+  //3 quadrante
+  if(vec.m_x<m_x && vec.m_y< m_y ){
+   angle = 180  + angle;
+  }
+  //angle =180 - angle;
+  //4 quadrante
+  if(vec.m_x >=m_x && vec.m_y <= m_y ){
+  angle =360 + angle;
+  }
+
+return angle;
+}
+/*
+//1 quadrante
+  if(vec.m_x >=m_x && vec.m_y <= m_y )
+    //angle = angle*-1;
+  //2 quadrante
+  if(vec.m_x<m_x && vec.m_y< m_y )
+    //angle =180 - angle;
+  //3 quadrante
+  if(vec.m_x<m_x && vec.m_y> m_y )
+  //angle =180 - angle;
+  //4 quadrante
+  if(vec.m_x>m_x && vec.m_y> m_y )
+    //angle =360 - angle;
+/*
+  //1 quadrante
+  if(vec.m_x >=m_x && vec.m_y <= m_y )
+    angle = angle*-1;
+  //2 quadrante
+  if(vec.m_x<m_x && vec.m_y< m_y )
+    angle =180 - angle;
+  //3 quadrante
+  if(vec.m_x<m_x && vec.m_y> m_y )
+  angle =180 - angle;
+  //4 quadrante
+  if(vec.m_x>m_x && vec.m_y> m_y )
+    angle =360 - angle;
+
+*/
+
+//return angle;
+//}
+
+float Vector::GetAngleRadians(Vector &vec){
+
+return GetAngleDegrees(vec)*3.14/180;
+
 }
 
 float Vector::GetDistance(Vector vec) {

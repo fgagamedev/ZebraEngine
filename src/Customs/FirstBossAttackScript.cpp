@@ -13,31 +13,24 @@ void FirstBossAttackScript::Start() {
 }
 void FirstBossAttackScript::CreateAnimations(){
 
- auto firstBossAttackImage = new Image("assets/boss1_Attack.png",0,0,512, 295);
+  auto firstBossAttackImage = new Image("assets/boss1_Attack.png",0,0,512, 295);
 
   auto firstBossAttackAnimation= new Animation(GetOwner(),firstBossAttackImage );
   for (int i = 0; i < 12; i++){
-    
-      firstBossAttackAnimation->AddFrame(new Frame(i * 40, 0, 39, 147));
-    
-    
-
-
+    firstBossAttackAnimation->AddFrame(new Frame(i * 40, 0, 39, 147));
   }
-     // animator
-      auto firstBossAttackAnimator = new Animator(GetOwner());
-      firstBossAttackAnimator->AddAnimation("firstBossAttackAnimation", firstBossAttackAnimation);
-  
-
-
+  // animator
+  auto firstBossAttackAnimator = new Animator(GetOwner());
+  firstBossAttackAnimator->AddAnimation("firstBossAttackAnimation", firstBossAttackAnimation);
 }
 
 
 void FirstBossAttackScript::ComponentUpdate() {
-  animator->PlayAnimation("firstBossAttackAnimation");
+  boss = SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss");
 
+  if(boss)
+    animator->PlayAnimation("firstBossAttackAnimation");
 }
 void FirstBossAttackScript::FixedComponentUpdate() {
-
-
+  if(boss){}
 }

@@ -27,9 +27,16 @@ private:
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
+
+  Vector mousePosition = Vector(0,0);
+  Vector playerPosition = Vector(0,0);
+  GameObject *player = nullptr;
+
   int play=0;
-  Vector *bulletVelocity = new Vector(0, 0);
-  float bulletSpeed = 10;
+  float angle=0;
+  Vector bulletVelocity = Vector(0, 0);
+
+  float bulletSpeed = 30;
   bool shoot = false;
 
 

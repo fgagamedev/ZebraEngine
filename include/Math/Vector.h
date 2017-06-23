@@ -21,6 +21,8 @@ public:
   float GetDistance(Vector vec);
   float GetLength();
   float GetLength(Vector &vec);
+  float GetAngleDegrees(Vector &vec);
+  float GetAngleRadians(Vector &vec);
   Vector GetNormalized();
 };
 

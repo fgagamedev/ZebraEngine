@@ -8,31 +8,28 @@ void FirstBossCentralEffectScript::Start() {
   position = GetOwner()->GetPosition();
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
-  GetOwner()->SetZoomProportion(Vector(175,175));
-
+  GetOwner()->SetZoomProportion(Vector(58,58));
 }
 void FirstBossCentralEffectScript::CreateAnimations(){
 
   auto firstBossCentralImage1 = new Image("assets/centroboss11.png",0,0,700, 70);
+  auto firstBossCentralAnimation1= new Animation(GetOwner(),firstBossCentralImage1 );
 
-    auto firstBossCentralAnimation1= new Animation(GetOwner(),firstBossCentralImage1 );
-      for (int i = 0; i < 10; i++)
-        firstBossCentralAnimation1->AddFrame(new Frame(i * 70,0, 70, 70));
-
+  for (int i = 0; i < 10; i++)
+    firstBossCentralAnimation1->AddFrame(new Frame(i * 70,0, 70, 70));
      // animator
-      auto firstBossAnimator = new Animator(GetOwner());
-      firstBossAnimator->AddAnimation("firstBossCentralAnimation1", firstBossCentralAnimation1);
-
+    auto firstBossAnimator = new Animator(GetOwner());
+    firstBossAnimator->AddAnimation("firstBossCentralAnimation1", firstBossCentralAnimation1);
 }
 
 
 void FirstBossCentralEffectScript::ComponentUpdate() {
-animator->PlayAnimation("firstBossCentralAnimation1");
+  boss = SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss");
+  if(boss) animator->PlayAnimation("firstBossCentralAnimation1");
 }
 void FirstBossCentralEffectScript::FixedComponentUpdate() {
- position->m_x  =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss")->GetPosition()->m_x +
-   SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss")->GetWidth()/2-30;
- position->m_y  =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss")->GetPosition()->m_y +
- SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss")->GetHeight()/2 - 20;
-
+  if(boss){
+    position->m_x = boss->GetPosition()->m_x + boss->GetWidth()/2 - GetOwner()->GetWidth()/2 + GetOwner()->GetWidth() / 5.575263158;
+    position->m_y = boss->GetPosition()->m_y + boss->GetHeight()/2 - GetOwner()->GetHeight()/2 +  GetOwner()->GetHeight() / 7.566428571;
+  }
 }

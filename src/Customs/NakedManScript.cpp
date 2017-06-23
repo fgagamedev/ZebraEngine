@@ -152,6 +152,7 @@ void NakedManScript::CreateAnimations(){
 
 
 void NakedManScript::ComponentUpdate() {
+
 SetDirection();
 
 walkSpeed = 15;
