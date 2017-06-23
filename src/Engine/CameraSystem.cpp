@@ -121,7 +121,7 @@ void CameraSystem::Reset(){
 
 
 
-void CameraSystem::ZoomIn(float zoomSpeed,GameObject * objectToFollow,Scene * scene) {
+void CameraSystem::ZoomIn(int zoomSpeed,GameObject * objectToFollow,Scene * scene) {
 
   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     if(!map)
@@ -161,12 +161,13 @@ void CameraSystem::ZoomIn(float zoomSpeed,GameObject * objectToFollow,Scene * sc
 
 }
 
-void CameraSystem::ZoomOut(float zoomSpeed,GameObject * objectToFollow,Scene * scene) {
+void CameraSystem::ZoomOut(int zoomSpeed,GameObject * objectToFollow,Scene * scene) {
   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     if(!map)
     return;
     x_pos_before = objectToFollow->GetPosition()->m_x;
     y_pos_before = objectToFollow->GetPosition()->m_y;
+        this->cameraSpeed = zoomSpeed;
     auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
     for(auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++ ){
       if((*it)->GetName()!="Map"){

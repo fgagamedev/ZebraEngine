@@ -40,9 +40,10 @@ public:
   void CameraShake(int intensity,float duration,Scene * scene);
 
   //Zoom
-  void ZoomIn(float zoomSpeed,GameObject * objectToFollow,Scene * scene);
-  void ZoomOut(float zoomSpeed,GameObject * objectToFollow,Scene * scene);
+  void ZoomIn(int zoomSpeed,GameObject * objectToFollow,Scene * scene);
+  void ZoomOut(int zoomSpeed,GameObject * objectToFollow,Scene * scene);
 
+  float currentZoom=0;
   private:
   CameraSystem();
   ~CameraSystem();

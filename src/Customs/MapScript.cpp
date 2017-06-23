@@ -32,15 +32,19 @@ void MapScript::ComponentUpdate() {
  if (input->GetKeyPressed(INPUT_Z))
     CameraSystem::GetInstance()->Lock();
 
-//printf("%d\n",CameraSystem::GetInstance()->IsLocked());
+printf("%f\n",CameraSystem::GetInstance()->currentZoom);
 
 
-  if(InputSystem::GetInstance()->GetKeyUp(INPUT_DOWN) &&  map->GetWidth()>=6144 &&  map->GetHeight()>=6144 ){
-        CameraSystem::GetInstance()->ZoomOut(0.5,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
+  if(InputSystem::GetInstance()->GetKeyUp(INPUT_DOWN) && CameraSystem::GetInstance()->currentZoom > -75){
+        CameraSystem::GetInstance()->ZoomOut(GetOwner()->originalWidth/4 + 1,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
+         CameraSystem::GetInstance()->ZoomIn(1,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
+        CameraSystem::GetInstance()->currentZoom -=25;
     }
 
-  if(InputSystem::GetInstance()->GetKeyUp(INPUT_UP) &&  map->GetWidth()<=18432 &&  map->GetHeight()<=18432){
-       CameraSystem::GetInstance()->ZoomIn(1.5,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
+  if(InputSystem::GetInstance()->GetKeyUp(INPUT_UP) && CameraSystem::GetInstance()->currentZoom < +75){
+       CameraSystem::GetInstance()->ZoomIn(GetOwner()->originalWidth/4 +1,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
+       CameraSystem::GetInstance()->ZoomOut(1,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
+       CameraSystem::GetInstance()->currentZoom +=25;
     }
 
 }

@@ -50,7 +50,7 @@ void GamePlayScene::CreateFirstBoss() {
  auto firstBossCentralEffectScript = new  FirstBossCentralEffectScript(FirstBossCentralEffect);
  AddGameObject(FirstBossCentralEffect);
 
-  auto firstBoss = new GameObject("FirstBoss", new Vector(500,100),690,930, 1);
+  auto firstBoss = new GameObject("FirstBoss", new Vector(-4700,-1600),690,930, 1);
   // Script
   auto firstBossScript = new  FirstBossScript(firstBoss);
   AddGameObject(firstBoss);
