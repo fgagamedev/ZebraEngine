@@ -23,12 +23,14 @@ private:
   Vector *nakedManPosition = nullptr;
   Vector *mapPosition = nullptr;
   NakedManScript *script = nullptr;
+  InputSystem *input = nullptr;
   char nakedManMovements;
   int mapSize_x;
   int mapSize_y;
   int mapSpeed;
   float proportion_x;
   float proportion_y;
+  bool shake=false;
 
 };
 

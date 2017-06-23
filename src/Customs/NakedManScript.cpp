@@ -9,7 +9,8 @@ void NakedManScript::Start() {
   position = GetOwner()->GetPosition();
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
-  GetOwner()->SetZoomProportion(Vector(128,128));
+   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
   CameraSystem::GetInstance()->SetCameraSpeed(walkSpeed);
 }
 
@@ -155,12 +156,11 @@ void NakedManScript::ComponentUpdate() {
 
 SetDirection();
 
-walkSpeed = 15;
+walkSpeed = fixedWalkSpeed;
   movements = 0;
 
   if((input->GetKeyPressed(INPUT_DOWN)) || (input->GetKeyPressed(INPUT_UP)))
     isZooming=true;
-
   if((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP)))
     isZooming=false;
 
@@ -306,9 +306,6 @@ else if (input->GetKeyPressed(INPUT_W)) {
   }
 
 
-  if (input->GetKeyPressed(INPUT_P))
-    shake=true;
-
 
  if(input->GetKeyDown(INPUT_L) && cameraLock==false) {
        cameraLock=true;
@@ -324,12 +321,6 @@ else if (input->GetKeyPressed(INPUT_W)) {
 }
 void NakedManScript::FixedComponentUpdate() {
 
-  if(shake){
-    //CameraShake(intensity,duration in seconds)
-    CameraSystem::GetInstance()->CameraShake(8,1,SceneManager::GetInstance()->GetCurrentScene());
-    if(!CameraSystem::GetInstance()->IsShaking())
-    shake=false;
-  }
 
   if (movements==5){
   walkSpeed = walkSpeed*0.70710;
@@ -375,61 +366,17 @@ void NakedManScript::FixedComponentUpdate() {
 
 
 
-if(cameraLock){
-    if (position->m_x + GetOwner()->GetWidth() >= deadzone_x){
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveRight(2,SceneManager::GetInstance()->GetCurrentScene());
+    if(cameraLock){
+        if (position->m_x + GetOwner()->GetWidth() >= deadzone_x){
+          if(isZooming){
+            CameraSystem::GetInstance()->MoveRight(2,SceneManager::GetInstance()->GetCurrentScene());
+            }
+          else{
+            CameraSystem::GetInstance()->MoveRight(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
+           }
         }
-      else{
-        CameraSystem::GetInstance()->MoveRight(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-       }
-    }
 
-    if (position->m_x <= deadzone_x){
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveLeft(2,SceneManager::GetInstance()->GetCurrentScene());
-      }
-      else{
-        CameraSystem::GetInstance()->MoveLeft(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-      }
-
-    }
-
-     if (position->m_y + GetOwner()->GetWidth() >= deadzone_y){
-       if(isZooming){
-          CameraSystem::GetInstance()->MoveDown(2,SceneManager::GetInstance()->GetCurrentScene());
-       }
-       else{
-         CameraSystem::GetInstance()->MoveDown(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-       }
-     }
-
-     if (position->m_y <= deadzone_y){
-       if(isZooming){
-         CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
-       }
-       else{
-         CameraSystem::GetInstance()->MoveUp(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-       }
-
-     }
-}
-
-else{
-
-
-
-
- if (position->m_x + GetOwner()->GetWidth() >= deadzone_x){
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveRight(2,SceneManager::GetInstance()->GetCurrentScene());
-        }
-      else{
-        CameraSystem::GetInstance()->MoveRight(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-       }
-    }
-
-        if (position->m_x <= 0){
+        if (position->m_x <= deadzone_x){
           if(isZooming){
             CameraSystem::GetInstance()->MoveLeft(2,SceneManager::GetInstance()->GetCurrentScene());
           }
@@ -439,41 +386,70 @@ else{
 
         }
 
+         if (position->m_y + GetOwner()->GetWidth() >= deadzone_y){
+           if(isZooming){
+              CameraSystem::GetInstance()->MoveDown(2,SceneManager::GetInstance()->GetCurrentScene());
+           }
+           else{
+             CameraSystem::GetInstance()->MoveDown(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
+           }
+         }
 
-          if (position->m_y + GetOwner()->GetWidth() >= deadzone_y){
-               if(isZooming){
-                  CameraSystem::GetInstance()->MoveDown(2,SceneManager::GetInstance()->GetCurrentScene());
-               }
-               else{
-                 CameraSystem::GetInstance()->MoveDown(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-               }
-             }
+         if (position->m_y <= deadzone_y){
+           if(isZooming){
+             CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
+           }
+           else{
+             CameraSystem::GetInstance()->MoveUp(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
+           }
 
-             if (position->m_y <= 0){
-               if(isZooming){
-                 CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
-               }
-               else{
-                 CameraSystem::GetInstance()->MoveUp(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-               }
+         }
+    }
 
-             }
-
-
-
-
+    else{
 
 
 
 
+     if (position->m_x + GetOwner()->GetWidth() >= deadzone_x){
+          if(isZooming){
+            CameraSystem::GetInstance()->MoveRight(2,SceneManager::GetInstance()->GetCurrentScene());
+            }
+          else{
+            CameraSystem::GetInstance()->MoveRight(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
+           }
+        }
+
+            if (position->m_x <= 0){
+              if(isZooming){
+                CameraSystem::GetInstance()->MoveLeft(2,SceneManager::GetInstance()->GetCurrentScene());
+              }
+              else{
+                CameraSystem::GetInstance()->MoveLeft(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
+              }
+
+            }
 
 
-}
+              if (position->m_y + GetOwner()->GetWidth() >= deadzone_y){
+                   if(isZooming){
+                      CameraSystem::GetInstance()->MoveDown(2,SceneManager::GetInstance()->GetCurrentScene());
+                   }
+                   else{
+                     CameraSystem::GetInstance()->MoveDown(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
+                   }
+                 }
+
+                 if (position->m_y <= 0){
+                   if(isZooming){
+                     CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
+                   }
+                   else{
+                     CameraSystem::GetInstance()->MoveUp(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
+                   }
+
+                 }
 
 
-
-
-
-
-
+            }
 }

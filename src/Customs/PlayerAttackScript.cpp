@@ -8,7 +8,8 @@ void PlayerAttackScript::Start() {
   position = GetOwner()->GetPosition();
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
-  GetOwner()->SetZoomProportion(Vector(0,0));
+   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
   player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
 
 }
@@ -65,8 +66,7 @@ void PlayerAttackScript::ComponentUpdate() {
 
 }
 void PlayerAttackScript::FixedComponentUpdate() { 
-//printf("%f\n",bulletVelocity.m_x);
-printf("%f\n",angle);
+
     bulletSpeed = bulletSpeed;
     position->m_y += bulletVelocity.m_y;
     position->m_x += bulletVelocity.m_x;

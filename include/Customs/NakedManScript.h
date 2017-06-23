@@ -25,13 +25,13 @@ private:
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
-  int walkSpeed = 15;
+  float walkSpeed = 15;
+  float fixedWalkSpeed = 15;
   int movements=0; //1=UP,2=DOWN,3=LEFT,4=RIGHT,5=UP LEFT.6=UP RIGHT,7=DOWN LEFT,8=DOWN RIGHT
   int deadzone_x = EngineGlobals::screen_width / 2;
   int deadzone_y = EngineGlobals::screen_height / 2;
   int lastDirection=1;
 
-  bool shake=false;
   bool cameraLock=true;
   bool isMovingLooking=true;
   static bool isZooming;

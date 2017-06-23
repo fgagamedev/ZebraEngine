@@ -48,7 +48,8 @@ public:
   bool operator<(const GameObject &go) const;
   // velocity
   void AddVelocity(Vector velocity);
-
+  float originalWidth;
+  float originalHeight;
 private:
   // map of components
   std::unordered_map<Uint32, std::vector<Component *>> m_components;

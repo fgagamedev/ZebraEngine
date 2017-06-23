@@ -8,7 +8,8 @@ void FirstBossCentralEffectScript::Start() {
   position = GetOwner()->GetPosition();
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
-  GetOwner()->SetZoomProportion(Vector(58,58));
+ auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+  if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
 }
 void FirstBossCentralEffectScript::CreateAnimations(){
 

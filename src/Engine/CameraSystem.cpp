@@ -121,7 +121,7 @@ void CameraSystem::Reset(){
 
 
 
-void CameraSystem::ZoomIn(int zoomSpeed,GameObject * objectToFollow,Scene * scene) {
+void CameraSystem::ZoomIn(float zoomSpeed,GameObject * objectToFollow,Scene * scene) {
 
   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     if(!map)
@@ -161,7 +161,7 @@ void CameraSystem::ZoomIn(int zoomSpeed,GameObject * objectToFollow,Scene * scen
 
 }
 
-void CameraSystem::ZoomOut(int zoomSpeed,GameObject * objectToFollow,Scene * scene) {
+void CameraSystem::ZoomOut(float zoomSpeed,GameObject * objectToFollow,Scene * scene) {
   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     if(!map)
     return;
@@ -199,7 +199,6 @@ void CameraSystem::ZoomOut(int zoomSpeed,GameObject * objectToFollow,Scene * sce
 
 }
 
-bool CameraSystem::IsShaking(){return isShaking;}
 
 CameraSystem * CameraSystem::GetInstance(){
   if (!m_instance)

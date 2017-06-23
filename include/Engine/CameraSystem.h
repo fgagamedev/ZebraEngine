@@ -25,21 +25,23 @@ public:
   float GetPos_y();
   int GetCameraSpeed();
 
+  bool IsLocked(){return isLocked;}
+  void Lock(){isLocked=true;}
+  void Unlock(){isLocked=false;}
+
+  bool IsLerping(){return isLerping;}
+
   void SetCameraSpeed(int speed);
- /*
-  void SetAndMovePos_x(float x,Scene * scene);
-  void SetAndMovePos_y(float y,Scene * scene);
-  */
   void SetAndMovePos_x(float x);
   void SetAndMovePos_y(float y);
 
   //Camera shake
-  bool IsShaking();
+  bool IsShaking(){return isShaking;}
   void CameraShake(int intensity,float duration,Scene * scene);
 
   //Zoom
-  void ZoomIn(int zoomSpeed,GameObject * objectToFollow,Scene * scene);
-  void ZoomOut(int zoomSpeed,GameObject * objectToFollow,Scene * scene);
+  void ZoomIn(float zoomSpeed,GameObject * objectToFollow,Scene * scene);
+  void ZoomOut(float zoomSpeed,GameObject * objectToFollow,Scene * scene);
 
   private:
   CameraSystem();
@@ -52,6 +54,8 @@ public:
   float y_pos_before;
   int cameraSpeed;
   bool isShaking;
+  bool isLocked = true;
+  bool isLerping = true;
   Timer timer;
   int current_x;
   int current_y;

@@ -9,6 +9,8 @@ GameObject::GameObject(std::string name, Vector *position, int width,
   m_height = height;
   m_layer = layer;
   m_velocity = new Vector(0, 0);
+  originalWidth = width;
+  originalHeight = height;
 }
 
 GameObject::~GameObject() {

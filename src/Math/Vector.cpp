@@ -42,61 +42,21 @@ Vector Vector::GetNormalized() {
 float Vector::GetAngleDegrees(Vector &vec){
 float angle  = atan((vec.m_y - m_y)/(vec.m_x - m_x))*180/3.14;
 
-
-//1 quadrante
-  if(vec.m_x >=m_x && vec.m_y <= m_y ){
+  //1 quadrante
+  if(vec.m_x >=m_x && vec.m_y <= m_y )
   angle = angle;
-  }
-    //angle = angle*-1;
-  //2 quadrante
-  if(vec.m_x<m_x && vec.m_y> m_y){
+   //2 quadrante
+  if(vec.m_x<m_x && vec.m_y> m_y)
   angle = 180 + angle;
-  }
-    //angle =180 - angle;
   //3 quadrante
-  if(vec.m_x<m_x && vec.m_y< m_y ){
+  if(vec.m_x<m_x && vec.m_y< m_y )
    angle = 180  + angle;
-  }
-  //angle =180 - angle;
   //4 quadrante
-  if(vec.m_x >=m_x && vec.m_y <= m_y ){
+  if(vec.m_x >=m_x && vec.m_y <= m_y )
   angle =360 + angle;
-  }
 
 return angle;
 }
-/*
-//1 quadrante
-  if(vec.m_x >=m_x && vec.m_y <= m_y )
-    //angle = angle*-1;
-  //2 quadrante
-  if(vec.m_x<m_x && vec.m_y< m_y )
-    //angle =180 - angle;
-  //3 quadrante
-  if(vec.m_x<m_x && vec.m_y> m_y )
-  //angle =180 - angle;
-  //4 quadrante
-  if(vec.m_x>m_x && vec.m_y> m_y )
-    //angle =360 - angle;
-/*
-  //1 quadrante
-  if(vec.m_x >=m_x && vec.m_y <= m_y )
-    angle = angle*-1;
-  //2 quadrante
-  if(vec.m_x<m_x && vec.m_y< m_y )
-    angle =180 - angle;
-  //3 quadrante
-  if(vec.m_x<m_x && vec.m_y> m_y )
-  angle =180 - angle;
-  //4 quadrante
-  if(vec.m_x>m_x && vec.m_y> m_y )
-    angle =360 - angle;
-
-*/
-
-//return angle;
-//}
-
 float Vector::GetAngleRadians(Vector &vec){
 
 return GetAngleDegrees(vec)*3.14/180;

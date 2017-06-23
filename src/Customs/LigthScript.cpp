@@ -8,6 +8,7 @@ void LightScript::Start() {
   position = GetOwner()->GetPosition();
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
+  //Not affected by zoom
   GetOwner()->SetZoomProportion(Vector(0,0));
 
 }

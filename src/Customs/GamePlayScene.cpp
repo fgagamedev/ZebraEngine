@@ -2,10 +2,10 @@
 #include "Globals/EngineGlobals.h"
 
 void GamePlayScene::OnActivation() {
+  CreateMap();//This must be the first function to be called
   CreateNakedMan();
-  CreateFirstBoss();
+CreateFirstBoss();
   CreateFirstBossAttack();
-  CreateMap();
   CreateLight();
   CreateRain();
   CreateSnow();
@@ -20,6 +20,19 @@ void GamePlayScene::OnShown() {}
 
 void GamePlayScene::OnHidden() {}
 
+void GamePlayScene::CreateMap() {
+  //Original resolution is 2048/2048
+  //6144,6144 = 3x
+  auto map = new GameObject("Map", new Vector(-5250 ,-5000),10500,10500);
+  // Renderer
+  auto mapImage = new Image("assets/world.png", 0, 0, 3500, 3500);
+  auto mapRenderer = new Renderer(map, mapImage);
+  // Script
+  auto mapScript = new MapScript(map);
+  AddGameObject(map);
+
+}
+
 void GamePlayScene::CreateNakedMan() {
 
   int xPos, yPos;
@@ -30,7 +43,6 @@ void GamePlayScene::CreateNakedMan() {
   auto nakedManScript = new NakedManScript(nakedMan);
   AddGameObject(nakedMan);
 }
-
 
 void GamePlayScene::CreateFirstBoss() {
 
@@ -62,21 +74,6 @@ void GamePlayScene::CreatePlayerAttack() {
   AddGameObject(playerAttack);
 
 }
-
-
-void GamePlayScene::CreateMap() {
-  //Original resolution is 2048/2048
-  //6144,6144 = 3x
-  auto map = new GameObject("Map", new Vector(-5630 ,-6130),12288,12288);
-  // Renderer
-  auto mapImage = new Image("assets/world.png", 0, 0, 2048, 2048);
-  auto mapRenderer = new Renderer(map, mapImage);
-  // Script
-  auto mapScript = new MapScript(map);
-  AddGameObject(map);
-}
-
-
 
 void GamePlayScene::CreateRain() {
 
