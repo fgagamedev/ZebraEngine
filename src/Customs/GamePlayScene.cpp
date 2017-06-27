@@ -11,6 +11,7 @@ CreateFirstBoss();
   CreateSnow();
   CreateThunder();
   CreatePlayerAttack();
+  CreateAmmoCounter();
 
 }
 
@@ -50,7 +51,7 @@ void GamePlayScene::CreateFirstBoss() {
  auto firstBossCentralEffectScript = new  FirstBossCentralEffectScript(FirstBossCentralEffect);
  AddGameObject(FirstBossCentralEffect);
 
-  auto firstBoss = new GameObject("FirstBoss", new Vector(-4700,-1600),690,930, 1);
+  auto firstBoss = new GameObject("FirstBoss", new Vector(-4700,-1600),690,930, 2);
   // Script
   auto firstBossScript = new  FirstBossScript(firstBoss);
   AddGameObject(firstBoss);
@@ -59,7 +60,7 @@ void GamePlayScene::CreateFirstBoss() {
 
 void GamePlayScene::CreateFirstBossAttack() {
 
-  auto firstBossAttack = new GameObject("FirstBossAttack", new Vector(400,100),39,147, 1);
+  auto firstBossAttack = new GameObject("FirstBossAttack", new Vector(-4700,-1700),39,147, 1);
   // Script
   auto firstBossAttackScript = new  FirstBossAttackScript(firstBossAttack);
   AddGameObject(firstBossAttack);
@@ -68,10 +69,25 @@ void GamePlayScene::CreateFirstBossAttack() {
 
 void GamePlayScene::CreatePlayerAttack() {
 
-  auto playerAttack = new GameObject("PlayerAttack", new Vector(0,0),15,15, 1);
-  // Script
-  auto playerAttackScript = new  PlayerAttackScript(playerAttack);
-  AddGameObject(playerAttack);
+  //Creating Bullets
+  for (int i = 0; i < 15; i++) {
+    std::string bulletName = "Bullet" + std::to_string(i + 1);
+    auto bullet = new GameObject(bulletName, new Vector(0, 0), 15, 15, 2);
+    //bullet->SetTag("Bullet");
+
+    auto bulletScript = new  PlayerAttackScript(bullet);
+
+    //auto playerCollider = new RectangleCollider(bullet, Vector(0, 0), 40, 60, 0);
+ 
+
+    //MissileController::GetInstance()->AddPlayer(bullet);
+    AddGameObject(bullet);
+    auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
+                   ->GetScene("Gameplay")
+                   ->GetGameObject(bulletName);
+    gameObjectBullet->active = false;
+                   
+  }
 
 }
 
@@ -107,5 +123,15 @@ void GamePlayScene::CreateLight() {
  //auto mapRenderer = new Renderer(light, lightImage);
   auto lightScript = new LightScript(light);
   AddGameObject(light);
+
+}
+
+void GamePlayScene::CreateAmmoCounter() {
+
+  auto ammo = new GameObject("Ammo", new Vector(2,2),200,200,3);
+  auto messengerText = new UIText(ammo, "15", "assets/UIpack/Font/kenvector_future_thin.ttf",
+                 100, 255, 255, 255, 255, 1);
+  //auto lightScript = new LightScript(light);
+  AddGameObject(ammo);
 
 }

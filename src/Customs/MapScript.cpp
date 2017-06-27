@@ -32,7 +32,7 @@ void MapScript::ComponentUpdate() {
  if (input->GetKeyPressed(INPUT_Z))
     CameraSystem::GetInstance()->Lock();
 
-printf("%f\n",CameraSystem::GetInstance()->currentZoom);
+ //printf("%f\n",CameraSystem::GetInstance()->currentZoom);
 
 
   if(InputSystem::GetInstance()->GetKeyUp(INPUT_DOWN) && CameraSystem::GetInstance()->currentZoom > -75){

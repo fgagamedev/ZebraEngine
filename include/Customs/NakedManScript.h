@@ -4,6 +4,7 @@
 #include "Components/Animator.h"
 #include "Components/Script.h"
 #include "Components/UIText.h"
+#include "Customs/PlayerAttackScript.h"
 #include "Engine/InputSystem.h"
 #include "Engine/SceneManager.h"
 #include "Engine/CameraSystem.h"
@@ -16,6 +17,8 @@ public:
   void Start() override;
   char GetMovement() { return movements; };
 
+  
+  int bulletNumber = 15;
 protected:
   void ComponentUpdate() override;
 
@@ -31,6 +34,7 @@ private:
   int deadzone_x = EngineGlobals::screen_width / 2;
   int deadzone_y = EngineGlobals::screen_height / 2;
   int lastDirection=1;
+
 
   bool cameraLock=true;
   bool isMovingLooking=true;

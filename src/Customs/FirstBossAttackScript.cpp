@@ -14,11 +14,11 @@ void FirstBossAttackScript::Start() {
 }
 void FirstBossAttackScript::CreateAnimations(){
 
-  auto firstBossAttackImage = new Image("assets/boss1_Attack.png",0,0,512, 295);
+  auto firstBossAttackImage = new Image("assets/firstBossAttack.png",0,0,600, 151);
 
   auto firstBossAttackAnimation= new Animation(GetOwner(),firstBossAttackImage );
-  for (int i = 0; i < 12; i++){
-    firstBossAttackAnimation->AddFrame(new Frame(i * 40, 0, 39, 147));
+  for (int i = 0; i < 15; i++){
+    firstBossAttackAnimation->AddFrame(new Frame(i * 40, 0, 40, 151));
   }
   // animator
   auto firstBossAttackAnimator = new Animator(GetOwner());

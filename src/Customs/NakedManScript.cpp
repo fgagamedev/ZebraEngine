@@ -170,6 +170,7 @@ walkSpeed = fixedWalkSpeed;
   else if((input->GetKeyDown(INPUT_V)) && (isMovingLooking)){
     isMovingLooking=false;
   }
+
 if(isMovingLooking){
 
     if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
@@ -232,9 +233,7 @@ if(isMovingLooking){
     }
 
   }
-}
-
-else{
+}else{
  if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
         movements=5;
         lastDirection=5;
@@ -296,6 +295,7 @@ else if (input->GetKeyPressed(INPUT_W)) {
   }
 
 }
+  //Sair para o Menu
   if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
     auto var = (UIText *)SceneManager::GetInstance()
                    ->GetScene("Main")
@@ -305,6 +305,37 @@ else if (input->GetKeyPressed(INPUT_W)) {
     SceneManager::GetInstance()->SetCurrentScene("Main");
   }
 
+  //Shoot gun
+  if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
+  
+    if(bulletNumber == 0){
+      cout << "no ammo" << endl;
+    }else{
+      auto script = (PlayerAttackScript*)SceneManager::GetInstance()
+                   ->GetScene("Gameplay")
+                   ->GetGameObject("Bullet" + std::to_string(bulletNumber))
+                   ->GetComponent("PlayerAttackScript");
+      script->SetShoot(true);
+
+      auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
+                   ->GetScene("Gameplay")
+                   ->GetGameObject("Bullet" + std::to_string(bulletNumber));
+      gameObjectBullet->active = true;
+                   
+
+      bulletNumber--;
+      cout << "ammo: " << bulletNumber << endl;
+    }
+  }
+
+  //Reload Gun
+  if (InputSystem::GetInstance()->GetKeyDown(INPUT_R)) {
+
+    cout << "Reloading..." << endl;
+    bulletNumber = 15;
+    cout << "ammo: " << bulletNumber << endl;
+    
+  }
 
 
  if(input->GetKeyDown(INPUT_L) && cameraLock==false) {

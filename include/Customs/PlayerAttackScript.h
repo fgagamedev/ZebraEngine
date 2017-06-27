@@ -19,6 +19,7 @@ public:
   std::string GetComponentName() override { return "PlayerAttackScript"; };
   void FixedComponentUpdate() override;
   void Start() override;
+  void SetShoot(bool shoot);
 
 protected:
   void ComponentUpdate() override;
@@ -32,12 +33,13 @@ private:
   Vector playerPosition = Vector(0,0);
   GameObject *player = nullptr;
 
+  bool shoot = false;
   int play=0;
   float angle=0;
   Vector bulletVelocity = Vector(0, 0);
 
   float bulletSpeed = 30;
-  bool shoot = false;
+  
 
 
 };

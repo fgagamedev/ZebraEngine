@@ -37,6 +37,7 @@ private:
   void CreateSnow();
   void CreateThunder();
   void CreateFirstBossAttack();
+  void CreateAmmoCounter();
 
 
 
