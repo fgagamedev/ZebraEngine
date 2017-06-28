@@ -60,7 +60,7 @@ void GamePlayScene::CreateFirstBoss() {
 
 void GamePlayScene::CreateFirstBossAttack() {
 
-  auto firstBossAttack = new GameObject("FirstBossAttack", new Vector(-4700,-1700),39,147, 1);
+  auto firstBossAttack = new GameObject("FirstBossAttack", new Vector(-4750,-1700),39,147, 1);
   // Script
   auto firstBossAttackScript = new  FirstBossAttackScript(firstBossAttack);
   AddGameObject(firstBossAttack);

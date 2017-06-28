@@ -80,9 +80,9 @@ void CollisionSystem::RectRect(RectangleCollider *r1, RectangleCollider *r2) {
   auto posR1 = r1->GetRectanglePoint();
   auto posR2 = r2->GetRectanglePoint();
 
-  if (abs(posR1.m_x - posR2.m_x) * 2 <= r1->GetWidth() + r2->GetWidth() &&
-      abs(posR1.m_y - posR2.m_y) * 2 <= r1->GetHeight() + r2->GetHeight())
-    collision = true;
+if(((posR1.m_x <= (posR2.m_x + r2->GetWidth())) && ((posR1.m_x + r1->GetWidth())>=posR2.m_x)) &&
+   ((posR1.m_y <=(posR2.m_y + r2->GetHeight())) && ((posR1.m_y + r1->GetHeight())>=posR2.m_y)))
+collision=true;
 
   if (collision) {
     INFO("COLLIDED");

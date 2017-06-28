@@ -10,7 +10,7 @@ void FirstBossScript::Start() {
   input = InputSystem::GetInstance();
   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
   if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
-
+  firstBossCollider = new RectangleCollider(GetOwner(), Vector(0, 0), GetOwner()->GetWidth(), GetOwner()->GetHeight(), 0);
 }
 void FirstBossScript::CreateAnimations(){
 
@@ -40,7 +40,9 @@ void FirstBossScript::CreateAnimations(){
 
 
 void FirstBossScript::ComponentUpdate() {
-    
+
+auto vec = Vector(firstBossCollider->GetRectanglePoint().m_x,firstBossCollider->GetRectanglePoint().m_y);
+GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
   animator->PlayAnimation("firstBossAnimation");
     
   //animator->PlayAnimation("firstBossJumpAnimation");

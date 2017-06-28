@@ -8,6 +8,8 @@
 #include "Engine/SceneManager.h"
 #include "Engine/CameraSystem.h"
 #include "Math/Vector.h"
+#include "Engine/GraphicsSystem.h"
+#include "Components/RectangleCollider.h"
 
 #include <string>
 
@@ -23,6 +25,8 @@ protected:
   void ComponentUpdate() override;
 private:
   void CreateAnimations();
+
+  RectangleCollider *firstBossCollider = nullptr;
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;

@@ -8,6 +8,7 @@
 #include "Engine/InputSystem.h"
 #include "Engine/SceneManager.h"
 #include "Engine/CameraSystem.h"
+#include "Components/RectangleCollider.h"
 
 class NakedManScript : public Script {
 public:
@@ -25,6 +26,7 @@ protected:
 private:
   void SetDirection();
   void CreateAnimations();
+
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
@@ -34,7 +36,7 @@ private:
   int deadzone_x = EngineGlobals::screen_width / 2;
   int deadzone_y = EngineGlobals::screen_height / 2;
   int lastDirection=1;
-
+  RectangleCollider* nakedManCollider = nullptr;
 
   bool cameraLock=true;
   bool isMovingLooking=true;

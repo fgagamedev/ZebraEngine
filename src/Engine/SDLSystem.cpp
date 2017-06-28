@@ -48,6 +48,12 @@ void SDLSystem::Run() {
     if (!FixFramerate())
       continue;
 
+    // clearing front buffer
+    SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
+    SDL_RenderClear(m_renderer);
+    // draw update changing the back buffer
+    SceneManager::GetInstance()->DrawUpdate();
+
     CalculateFramerate();
     InputSystem::GetInstance()->UpdateStates();
 
@@ -61,11 +67,7 @@ void SDLSystem::Run() {
       m_lastFixedUpdate = SDL_GetTicks();
     }
 
-    // clearing front buffer
-    SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
-    SDL_RenderClear(m_renderer);
-    // draw update changing the back buffer
-    SceneManager::GetInstance()->DrawUpdate();
+
     // getting back buffer and sending to front buffer
     SDL_RenderPresent(m_renderer);
   }
@@ -178,7 +180,7 @@ bool SDLSystem::CreateRenderer() {
     SDL_ERROR("SDLSystem::CreateRenderer() failed.");
     return false;
   }
-
+  SDL_SetRenderDrawBlendMode(m_renderer,SDL_BLENDMODE_BLEND);
   INFO("Created renderer successfully.");
   return true;
 }

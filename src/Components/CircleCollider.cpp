@@ -12,4 +12,5 @@ CircleCollider::CircleCollider(GameObject *owner, Vector &offset, float radius,
 void CircleCollider::FixedComponentUpdate() {
   m_shape.x = GetOwner()->GetPosition()->m_x + m_offset.m_x;
   m_shape.y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
+  m_shape.radius = GetOwner()->GetWidth()/2;
 }

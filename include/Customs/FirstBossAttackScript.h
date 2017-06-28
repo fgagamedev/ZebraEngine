@@ -8,6 +8,8 @@
 #include "Engine/SceneManager.h"
 #include "Engine/CameraSystem.h"
 #include "Math/Vector.h"
+#include "Engine/GraphicsSystem.h"
+#include "Components/RectangleCollider.h"
 
 #include <string>
 
@@ -27,6 +29,7 @@ private:
   Animator *animator = nullptr;
   Vector *position = nullptr;
   GameObject *boss = nullptr;
+  RectangleCollider* firstBossAttackCollider = nullptr;
 
 };
 

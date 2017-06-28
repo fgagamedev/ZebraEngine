@@ -9,9 +9,11 @@ void NakedManScript::Start() {
   position = GetOwner()->GetPosition();
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
-   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
-    if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
   CameraSystem::GetInstance()->SetCameraSpeed(walkSpeed);
+
+  auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+  if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
+  nakedManCollider = new RectangleCollider(GetOwner(), Vector(0, 0), GetOwner()->GetWidth(), GetOwner()->GetHeight(), 0);
 }
 
 void NakedManScript::SetDirection(){
@@ -154,6 +156,8 @@ void NakedManScript::CreateAnimations(){
 
 void NakedManScript::ComponentUpdate() {
 
+auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,nakedManCollider->GetRectanglePoint().m_y);
+GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
 SetDirection();
 
 walkSpeed = fixedWalkSpeed;

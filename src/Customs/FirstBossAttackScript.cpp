@@ -8,8 +8,9 @@ void FirstBossAttackScript::Start() {
   position = GetOwner()->GetPosition();
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
-   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
-    if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
+  auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+  if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
+  firstBossAttackCollider = new RectangleCollider(GetOwner(), Vector(0, 0), GetOwner()->GetWidth(), GetOwner()->GetHeight(), 0);
 
 }
 void FirstBossAttackScript::CreateAnimations(){
@@ -27,6 +28,9 @@ void FirstBossAttackScript::CreateAnimations(){
 
 
 void FirstBossAttackScript::ComponentUpdate() {
+auto vec = Vector(firstBossAttackCollider->GetRectanglePoint().m_x,firstBossAttackCollider->GetRectanglePoint().m_y);
+GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
+
   boss = SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FirstBoss");
 
   if(boss)

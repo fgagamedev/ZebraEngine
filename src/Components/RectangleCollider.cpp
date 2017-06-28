@@ -13,4 +13,6 @@ RectangleCollider::RectangleCollider(GameObject *owner, Vector offset,
 void RectangleCollider::FixedComponentUpdate() {
   m_shape.x = GetOwner()->GetPosition()->m_x + m_offset.m_x;
   m_shape.y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
+  m_shape.width = GetOwner()->GetWidth();
+  m_shape.height = GetOwner()->GetHeight();
 }
