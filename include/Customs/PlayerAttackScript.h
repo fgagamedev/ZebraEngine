@@ -8,6 +8,8 @@
 #include "Components/Renderer.h"
 #include "Engine/SceneManager.h"
 #include "Engine/CameraSystem.h"
+#include "Components/RectangleCollider.h"
+#include "Engine/GraphicsSystem.h"
 #include "Math/Vector.h"
 
 #include <string>
@@ -28,6 +30,7 @@ private:
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
+  RectangleCollider* playerCollider =  nullptr;
 
   Vector mousePosition = Vector(0,0);
   Vector playerPosition = Vector(0,0);

@@ -72,6 +72,8 @@ void CollisionSystem::CircleCircle(CircleCollider *c1, CircleCollider *c2) {
   if (collision) {
     INFO("CIRCLE CIRCLE");
     INFO("COLLIDED");
+    //c1->GetOwner()->AddCollision(c2->GetOwner());
+    //c2->GetOwner()->AddCollision(c1->GetOwner());
   }
 }
 
@@ -81,12 +83,15 @@ void CollisionSystem::RectRect(RectangleCollider *r1, RectangleCollider *r2) {
   auto posR2 = r2->GetRectanglePoint();
 
 if(((posR1.m_x <= (posR2.m_x + r2->GetWidth())) && ((posR1.m_x + r1->GetWidth())>=posR2.m_x)) &&
-   ((posR1.m_y <=(posR2.m_y + r2->GetHeight())) && ((posR1.m_y + r1->GetHeight())>=posR2.m_y)))
-collision=true;
+   ((posR1.m_y <=(posR2.m_y + r2->GetHeight())) && ((posR1.m_y + r1->GetHeight())>=posR2.m_y)) && 
+   (r1->active == true) && (r2->active == true))
+  collision=true;
 
   if (collision) {
     INFO("COLLIDED");
     INFO("RECT RECT");
+    //r1->GetOwner()->AddCollision(r2->GetOwner());
+    //r2->GetOwner()->AddCollision(r1->GetOwner());
   }
 }
 
@@ -110,6 +115,8 @@ void CollisionSystem::CircleRect(CircleCollider *c, RectangleCollider *r) {
   if (collision) {
     INFO("COLLIDED");
     INFO("RECT CIRCLE");
+    //c->GetOwner()->AddCollision(r->GetOwner());
+    //r->GetOwner()->AddCollision(c->GetOwner());
   }
 
 }

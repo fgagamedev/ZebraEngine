@@ -312,14 +312,13 @@ else if (input->GetKeyPressed(INPUT_W)) {
   //Shoot gun
   if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
   
-    if(bulletNumber == 0){
-      cout << "no ammo" << endl;
-    }else{
+      cout << "ammo: " << bulletNumber << endl;
       auto script = (PlayerAttackScript*)SceneManager::GetInstance()
                    ->GetScene("Gameplay")
                    ->GetGameObject("Bullet" + std::to_string(bulletNumber))
                    ->GetComponent("PlayerAttackScript");
       script->SetShoot(true);
+
 
       auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
                    ->GetScene("Gameplay")
@@ -327,12 +326,18 @@ else if (input->GetKeyPressed(INPUT_W)) {
       gameObjectBullet->active = true;
                    
 
-      bulletNumber--;
-      cout << "ammo: " << bulletNumber << endl;
+      bulletNumber++;
+      
+
+    if(bulletNumber == 10){
+      bulletNumber = 1;
+      //cout << "no ammo" << endl;
     }
+    
   }
 
   //Reload Gun
+  /*
   if (InputSystem::GetInstance()->GetKeyDown(INPUT_R)) {
 
     cout << "Reloading..." << endl;
@@ -340,6 +345,7 @@ else if (input->GetKeyPressed(INPUT_W)) {
     cout << "ammo: " << bulletNumber << endl;
     
   }
+  */
 
 
  if(input->GetKeyDown(INPUT_L) && cameraLock==false) {

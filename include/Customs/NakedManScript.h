@@ -19,7 +19,7 @@ public:
   char GetMovement() { return movements; };
 
   
-  int bulletNumber = 15;
+  int bulletNumber = 1;
 protected:
   void ComponentUpdate() override;
 

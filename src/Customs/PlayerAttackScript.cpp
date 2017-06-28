@@ -12,6 +12,8 @@ void PlayerAttackScript::Start() {
   if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
   player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
 
+  playerCollider = new RectangleCollider(GetOwner(), Vector(0, 0), GetOwner()->GetWidth(), GetOwner()->GetHeight(), 0);
+
 }
 void PlayerAttackScript::CreateAnimations(){
 
@@ -24,25 +26,36 @@ void PlayerAttackScript::CreateAnimations(){
 
 
 void PlayerAttackScript::ComponentUpdate() {
+    
+    player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
+    
+    //Deactivate Object when it comer out of windowsd
+    if(position->m_x > EngineGlobals::screen_width || position->m_x < 0){ 
+      //GetOwner()->active = false;
+    }
 
-     player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
-     if(player){
-         playerPosition.m_x  =  player->GetPosition()->m_x +  player->GetWidth()/2;
-         playerPosition.m_y  =  player->GetPosition()->m_y +  player->GetHeight()/2;
-
-         mousePosition.m_x = input->GetMousePosition().first;
-         mousePosition.m_y = input->GetMousePosition().second;
 
 
-        if(shoot){
+    if(player){
+        
+      //Get player Position
+      playerPosition.m_x  =  player->GetPosition()->m_x +  player->GetWidth()/2;
+      playerPosition.m_y  =  player->GetPosition()->m_y +  player->GetHeight()/2;
 
-          angle = playerPosition.GetAngleRadians(mousePosition);
-          bulletVelocity.m_x = bulletSpeed * cos(angle);
-          bulletVelocity.m_y = bulletSpeed * sin(angle);
-          position->m_x = playerPosition.m_x;
-          position->m_y = playerPosition.m_y;
-          shoot = false;
-        }
+      //Get Mouse Position
+      mousePosition.m_x = input->GetMousePosition().first;
+      mousePosition.m_y = input->GetMousePosition().second;
+
+
+      if(shoot){
+
+        angle = playerPosition.GetAngleRadians(mousePosition);
+        bulletVelocity.m_x = bulletSpeed * cos(angle);
+        bulletVelocity.m_y = bulletSpeed * sin(angle);
+        position->m_x = playerPosition.m_x;
+        position->m_y = playerPosition.m_y;
+        shoot = false;
+      }
     }
 
     //if(shoot==false){

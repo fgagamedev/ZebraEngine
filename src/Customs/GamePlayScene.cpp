@@ -70,22 +70,16 @@ void GamePlayScene::CreateFirstBossAttack() {
 void GamePlayScene::CreatePlayerAttack() {
 
   //Creating Bullets
-  for (int i = 0; i < 15; i++) {
-    std::string bulletName = "Bullet" + std::to_string(i + 1);
-    auto bullet = new GameObject(bulletName, new Vector(0, 0), 15, 15, 2);
+  for (int i = 1; i < 10; i++) {
+    std::string bulletName = "Bullet" + std::to_string(i);
+    auto bullet = new GameObject(bulletName, new Vector(100 * i, 0), 15, 15, 2);
     //bullet->SetTag("Bullet");
 
     auto bulletScript = new  PlayerAttackScript(bullet);
-
-    //auto playerCollider = new RectangleCollider(bullet, Vector(0, 0), 40, 60, 0);
- 
-
     //MissileController::GetInstance()->AddPlayer(bullet);
     AddGameObject(bullet);
-    auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
-                   ->GetScene("Gameplay")
-                   ->GetGameObject(bulletName);
-    gameObjectBullet->active = false;
+
+    //bullet->active = false;
                    
   }
 
