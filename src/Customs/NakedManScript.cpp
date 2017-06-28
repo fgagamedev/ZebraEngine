@@ -331,21 +331,10 @@ else if (input->GetKeyPressed(INPUT_W)) {
 
     if(bulletNumber == 10){
       bulletNumber = 1;
-      //cout << "no ammo" << endl;
+      
     }
     
   }
-
-  //Reload Gun
-  /*
-  if (InputSystem::GetInstance()->GetKeyDown(INPUT_R)) {
-
-    cout << "Reloading..." << endl;
-    bulletNumber = 15;
-    cout << "ammo: " << bulletNumber << endl;
-    
-  }
-  */
 
 
  if(input->GetKeyDown(INPUT_L) && cameraLock==false) {
@@ -361,7 +350,7 @@ else if (input->GetKeyPressed(INPUT_W)) {
  }
 }
 void NakedManScript::FixedComponentUpdate() {
-
+  GameCollisionCheck();
 
   if (movements==5){
   walkSpeed = walkSpeed*0.70710;
@@ -493,4 +482,20 @@ void NakedManScript::FixedComponentUpdate() {
 
 
             }
+}
+
+void NakedManScript::GameCollisionCheck() {
+  for (auto obj : GetOwner()->GetCollisions()) {
+    if (obj->GetTag() == "Bullet") {
+      cout << "Bullet Colider" << endl;
+      GetOwner()->ClearCollisions();
+      
+    }else if(obj->GetTag() == "FirstBoss"){
+      cout << "Boss Colider" << endl;
+      GetOwner()->ClearCollisions();
+    }else if(obj->GetTag() == "FirstBossAtack"){
+      cout << "Boss Atack Colider" << endl;
+      GetOwner()->ClearCollisions();
+    }
+  }
 }

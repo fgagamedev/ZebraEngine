@@ -26,6 +26,7 @@ protected:
 private:
   void SetDirection();
   void CreateAnimations();
+  void GameCollisionCheck(); 
 
   InputSystem *input = nullptr;
   Animator *animator = nullptr;

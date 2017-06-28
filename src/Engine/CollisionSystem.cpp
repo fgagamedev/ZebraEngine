@@ -70,10 +70,10 @@ void CollisionSystem::CircleCircle(CircleCollider *c1, CircleCollider *c2) {
     collision = true;
 
   if (collision) {
-    INFO("CIRCLE CIRCLE");
-    INFO("COLLIDED");
-    //c1->GetOwner()->AddCollision(c2->GetOwner());
-    //c2->GetOwner()->AddCollision(c1->GetOwner());
+    //INFO("CIRCLE CIRCLE");
+    //INFO("COLLIDED");
+    c1->GetOwner()->AddCollision(c2->GetOwner());
+    c2->GetOwner()->AddCollision(c1->GetOwner());
   }
 }
 
@@ -88,10 +88,10 @@ if(((posR1.m_x <= (posR2.m_x + r2->GetWidth())) && ((posR1.m_x + r1->GetWidth())
   collision=true;
 
   if (collision) {
-    INFO("COLLIDED");
-    INFO("RECT RECT");
-    //r1->GetOwner()->AddCollision(r2->GetOwner());
-    //r2->GetOwner()->AddCollision(r1->GetOwner());
+    //INFO("COLLIDED");
+    //INFO("RECT RECT");
+    r1->GetOwner()->AddCollision(r2->GetOwner());
+    r2->GetOwner()->AddCollision(r1->GetOwner());
   }
 }
 
@@ -113,10 +113,10 @@ void CollisionSystem::CircleRect(CircleCollider *c, RectangleCollider *r) {
         if (((distX <= (r->GetWidth()/2)) || (distY <= (r->GetHeight()/2))) || (dx*dx + dy*dy <= (c->GetRadius()*c->GetRadius())))
                 collision=true;
   if (collision) {
-    INFO("COLLIDED");
-    INFO("RECT CIRCLE");
-    //c->GetOwner()->AddCollision(r->GetOwner());
-    //r->GetOwner()->AddCollision(c->GetOwner());
+    //INFO("COLLIDED");
+    //INFO("RECT CIRCLE");
+    c->GetOwner()->AddCollision(r->GetOwner());
+    r->GetOwner()->AddCollision(c->GetOwner());
   }
 
 }

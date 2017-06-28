@@ -42,6 +42,11 @@ public:
   inline int GetHeight() { return m_height; };
   inline Vector *GetZoomProportion() { return zoomProportion; };
   void SetSize(int width, int height);
+
+  //Object Tag
+  inline void SetTag(std::string tag) { m_tag = tag; };
+  inline std::string GetTag() { return m_tag; };
+  
   inline Uint8 GetLayer() { return m_layer; };
   Vector GetVelocity();
   // operator overload
@@ -50,6 +55,12 @@ public:
   void AddVelocity(Vector velocity);
   float originalWidth;
   float originalHeight;
+
+  // Collision
+  void AddCollision(GameObject *gameobject);
+  void ClearCollisions();
+  std::vector<GameObject *> GetCollisions();
+
 private:
   // map of components
   std::unordered_map<Uint32, std::vector<Component *>> m_components;
@@ -60,7 +71,9 @@ private:
   int m_height = 0;
   Vector *zoomProportion = new Vector(1,1);
   Uint8 m_layer;
+  std::string m_tag = "";
   Vector *m_velocity;
+  std::vector<GameObject *> m_colliding;
 
   // methods for handling specific update
   void PhysicsUpdate();

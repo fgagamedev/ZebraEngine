@@ -52,6 +52,10 @@ void GamePlayScene::CreateFirstBoss() {
  AddGameObject(FirstBossCentralEffect);
 
   auto firstBoss = new GameObject("FirstBoss", new Vector(-4700,-1600),690,930, 2);
+
+  //Tag
+  firstBoss->SetTag("FirstBoss");
+  
   // Script
   auto firstBossScript = new  FirstBossScript(firstBoss);
   AddGameObject(firstBoss);
@@ -61,6 +65,10 @@ void GamePlayScene::CreateFirstBoss() {
 void GamePlayScene::CreateFirstBossAttack() {
 
   auto firstBossAttack = new GameObject("FirstBossAttack", new Vector(-4750,-1700),39,147, 1);
+  
+  //Tag
+  firstBossAttack->SetTag("FirstBossAtack");
+
   // Script
   auto firstBossAttackScript = new  FirstBossAttackScript(firstBossAttack);
   AddGameObject(firstBossAttack);
@@ -73,7 +81,7 @@ void GamePlayScene::CreatePlayerAttack() {
   for (int i = 1; i < 10; i++) {
     std::string bulletName = "Bullet" + std::to_string(i);
     auto bullet = new GameObject(bulletName, new Vector(100 * i, 0), 15, 15, 2);
-    //bullet->SetTag("Bullet");
+    bullet->SetTag("Bullet");
 
     auto bulletScript = new  PlayerAttackScript(bullet);
     //MissileController::GetInstance()->AddPlayer(bullet);

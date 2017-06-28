@@ -26,6 +26,7 @@ void PlayerAttackScript::CreateAnimations(){
 
 
 void PlayerAttackScript::ComponentUpdate() {
+
     
     player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
     
@@ -64,11 +65,28 @@ void PlayerAttackScript::ComponentUpdate() {
 
 }
 void PlayerAttackScript::FixedComponentUpdate() { 
+    GameCollisionCheck();
 
     bulletSpeed = bulletSpeed;
     position->m_y += bulletVelocity.m_y;
     position->m_x += bulletVelocity.m_x;
 
+}
+
+void PlayerAttackScript::GameCollisionCheck() {
+  for (auto obj : GetOwner()->GetCollisions()) {
+    if (obj->GetTag() == "Bullet") {
+      cout << "Bullet Colider" << endl;
+      GetOwner()->ClearCollisions();
+      
+    }else if(obj->GetTag() == "FirstBoss"){
+      cout << "Boss Colider" << endl;
+      GetOwner()->ClearCollisions();
+    }else if(obj->GetTag() == "FirstBossAtack"){
+      cout << "Boss Atack Colider" << endl;
+      GetOwner()->ClearCollisions();
+    }
+  }
 }
 
 void PlayerAttackScript::SetShoot(bool shoot){

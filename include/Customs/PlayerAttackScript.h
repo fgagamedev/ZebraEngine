@@ -22,6 +22,7 @@ public:
   void FixedComponentUpdate() override;
   void Start() override;
   void SetShoot(bool shoot);
+  void GameCollisionCheck();
 
 protected:
   void ComponentUpdate() override;
