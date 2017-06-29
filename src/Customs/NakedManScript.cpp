@@ -1,4 +1,5 @@
 #include "Customs/NakedManScript.h"
+#include "Customs/FirstBossController.h"
 #include <stdio.h>
 bool NakedManScript::isZooming=false;
 
@@ -14,6 +15,8 @@ void NakedManScript::Start() {
   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
   if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
   nakedManCollider = new RectangleCollider(GetOwner(), Vector(0, 0), GetOwner()->GetWidth(), GetOwner()->GetHeight(), 0);
+
+  FirstBossController::GetInstance();
 }
 
 void NakedManScript::SetDirection(){
