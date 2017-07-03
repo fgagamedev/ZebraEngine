@@ -1,7 +1,7 @@
 #include "Engine/SDLSystem.h"
 
 // load commons includes
-#include "Customs/CatchAllScene.h"
+#include "Customs/FirstBossScene.h"
 #include "Customs/MainScene.h"
 #include "Customs/GamePlayScene.h"
 
@@ -198,14 +198,12 @@ void SDLSystem::CalculateFramerate() {
 
 void SDLSystem::LoadCommons() {
   auto mainScene = new MainScene();
-   auto gameplayScene = new GamePlayScene();
-  auto catchAllScene = new CatchAllScene();
+  auto gameplayScene = new GamePlayScene();
+  auto firstBossScene = new FirstBossScene();
 
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
-
   SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay", gameplayScene));
-
-  SceneManager::GetInstance()->AddScene(std::make_pair("CatchAll", catchAllScene));
+  SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene", firstBossScene));
 
 }
 

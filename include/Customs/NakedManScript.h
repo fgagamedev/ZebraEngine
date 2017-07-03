@@ -5,6 +5,7 @@
 #include "Components/Script.h"
 #include "Components/UIText.h"
 #include "Customs/PlayerAttackScript.h"
+#include "Customs/HitScript.h"
 #include "Engine/InputSystem.h"
 #include "Engine/SceneManager.h"
 #include "Engine/CameraSystem.h"
@@ -27,6 +28,12 @@ private:
   void SetDirection();
   void CreateAnimations();
   void GameCollisionCheck(); 
+  void StartFirstBoss();
+
+  //Player Movements
+  void Movements(); 
+
+  bool zoom = true;
 
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
@@ -39,10 +46,15 @@ private:
   int lastDirection=1;
   RectangleCollider* nakedManCollider = nullptr;
 
+  int m_hitFrames = 0;
+  bool m_hitFrameController = false;
+
   bool cameraLock=true;
   bool isMovingLooking=true;
   static bool isZooming;
   std::pair<int, int> mousePosition;
+
+
 
 };
 

@@ -16,7 +16,7 @@ FirstBossController *FirstBossController::GetInstance() { //Singleton class
 FirstBossController::FirstBossController() {} //Constructor void
 
 void FirstBossController::StartBossFight() {
-  
+  PositAllTentacles();
   //PositBoss();
   //->boss resurge animation
   //wait time
@@ -41,12 +41,19 @@ void FirstBossController::PositPlayer() { m_player->SetPosition(Vector(m_wPos, m
 
 void FirstBossController::PositBoss() { m_boss->SetPosition(Vector(m_wPos, m_hPos)); }
 
-void FirstBossController::PositTentacle() { 
+void FirstBossController::PositAllTentacles() { 
   for (auto tentacle : m_tentacles) {
-
-      tentacle->SetPosition(Vector(m_wPos, m_hPos));
+      Vector *position = m_player->GetPosition();
+      tentacle->SetPosition(Vector(position->m_x + 30, position->m_y - 30));
   }
-} //use rand to posit
+} 
+
+void FirstBossController::PositTentacle(int index) { 
+
+      Vector *position = m_player->GetPosition();
+      m_tentacles[index]->SetPosition(Vector(position->m_x , position->m_y - 250));
+  
+} 
 
 /*Active*/
 void FirstBossController::ActivatePlayer() {
@@ -90,6 +97,33 @@ std::pair <int, int> FirstBossController::GetRandomPosition() {
   randomPosition.second = rand();
 
   return randomPosition;
+}
+
+void FirstBossController::FirstAttack() {
+    cout << "FirstAttack" << endl;
+    if(actualTentacle == 4)
+      actualTentacle = 1;
+
+    m_tentacles[actualTentacle]->ClearCollisions();
+    m_tentacles[actualTentacle]->active = true;
+    PositTentacle(actualTentacle);
+    auto firstBossAttackScript = (FirstBossAttackScript*)m_tentacles[actualTentacle]->GetComponent("FirstBossAttackScript");
+    firstBossAttackScript->attack = true;
+/*
+      auto script = (ScoreScript*)SceneManager::GetInstance()
+                   ->GetScene("Gameplay")
+                   ->GetGameObject("Score")
+                   ->GetComponent("ScoreScript");
+                   script->SetScore(0);
+
+                   */
+    actualTentacle++;
+
+     //animator = (Animator *)GetOwner()->GetComponent("Animator");
+}
+
+void FirstBossController::SecondAttack() {
+    
 }
 
 /*

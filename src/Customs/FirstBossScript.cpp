@@ -41,15 +41,33 @@ void FirstBossScript::CreateAnimations(){
 
 void FirstBossScript::ComponentUpdate() {
 
-auto vec = Vector(firstBossCollider->GetRectanglePoint().m_x,firstBossCollider->GetRectanglePoint().m_y);
-GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
+  auto vec = Vector(firstBossCollider->GetRectanglePoint().m_x,firstBossCollider->GetRectanglePoint().m_y);
+  GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
   animator->PlayAnimation("firstBossAnimation");
     
   //animator->PlayAnimation("firstBossJumpAnimation");
     
 
 }
+
+
 void FirstBossScript::FixedComponentUpdate() {
 
-  
+  timerAttackCooldown.Update(EngineGlobals::fixed_update_interval);
+  Attack();
+}
+
+void FirstBossScript::Attack(){
+
+  //cout << "FirstBossScript" << endl;
+  if(timerAttackCooldown.GetTime() >= 2*1000){
+
+    FirstBossController::GetInstance()->FirstAttack();
+    timerAttackCooldown.Restart();
+  }
+
+
+ 
+  //Random attack 1 e 2
+
 }

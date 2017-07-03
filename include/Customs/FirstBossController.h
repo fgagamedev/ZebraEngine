@@ -3,6 +3,7 @@
 
 #include <Engine/GameObject.h>
 #include <Globals/EngineGlobals.h>
+#include "Customs/FirstBossAttackScript.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -21,7 +22,8 @@ public:
   /*Posit*/
   void PositPlayer();
   void PositBoss();
-  void PositTentacle();
+  void PositTentacle(int index);
+  void PositAllTentacles();
 
   /*Activate*/
   void ActivatePlayer();
@@ -34,7 +36,11 @@ public:
   void DeactivateTentacles(); 
   void DeactivateTentacle(int tentacleIndex);
 
+  void FirstAttack();
+  void SecondAttack(); 
+
   std::pair <int, int> GetRandomPosition();
+  
   
 private:
   FirstBossController();
@@ -48,6 +54,8 @@ private:
   //Positions
   int m_wPos;
   int m_hPos;
+
+  int actualTentacle = 1;
   std::pair <int, int> randomPosition;
   
 };

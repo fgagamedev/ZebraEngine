@@ -3,6 +3,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <string>
 
 #include "Engine/Scene.h"
 
@@ -20,6 +21,8 @@ public:
   void Update();
   void FixedUpdate();
   void DrawUpdate();
+
+  std::string GetCurrentSceneName();
 
 private:
   // constructor and destructor

@@ -1,6 +1,8 @@
-#ifndef __GAMEPLAYSCENE__
-#define __GAMEPLAYSCENE__
+#ifndef __FIRST_BOSS_SCENE__
+#define __FIRST_BOSS_SCENE__
 
+#include "Components/CircleCollider.h"
+#include "Components/RectangleCollider.h"
 #include "Engine/GameObject.h"
 #include "Engine/Scene.h"
 #include "Components/CircleRenderer.h"
@@ -20,31 +22,28 @@
 #include "Customs/FirstBossScript.h"
 #include "Customs/FirstBossAttackScript.h"
 #include "Customs/FirstBossCentralEffectScript.h"
+#include "Engine/CameraSystem.h"
 
-
-class GamePlayScene : public Scene {
+class FirstBossScene : public Scene {
 public:
-  void OnActivation() override;
-  void OnDeactivation() override;
-  void OnShown() override;
-  void OnHidden() override;
-
+  	FirstBossScene();
+  	virtual void OnActivation() override;
+  	void OnDeactivation() override;
+  	void OnShown() override;
+	void OnHidden() override;
 private:
-  void CreateNakedMan();
-  void CreatePlayerAttack();
-  void CreateFirstBoss();
-  void CreateMap();
-  void CreateLight();
-  void CreateRain();
-  void CreateSnow();
-  void CreateThunder();
-  void CreateFirstBossAttack();
-  void CreateAmmoCounter();
-  void CreatePlayerHit();
-
-
-
-
+  	void CreateMap();
+	void CreatePlayer();
+  	void CreateBoss();
+  	void CreatePlayerAttack();
+  	void CreateFirstBossAttack();
+  	void CreateLight();
+  	void CreateRain();
+  	void CreateSnow();
+  	void CreateThunder();
+  	void CreateAmmoCounter();
+  	void CreatePlayerHit();
+  
 };
 
 #endif

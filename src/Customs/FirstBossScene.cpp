@@ -1,43 +1,61 @@
-#include "Customs/GamePlayScene.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/FirstBossScene.h"
 
-void GamePlayScene::OnActivation() {
+FirstBossScene::FirstBossScene() {}
+
+void FirstBossScene::OnActivation() {
   CreateMap();//This must be the first function to be called
-  CreateNakedMan();
-  CreateFirstBoss();
-  CreateFirstBossAttack();
+  CreatePlayer();
+  CreateBoss();
+
+  //CreateFirstBossAttack();
   CreateLight();
   CreateRain();
   CreateSnow();
   CreateThunder();
   CreatePlayerAttack();
-  //CreateAmmoCounter();
-  //CreatePlayerHit();
-
+  CreatePlayerHit();
   //FirstBossController::GetInstance()->StartBossFight();
+
+  /*
+  CameraSystem::GetInstance()->ZoomOut( 100,
+                                        SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan"), 
+                                        SceneManager::GetInstance()->GetCurrentScene());
+  CameraSystem::GetInstance()->ZoomIn(  1,
+                                      SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan"),
+                                      SceneManager::GetInstance()->GetCurrentScene());
+  CameraSystem::GetInstance()->currentZoom -=25;
+  */
+}
+
+
+void FirstBossScene::OnDeactivation() {}
+
+void FirstBossScene::OnShown() {
+  //CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
+  //CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
 
 }
 
-void GamePlayScene::OnDeactivation() {}
+void FirstBossScene::OnHidden() {}
 
-void GamePlayScene::OnShown() {}
 
-void GamePlayScene::OnHidden() {}
 
-void GamePlayScene::CreateMap() {
+void FirstBossScene::CreateMap() {
   //Original resolution is 2048/2048
   //6144,6144 = 3x
-  auto map = new GameObject("Map", new Vector(-5250 ,-5000),10500,10500);
+  /*auto map = new GameObject("Map", new Vector(-5250 ,-5000),10500,10500);
   // Renderer
   auto mapImage = new Image("assets/world.png", 0, 0, 3500, 3500);
   auto mapRenderer = new Renderer(map, mapImage);
+  */
+  //auto map =  SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
   // Script
-  auto mapScript = new MapScript(map);
-  AddGameObject(map);
+  //auto mapScript = new MapScript(map);
+  //AddGameObject(map);
 
 }
 
-void GamePlayScene::CreateNakedMan() {
+void FirstBossScene::CreatePlayer() {
 
   int xPos, yPos;
   xPos =EngineGlobals::screen_width / 2 - 96/2;
@@ -49,13 +67,13 @@ void GamePlayScene::CreateNakedMan() {
   FirstBossController::GetInstance()->AddPlayer(nakedMan);
 }
 
-void GamePlayScene::CreateFirstBoss() {
+void FirstBossScene::CreateBoss() {
 
  auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect", new Vector(0,0),211.86,211.86, 1);
  auto firstBossCentralEffectScript = new  FirstBossCentralEffectScript(FirstBossCentralEffect);
  AddGameObject(FirstBossCentralEffect);
 
-  auto firstBoss = new GameObject("FirstBoss", new Vector(-4700,-1600),690,930, 2);
+  auto firstBoss = new GameObject("FirstBoss", new Vector(0,0),690,930, 2);
 
   //Tag
   firstBoss->SetTag("FirstBoss");
@@ -67,34 +85,21 @@ void GamePlayScene::CreateFirstBoss() {
 
 }
 
-void GamePlayScene::CreateFirstBossAttack() {
+void FirstBossScene::CreateFirstBossAttack() {
 
   auto firstBossAttack = new GameObject("FirstBossAttack", new Vector(-4750,-1700),39,147, 1);
   
-  
+  //Tag
+  firstBossAttack->SetTag("FirstBossAtack");
 
-  
-  
-  
+  // Script
+  auto firstBossAttackScript = new  FirstBossAttackScript(firstBossAttack);
+  AddGameObject(firstBossAttack);
+  FirstBossController::GetInstance()->AddTentacle(firstBossAttack);
 
-  for (int i = 1; i < 5; i++) {
-    std::string tentacleName = "FirstBossAttack" + std::to_string(i);
-    auto firstBossAttack = new GameObject(tentacleName, new Vector(-4750, -1700), 100, 377, 2);
-    //Tag
-    firstBossAttack->SetTag("FirstBossAtack");
-
-    // Script
-    auto firstBossAttackScript = new  FirstBossAttackScript(firstBossAttack);
-    
-    AddGameObject(firstBossAttack);
-    FirstBossController::GetInstance()->AddTentacle(firstBossAttack);
-
-    //bullet->active = false;
-                   
-  }
 }
 
-void GamePlayScene::CreatePlayerAttack() {
+void FirstBossScene::CreatePlayerAttack() {
 
   //Creating Bullets
   for (int i = 1; i < 10; i++) {
@@ -112,7 +117,7 @@ void GamePlayScene::CreatePlayerAttack() {
 
 }
 
-void GamePlayScene::CreateRain() {
+void FirstBossScene::CreateRain() {
 
   auto rain = new GameObject("Rain", new Vector(0,0),1024,800,1);
   auto rainScript = new RainScript(rain);
@@ -120,7 +125,7 @@ void GamePlayScene::CreateRain() {
 
 }
 
-void GamePlayScene::CreatePlayerHit() {
+void FirstBossScene::CreatePlayerHit() {
 
   auto hit = new GameObject("Hit", new Vector(0,0),1024,800,1);
 
@@ -130,7 +135,7 @@ void GamePlayScene::CreatePlayerHit() {
 }
 
 
-void GamePlayScene::CreateThunder() {
+void FirstBossScene::CreateThunder() {
 
   auto thunder = new GameObject("Rain", new Vector(200,0),113,267,1);
   auto thunderScript = new ThunderScript(thunder);
@@ -139,14 +144,14 @@ void GamePlayScene::CreateThunder() {
 }
 
 
-void GamePlayScene::CreateSnow(){
+void FirstBossScene::CreateSnow(){
 
   auto snow = new GameObject("Snow", new Vector(0,0),1024,800,1);
   auto snowScript = new SnowScript(snow);
   AddGameObject(snow);
 
 }
-void GamePlayScene::CreateLight() {
+void FirstBossScene::CreateLight() {
 
   auto light = new GameObject("Light", new Vector(0,0),2*1024,2*800,1);
  //auto lightImage = new Image("assets/luz.png",0,0,682, 512);
@@ -155,7 +160,7 @@ void GamePlayScene::CreateLight() {
   AddGameObject(light);
 
 }
-
+/*
 void GamePlayScene::CreateAmmoCounter() {
 
   auto ammo = new GameObject("Ammo", new Vector(2,2),200,200,3);
@@ -165,3 +170,4 @@ void GamePlayScene::CreateAmmoCounter() {
   AddGameObject(ammo);
 
 }
+*/
