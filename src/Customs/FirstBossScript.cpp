@@ -53,19 +53,38 @@ void FirstBossScript::ComponentUpdate() {
 
 void FirstBossScript::FixedComponentUpdate() {
 
-  timerAttackCooldown.Update(EngineGlobals::fixed_update_interval);
+  timerFirstAttackCooldown.Update(EngineGlobals::fixed_update_interval);
+  
+  if(goneFirstAttack)
+    timerFirstAttackGone.Update(EngineGlobals::fixed_update_interval);
+
   Attack();
 }
 
 void FirstBossScript::Attack(){
 
   //cout << "FirstBossScript" << endl;
-  if(timerAttackCooldown.GetTime() >= 2*1000){
 
-    FirstBossController::GetInstance()->FirstAttack();
-    timerAttackCooldown.Restart();
+  if(GetOwner()->active){
+    //rand first attack or second attack
+    if(timerFirstAttackCooldown.GetTime() >= 3*1000 && firstAttackCounter < 3){
+
+      FirstBossController::GetInstance()->FirstAttackSurge();
+      timerFirstAttackCooldown.Restart();
+      firstAttackCounter++;
+      //delay for next sord
+    }
+    if(firstAttackCounter == 3){ //Activate timer to gone tentacle
+      goneFirstAttack = true;
+    }
+
+    if(timerFirstAttackGone.GetTime() >= 6*1000){ //wait 6 seconds to make attack gone
+      FirstBossController::GetInstance()->FirstAttackGone();
+    }
+
+
   }
-
+  
 
  
   //Random attack 1 e 2

@@ -17,6 +17,7 @@ public:
   /*Add*/
   void AddPlayer(GameObject *player);
   void AddBoss(GameObject *boss);
+  void AddInsideBossFx(GameObject *bossInsideFx);
   void AddTentacle(GameObject *tentacle);
   
   /*Posit*/
@@ -28,15 +29,19 @@ public:
   /*Activate*/
   void ActivatePlayer();
   void ActivateBoss();
+  void ActivateInsideBossFx();
   void ActivateTentacles();
+  void ActivateTentacle(int indexTentacle);
 
   /*Deactive*/
   void DeactivatePlayer(); 
-  void DeactivateBoss(); 
+  void DeactivateBoss();
+  void DeactivateInsideBossFx(); 
   void DeactivateTentacles(); 
   void DeactivateTentacle(int tentacleIndex);
 
-  void FirstAttack();
+  void FirstAttackSurge();
+  void FirstAttackGone();
   void SecondAttack(); 
 
   std::pair <int, int> GetRandomPosition();
@@ -49,6 +54,7 @@ private:
   //Objects
   GameObject *m_player = nullptr;
   GameObject *m_boss = nullptr;
+  GameObject *m_bossInsideFx =  nullptr;
   std::vector<GameObject *> m_tentacles;
   
   //Positions

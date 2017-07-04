@@ -19,7 +19,9 @@
 #include "Customs/PlayerAttackScript.h"
 #include "Customs/FirstBossScript.h"
 #include "Customs/FirstBossAttackScript.h"
+#include "Customs/FirstBossLifeScript.h"
 #include "Customs/FirstBossCentralEffectScript.h"
+#include "Customs/BulletCounterScript.h"
 
 
 class GamePlayScene : public Scene {
@@ -41,6 +43,7 @@ private:
   void CreateFirstBossAttack();
   void CreateAmmoCounter();
   void CreatePlayerHit();
+  void CreateFirstBossLife();
 
 
 

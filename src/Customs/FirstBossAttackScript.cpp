@@ -58,9 +58,7 @@ void FirstBossAttackScript::ComponentUpdate() {
       //FirstBossController::GetInstance()->PositTentacle(1);
       //FirstBossController::GetInstance()->PositTentacle();
       //m_surgeAnimation = true;
-      //Attack();
-     
-     
+      //Attack();  
   }
 
   
@@ -75,7 +73,7 @@ void FirstBossAttackScript::FixedComponentUpdate() {
 
 
   timerAnimation.Update(EngineGlobals::fixed_update_interval);
-  
+  CameraShakeAttack();
  
 
 }
@@ -85,6 +83,7 @@ void FirstBossAttackScript::Attack(){
 
 
   if(m_surgeAnimation){
+    CameraSystem::GetInstance()->CameraShake(8,3,SceneManager::GetInstance()->GetCurrentScene());
     animator->PlayAnimation("firstBossAttackSurgeAnimation");
     m_surgeAnimation = false;
     m_idleAnimation =  true;
@@ -94,10 +93,10 @@ void FirstBossAttackScript::Attack(){
   if(m_idleAnimation && timerAnimation.GetTime()>=1*1000){
     animator->PlayAnimation("firstBossAttackIdleAnimation");
     
-    m_goneAnimation =  true;
+    //m_goneAnimation =  true;
     //timerAnimation.Restart();
   }
-  if(m_goneAnimation && timerAnimation.GetTime() >= attackDuration*1000){
+  if(m_goneAnimation){
     animator->PlayAnimation("firstBossAttackGoneAnimation");
     m_goneAnimation = false;
     m_idleAnimation =  false;
@@ -105,4 +104,13 @@ void FirstBossAttackScript::Attack(){
     m_surgeAnimation = true;
   }
   
+}
+
+void FirstBossAttackScript::CameraShakeAttack(){
+  if(shake){
+    //CameraShake(intensity,duration in seconds)
+    CameraSystem::GetInstance()->CameraShake(8,1,SceneManager::GetInstance()->GetCurrentScene());
+    if(!CameraSystem::GetInstance()->IsShaking())
+    shake=false;
+  }
 }

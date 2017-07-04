@@ -16,7 +16,8 @@ public:
   void SetColor(int r, int g, int b, int a);
   virtual string GetComponentName() override { return "RectangleRenderer"; };
   virtual void ComponentUpdate() override;
-
+  inline void SetWidth(int width) { this->m_width = width; };
+  inline int GetWidth() { return m_width; };
 private:
   int m_width, m_height;
   Vector m_offset;

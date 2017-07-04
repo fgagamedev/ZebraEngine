@@ -30,11 +30,13 @@ public:
   bool m_goneAnimation = false;
   bool m_noAnimation = false;
   bool attack = false;
+  bool shake =  false;
 
 protected:
   void ComponentUpdate() override;
 private:
   void CreateAnimations();
+  void CameraShakeAttack();
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;

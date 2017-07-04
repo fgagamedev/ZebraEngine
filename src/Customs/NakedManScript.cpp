@@ -309,7 +309,7 @@ else if (input->GetKeyPressed(INPUT_W)) {
 
   //Shoot gun
   if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
-  
+      
       cout << "ammo: " << bulletNumber << endl;
       auto script = (PlayerAttackScript*)SceneManager::GetInstance()
                    ->GetCurrentScene()
@@ -324,13 +324,15 @@ else if (input->GetKeyPressed(INPUT_W)) {
       gameObjectBullet->active = true;
                    
 
-      bulletNumber++;
+      bulletNumber--;
       
-
-    if(bulletNumber == 10){
-      bulletNumber = 1;
       
-    }
+      if(bulletNumber == 0){
+        bulletNumber = 10; 
+        //wait delay reload time
+        
+      }
+    
     
   }
 
@@ -506,10 +508,13 @@ void NakedManScript::StartFirstBoss(){
   //cout << SceneManager::GetInstance()->GetCurrentScene()->GetName() <<  endl;
   
   if( (CameraSystem::GetInstance()->worldCamera_x < 980)){
-    if(CameraSystem::GetInstance()->currentZoom > -50){
+    if(CameraSystem::GetInstance()->currentZoom > -50){ //Take zoom out 2 times
       CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->originalWidth/4 + 1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
       CameraSystem::GetInstance()->ZoomIn(1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
       CameraSystem::GetInstance()->currentZoom -=25;
+
+      FirstBossController::GetInstance()->ActivateBoss();
+      FirstBossController::GetInstance()->ActivateInsideBossFx();
       //zoom = false;
       
     }

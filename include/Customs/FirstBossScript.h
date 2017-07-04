@@ -33,7 +33,12 @@ private:
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
-  Timer timerAttackCooldown;
+  Timer timerFirstAttackCooldown;
+  Timer timerFirstAttackGone;
+
+  bool goneFirstAttack = false;
+
+  int firstAttackCounter = 0;
 
 
 };

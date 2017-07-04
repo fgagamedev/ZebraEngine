@@ -14,6 +14,9 @@ void PlayerAttackScript::Start() {
 
   playerCollider = new RectangleCollider(GetOwner(), Vector(0, 0), GetOwner()->GetWidth(), GetOwner()->GetHeight(), 0);
 
+ 
+      
+
 }
 void PlayerAttackScript::CreateAnimations(){
 
@@ -82,6 +85,13 @@ void PlayerAttackScript::GameCollisionCheck() {
     }else if(obj->GetTag() == "FirstBoss"){
       cout << "Boss Colider" << endl;
       GetOwner()->ClearCollisions();
+      auto firstBossLifeScript = (FirstBossLifeScript*)SceneManager::GetInstance()
+                   ->GetCurrentScene()
+                   ->GetGameObject("FirstBossLife")
+                   ->GetComponent("FirstBossLifeScript");
+      firstBossLifeScript->hit = true;
+
+
     }else if(obj->GetTag() == "FirstBossAtack"){
       cout << "Boss Atack Colider" << endl;
       GetOwner()->ClearCollisions();

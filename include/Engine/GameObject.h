@@ -39,6 +39,7 @@ public:
   inline void SetPosition(Vector value) { *m_position = value; };
   inline void SetZoomProportion(Vector value) { *zoomProportion = value;};
   inline int GetWidth() { return m_width; };
+  inline void SetWidth(int width) {this->m_width = width; };
   inline int GetHeight() { return m_height; };
   inline Vector *GetZoomProportion() { return zoomProportion; };
   void SetSize(int width, int height);

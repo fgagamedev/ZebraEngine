@@ -20,7 +20,7 @@ public:
   char GetMovement() { return movements; };
 
   
-  int bulletNumber = 1;
+  int bulletNumber = 10;
 protected:
   void ComponentUpdate() override;
 
@@ -53,6 +53,7 @@ private:
   bool isMovingLooking=true;
   static bool isZooming;
   std::pair<int, int> mousePosition;
+
 
 
 
