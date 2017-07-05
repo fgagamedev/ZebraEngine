@@ -358,8 +358,218 @@ rightWalls[rightWallsAmmount]={969,-1800,30,70};
 rightWallsOriginal[rightWallsAmmount]={969,-1800,30,70};
 rightWallsAmmount++;
 
+rightWalls[rightWallsAmmount]={-3526,-1260,30,1930};
+rightWallsOriginal[rightWallsAmmount]={-3526,-1260,30,1930};
+rightWallsAmmount++;
+
+upWalls[upWallsAmmount]={-3498,670, 942,30};
+upWallsOriginal[upWallsAmmount]={-3498,670, 942,30};
+upWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-2556,52, 30,615};
+leftWallsOriginal[leftWallsAmmount]={-2556,52, 30,615};
+leftWallsAmmount++;
+
+downWalls[downWallsAmmount]={-3497,-1287,954,30};
+downWallsOriginal[downWallsAmmount]={-3497,-1287,954,30};
+downWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-2556,-1250, 30,672};
+leftWallsOriginal[leftWallsAmmount]={-2556,1250, 30,672};
+leftWallsAmmount++;
+
+downWalls[downWallsAmmount]={-2522,-583,135,30};
+downWallsOriginal[downWallsAmmount]={-2522,-583,135,30};
+downWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-2394,-748,30,162};
+rightWallsOriginal[rightWallsAmmount]={-2394,-748,30,162};
+rightWallsAmmount++;
+
+downWalls[downWallsAmmount]={-2364,-778,203,30};
+downWallsOriginal[downWallsAmmount]={-2364,-778,203,30};
+downWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-2161,-742, 30,163};
+leftWallsOriginal[leftWallsAmmount]={-2161,-742, 30,163};
+leftWallsAmmount++;
 
 
+downWalls[downWallsAmmount]={-2139,-578,166,30};
+downWallsOriginal[downWallsAmmount]={-2364,-778,203,30};
+downWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1975,-547, 30,734};
+leftWallsOriginal[leftWallsAmmount]={-1975,-547, 30,734};
+leftWallsAmmount++;
+
+upWalls[upWallsAmmount]={-2518,27, 122,30};
+upWallsOriginal[upWallsAmmount]={-2518,27, 122,30};
+upWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-2397,57,30,2758};
+rightWallsOriginal[rightWallsAmmount]={-2397,57,30,2758};
+rightWallsAmmount++;
+
+downWalls[downWallsAmmount]={-1950,186,164,29};
+downWallsOriginal[downWallsAmmount]={-1950,186,164,29};
+downWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1786,215, 30,195};
+leftWallsOriginal[leftWallsAmmount]={-1786,215, 30,195};
+leftWallsAmmount++;
+
+upWalls[upWallsAmmount]={-1951,410, 165,30};
+upWallsOriginal[upWallsAmmount]={-1951,410, 165,30};
+upWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1981,441, 30,1951};
+leftWallsOriginal[leftWallsAmmount]={-1786,215, 30,1951};
+leftWallsAmmount++;
+
+downWalls[downWallsAmmount]={-1952,2393,42,30};
+downWallsOriginal[downWallsAmmount]={-1952,2393,42,30};
+downWallsAmmount++;
+
+upWalls[upWallsAmmount]={-2365,2813,1860 ,30};
+upWallsOriginal[upWallsAmmount]={-2365,2813,1860 ,30};
+upWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1405,2515, 30,300};
+leftWallsOriginal[leftWallsAmmount]={-1405,2515, 30,300};
+leftWallsAmmount++;
+
+downWalls[downWallsAmmount]={-1570,2490,167,30};
+downWallsOriginal[downWallsAmmount]={-1570,2490,167,30};
+downWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1593,1975, 30,514};
+leftWallsOriginal[leftWallsAmmount]={-1593,1975, 30,514};
+leftWallsAmmount++;
+
+upWalls[upWallsAmmount]={-1563,1945, 352,30};
+upWallsOriginal[upWallsAmmount]={-1563,1945, 352,30};
+upWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-1910,2136,30,254};
+rightWallsOriginal[rightWallsAmmount]={-1910,2136,30,254};
+rightWallsAmmount++;
+
+downWalls[downWallsAmmount]={-1890,2106,75,30};
+downWallsOriginal[downWallsAmmount]={-1890,2106,75,30};
+downWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-1820,1843,30,262};
+rightWallsOriginal[rightWallsAmmount]={-1820,1843,30,262};
+rightWallsAmmount++;
+
+downWalls[downWallsAmmount]={-1792,1815,360,30};
+downWallsOriginal[downWallsAmmount]={-1792,1815,360,30};
+downWallsAmmount++;
+
+upWalls[upWallsAmmount]={-1792,1655,360 ,30};
+upWallsOriginal[upWallsAmmount]={-1792,1655,360 ,30};
+upWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-1432,1686,30,128};
+rightWallsOriginal[rightWallsAmmount]={-1432,1686,30,128};
+rightWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-1815,597,30,1005};
+rightWallsOriginal[rightWallsAmmount]={-1815,597,30,1005};
+rightWallsAmmount++;
+
+downWalls[downWallsAmmount]={-1787,567,160,30};
+downWallsOriginal[downWallsAmmount]={-1787,567,160,30};
+downWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-1627,27,30,539};
+rightWallsOriginal[rightWallsAmmount]={-1627,27,30,539};
+rightWallsAmmount++;
+
+upWalls[upWallsAmmount]={-1791,28,195 ,30};
+upWallsOriginal[upWallsAmmount]={-1791,28,195 ,30};
+upWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-1816,-752,30,779};
+rightWallsOriginal[rightWallsAmmount]={-1816,-752,30,779};
+rightWallsAmmount++;
+
+downWalls[downWallsAmmount]={-1791,-776,770,30};
+downWallsOriginal[downWallsAmmount]={-1791,-776,770,30};
+downWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1018,-746, 30,675};
+leftWallsOriginal[leftWallsAmmount]={-1018,-746, 30,675};
+leftWallsAmmount++;
+
+upWalls[upWallsAmmount]={-1081,-66,60 ,30};
+upWallsOriginal[upWallsAmmount]={-1081,-66,60 ,30};
+upWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1111,-35, 30,222};
+leftWallsOriginal[leftWallsAmmount]={-1111,-35, 30,222};
+leftWallsAmmount++;
+
+downWalls[downWallsAmmount]={-1081,188,60,30};
+downWallsOriginal[downWallsAmmount]={-1081,188,60,30};
+downWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1021,218, 30,60};
+leftWallsOriginal[leftWallsAmmount]={-1021,218, 30,60};
+leftWallsAmmount++;
+
+downWalls[downWallsAmmount]={-990,278,359,30};
+downWallsOriginal[downWallsAmmount]={-990,278,359,30};
+downWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1596,-330, 30,308};
+leftWallsOriginal[leftWallsAmmount]={-1596,-330, 30,308};
+leftWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-1334,-330,30,322};
+rightWallsOriginal[rightWallsAmmount]={-1334,-330,30,322};
+rightWallsAmmount++;
+
+upWalls[upWallsAmmount]={-1558,-360,225 ,31};
+upWallsOriginal[upWallsAmmount]={-1558,-360,225 ,31};
+upWallsAmmount++;
+
+downWalls[downWallsAmmount]={-1558,-5,225,30};
+downWallsOriginal[downWallsAmmount]={-1558,-5,225,30};
+downWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1213,1397, 31 ,548};
+leftWallsOriginal[leftWallsAmmount]={-1213,1397, 31 ,548};
+leftWallsAmmount++;
+
+upWalls[upWallsAmmount]={-1181,1374,710,30};
+upWallsOriginal[upWallsAmmount]={-1181,1374,710,30};
+upWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1016,533, 30 ,840};
+leftWallsOriginal[leftWallsAmmount]={-1016,533, 30 ,840};
+leftWallsAmmount++;
+
+upWalls[upWallsAmmount]={-985,503,307,30};
+upWallsOriginal[upWallsAmmount]={-985,503,307,30};
+upWallsAmmount++;
+
+upWalls[upWallsAmmount]={-1473,605,330,30};
+upWallsOriginal[upWallsAmmount]={-1473,605,330,30};
+upWallsAmmount++;
+
+downWalls[downWallsAmmount]={-1474,1145,330,30};
+downWallsOriginal[downWallsAmmount]={-1474,1145,330,30};
+downWallsAmmount++;
+
+leftWalls[leftWallsAmmount]={-1498,636, 30 ,506};
+leftWallsOriginal[leftWallsAmmount]={-1498,636, 30 ,506};
+leftWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-1143,636,30,508};
+rightWallsOriginal[rightWallsAmmount]={-1143,636,30,508};
+rightWallsAmmount++;
 
 
 }
