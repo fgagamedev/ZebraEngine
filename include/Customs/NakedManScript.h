@@ -26,8 +26,8 @@ protected:
 private:
   void SetDirection();
   void CreateAnimations();
-  void GameCollisionCheck(); 
-
+  void GameCollisionCheck();
+  void WallCollisionResolution();
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
@@ -37,6 +37,8 @@ private:
   int deadzone_x = EngineGlobals::screen_width / 2;
   int deadzone_y = EngineGlobals::screen_height / 2;
   int lastDirection=1;
+  int playerprevious=0;
+  Vector playerprevious_vec;
   RectangleCollider* nakedManCollider = nullptr;
 
   bool cameraLock=true;

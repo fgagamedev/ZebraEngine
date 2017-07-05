@@ -191,7 +191,7 @@ void SDLSystem::CalculateFramerate() {
     m_framerate = m_frameCounter;
     m_frameCounter = 0;
     m_lastFrameTicks = m_currentTicks;
-    INFO("Framerate per second: " << m_framerate);
+   // INFO("Framerate per second: " << m_framerate);
   }
   m_frameCounter++;
 }

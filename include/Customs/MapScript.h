@@ -13,11 +13,28 @@ public:
   std::string GetComponentName() override { return "MapScript"; };
   void FixedComponentUpdate() override;
   void Start() override;
+  int DetectWallCollision(GameObject* object);
 
+  Vector leftWalls[100];
+  Vector leftWallsOriginal[100];
+  int leftWallsAmmount=0;
+
+  Vector rightWalls[100];
+  int rightWallsAmmount=0;
+  Vector rightWallsOriginal[100];
+
+  Vector upWalls[100];
+  int upWallsAmmount=0;
+  Vector upWallsOriginal[100];
+
+  Vector downWalls[100];
+  Vector downWallsOriginal[100];
+  int downWallsAmmount=0;
 protected:
   void ComponentUpdate() override;
 
 private:
+  void RenderWallsRects();
   GameObject *nakedMan = nullptr;
   GameObject *map = nullptr;
   Vector *nakedManPosition = nullptr;
@@ -31,6 +48,7 @@ private:
   float proportion_x;
   float proportion_y;
   bool shake=false;
+  void CreateWalls();
 
 };
 

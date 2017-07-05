@@ -23,6 +23,7 @@ public:
   virtual void OnHidden() override;
 
 private:
+  void CreateAnimation();
   int m_width_middle;
   int m_height_middle;
   void CreateLogo();

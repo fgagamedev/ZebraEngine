@@ -1,5 +1,6 @@
 #include "Customs/NakedManScript.h"
 #include "Customs/FirstBossController.h"
+#include "Customs/MapScript.h"
 #include <stdio.h>
 bool NakedManScript::isZooming=false;
 
@@ -20,7 +21,6 @@ void NakedManScript::Start() {
 }
 
 void NakedManScript::SetDirection(){
-
 mousePosition = input->GetMousePosition();
 
 
@@ -155,12 +155,13 @@ void NakedManScript::CreateAnimations(){
   nakedManAnimator->AddAnimation("Stop Right", StopRightAnimation);
 }
 
-
-
 void NakedManScript::ComponentUpdate() {
+
+
 
 auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,nakedManCollider->GetRectanglePoint().m_y);
 GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
+
 SetDirection();
 
 walkSpeed = fixedWalkSpeed;
@@ -170,13 +171,6 @@ walkSpeed = fixedWalkSpeed;
     isZooming=true;
   if((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP)))
     isZooming=false;
-
-  if((input->GetKeyDown(INPUT_V)) && (!isMovingLooking)){
-    isMovingLooking=true;
-  }
-  else if((input->GetKeyDown(INPUT_V)) && (isMovingLooking)){
-    isMovingLooking=false;
-  }
 
 if(isMovingLooking){
 
@@ -352,9 +346,14 @@ else if (input->GetKeyPressed(INPUT_W)) {
   animator->StopAllAnimations();
  }
 }
-void NakedManScript::FixedComponentUpdate() {
-  GameCollisionCheck();
 
+void NakedManScript::FixedComponentUpdate() {
+printf("x = %f\ny = %f\n\n",position->m_x,position->m_y);
+printf("x = %f\ny = %f\n\n",position->m_x + CameraSystem::GetInstance()->GetPos_x()-3500,position->m_y+ CameraSystem::GetInstance()->GetPos_y()-3800);
+
+
+  GameCollisionCheck();
+WallCollisionResolution();
   if (movements==5){
   walkSpeed = walkSpeed*0.70710;
  position->m_y -= walkSpeed;
@@ -485,6 +484,8 @@ void NakedManScript::FixedComponentUpdate() {
 
 
             }
+
+
 }
 
 void NakedManScript::GameCollisionCheck() {
@@ -501,4 +502,12 @@ void NakedManScript::GameCollisionCheck() {
       GetOwner()->ClearCollisions();
     }
   }
+}
+
+
+void NakedManScript::WallCollisionResolution(){
+
+auto mapscript = (MapScript*)SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map")->GetComponent("MapScript");
+if(mapscript)
+    mapscript->DetectWallCollision(GetOwner());
 }

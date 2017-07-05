@@ -27,6 +27,17 @@ void Animator::StopAllAnimations() {
     result.second->SetPlaying(false);
 }
 
+bool Animator::IsPlaying(std::string name){
+  auto result = m_aMap.find(name);
+  if (result == m_aMap.end())
+    ERROR("Couldn't find animation: " << name);
+  if(result->second->IsPlaying())
+  return true;
+  return false;
+
+
+}
+
 Animation *Animator::GetAnimation(std::string name) {
   for (auto result : m_aMap)
     if (result.first == name)

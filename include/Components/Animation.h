@@ -23,7 +23,7 @@ public:
   void AddFrame(Frame *frame);
   void DrawCurrentFrame();
   std::string GetComponentName() override { return "Animation"; };
-
+  bool IsPlaying(){return m_isPlaying;}
 private:
   int m_framesQuantity = 0;
   int m_currentFrame = 0;

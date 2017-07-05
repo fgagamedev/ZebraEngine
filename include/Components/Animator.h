@@ -17,6 +17,7 @@ public:
   void PlayAnimation(std::string name);
   void StopAnimation(std::string name);
   void StopAllAnimations();
+  bool IsPlaying(std::string name);
   Animation *GetAnimation(std::string name);
   std::string GetComponentName() override { return "Animator"; };
 

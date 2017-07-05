@@ -24,6 +24,8 @@ public:
                       Uint8 a);
   void DrawFillRectangle(Vector &position, int width, int height, Uint8 r,
                          Uint8 g, Uint8 b, Uint8 a);
+  void DrawFillRectangle(SDL_Rect * source, int width, int height, Uint8 r,
+                         Uint8 g, Uint8 b, Uint8 a);
 
 private:
   // singleton instance

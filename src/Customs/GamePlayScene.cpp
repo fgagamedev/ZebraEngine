@@ -24,9 +24,10 @@ void GamePlayScene::OnHidden() {}
 void GamePlayScene::CreateMap() {
   //Original resolution is 2048/2048
   //6144,6144 = 3x
-  auto map = new GameObject("Map", new Vector(-5250 ,-5000),10500,10500);
+  auto map = new GameObject("Map", new Vector(-3500 ,-3800),8034,8034);
   // Renderer
-  auto mapImage = new Image("assets/world.png", 0, 0, 3500, 3500);
+ // auto mapImage = new Image("assets/mapa2.png", 0, 0, 2678, 2678);
+   auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
   auto mapRenderer = new Renderer(map, mapImage);
   // Script
   auto mapScript = new MapScript(map);
