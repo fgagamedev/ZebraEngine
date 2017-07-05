@@ -16,7 +16,7 @@ FirstBossController *FirstBossController::GetInstance() { //Singleton class
 FirstBossController::FirstBossController() {} //Constructor void
 
 void FirstBossController::StartBossFight() {
-  
+  PositAllTentacles();
   //PositBoss();
   //->boss resurge animation
   //wait time
@@ -34,6 +34,8 @@ void FirstBossController::AddPlayer(GameObject *player) { m_player = player; }
 
 void FirstBossController::AddBoss(GameObject *boss) { m_boss = boss; }
 
+void FirstBossController::AddInsideBossFx(GameObject *bossInsideFx) {m_bossInsideFx = bossInsideFx; }
+
 void FirstBossController::AddTentacle(GameObject *tentacle){ m_tentacles.push_back(tentacle); }
 
 /*Posit*/
@@ -41,12 +43,19 @@ void FirstBossController::PositPlayer() { m_player->SetPosition(Vector(m_wPos, m
 
 void FirstBossController::PositBoss() { m_boss->SetPosition(Vector(m_wPos, m_hPos)); }
 
-void FirstBossController::PositTentacle() { 
+void FirstBossController::PositAllTentacles() { 
   for (auto tentacle : m_tentacles) {
-
-      tentacle->SetPosition(Vector(m_wPos, m_hPos));
+      Vector *position = m_player->GetPosition();
+      tentacle->SetPosition(Vector(position->m_x + 30, position->m_y - 30));
   }
-} //use rand to posit
+} 
+
+void FirstBossController::PositTentacle(int index) { 
+
+      Vector *position = m_player->GetPosition();
+      m_tentacles[index]->SetPosition(Vector(position->m_x , position->m_y -120));
+  
+} 
 
 /*Active*/
 void FirstBossController::ActivatePlayer() {
@@ -56,8 +65,14 @@ void FirstBossController::ActivatePlayer() {
 }
 
 void FirstBossController::ActivateBoss() {
-    m_player->ClearCollisions();
-    m_player->active = true;
+    m_boss->ClearCollisions();
+    m_boss->active = true;
+ 
+}
+
+void FirstBossController::ActivateInsideBossFx() {
+    //m_bossInsideFx->ClearCollisions();
+    m_bossInsideFx->active = true;
  
 }
 
@@ -69,10 +84,16 @@ void FirstBossController::ActivateTentacles() {
    }
 }
 
+void FirstBossController::ActivateTentacle(int indexTentacle){
+  m_tentacles[indexTentacle]->active = true;
+}
+
 /*Deactive*/
 void FirstBossController::DeactivatePlayer() { m_player->active = false; }
 
 void FirstBossController::DeactivateBoss() { m_boss->active = false; }
+
+void FirstBossController::DeactivateInsideBossFx() { m_bossInsideFx->active = false; }
 
 void FirstBossController::DeactivateTentacles() {
   for (auto tentacle : m_tentacles)
@@ -90,6 +111,37 @@ std::pair <int, int> FirstBossController::GetRandomPosition() {
   randomPosition.second = rand();
 
   return randomPosition;
+}
+
+void FirstBossController::FirstAttackSurge() {
+    cout << "FirstAttack" << endl;
+    if(actualTentacle == 4)
+      actualTentacle = 1;
+
+    m_tentacles[actualTentacle]->ClearCollisions();
+    //m_tentacles[actualTentacle]->active = true;
+    ActivateTentacle(actualTentacle);
+    PositTentacle(actualTentacle);
+
+    auto firstBossAttackScript = (FirstBossAttackScript*)m_tentacles[actualTentacle]->GetComponent("FirstBossAttackScript");
+    firstBossAttackScript->attack = true; //Perform attack
+    firstBossAttackScript->shake = true; //Shake camera
+    actualTentacle++;
+
+    
+}
+
+void FirstBossController::FirstAttackGone(){
+  for (auto tentacle : m_tentacles) {
+    auto firstBossAttackScript = (FirstBossAttackScript*)tentacle->GetComponent("FirstBossAttackScript");
+    firstBossAttackScript->m_goneAnimation = true; //Perform gone animation
+
+  }
+
+}
+
+void FirstBossController::SecondAttack() {
+    
 }
 
 /*

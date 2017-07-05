@@ -10,6 +10,8 @@
 #include "Math/Vector.h"
 #include "Engine/GraphicsSystem.h"
 #include "Components/RectangleCollider.h"
+#include "Engine/Timer.h"
+#include "Customs/FirstBossController.h"
 
 #include <string>
 
@@ -20,6 +22,7 @@ public:
   std::string GetComponentName() override { return "FirstBossScript"; };
   void FixedComponentUpdate() override;
   void Start() override;
+  void Attack();
 
 protected:
   void ComponentUpdate() override;
@@ -30,6 +33,18 @@ private:
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
+  Timer timerFirstAttackCooldown;
+  Timer timerFirstAttackGone;
+  Timer timerSecondAttack;
+  Timer timerAttackCooldown;
+  
+  bool FirstAttack = false;
+  bool goneFirstAttack = false;
+  bool SecondAttack = false;
+  bool SecondAttackJump = false;
+
+  int firstAttackCounter = 0;
+  int randNumber = 1;
 
 
 };

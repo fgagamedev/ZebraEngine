@@ -14,6 +14,9 @@ void PlayerAttackScript::Start() {
 
   playerCollider = new RectangleCollider(GetOwner(), Vector(0, 0), GetOwner()->GetWidth(), GetOwner()->GetHeight(), 0);
 
+ 
+      
+
 }
 void PlayerAttackScript::CreateAnimations(){
 
@@ -30,10 +33,7 @@ void PlayerAttackScript::ComponentUpdate() {
     
     player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
     
-    //Deactivate Object when it comer out of windowsd
-    if(position->m_x > EngineGlobals::screen_width || position->m_x < 0){ 
-      //GetOwner()->active = false;
-    }
+   
 
 
 
@@ -49,7 +49,7 @@ void PlayerAttackScript::ComponentUpdate() {
 
 
       if(shoot){
-
+        GetOwner()->active = true;
         angle = playerPosition.GetAngleRadians(mousePosition);
         bulletVelocity.m_x = bulletSpeed * cos(angle);
         bulletVelocity.m_y = bulletSpeed * sin(angle);
@@ -59,9 +59,6 @@ void PlayerAttackScript::ComponentUpdate() {
       }
     }
 
-    //if(shoot==false){
-    //animator->StopAllAnimations();
-    //}
 
 }
 void PlayerAttackScript::FixedComponentUpdate() { 
@@ -76,12 +73,20 @@ void PlayerAttackScript::FixedComponentUpdate() {
 void PlayerAttackScript::GameCollisionCheck() {
   for (auto obj : GetOwner()->GetCollisions()) {
     if (obj->GetTag() == "Bullet") {
-      cout << "Bullet Colider" << endl;
+      //cout << "Bullet Colider" << endl;
       GetOwner()->ClearCollisions();
       
     }else if(obj->GetTag() == "FirstBoss"){
       cout << "Boss Colider" << endl;
+      auto firstBossLifeScript = (FirstBossLifeScript*)SceneManager::GetInstance()
+                   ->GetCurrentScene()
+                   ->GetGameObject("FirstBossLife")
+                   ->GetComponent("FirstBossLifeScript");
+      firstBossLifeScript->hit = true;
+      GetOwner()->active = false;
       GetOwner()->ClearCollisions();
+
+
     }else if(obj->GetTag() == "FirstBossAtack"){
       cout << "Boss Atack Colider" << endl;
       GetOwner()->ClearCollisions();

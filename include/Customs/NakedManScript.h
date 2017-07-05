@@ -5,6 +5,7 @@
 #include "Components/Script.h"
 #include "Components/UIText.h"
 #include "Customs/PlayerAttackScript.h"
+#include "Customs/HitScript.h"
 #include "Engine/InputSystem.h"
 #include "Engine/SceneManager.h"
 #include "Engine/CameraSystem.h"
@@ -19,15 +20,25 @@ public:
   char GetMovement() { return movements; };
 
   
-  int bulletNumber = 1;
+  int bulletNumber = 10;
 protected:
   void ComponentUpdate() override;
 
 private:
   void SetDirection();
   void CreateAnimations();
-  void GameCollisionCheck();
+
   void WallCollisionResolution();
+
+  void GameCollisionCheck(); 
+  void StartFirstBoss();
+
+  //Player Movements
+  void Movements(); 
+
+  bool zoom = true;
+
+
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
@@ -41,10 +52,16 @@ private:
   Vector playerprevious_vec;
   RectangleCollider* nakedManCollider = nullptr;
 
+  int m_hitFrames = 0;
+  bool m_hitFrameController = false;
+
   bool cameraLock=true;
   bool isMovingLooking=true;
   static bool isZooming;
   std::pair<int, int> mousePosition;
+
+
+
 
 };
 

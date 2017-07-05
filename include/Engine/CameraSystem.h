@@ -44,12 +44,16 @@ public:
   void ZoomIn(int zoomSpeed,GameObject * objectToFollow,Scene * scene);
   void ZoomOut(int zoomSpeed,GameObject * objectToFollow,Scene * scene);
 
+
+
   float currentZoom=0;
+
+  float  worldCamera_x;
+  float  worldCamera_y;
   private:
   CameraSystem();
   ~CameraSystem();
-  float  worldCamera_x;
-  float  worldCamera_y;
+ 
   float proportion_x;
   float proportion_y;
   float x_pos_before;
