@@ -299,34 +299,40 @@ else if (input->GetKeyPressed(INPUT_W)) {
 }
   //Sair para o Menu
   if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
+    /*
     auto var = (UIText *)SceneManager::GetInstance()
                    ->GetScene("Main")
                    ->GetGameObject("Play")
                    ->GetComponent("UIText");
     var->SetText("Continue");
-    SceneManager::GetInstance()->SetCurrentScene("Main");
+    */
+    //SceneManager::GetInstance()->SetCurrentScene("Main");
+    SDLSystem::GetInstance()->SetRunning(false);
   }
 
   //Shoot gun
   if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
       
       cout << "ammo: " << bulletNumber << endl;
+      
+      auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
+                   ->GetCurrentScene()
+                   ->GetGameObject("Bullet" + std::to_string(bulletNumber));
+      gameObjectBullet->active = true;
+
       auto script = (PlayerAttackScript*)SceneManager::GetInstance()
                    ->GetCurrentScene()
                    ->GetGameObject("Bullet" + std::to_string(bulletNumber))
                    ->GetComponent("PlayerAttackScript");
       script->SetShoot(true);
 
-
-      auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
-                   ->GetCurrentScene()
-                   ->GetGameObject("Bullet" + std::to_string(bulletNumber));
-      gameObjectBullet->active = true;
-                   
+      
+                 
 
       bulletNumber--;
       
-      
+
+      /** Reload **/ 
       if(bulletNumber == 0){
         bulletNumber = 10; 
         //wait delay reload time

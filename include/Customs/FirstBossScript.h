@@ -35,10 +35,16 @@ private:
   Vector *position = nullptr;
   Timer timerFirstAttackCooldown;
   Timer timerFirstAttackGone;
-
+  Timer timerSecondAttack;
+  Timer timerAttackCooldown;
+  
+  bool FirstAttack = false;
   bool goneFirstAttack = false;
+  bool SecondAttack = false;
+  bool SecondAttackJump = false;
 
   int firstAttackCounter = 0;
+  int randNumber = 1;
 
 
 };

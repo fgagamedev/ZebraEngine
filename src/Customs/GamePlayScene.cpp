@@ -13,7 +13,7 @@ void GamePlayScene::OnActivation() {
   CreateThunder();
   CreatePlayerAttack();
   //CreateAmmoCounter();
-  //CreatePlayerHit();
+  CreatePlayerHit();
 
   //FirstBossController::GetInstance()->StartBossFight();
 
@@ -109,6 +109,7 @@ void GamePlayScene::CreatePlayerAttack() {
     bullet->SetTag("Bullet");
     auto bulletScript = new  PlayerAttackScript(bullet);
     AddGameObject(bullet);
+    bullet->active = false;
 
     //MissileController::GetInstance()->AddPlayer(bullet);
     //bullet->active = false;               
