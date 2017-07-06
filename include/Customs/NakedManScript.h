@@ -10,6 +10,7 @@
 #include "Engine/SceneManager.h"
 #include "Engine/CameraSystem.h"
 #include "Components/RectangleCollider.h"
+#include "Engine/GameController.h"
 
 class NakedManScript : public Script {
 public:
@@ -40,6 +41,7 @@ private:
 
 
   InputSystem *input = nullptr;
+  GameController* gamecontroller = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
   float walkSpeed = 15;

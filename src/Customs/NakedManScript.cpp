@@ -1,6 +1,7 @@
 #include "Customs/NakedManScript.h"
 #include "Customs/FirstBossController.h"
 #include "Customs/MapScript.h"
+
 #include <stdio.h>
 bool NakedManScript::isZooming=false;
 
@@ -12,7 +13,7 @@ void NakedManScript::Start() {
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
   CameraSystem::GetInstance()->SetCameraSpeed(walkSpeed);
- 
+  gamecontroller = input->GetGameController(0);
 
   auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
   if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
@@ -153,11 +154,57 @@ void NakedManScript::CreateAnimations(){
 
 void NakedManScript::ComponentUpdate() {
 
+/*
+
+if(gamecontroller->GetButtonDown(GC_INPUT_INVALID))
+printf("-1\n");
+if(gamecontroller->GetButtonDown(GC_INPUT_A))
+printf("A\n");
+
+if(gamecontroller->GetButtonDown(GC_INPUT_B))
+printf("B\n");
+
+if(gamecontroller->GetButtonDown( GC_INPUT_X))
+printf("X\n");
+
+if(gamecontroller->GetButtonDown( GC_INPUT_Y))
+printf("Y\n");
+
+if(gamecontroller->GetButtonDown(GC_INPUT_BACK))
+printf("BACK\n");
+
+if(gamecontroller->GetButtonDown(GC_INPUT_GUIDE))
+printf("GUIDE\n");
+
+if(gamecontroller->GetButtonDown( GC_INPUT_START))
+printf("START\n");
+
+if(gamecontroller->GetButtonDown(GC_INPUT_LEFTSTICK))
+printf("LEFTSTIK\n");
+
+if(gamecontroller->GetButtonDown(GC_INPUT_RIGHTSTICK))
+printf("RIGHTSTICK\n");
+if(gamecontroller->GetButtonDown( GC_INPUT_LEFTSHOULDER))
+printf("LEFTSHOULDER\n");
+if(gamecontroller->GetButtonDown(GC_INPUT_RIGHTSHOULDER))
+printf("RIGHTSHOULDER\n");
+if(gamecontroller->GetButtonDown( GC_INPUT_DPAD_UP))
+printf("DPADUP\n");
+if(gamecontroller->GetButtonDown(GC_INPUT_DPAD_DOWN))
+printf("DPADDOWN\n");
+if(gamecontroller->GetButtonDown( GC_INPUT_DPAD_LEFT))
+printf("DPADLEFT\n");
+if(gamecontroller->GetButtonDown(GC_INPUT_DPAD_RIGHT))
+printf("DPADRIGHT\n");
 
 
 
-auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,nakedManCollider->GetRectanglePoint().m_y);
-GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
+printf("%d\n",gamecontroller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT));
+
+
+*/
+//auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,nakedManCollider->GetRectanglePoint().m_y);
+//GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
 
 
 SetDirection();
@@ -302,18 +349,16 @@ else if (input->GetKeyPressed(INPUT_W)) {
   }
 
 }
+
   //Sair para o Menu
-  if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
-    /*
-    auto var = (UIText *)SceneManager::GetInstance()
-                   ->GetScene("Main")
-                   ->GetGameObject("Play")
-                   ->GetComponent("UIText");
-    var->SetText("Continue");
-    */
-    //SceneManager::GetInstance()->SetCurrentScene("Main");
-    SDLSystem::GetInstance()->SetRunning(false);
-  }
+   if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
+     auto var = (UIText *)SceneManager::GetInstance()
+                    ->GetScene("Main")
+                    ->GetGameObject("Play")
+                    ->GetComponent("UIText");
+     var->SetText("Continue");
+     SceneManager::GetInstance()->SetCurrentScene("Main");
+   }
 
   //Shoot gun
   if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
@@ -362,9 +407,6 @@ else if (input->GetKeyPressed(INPUT_W)) {
 
 void NakedManScript::FixedComponentUpdate() {
 
-printf("x = %f\ny = %f\n\n",position->m_x,position->m_y);
-printf("x = %f\ny = %f\n\n",position->m_x + CameraSystem::GetInstance()->GetPos_x()-3500,position->m_y+ CameraSystem::GetInstance()->GetPos_y()-3800);
-
 
     GameCollisionCheck();
     WallCollisionResolution();
@@ -375,7 +417,7 @@ printf("x = %f\ny = %f\n\n",position->m_x + CameraSystem::GetInstance()->GetPos_
     Movements();
 
 
-    
+
 }
 
 
@@ -560,19 +602,6 @@ void NakedManScript::WallCollisionResolution(){
         mapscript->DetectWallCollision(GetOwner());
 }
 
-  /*
-  if( (CameraSystem::GetInstance()->worldCamera_x > 980) && CameraSystem::GetInstance()->currentZoom ){
-    if(zoom){
-      CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->originalWidth/4 + 1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
-      CameraSystem::GetInstance()->ZoomIn(1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
-      CameraSystem::GetInstance()->currentZoom -=25;
-      zoom = false;
-      
-    }
-   
-  }
-  */
- 
 
 
 

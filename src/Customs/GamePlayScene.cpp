@@ -26,16 +26,30 @@ void GamePlayScene::OnShown() {}
 void GamePlayScene::OnHidden() {}
 
 void GamePlayScene::CreateMap() {
+
+
   //Original resolution is 2048/2048
   //6144,6144 = 3x
   auto map = new GameObject("Map", new Vector(-3500 ,-3800),8034,8034);
   // Renderer
- // auto mapImage = new Image("assets/mapa2.png", 0, 0, 2678, 2678);
-   auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
+  auto mapImage = new Image("assets/mapa2.png", 0, 0, 2678, 2678);
+ //  auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
   auto mapRenderer = new Renderer(map, mapImage);
+
+
+    auto trees = new GameObject("Tree", new Vector(-3500 ,-3800),8034,8034,2);
+    // Renderer
+   auto treesImage = new Image("assets/trees.png", 0, 0, 2678, 2678);
+    auto treesRenderer = new Renderer(trees, treesImage);
+
+
+
+
+
   // Script
   auto mapScript = new MapScript(map);
   AddGameObject(map);
+  AddGameObject(trees);
 }
 
 void GamePlayScene::CreateNakedMan() {
