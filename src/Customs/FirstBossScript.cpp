@@ -120,7 +120,7 @@ void FirstBossScript::Attack(){
     //rand first attack or second attack
     
     
-    if(timerAttackCooldown.GetTime() >= 8*1000){ // chosse new number
+    if(timerAttackCooldown.GetTime() >= 9*1000){ // chosse new number
       randNum = rand() % 2;
       timerAttackCooldown.Restart();
       //randNumber = 1;
@@ -131,13 +131,13 @@ void FirstBossScript::Attack(){
 
 
     if(randNum == 0 && SecondAttackFall ==  false){
-      cout << "First Attack" << endl;
+      //cout << "First Attack" << endl;
       SecondAttack = true;
       animator->PlayAnimation("firstBossJumpAnimation");
     }
 
     if(randNum ==  1){
-      cout << "Second Attack" << endl;
+      //cout << "Second Attack" << endl;
       FirstAttack = true;
       /** First Attack **/
       if(timerFirstAttackCooldown.GetTime() >= 2*1000 && firstAttackCounter < 3){
@@ -158,6 +158,7 @@ void FirstBossScript::Attack(){
         goneFirstAttack = false;
         timerFirstAttackGone.Restart();
         timerFirstAttackCooldown.Restart();
+        randNum = -1;
        
       }
       
@@ -197,6 +198,7 @@ void FirstBossScript::Attack(){
       }else{
         SecondAttackFall = false;
         shake = false;
+        randNum = -1;
       }
 
       

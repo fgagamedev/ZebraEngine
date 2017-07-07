@@ -35,10 +35,12 @@ void SnowScript::ComponentUpdate() {
 
     if(input->GetKeyDown(INPUT_T) && play==0){
    // animator->StopAllAnimations();
+      AudioController::GetInstance()->PlayAudio("snowSound", -1);
     play=1;
     }
     else if(input->GetKeyDown(INPUT_T) && play==1){
     play=0;
+    AudioController::GetInstance()->StopAudio("snowSound");
     animator->StopAllAnimations();
     }
 

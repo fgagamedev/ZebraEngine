@@ -1,4 +1,5 @@
 #include "Customs/FirstBossAttackScript.h"
+#include "Customs/AudioController.h"
 
 FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) : Script(owner) {}
 
@@ -73,6 +74,10 @@ void FirstBossAttackScript::FixedComponentUpdate() {
 
 
   timerAnimation.Update(EngineGlobals::fixed_update_interval);
+
+  if(desactivateObj)
+  timerGone.Update(EngineGlobals::fixed_update_interval);
+  
   CameraShakeAttack();
  
 
@@ -88,20 +93,32 @@ void FirstBossAttackScript::Attack(){
     m_surgeAnimation = false;
     m_idleAnimation =  true;
     timerAnimation.Restart();
+    //auto soundFX = (UISound *)GetOwner()->GetComponent("UISound");
+    //soundFX->Play(0, -1);
+    AudioController::GetInstance()->PlayAudio("secondAttackSound", 0);
+    
     
   }
   if(m_idleAnimation && timerAnimation.GetTime()>=1*1000){
     animator->PlayAnimation("firstBossAttackIdleAnimation");
-    
     //m_goneAnimation =  true;
     //timerAnimation.Restart();
   }
   if(m_goneAnimation){
     animator->PlayAnimation("firstBossAttackGoneAnimation");
+    AudioController::GetInstance()->PlayAudio("fourthAttackSound", 0);
     m_goneAnimation = false;
     m_idleAnimation =  false;
     attack = false;
     m_surgeAnimation = true;
+    desactivateObj = true;
+    
+
+  }
+  if(timerGone.GetTime()>=1*1000){
+    GetOwner()->active = false;
+    timerGone.Restart();
+    desactivateObj = false;
   }
   
 }

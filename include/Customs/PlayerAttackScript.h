@@ -11,6 +11,7 @@
 #include "Components/RectangleCollider.h"
 #include "Engine/GraphicsSystem.h"
 #include "Customs/FirstBossLifeScript.h"
+#include "Customs/AudioController.h"
 #include "Math/Vector.h"
 
 #include <string>

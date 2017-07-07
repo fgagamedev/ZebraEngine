@@ -21,9 +21,11 @@
 #include "Customs/FirstBossLifeBorderScript.h"
 #include "Customs/FirstBossAttackScript.h"
 #include "Customs/CreditsScript.h"
+#include "Components/UISound.h"
 #include "Customs/FirstBossLifeScript.h"
 #include "Customs/FirstBossCentralEffectScript.h"
 #include "Customs/BulletCounterScript.h"
+#include "Customs/AudioController.h"
 
 
 class GamePlayScene : public Scene {
@@ -47,6 +49,7 @@ private:
   void CreatePlayerHit();
   void CreateFirstBossLife();
   void CreateCreditAnimation();
+  void CreateSounds();
 
 
 

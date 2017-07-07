@@ -1,5 +1,6 @@
 #include "Customs/NakedManScript.h"
 #include "Customs/FirstBossController.h"
+#include "Customs/AudioController.h"
 #include "Customs/MapScript.h"
 #include <stdio.h>
 bool NakedManScript::isZooming=false;
@@ -171,6 +172,7 @@ void NakedManScript::ComponentUpdate() {
   }
 */
   Animations();
+  MovementsSounds();
 
   
 
@@ -206,6 +208,20 @@ void NakedManScript::ComponentUpdate() {
   }
 }
 
+void NakedManScript::MovementsSounds(){
+  if (input->GetKeyPressed(INPUT_W) || input->GetKeyPressed(INPUT_A) || input->GetKeyPressed(INPUT_S) || input->GetKeyPressed(INPUT_D)){
+    if(!walking)
+      //AudioController::GetInstance()->PlayAudio("runSound", -1);
+    walking = true;
+
+  }else{
+    walking = false;
+    //AudioController::GetInstance()->StopAudio("runSound");
+  }
+
+
+}
+
 void NakedManScript::FixedComponentUpdate() {
 
   //printf("x = %f\ny = %f\n\n",position->m_x,position->m_y);
@@ -233,16 +249,12 @@ void NakedManScript::FixedComponentUpdate() {
     xPos =EngineGlobals::screen_width / 2 - 96/2;
     yPos =EngineGlobals::screen_height / 2 - 96/2;
 
-    //FirstBossController::GetInstance()->PositPlayer(Vector(xPos, yPos ));
+    FirstBossController::GetInstance()->PositPlayer(Vector(xPos, yPos ));
     //FirstBossController::GetInstance()->PositMap(Vector(-500, -3800 ));
-    //CameraSystem::GetInstance()->MoveLeft(200,SceneManager::GetInstance()->GetCurrentScene());
+    CameraSystem::GetInstance()->MoveRight(200,SceneManager::GetInstance()->GetCurrentScene());
     endBossFight =  false;
   }
   
-
-
-
-
     
 }
 
@@ -251,7 +263,7 @@ void NakedManScript::PlayerLife(){
     lifeRecover.Update(EngineGlobals::fixed_update_interval); 
     cout << life << endl;
     if(lifeRecover.GetTime() >= 0.5*1000){
-      life++;
+      life ++;
       lifeRecover.Restart();
 
 
@@ -278,6 +290,7 @@ void NakedManScript::Shoot(){
                      ->GetGameObject("Bullet" + std::to_string(bulletNumber))
                      ->GetComponent("PlayerAttackScript");
     script->SetShoot(true);
+    //AudioController::GetInstance()->PlayAudio("bulletSound", 0);
     bulletNumber--;
   }
 }
@@ -317,7 +330,7 @@ void NakedManScript::Animations(){
       animator->PlayAnimation("Walk Side");
     }else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_D)) {
       movements=8;
-      lastDirection=8;
+      lastDirection=8; 
       animator->GetAnimation("Walk Side")->SetFlip(false, false);
       animator->PlayAnimation("Walk Side");
     }else if (input->GetKeyPressed(INPUT_W)) {
@@ -360,35 +373,42 @@ void NakedManScript::Animations(){
       lastDirection=5;
       animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
       animator->PlayAnimation("Back Walk Side");
+     
     }else if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_D)) {
       movements=6;
       lastDirection=6;
       animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
       animator->PlayAnimation("Back Walk Side");
+      
     }else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_A)) {
       movements=7;
       lastDirection=7;
       animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
       animator->PlayAnimation("Back Walk Side");
+     
     }else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_D)) {
       movements=8;
       lastDirection=8;
       animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
       animator->PlayAnimation("Back Walk Side");
+      
     }else if (input->GetKeyPressed(INPUT_W)) {
       lastDirection=0;
       movements = 1;
       animator->PlayAnimation("Back Walk Down");
+     
 
     }else if (input->GetKeyPressed(INPUT_S)) {
       lastDirection=1;
       movements = 2;
       animator->PlayAnimation("Back Walk Up");
+      
     }else if (input->GetKeyPressed(INPUT_A)) {
       lastDirection=3;
       movements = 3;
       animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
       animator->PlayAnimation("Back Walk Side");
+      
     }else if (input->GetKeyPressed(INPUT_D)) {
       lastDirection=3;
       movements = 4;
@@ -558,13 +578,20 @@ void NakedManScript::GameCollisionCheck() {
       
     }else if(obj->GetTag() == "FirstBoss"){
       cout << "Boss Colider" << endl;
+      if(obj->active){
+        m_hit = true;
+        life --;     
+        
+      }
       GetOwner()->ClearCollisions();
-      m_hit = true;
-      life--;     
+         
     }else if(obj->GetTag() == "FirstBossAtack"){
       cout << "Boss Atack Colider" << endl;
-      m_hit = true;
-      life --;     
+      if(obj->active){
+        m_hit = true;
+        life --;     
+        
+      }
       GetOwner()->ClearCollisions();
     }
    
@@ -581,18 +608,30 @@ void NakedManScript::StartFirstBoss(){
   }
   //cout << SceneManager::GetInstance()->GetCurrentScene()->GetName() <<  endl;
   
-  if( (CameraSystem::GetInstance()->worldCamera_x < 500)){
-    if(CameraSystem::GetInstance()->currentZoom > -50){ //Take zoom out 2 times
+  
+  if(!bossFight){
+    
+    if( (CameraSystem::GetInstance()->worldCamera_x < 500)){
+    
+      CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->originalWidth/4 + 1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
+      CameraSystem::GetInstance()->ZoomIn(1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
+      CameraSystem::GetInstance()->currentZoom -=25;
+
       CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->originalWidth/4 + 1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
       CameraSystem::GetInstance()->ZoomIn(1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
       CameraSystem::GetInstance()->currentZoom -=25;
 
       FirstBossController::GetInstance()->ActivateBoss();
       FirstBossController::GetInstance()->ActivateInsideBossFx();
-      //zoom = false;
-      
+      FirstBossController::GetInstance()->ActivateLifeBars();
+        
+
+        
+        
+    
+      AudioController::GetInstance()->PlayAudio("bossBattleSound", -1);
+      bossFight = true;
     }
-   
   }
 }
 

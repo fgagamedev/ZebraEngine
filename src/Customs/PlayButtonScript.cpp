@@ -10,8 +10,10 @@ void PlayButtonScript::ComponentUpdate() {
 
 	auto textButton = (UIText *)GetOwner()->GetComponent("UIText");
   auto soundButton = (UISound *)GetOwner()->GetComponent("UISound");
+  auto menuSound = (UISound *)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Music")->GetComponent("UISound");
   if (m_uiButton->IsClicked()) {
     soundButton->Play(0, -1);
+    menuSound->Stop();
     SceneManager::GetInstance()->SetCurrentScene("Gameplay");
   }
 

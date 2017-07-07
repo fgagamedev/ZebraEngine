@@ -4,6 +4,7 @@
 #include "Components/Animator.h"
 #include "Engine/InputSystem.h"
 #include "Components/Script.h"
+#include "Components/UISound.h"
 #include "Engine/GameObject.h"
 #include "Engine/SceneManager.h"
 #include "Engine/CameraSystem.h"
@@ -31,6 +32,7 @@ public:
   bool m_noAnimation = false;
   bool attack = false;
   bool shake =  false;
+  bool desactivateObj = false;
 
 protected:
   void ComponentUpdate() override;
@@ -44,9 +46,10 @@ private:
   RectangleCollider* firstBossAttackCollider = nullptr;
   int m_tentaclesFrames = 0;
 
-  Timer timerSpawn;
+  Timer timerGone;
   Timer timerAnimation;
   Timer timerIdleAnimation;
+
 
   
   double attackDuration = 4;

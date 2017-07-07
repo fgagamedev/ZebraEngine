@@ -55,6 +55,8 @@ void PlayerAttackScript::ComponentUpdate() {
         bulletVelocity.m_y = bulletSpeed * sin(angle);
         position->m_x = playerPosition.m_x;
         position->m_y = playerPosition.m_y;
+        auto soundButton = (UISound *)GetOwner()->GetComponent("UISound");
+        soundButton->Play(0, -1);
         shoot = false;
       }
     }

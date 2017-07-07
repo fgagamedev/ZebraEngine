@@ -43,7 +43,12 @@ private:
   void ReloadGun();
   void PlayerLife();
 
+  void MovementsSounds();
+
   bool zoom = true;
+
+  bool bossFight = false;
+  bool walking = false;
 
 
   InputSystem *input = nullptr;

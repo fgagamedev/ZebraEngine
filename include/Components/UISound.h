@@ -15,6 +15,7 @@ using namespace std;
 class UISound : public Component {
 public:
   UISound(GameObject *owner, string message, string audio_path, bool is_music, bool play_on_start);
+
   string GetComponentName() override { return "UISound"; };
   
   void Start() override;
@@ -27,6 +28,7 @@ public:
   void Stop(int channel = -1);
   void Pause(int channel = -1);
 
+  inline string GetMessage(){ return m_message; };
 private:
   bool m_is_music;
   string m_message;

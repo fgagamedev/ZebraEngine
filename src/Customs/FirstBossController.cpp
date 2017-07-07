@@ -1,3 +1,4 @@
+
 #include "Customs/FirstBossController.h"
 #include <Components/UIText.h>
 #include <Engine/SceneManager.h>
@@ -47,7 +48,7 @@ void FirstBossController::PositBoss() { m_boss->SetPosition(Vector(m_wPos, m_hPo
 void FirstBossController::PositAllTentacles() { 
   for (auto tentacle : m_tentacles) {
       Vector *position = m_player->GetPosition();
-      tentacle->SetPosition(Vector(position->m_x + 30, position->m_y - 30));
+      tentacle->SetPosition(Vector(-500, -500));
   }
 } 
 

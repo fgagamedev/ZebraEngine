@@ -17,6 +17,7 @@ public:
   float GetWidth() { return m_shape.width; };
   float GetHeight() { return m_shape.height; };
   virtual string GetComponentName() override { return "RectangleCollider"; };
+  GameObject *m_owner;
 
 private:
   Rectangle m_shape;

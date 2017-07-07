@@ -33,18 +33,20 @@ void RainScript::CreateAnimations(){
 
 void RainScript::ComponentUpdate() {
 
-    if(play==1)
-      animator->PlayAnimation("rainAnimation");
+  if(play==1)
+    animator->PlayAnimation("rainAnimation");
       
 
-    if(input->GetKeyDown(INPUT_R) && play==0){
-   // animator->StopAllAnimations();
+  if(input->GetKeyDown(INPUT_R) && play==0){
+   
+    AudioController::GetInstance()->PlayAudio("rainSound", -1);
     play=1;
-    }
-    else if(input->GetKeyDown(INPUT_R) && play==1){
+  }else if(input->GetKeyDown(INPUT_R) && play==1){
     play=0;
+    AudioController::GetInstance()->StopAudio("rainSound");
     animator->StopAllAnimations();
-    }
+
+  }
 
 }
 void RainScript::FixedComponentUpdate() {

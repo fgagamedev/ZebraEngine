@@ -10,6 +10,8 @@ UISound::UISound(GameObject *owner, string message, string audio_path, bool is_m
 		m_play_on_start = play_on_start;
 		OnPropertyChange();
 }
+
+
 void UISound::Start() {}
 
 void UISound::ComponentUpdate() {

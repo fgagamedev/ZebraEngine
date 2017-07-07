@@ -1,6 +1,7 @@
 #include "Customs/GamePlayScene.h"
 #include "Globals/EngineGlobals.h"
 
+
 void GamePlayScene::OnActivation() {
   CreateMap();//This must be the first function to be called
   CreateCreditAnimation();
@@ -36,8 +37,16 @@ void GamePlayScene::CreateMap() {
   auto mapRenderer = new Renderer(map, mapImage);
   // Script
   auto mapScript = new MapScript(map);
+
+
+
+  auto bossBattleSound = new UISound(map, "bossBattleSound", "assets/Audio/Boss/heartfinal.ogg", false, false);
+  AudioController::GetInstance()->AddAudio(bossBattleSound);
+
+
+
   AddGameObject(map);
-   FirstBossController::GetInstance()->AddMap(map);
+  FirstBossController::GetInstance()->AddMap(map);
 }
 
 void GamePlayScene::CreateNakedMan() {
@@ -48,6 +57,10 @@ void GamePlayScene::CreateNakedMan() {
   auto nakedMan = new GameObject("NakedMan", new Vector(xPos,yPos),96 , 96, 1);
   // Script
   auto nakedManScript = new NakedManScript(nakedMan);
+
+  auto runSound = new UISound(nakedMan, "runSound", "assets/Audio/Player/runcrushed.ogg", false, false);
+  AudioController::GetInstance()->AddAudio(runSound);
+
   AddGameObject(nakedMan);
   FirstBossController::GetInstance()->AddPlayer(nakedMan);
 }
@@ -85,6 +98,21 @@ void GamePlayScene::CreateFirstBossAttack() {
     // Script
     auto firstBossAttackScript = new  FirstBossAttackScript(firstBossAttack);
     
+    //Sounds
+    auto firstAttackSound = new UISound(firstBossAttack, "firstAttackSound", "assets/Audio/Boss/grito1.ogg", false, false);
+    AudioController::GetInstance()->AddAudio(firstAttackSound);
+
+    auto secondAttackSound = new UISound(firstBossAttack, "secondAttackSound", "assets/Audio/Boss/grito2.ogg", false, false);
+    AudioController::GetInstance()->AddAudio(secondAttackSound);
+
+    auto thirdAttackSound = new UISound(firstBossAttack, "thirdAttackSound", "assets/Audio/Boss/grito3.ogg", false, false);
+    AudioController::GetInstance()->AddAudio(thirdAttackSound);
+
+    auto fourthAttackSound = new UISound(firstBossAttack, "fourthAttackSound", "assets/Audio/Boss/heart_attack.ogg", false, false);
+    AudioController::GetInstance()->AddAudio(fourthAttackSound);
+    
+    
+
     AddGameObject(firstBossAttack);
     FirstBossController::GetInstance()->AddTentacle(firstBossAttack);
 
@@ -103,12 +131,12 @@ void GamePlayScene::CreateFirstBossLife() {
   
   /** Life**/
   auto firstBossLife = new GameObject("FirstBossLife", new Vector(0, 0),337, 25, 2);
-  auto lifeRectangle = new RectangleRenderer(firstBossLife, Vector(0, 0), 10, 25);
+  auto lifeRectangle = new RectangleRenderer(firstBossLife, Vector(0, 0), 337, 25);
   lifeRectangle->SetColor(255, 48, 48, 255);
   auto firstBossLifeScript = new  FirstBossLifeScript(firstBossLife);
   AddGameObject(firstBossLife);
   FirstBossController::GetInstance()->AddLifeBar(firstBossLife);// Add to controller
-  //FirstBossController::GetInstance()->DeactivateLifeBars();// Desable all life bars
+  FirstBossController::GetInstance()->DeactivateLifeBars();// Desable all life bars
 }
 
 void GamePlayScene::CreatePlayerAttack() {
@@ -120,6 +148,10 @@ void GamePlayScene::CreatePlayerAttack() {
     bullet->SetTag("Bullet");
     auto bulletScript = new  PlayerAttackScript(bullet);
     AddGameObject(bullet);
+
+    auto bulletSound = new UISound(bullet, "bulletSound", "assets/Audio/Player/fireball.ogg", false, false);
+    AudioController::GetInstance()->AddAudio(bulletSound);
+
     bullet->active = false;
 
     //MissileController::GetInstance()->AddPlayer(bullet);
@@ -137,6 +169,8 @@ void GamePlayScene::CreateRain() {
 
   auto rain = new GameObject("Rain", new Vector(0,0),1024,800,1);
   auto rainScript = new RainScript(rain);
+  auto rainSound = new UISound(rain, "rainSound", "assets/Audio/Boss/chuva.ogg", false, false);
+  AudioController::GetInstance()->AddAudio(rainSound);
   AddGameObject(rain);
 }
 
@@ -159,6 +193,8 @@ void GamePlayScene::CreateSnow(){
 
   auto snow = new GameObject("Snow", new Vector(0,0),1024,800,1);
   auto snowScript = new SnowScript(snow);
+  auto snowSound = new UISound(snow, "snowSound", "assets/Audio/Clima/winteriscomming.ogg", false, false);
+  AudioController::GetInstance()->AddAudio(snowSound);
   AddGameObject(snow);
 }
 
@@ -192,3 +228,4 @@ void GamePlayScene::CreateAmmoCounter() {
   //auto lightScript = new LightScript(light);
   AddGameObject(ammo);
 }
+

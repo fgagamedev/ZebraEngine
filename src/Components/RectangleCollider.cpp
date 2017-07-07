@@ -3,6 +3,7 @@
 RectangleCollider::RectangleCollider(GameObject *owner, Vector offset,
                                      float width, float height, int layer)
     : Collider(owner, layer) {
+  m_owner = owner;
   m_offset = offset;
   m_shape.width = width;
   m_shape.height = height;
