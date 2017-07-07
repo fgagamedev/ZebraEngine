@@ -27,26 +27,44 @@ void MenuAnimationScript::CreateAnimations(){
     mainAnimation->AddFrame(new Frame(i * 341, 0, 341, 256));
 
 
+ auto mainAnimation2 = new Animation(GetOwner(), mainSprite);
+  for (int i = 0; i <16; i++)
+    mainAnimation2->AddFrame(new Frame(i * 341, 256, 341, 256));
+
+
    mainAnimation->SetFramesPerSecond(10);
+    mainAnimation2->SetFramesPerSecond(10);
 
 
 
   MenuAnimationScriptAnimator->AddAnimation("mainAnimation", mainAnimation);
+   MenuAnimationScriptAnimator->AddAnimation("mainAnimation2", mainAnimation2);
 
 }
 
 void MenuAnimationScript::ComponentUpdate() {
 
-if(!animator->IsPlaying("mainAnimation")){
 
+if(!animator->IsPlaying("mainAnimation") && !initialanimation){
+initialanimation=true;
 animator->PlayAnimation("mainAnimation");
 }
+
+if(initialanimation){
+
+if(!animator->IsPlaying("mainAnimation"))
+if(!animator->IsPlaying("mainAnimation2") && initialanimation){
+animator->PlayAnimation("mainAnimation2");
+}
+
+}
+
+
 
 
 }
 
 void MenuAnimationScript::FixedComponentUpdate() {
-
 
 
 }

@@ -6,8 +6,15 @@
 #include "Engine/SceneManager.h"
 #include "Globals/EngineGlobals.h"
 #include "Engine/CameraSystem.h"
+#include "Customs/ForestActivatorScript.h"
+#include "Customs/ForestActivatorScript2.h"
+#include "Customs/ForestActivatorScript3.h"
+#include "Customs/SnowActivatorScript.h"
+
 
 class MapScript : public Script {
+//Right[45]=button lowerleft,Right[46]=button central,Right[47]=button centralupleft,right[48]=blueboss ->> reserved for buttons
+//right[49] = wall left down[48] = blue boss wall
 public:
   MapScript(GameObject *owner);
   std::string GetComponentName() override { return "MapScript"; };

@@ -19,6 +19,7 @@ protected:
   void ComponentUpdate() override;
 
 private:
+    bool initialanimation=false;
     int currentframe=0;
     bool isPlaying=false;
   void CreateAnimations();

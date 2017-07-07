@@ -1,9 +1,13 @@
-# ZebraEngine
-## About
+# VoiD
 
-<p align="justify">
-Zebra Engine is a 2D personal engine made for learning.
-</p>
+## Playing
+<b>Movement:</b>    W A S D       / Left Joystick <br>
+<b>Aim:</b>         Mouse Cursor  / Right Joystick <br>
+<b>Attack:</b>      Left Mouse    / X <br>
+<b>Projectile:</b>  Right Mouse   / RT <br>
+<b>Dash:</b>        Space         / RB <br>
+
+# Installing and running
 
 ## Dependencies
 

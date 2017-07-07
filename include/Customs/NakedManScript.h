@@ -11,6 +11,7 @@
 #include "Engine/Timer.h"
 #include "Engine/CameraSystem.h"
 #include "Components/RectangleCollider.h"
+#include "Engine/GameController.h"
 
 class NakedManScript : public Script {
 public:
@@ -20,21 +21,26 @@ public:
   void Start() override;
   char GetMovement() { return movements; };
 
-  
+  bool lockplayerMovements=false;
   int bulletNumber = 10;
+  bool gameControllerActivated = false;
+  float gameControllerAngle=0;
+
 protected:
   void ComponentUpdate() override;
 
 private:
+
   void SetDirection();
+  void KeyBoardUpdate();
+  void GameControllerUpdate();
   void CreateAnimations();
-
   void WallCollisionResolution();
-
   void GameCollisionCheck(); 
   void StartFirstBoss();
 
   //Player Movements
+
   void Movements(); 
 
   void Animations();
@@ -51,7 +57,13 @@ private:
   bool walking = false;
 
 
+
+
+  int bulletController = 0;
+  int dashController = 0;
+
   InputSystem *input = nullptr;
+  GameController* gamecontroller = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
   float walkSpeed = 15;
@@ -60,8 +72,6 @@ private:
   int deadzone_x = EngineGlobals::screen_width / 2;
   int deadzone_y = EngineGlobals::screen_height / 2;
   int lastDirection=1;
-  int playerprevious=0;
-  Vector playerprevious_vec;
   RectangleCollider* nakedManCollider = nullptr;
 
   int m_hitFrames = 0;

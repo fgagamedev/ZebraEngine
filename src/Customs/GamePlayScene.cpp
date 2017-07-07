@@ -16,6 +16,9 @@ void GamePlayScene::OnActivation() {
   CreatePlayerAttack();
   //CreateAmmoCounter();
   CreatePlayerHit();
+  CreateForestActivator();
+  CreateSnowActivator();
+  CreateCentralLights();
 
   //FirstBossController::GetInstance()->StartBossFight();
 
@@ -28,13 +31,22 @@ void GamePlayScene::OnShown() {}
 void GamePlayScene::OnHidden() {}
 
 void GamePlayScene::CreateMap() {
+
+
   //Original resolution is 2048/2048
   //6144,6144 = 3x
   auto map = new GameObject("Map", new Vector(-3500 ,-3800),8034,8034);
   // Renderer
- // auto mapImage = new Image("assets/mapa2.png", 0, 0, 2678, 2678);
-   auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
+  auto mapImage = new Image("assets/mapa2.png", 0, 0, 2678, 2678);
+ //  auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
   auto mapRenderer = new Renderer(map, mapImage);
+
+
+  auto trees = new GameObject("Tree", new Vector(-3500 ,-3800),8034,8034,2);
+  // Renderer
+  auto treesImage = new Image("assets/trees.png", 0, 0, 2678, 2678);
+  auto treesRenderer = new Renderer(trees, treesImage);
+
   // Script
   auto mapScript = new MapScript(map);
 
@@ -46,7 +58,53 @@ void GamePlayScene::CreateMap() {
 
 
   AddGameObject(map);
+
   FirstBossController::GetInstance()->AddMap(map);
+
+  AddGameObject(trees);
+
+}
+void  GamePlayScene::CreateForestActivator(){
+//left
+  auto forestActivator = new GameObject("FOREST ACTIVATOR", new Vector(1720,-3463),192,192,1);
+  auto  forestactivatorScript = new ForestActivatorScript(forestActivator);
+  AddGameObject(forestActivator);
+//blue
+  auto forestActivator2 = new GameObject("FOREST ACTIVATOR2", new Vector(701,-578),192,192,1);
+  auto  forestactivatorScript2 = new ForestActivatorScript2(forestActivator2);
+  AddGameObject(forestActivator2);
+//central
+  auto forestActivator3 = new GameObject("FOREST ACTIVATOR3", new Vector(-579,-1546),192,192,1);
+  auto  forestactivatorScript3 = new ForestActivatorScript3(forestActivator3);
+  AddGameObject(forestActivator3);
+
+  }
+
+void GamePlayScene::CreateSnowActivator(){
+
+  auto snowActivator = new GameObject("SNOW ACTIVATOR", new Vector(-1044,2446),192,192,1);
+  auto  snowactivatorScript = new SnowActivatorScript(snowActivator);
+  AddGameObject(snowActivator);
+
+  }
+void GamePlayScene::CreateCentralLights(){
+
+  auto centralLight1= new GameObject("CENTRAL LIGHT 1", new Vector(424,422),192,192,1);
+  auto  centralLight1Script = new CentralLightScript1(centralLight1);
+  AddGameObject(centralLight1);
+
+  auto centralLight2= new GameObject("CENTRAL LIGHT 2", new Vector(309,308),192,192,1);
+  auto  centralLight2Script = new CentralLightScript2(centralLight2);
+  AddGameObject(centralLight2);
+
+  auto centralLight3= new GameObject("CENTRAL LIGHT 3", new Vector(542,308),192,192,1);
+  auto  centralLight3Script = new CentralLightScript3(centralLight3);
+  AddGameObject(centralLight3);
+
+  auto centralLight4= new GameObject("CENTRAL LIGHT 4", new Vector(424,197),192,192,1);
+  auto  centralLight4Script = new CentralLightScript4(centralLight4);
+  AddGameObject(centralLight4);
+
 }
 
 void GamePlayScene::CreateNakedMan() {
@@ -54,7 +112,7 @@ void GamePlayScene::CreateNakedMan() {
   int xPos, yPos;
   xPos =EngineGlobals::screen_width / 2 - 96/2;
   yPos =EngineGlobals::screen_height / 2 - 96/2;
-  auto nakedMan = new GameObject("NakedMan", new Vector(xPos,yPos),96 , 96, 1);
+  auto nakedMan = new GameObject("NakedMan", new Vector(xPos,yPos),96 , 96, 2);
   // Script
   auto nakedManScript = new NakedManScript(nakedMan);
 
@@ -63,6 +121,7 @@ void GamePlayScene::CreateNakedMan() {
 
   AddGameObject(nakedMan);
   FirstBossController::GetInstance()->AddPlayer(nakedMan);
+
 }
 
 void GamePlayScene::CreateFirstBoss() {
