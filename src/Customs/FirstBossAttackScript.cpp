@@ -112,11 +112,11 @@ void FirstBossAttackScript::Attack(){
     attack = false;
     m_surgeAnimation = true;
     desactivateObj = true;
-    
+    GetOwner()->active = false;
 
   }
   if(timerGone.GetTime()>=1*1000){
-    GetOwner()->active = false;
+
     timerGone.Restart();
     desactivateObj = false;
   }

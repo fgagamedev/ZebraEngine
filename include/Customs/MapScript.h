@@ -37,6 +37,8 @@ public:
   Vector downWalls[100];
   Vector downWallsOriginal[100];
   int downWallsAmmount=0;
+    bool activated=true;
+
 protected:
   void ComponentUpdate() override;
 

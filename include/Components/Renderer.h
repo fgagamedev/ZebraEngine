@@ -21,12 +21,15 @@ public:
   void RotateTowards(Vector *point);
   // override for start
   void Start() override;
+    void SetActivationTrue(){activation=true;};
+    void SetActivationFalse(){activation=false;};
 
 protected:
   // overriding method called by final update
   void ComponentUpdate() override;
 
 private:
+  bool activation=true;
   Image *m_image = nullptr;
   Vector *m_position = nullptr;
 };

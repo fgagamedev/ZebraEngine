@@ -5,6 +5,8 @@
 #include "Customs/MainScene.h"
 #include "Customs/GamePlayScene.h"
 #include "Customs/PreMenuScene.h"
+#include "Customs/EndScene1.h"
+#include "Customs/EndScene2.h"
 
 // static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
@@ -203,10 +205,18 @@ void SDLSystem::LoadCommons() {
   auto firstBossScene = new FirstBossScene();
   auto preMenuScene = new PreMenuScene();
 
+  //auto endScene1 = new EndScene1();
+  //auto endScene2 = new EndScene2();
+
   SceneManager::GetInstance()->AddScene(std::make_pair("Pre Menu", preMenuScene));
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
   SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay", gameplayScene));
   SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene", firstBossScene));
+
+  //SceneManager::GetInstance()->AddScene(std::make_pair("EndScene1", endScene1));
+  //SceneManager::GetInstance()->AddScene(std::make_pair("EndScene2", endScene2));
+
+
 
 }
 

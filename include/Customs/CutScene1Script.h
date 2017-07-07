@@ -1,34 +1,36 @@
-#ifndef __LIGHT_SCRIPT__
-#define __LIGHT_SCRIPT__
+#ifndef __CUT_SCENE1_SCRIPT__
+#define __CUT_SCENE1_SCRIPT__
 
 #include "Components/Animator.h"
 #include "Engine/InputSystem.h"
 #include "Components/Script.h"
 #include "Engine/GameObject.h"
 #include "Engine/SceneManager.h"
-#include "Engine/CameraSystem.h"
 #include "Math/Vector.h"
-
 #include <string>
+#include "Engine/Timer.h"
+#include "Engine/GameController.h"
 
-class LightScript : public Script {
+class CutScene1Script : public Script {
 
 public:
-  LightScript(GameObject *owner);
-  std::string GetComponentName() override { return "RainScript"; };
+  CutScene1Script(GameObject *owner);
+  std::string GetComponentName() override { return "CutScene1Script"; };
   void FixedComponentUpdate() override;
   void Start() override;
+  void Activate(){active = true;}
 
 protected:
   void ComponentUpdate() override;
 private:
+  bool active=false;
+  Timer time;
   void CreateAnimations();
   InputSystem *input = nullptr;
+   GameController* gamecontroller = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
-  GameObject *player = nullptr;
-  int play=1;
+  int play=0;
 
 };
-
 #endif

@@ -36,7 +36,7 @@ void FirstBossLifeScript::ComponentUpdate() {
 
     
     cout << actualLife << endl;
-    firstBossLifeRenderer->SetWidth(actualLife - 1);
+    firstBossLifeRenderer->SetWidth(actualLife - 10);
     hit = false;
   }
   if(actualLife <= 0){

@@ -9,6 +9,7 @@
 void Renderer::ComponentUpdate() {
   std::pair<int, int> sizes =
       std::make_pair(GetOwner()->GetWidth(), GetOwner()->GetHeight());
+     // if(!activation)
   GraphicsSystem::GetInstance()->Draw(m_image, m_position, sizes);
 }
 

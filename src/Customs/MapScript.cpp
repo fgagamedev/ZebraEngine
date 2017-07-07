@@ -52,6 +52,16 @@ void MapScript::ComponentUpdate() {
 
 void MapScript::FixedComponentUpdate() {
 
+   auto script =       (NakedManScript*) SceneManager::GetInstance()
+                     ->GetCurrentScene()
+                     ->GetGameObject("NakedMan")
+                     ->GetComponent("NakedManScript");
+
+  if (script->life<=0) {
+
+    //SceneManager::GetInstance()->SetCurrentScene("EndScene1");
+  }
+
       if(shake){
         //CameraShake(intensity,duration in seconds)
         CameraSystem::GetInstance()->CameraShake(8,1,SceneManager::GetInstance()->GetCurrentScene());

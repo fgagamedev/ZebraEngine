@@ -46,6 +46,7 @@ public:
   void OnHidden() override;
 
 private:
+  void CreateCutScenes();
   void CreateCentralLights();
   void CreateNakedMan();
   void CreatePlayerAttack();

@@ -25,7 +25,8 @@ public:
   int bulletNumber = 10;
   bool gameControllerActivated = false;
   float gameControllerAngle=0;
-
+bool activated=true;
+  int life = 100;
 protected:
   void ComponentUpdate() override;
 
@@ -76,7 +77,7 @@ private:
 
   int m_hitFrames = 0;
   bool m_hit = false;
-  int life = 100;
+
 
   Timer timerReload;
   Timer lifeRecover;

@@ -1,6 +1,6 @@
 #include "Customs/GamePlayScene.h"
 #include "Globals/EngineGlobals.h"
-
+#include "Customs/CutScene1Script.h"
 
 void GamePlayScene::OnActivation() {
   CreateMap();//This must be the first function to be called
@@ -19,8 +19,9 @@ void GamePlayScene::OnActivation() {
   CreateForestActivator();
   CreateSnowActivator();
   CreateCentralLights();
+  CreateCutScenes();
 
-  //FirstBossController::GetInstance()->StartBossFight();
+  FirstBossController::GetInstance()->StartBossFight();
 
 }
 
@@ -35,14 +36,14 @@ void GamePlayScene::CreateMap() {
 
   //Original resolution is 2048/2048
   //6144,6144 = 3x
-  auto map = new GameObject("Map", new Vector(-3500 ,-3800),8034,8034);
+  auto map = new GameObject("Map", new Vector(-3500 ,-3800),8034,8034,0);
   // Renderer
   auto mapImage = new Image("assets/mapa2.png", 0, 0, 2678, 2678);
  //  auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
   auto mapRenderer = new Renderer(map, mapImage);
 
 
-  auto trees = new GameObject("Tree", new Vector(-3500 ,-3800),8034,8034,2);
+  auto trees = new GameObject("Tree", new Vector(-3500 ,-3800),8034,8034,1);
   // Renderer
   auto treesImage = new Image("assets/trees.png", 0, 0, 2678, 2678);
   auto treesRenderer = new Renderer(trees, treesImage);
@@ -64,6 +65,16 @@ void GamePlayScene::CreateMap() {
   AddGameObject(trees);
 
 }
+
+void GamePlayScene::CreateCutScenes(){
+
+  auto scene1 = new GameObject("SCENE1", new Vector(0,0),1024,800,0);
+  auto  scene1Script = new CutScene1Script(scene1);
+  scene1Script->Activate();
+  AddGameObject(scene1);
+}
+
+
 void  GamePlayScene::CreateForestActivator(){
 //left
   auto forestActivator = new GameObject("FOREST ACTIVATOR", new Vector(1720,-3463),192,192,1);
@@ -259,7 +270,7 @@ void GamePlayScene::CreateSnow(){
 
 void GamePlayScene::CreateLight() {
 
-  auto light = new GameObject("Light", new Vector(0,0),2*1024,2*800,1);
+  auto light = new GameObject("Light", new Vector(0,0),2*1024,2*800,2);
  //auto lightImage = new Image("assets/luz.png",0,0,682, 512);
  //auto mapRenderer = new Renderer(light, lightImage);
   auto lightScript = new LightScript(light);
