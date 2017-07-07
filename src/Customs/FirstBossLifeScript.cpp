@@ -27,18 +27,21 @@ void FirstBossLifeScript::ComponentUpdate() {
   auto var = (UIText *)GetOwner()->GetComponent("UIText");              
   var->SetText(std::to_string(m_numberBullet));
   */
-  auto firstBossLifeRenderer = (RectangleRenderer*)GetOwner()
-                                  ->GetComponent("RectangleRenderer");
+  auto firstBossLifeRenderer = (RectangleRenderer*)GetOwner()->GetComponent("RectangleRenderer");
   int actualLife = firstBossLifeRenderer->GetWidth();
+  //cout << actualLife << endl;
   if(hit && actualLife > 0){
     cout << "hit" << endl;
     
 
-
     
     cout << actualLife << endl;
-    firstBossLifeRenderer ->SetWidth(actualLife - 1);
+    firstBossLifeRenderer->SetWidth(actualLife - 1);
     hit = false;
+  }
+  if(actualLife <= 0){
+    FirstBossController::GetInstance()->ActivateCreditsAnimation();
+    FirstBossController::GetInstance()->DeactivateLifeBars();
   }
 }
 void FirstBossLifeScript::FixedComponentUpdate() {

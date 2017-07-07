@@ -18,76 +18,67 @@ void NakedManScript::Start() {
   if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
   nakedManCollider = new RectangleCollider(GetOwner(), Vector(0, 0), GetOwner()->GetWidth(), GetOwner()->GetHeight(), 0);
 
-  FirstBossController::GetInstance();
+  //FirstBossController::GetInstance();
 }
 
 void NakedManScript::SetDirection(){
-mousePosition = input->GetMousePosition();
+  mousePosition = input->GetMousePosition();
 
-
-//if(input->GetMouseButtonPressed(M_INPUT_LEFT))
-//x-axis
-    if(mousePosition.first >= position->m_x && movements==4){
+  //x-axis
+  if(mousePosition.first >= position->m_x && movements==4){
     isMovingLooking=true;
-    }
-    else if(mousePosition.first > position->m_x && movements==3){
+  
+  }else if(mousePosition.first > position->m_x && movements==3){
     isMovingLooking=false;
-    }
+  }
 
-    if(mousePosition.first <= position->m_x && movements==3){
+  if(mousePosition.first <= position->m_x && movements==3){
     isMovingLooking=true;
-    }
-    else if(mousePosition.first < position->m_x && movements==4){
+  
+  }else if(mousePosition.first < position->m_x && movements==4){
     isMovingLooking=false;
-    }
-//y-axis
-    if(mousePosition.second <= position->m_y && movements==1){
+  }
+  
+  //y-axis
+  if(mousePosition.second <= position->m_y && movements==1){
     isMovingLooking=true;
-    }
-    else if(mousePosition.second < position->m_y && movements==2){
+  }else if(mousePosition.second < position->m_y && movements==2){
     isMovingLooking=false;
-    }
+  }
 
-    if(mousePosition.second >= position->m_y && movements==2){
-      isMovingLooking=true;
-     }
-     else if(mousePosition.second > position->m_y && movements==1){
-       isMovingLooking=false;
-     }
-//Diagonal 1
-    if(mousePosition.first >= position->m_x && mousePosition.second <= position->m_y && movements == 6){
+  if(mousePosition.second >= position->m_y && movements==2){
     isMovingLooking=true;
-    }
-    else if(mousePosition.first >= position->m_x && mousePosition.second <= position->m_y && movements == 7){
+  
+  }else if(mousePosition.second > position->m_y && movements==1){
     isMovingLooking=false;
-    }
-
- if(mousePosition.first <= position->m_x && mousePosition.second >= position->m_y && movements == 7){
+  }
+  
+  //Diagonal 1
+  if(mousePosition.first >= position->m_x && mousePosition.second <= position->m_y && movements == 6){
     isMovingLooking=true;
-    }
-    else if(mousePosition.first <= position->m_x && mousePosition.second >= position->m_y && movements == 6){
+  }else if(mousePosition.first >= position->m_x && mousePosition.second <= position->m_y && movements == 7){
     isMovingLooking=false;
-    }
-//Diagonal 2
+  }
 
-   if(mousePosition.first >= position->m_x && mousePosition.second >= position->m_y && movements == 8){
+  if(mousePosition.first <= position->m_x && mousePosition.second >= position->m_y && movements == 7){
     isMovingLooking=true;
-    }
-    else if(mousePosition.first >= position->m_x && mousePosition.second >= position->m_y && movements == 5){
+  }else if(mousePosition.first <= position->m_x && mousePosition.second >= position->m_y && movements == 6){
     isMovingLooking=false;
-    }
-    if(mousePosition.first <= position->m_x && mousePosition.second <= position->m_y && movements == 5){
+  }
+  
+  //Diagonal 2
+  if(mousePosition.first >= position->m_x && mousePosition.second >= position->m_y && movements == 8){
     isMovingLooking=true;
-    }
-    else if(mousePosition.first <= position->m_x && mousePosition.second <= position->m_y && movements == 8){
+  }else if(mousePosition.first >= position->m_x && mousePosition.second >= position->m_y && movements == 5){
     isMovingLooking=false;
-    }
+  }
 
-
-
-
-
-
+  if(mousePosition.first <= position->m_x && mousePosition.second <= position->m_y && movements == 5){
+    isMovingLooking=true;
+  
+  }else if(mousePosition.first <= position->m_x && mousePosition.second <= position->m_y && movements == 8){
+    isMovingLooking=false;
+  }
 }
 
 void NakedManScript::CreateAnimations(){
@@ -155,153 +146,34 @@ void NakedManScript::ComponentUpdate() {
 
 
 
+  //Debug Collider
+  //auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,nakedManCollider->GetRectanglePoint().m_y);
+  //GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
 
-auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,nakedManCollider->GetRectanglePoint().m_y);
-GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
 
+  SetDirection();
+  walkSpeed = fixedWalkSpeed;
 
-SetDirection();
-
-walkSpeed = fixedWalkSpeed;
-  movements = 0;
-
+  
+ 
+/*
   if((input->GetKeyPressed(INPUT_DOWN)) || (input->GetKeyPressed(INPUT_UP)))
     isZooming=true;
   if((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP)))
     isZooming=false;
+*/
 
-
-
+/*
   if((input->GetKeyDown(INPUT_V)) && (!isMovingLooking)){
     isMovingLooking=true;
   }else if((input->GetKeyDown(INPUT_V)) && (isMovingLooking)){
     isMovingLooking=false;
   }
+*/
+  Animations();
 
-if(isMovingLooking){
+  
 
-    if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
-        movements=5;
-        lastDirection=5;
-        animator->GetAnimation("Walk Side")->SetFlip(true, false);
-        animator->PlayAnimation("Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_D)) {
-        movements=6;
-        lastDirection=6;
-        animator->GetAnimation("Walk Side")->SetFlip(false, false);
-       animator->PlayAnimation("Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_A)) {
-        movements=7;
-        lastDirection=7;
-        animator->GetAnimation("Walk Side")->SetFlip(true, false);
-        animator->PlayAnimation("Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_D)) {
-       movements=8;
-       lastDirection=8;
-       animator->GetAnimation("Walk Side")->SetFlip(false, false);
-       animator->PlayAnimation("Walk Side");
-     }
-
-  else if (input->GetKeyPressed(INPUT_W)) {
-    lastDirection=0;
-    movements = 1;
-    animator->PlayAnimation("Walk Up");
-
-  } else if (input->GetKeyPressed(INPUT_S)) {
-    lastDirection=1;
-    movements = 2;
-    animator->PlayAnimation("Walk Down");
-  } else if (input->GetKeyPressed(INPUT_A)) {
-   lastDirection=3;
-    movements = 3;
-    animator->GetAnimation("Walk Side")->SetFlip(true, false);
-    animator->PlayAnimation("Walk Side");
-  } else if (input->GetKeyPressed(INPUT_D)) {
-    lastDirection=3;
-    movements = 4;
-    animator->GetAnimation("Walk Side")->SetFlip(false, false);
-    animator->PlayAnimation("Walk Side");
-  } else {
-
-    if(lastDirection==0) {
-    animator->PlayAnimation("Stop Up");
-    }
-    else if(lastDirection==1) {
-    animator->PlayAnimation("Stop Down");
-    }
-    else if(lastDirection==2) {
-    animator->PlayAnimation("Stop Left");
-    }
-    else if(lastDirection==3) {
-    animator->PlayAnimation("Stop Right");
-    }
-
-  }
-}else{
- if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
-        movements=5;
-        lastDirection=5;
-        animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-        animator->PlayAnimation("Back Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_D)) {
-        movements=6;
-        lastDirection=6;
-        animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-       animator->PlayAnimation("Back Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_A)) {
-        movements=7;
-        lastDirection=7;
-        animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-        animator->PlayAnimation("Back Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_D)) {
-       movements=8;
-       lastDirection=8;
-       animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-       animator->PlayAnimation("Back Walk Side");
-     }
-else if (input->GetKeyPressed(INPUT_W)) {
-    lastDirection=0;
-    movements = 1;
-    animator->PlayAnimation("Back Walk Down");
-
-  } else if (input->GetKeyPressed(INPUT_S)) {
-    lastDirection=1;
-    movements = 2;
-    animator->PlayAnimation("Back Walk Up");
-  } else if (input->GetKeyPressed(INPUT_A)) {
-   lastDirection=3;
-    movements = 3;
-    animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-    animator->PlayAnimation("Back Walk Side");
-  } else if (input->GetKeyPressed(INPUT_D)) {
-    lastDirection=3;
-    movements = 4;
-    animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-    animator->PlayAnimation("Back Walk Side");
-  } else {
-
-    if(lastDirection==0) {
-    animator->PlayAnimation("Stop Down");
-    }
-    else if(lastDirection==1) {
-    animator->PlayAnimation("Stop Up");
-    }
-    else if(lastDirection==2) {
-    animator->PlayAnimation("Stop Left");
-    }
-    else if(lastDirection==3) {
-    animator->PlayAnimation("Stop Right");
-    }
-
-  }
-
-}
   //Sair para o Menu
   if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
     /*
@@ -316,35 +188,9 @@ else if (input->GetKeyPressed(INPUT_W)) {
   }
 
   //Shoot gun
-  if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
-      
-      cout << "ammo: " << bulletNumber << endl;
-      
-      auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
-                   ->GetCurrentScene()
-                   ->GetGameObject("Bullet" + std::to_string(bulletNumber));
-      gameObjectBullet->active = true;
-
-      auto script = (PlayerAttackScript*)SceneManager::GetInstance()
-                   ->GetCurrentScene()
-                   ->GetGameObject("Bullet" + std::to_string(bulletNumber))
-                   ->GetComponent("PlayerAttackScript");
-      script->SetShoot(true);
-
-      
-                 
-
-      bulletNumber--;
-      
-
-      /** Reload **/ 
-      if(bulletNumber == 0){
-        bulletNumber = 10; 
-        //wait delay reload time
-        
-      }
-    
-    
+  if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {   
+    Shoot();
+  
   }
 
 
@@ -362,22 +208,229 @@ else if (input->GetKeyPressed(INPUT_W)) {
 
 void NakedManScript::FixedComponentUpdate() {
 
-printf("x = %f\ny = %f\n\n",position->m_x,position->m_y);
-printf("x = %f\ny = %f\n\n",position->m_x + CameraSystem::GetInstance()->GetPos_x()-3500,position->m_y+ CameraSystem::GetInstance()->GetPos_y()-3800);
+  //printf("x = %f\ny = %f\n\n",position->m_x,position->m_y);
+  //printf("x = %f\ny = %f\n\n",position->m_x + CameraSystem::GetInstance()->GetPos_x()-3500,position->m_y+ CameraSystem::GetInstance()->GetPos_y()-3800);
 
 
-    GameCollisionCheck();
-    WallCollisionResolution();
+  GameCollisionCheck();
+  WallCollisionResolution();
+  StartFirstBoss();
+  Movements();
+  ReloadGun();
+  PlayerLife();
+
+  //Shoot gun
+  if (InputSystem::GetInstance()->GetKeyDown(INPUT_B)) {   
+    life = 0;
+
+  
+  }
+
+  if(endBossFight){
+    FirstBossController::GetInstance()->EndBossFight();
+    //posit player on spawn
+    int xPos, yPos;
+    xPos =EngineGlobals::screen_width / 2 - 96/2;
+    yPos =EngineGlobals::screen_height / 2 - 96/2;
+
+    //FirstBossController::GetInstance()->PositPlayer(Vector(xPos, yPos ));
+    //FirstBossController::GetInstance()->PositMap(Vector(-500, -3800 ));
+    //CameraSystem::GetInstance()->MoveLeft(200,SceneManager::GetInstance()->GetCurrentScene());
+    endBossFight =  false;
+  }
+  
 
 
-    //GameCollisionCheck();
-    StartFirstBoss();
-    Movements();
 
 
     
 }
 
+void NakedManScript::PlayerLife(){
+  if(life<100 && !endBossFight){
+    lifeRecover.Update(EngineGlobals::fixed_update_interval); 
+    cout << life << endl;
+    if(lifeRecover.GetTime() >= 0.5*1000){
+      life++;
+      lifeRecover.Restart();
+
+
+    }
+  }
+  if(life <= 0){ //Player is dead
+    endBossFight = true;
+    //stop boss fight
+    //desactivate boos fight
+    //posit player outside boss fight
+  }
+}
+
+void NakedManScript::Shoot(){
+  if(bulletNumber > 0){
+
+    auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
+                     ->GetCurrentScene()
+                     ->GetGameObject("Bullet" + std::to_string(bulletNumber));
+    gameObjectBullet->active = true;
+
+    auto script = (PlayerAttackScript*)SceneManager::GetInstance()
+                     ->GetCurrentScene()
+                     ->GetGameObject("Bullet" + std::to_string(bulletNumber))
+                     ->GetComponent("PlayerAttackScript");
+    script->SetShoot(true);
+    bulletNumber--;
+  }
+}
+
+void NakedManScript::ReloadGun(){
+  /** Reload **/
+  if(bulletNumber == 0){
+
+    timerReload.Update(EngineGlobals::fixed_update_interval);        
+  } 
+     
+  if(timerReload.GetTime() >= 2*1000){ // Waits 2 seconds to Reload
+    bulletNumber = 10; 
+    timerReload.Restart();
+  }
+}
+
+void NakedManScript::Animations(){
+  movements = 0;
+
+ if(isMovingLooking){
+
+    if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
+      movements=5;
+      lastDirection=5;
+      animator->GetAnimation("Walk Side")->SetFlip(true, false);
+      animator->PlayAnimation("Walk Side");
+    }else if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_D)) {
+      movements=6;
+      lastDirection=6;
+      animator->GetAnimation("Walk Side")->SetFlip(false, false);
+      animator->PlayAnimation("Walk Side");
+    }else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_A)) {
+      movements=7;
+      lastDirection=7;
+      animator->GetAnimation("Walk Side")->SetFlip(true, false);
+      animator->PlayAnimation("Walk Side");
+    }else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_D)) {
+      movements=8;
+      lastDirection=8;
+      animator->GetAnimation("Walk Side")->SetFlip(false, false);
+      animator->PlayAnimation("Walk Side");
+    }else if (input->GetKeyPressed(INPUT_W)) {
+      lastDirection=0;
+      movements = 1;
+      animator->PlayAnimation("Walk Up");
+
+    }else if (input->GetKeyPressed(INPUT_S)) {
+      lastDirection=1;
+      movements = 2;
+      animator->PlayAnimation("Walk Down");
+    }else if (input->GetKeyPressed(INPUT_A)) {
+      lastDirection=3;
+      movements = 3;
+      animator->GetAnimation("Walk Side")->SetFlip(true, false);
+      animator->PlayAnimation("Walk Side");
+    }else if (input->GetKeyPressed(INPUT_D)) {
+      lastDirection=3;
+      movements = 4;
+      animator->GetAnimation("Walk Side")->SetFlip(false, false);
+      animator->PlayAnimation("Walk Side");
+    }else {
+
+      if(lastDirection==0) {
+      animator->PlayAnimation("Stop Up");
+      }else if(lastDirection==1) {
+      animator->PlayAnimation("Stop Down");
+      }else if(lastDirection==2) {
+      animator->PlayAnimation("Stop Left");
+
+      }else if(lastDirection==3) {
+      animator->PlayAnimation("Stop Right");
+      }
+
+    }
+  }else{
+    
+    if(input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
+      movements=5;
+      lastDirection=5;
+      animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+      animator->PlayAnimation("Back Walk Side");
+    }else if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_D)) {
+      movements=6;
+      lastDirection=6;
+      animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+      animator->PlayAnimation("Back Walk Side");
+    }else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_A)) {
+      movements=7;
+      lastDirection=7;
+      animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+      animator->PlayAnimation("Back Walk Side");
+    }else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_D)) {
+      movements=8;
+      lastDirection=8;
+      animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+      animator->PlayAnimation("Back Walk Side");
+    }else if (input->GetKeyPressed(INPUT_W)) {
+      lastDirection=0;
+      movements = 1;
+      animator->PlayAnimation("Back Walk Down");
+
+    }else if (input->GetKeyPressed(INPUT_S)) {
+      lastDirection=1;
+      movements = 2;
+      animator->PlayAnimation("Back Walk Up");
+    }else if (input->GetKeyPressed(INPUT_A)) {
+      lastDirection=3;
+      movements = 3;
+      animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+      animator->PlayAnimation("Back Walk Side");
+    }else if (input->GetKeyPressed(INPUT_D)) {
+      lastDirection=3;
+      movements = 4;
+      animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+      animator->PlayAnimation("Back Walk Side");
+    }else {
+
+      if(lastDirection==0) {
+      animator->PlayAnimation("Stop Down");
+      }
+      else if(lastDirection==1) {
+      animator->PlayAnimation("Stop Up");
+      }
+      else if(lastDirection==2) {
+      animator->PlayAnimation("Stop Left");
+      }
+      else if(lastDirection==3) {
+      animator->PlayAnimation("Stop Right");
+      }
+
+    }
+
+  }
+
+  if(m_hit){
+    m_hitFrames++;
+    timerHit.Update(EngineGlobals::fixed_update_interval);
+
+    if(m_hitFrames >= 7){
+      animator->StopAllAnimations();
+      if(m_hitFrames >= 12){
+        m_hitFrames = 0;
+      }
+    }
+  }
+  
+ 
+  if(timerHit.GetTime() >= 1*1000){
+      m_hit =  false;
+      timerHit.Restart();
+  }
+}
 
 void NakedManScript::Movements(){
 
@@ -487,39 +540,31 @@ void NakedManScript::Movements(){
         CameraSystem::GetInstance()->MoveUp(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
       }
     }
-
-
 }
+
 
 void NakedManScript::GameCollisionCheck() {
 
-    auto script = (HitScript*)SceneManager::GetInstance()
+/*
+    auto scriptHit = (HitScript*)SceneManager::GetInstance()
                    ->GetScene("Gameplay")
                    ->GetGameObject("Hit")
                    ->GetComponent("HitScript");
-  
-  if(m_hitFrameController){
-    m_hitFrames++;
-    std::cout << m_hitFrames << std::endl;
-  }
-  if(m_hitFrames> 20){
-     script->play = 0;
-     m_hitFrames = 0;
-  }
-
+*/
   for (auto obj : GetOwner()->GetCollisions()) {
     if (obj->GetTag() == "Bullet") {
-      cout << "Bullet Colider" << endl;
+      //cout << "Bullet Colider" << endl;
       GetOwner()->ClearCollisions();
       
     }else if(obj->GetTag() == "FirstBoss"){
       cout << "Boss Colider" << endl;
       GetOwner()->ClearCollisions();
+      m_hit = true;
+      life--;     
     }else if(obj->GetTag() == "FirstBossAtack"){
       cout << "Boss Atack Colider" << endl;
-      script->play = 1;
-      m_hitFrameController = true;
-      
+      m_hit = true;
+      life --;     
       GetOwner()->ClearCollisions();
     }
    
@@ -536,7 +581,7 @@ void NakedManScript::StartFirstBoss(){
   }
   //cout << SceneManager::GetInstance()->GetCurrentScene()->GetName() <<  endl;
   
-  if( (CameraSystem::GetInstance()->worldCamera_x < 980)){
+  if( (CameraSystem::GetInstance()->worldCamera_x < 500)){
     if(CameraSystem::GetInstance()->currentZoom > -50){ //Take zoom out 2 times
       CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->originalWidth/4 + 1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
       CameraSystem::GetInstance()->ZoomIn(1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
@@ -549,9 +594,7 @@ void NakedManScript::StartFirstBoss(){
     }
    
   }
-
 }
-
 
 void NakedManScript::WallCollisionResolution(){
 
@@ -559,20 +602,4 @@ void NakedManScript::WallCollisionResolution(){
     if(mapscript)
         mapscript->DetectWallCollision(GetOwner());
 }
-
-  /*
-  if( (CameraSystem::GetInstance()->worldCamera_x > 980) && CameraSystem::GetInstance()->currentZoom ){
-    if(zoom){
-      CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->originalWidth/4 + 1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
-      CameraSystem::GetInstance()->ZoomIn(1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
-      CameraSystem::GetInstance()->currentZoom -=25;
-      zoom = false;
-      
-    }
-   
-  }
-  */
- 
-
-
 

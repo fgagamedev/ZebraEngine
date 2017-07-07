@@ -61,13 +61,13 @@ public:
   void AddCollision(GameObject *gameobject);
   void ClearCollisions();
   std::vector<GameObject *> GetCollisions();
+  Vector *m_position = new Vector(0, 0);
 
 private:
   // map of components
   std::unordered_map<Uint32, std::vector<Component *>> m_components;
   // object properties
   std::string m_name = "no_name_defined";
-  Vector *m_position = new Vector(0, 0);
   int m_width = 0;
   int m_height = 0;
   Vector *zoomProportion = new Vector(1,1);

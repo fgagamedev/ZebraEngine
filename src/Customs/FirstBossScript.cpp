@@ -5,6 +5,7 @@ FirstBossScript::FirstBossScript(GameObject *owner) : Script(owner) {}
 void FirstBossScript::Start() {
 
   CreateAnimations();
+  
   position = GetOwner()->GetPosition();
   animator = (Animator *)GetOwner()->GetComponent("Animator");
   input = InputSystem::GetInstance();
@@ -36,12 +37,21 @@ void FirstBossScript::CreateAnimations(){
   }
 
 
+  //Second Attack
+  auto firstBossFallAnimation= new Animation(GetOwner(),firstBossJumpImage );
+  for (int i = 5; i > 0; i--){
+    firstBossFallAnimation->AddFrame(new Frame(i * 236,0, 236, 406));
+    firstBossFallAnimation->AddFrame(new Frame(i * 236,0, 236, 406)); 
+   
+  }
+
+
 
   // animator
   auto firstBossAnimator = new Animator(GetOwner());
-      
-      firstBossAnimator->AddAnimation("firstBossAnimation", firstBossAnimation);
-      firstBossAnimator->AddAnimation("firstBossJumpAnimation", firstBossJumpAnimation);
+  firstBossAnimator->AddAnimation("firstBossAnimation", firstBossAnimation);
+  firstBossAnimator->AddAnimation("firstBossJumpAnimation", firstBossJumpAnimation);
+  firstBossAnimator->AddAnimation("firstBossFallAnimation", firstBossFallAnimation);
 
 
 }
@@ -52,24 +62,18 @@ void FirstBossScript::ComponentUpdate() {
   //auto vec = Vector(firstBossCollider->GetRectanglePoint().m_x,firstBossCollider->GetRectanglePoint().m_y);
   //GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
   
-  if(!SecondAttack){
+  if(!SecondAttack && !SecondAttackFall){
     animator->PlayAnimation("firstBossAnimation"); //Idle animation
     
   }
 
-
-  if((timerSecondAttack.GetTime() >= 0.5*1000) && SecondAttack ){
-     if(GetOwner()->GetPosition()->m_y > -1900){
-      Vector *newPosition = GetOwner()->GetPosition();
-       
-      newPosition->m_y = newPosition->m_y - 90;
-      GetOwner()->SetPosition(*newPosition);
-    }
+  if(input->GetKeyPressed(INPUT_N)){
+    SecondAttack = true;
+    animator->PlayAnimation("firstBossJumpAnimation");
   }
-  if(timerSecondAttack.GetTime() >= 1*1000){
-      SecondAttack = false;
 
-    }
+
+  
     
 
    
@@ -83,7 +87,7 @@ void FirstBossScript::ComponentUpdate() {
 
 void FirstBossScript::FixedComponentUpdate() {
   
-
+  if(FirstAttack)
     timerFirstAttackCooldown.Update(EngineGlobals::fixed_update_interval);
   
   if(goneFirstAttack)
@@ -92,9 +96,21 @@ void FirstBossScript::FixedComponentUpdate() {
   if(SecondAttack)
     timerSecondAttack.Update(EngineGlobals::fixed_update_interval);
 
+  if(SecondAttackFall)
+    timerSecondAttackFall.Update(EngineGlobals::fixed_update_interval);
+
 
   timerAttackCooldown.Update(EngineGlobals::fixed_update_interval);
+  
   Attack();
+
+
+  if(shake){
+    //CameraShake(intensity,duration in seconds)
+    CameraSystem::GetInstance()->CameraShake(8,1,SceneManager::GetInstance()->GetCurrentScene());
+    if(!CameraSystem::GetInstance()->IsShaking())
+    shake=false;
+  }
 }
 
 void FirstBossScript::Attack(){
@@ -103,15 +119,26 @@ void FirstBossScript::Attack(){
   if(GetOwner()->active){
     //rand first attack or second attack
     
-
-    if(timerAttackCooldown.GetTime() >= 10*1000){ // chosse new number
-      //int randNum = rand() % 2;
-      randNumber = 1;
-      //timerFirstAttackCooldown.Restart();
-    }
     
-    //if(randNumber){
-      //FirstAttack = true;
+    if(timerAttackCooldown.GetTime() >= 8*1000){ // chosse new number
+      randNum = rand() % 2;
+      timerAttackCooldown.Restart();
+      //randNumber = 1;
+      cout << randNum << endl;
+    }
+
+    
+
+
+    if(randNum == 0 && SecondAttackFall ==  false){
+      cout << "First Attack" << endl;
+      SecondAttack = true;
+      animator->PlayAnimation("firstBossJumpAnimation");
+    }
+
+    if(randNum ==  1){
+      cout << "Second Attack" << endl;
+      FirstAttack = true;
       /** First Attack **/
       if(timerFirstAttackCooldown.GetTime() >= 2*1000 && firstAttackCounter < 3){
 
@@ -133,6 +160,49 @@ void FirstBossScript::Attack(){
         timerFirstAttackCooldown.Restart();
        
       }
+      
+    }
+
+    if((timerSecondAttack.GetTime() >= 0.5*1000) && SecondAttack ){
+      if(GetOwner()->GetPosition()->m_y > -1900){
+        Vector *newPosition = GetOwner()->GetPosition();
+         
+        newPosition->m_y = newPosition->m_y - 90;
+        GetOwner()->SetPosition(*newPosition);
+        
+      }else{
+        SecondAttack = false;
+        SecondAttackFall = true;
+        timerSecondAttack.Restart();
+      }
+    }
+    if(timerSecondAttackFall.GetTime() >= 2*1000  && SecondAttackFall){
+
+
+
+      //player position
+     //Get player Position
+      player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
+      playerPosition.m_x  =  player->GetPosition()->m_x -  160;
+      playerPosition.m_y  =  player->GetPosition()->m_y -  450;
+      cout << "flag" << endl;
+
+      std::cout << playerPosition.m_x << "  "  << playerPosition.m_y << std::endl;
+      
+      GetOwner()->m_position->m_x = playerPosition.m_x;
+      if(GetOwner()->m_position->m_y < playerPosition.m_y){
+        GetOwner()->m_position->m_y += 90;
+        shake = true;
+        animator->PlayAnimation("firstBossFallAnimation"); 
+      }else{
+        SecondAttackFall = false;
+        shake = false;
+      }
+
+      
+
+    }
+    //if(randNumber){
     //}else{
         /** Second Attack **/ 
 //      SecondAttack = true;

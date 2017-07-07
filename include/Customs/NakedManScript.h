@@ -8,6 +8,7 @@
 #include "Customs/HitScript.h"
 #include "Engine/InputSystem.h"
 #include "Engine/SceneManager.h"
+#include "Engine/Timer.h"
 #include "Engine/CameraSystem.h"
 #include "Components/RectangleCollider.h"
 
@@ -36,6 +37,12 @@ private:
   //Player Movements
   void Movements(); 
 
+  void Animations();
+
+  void Shoot();
+  void ReloadGun();
+  void PlayerLife();
+
   bool zoom = true;
 
 
@@ -53,10 +60,17 @@ private:
   RectangleCollider* nakedManCollider = nullptr;
 
   int m_hitFrames = 0;
-  bool m_hitFrameController = false;
+  bool m_hit = false;
+  int life = 100;
+
+  Timer timerReload;
+  Timer lifeRecover;
+  Timer timerHit;
 
   bool cameraLock=true;
   bool isMovingLooking=true;
+
+  bool endBossFight = false;
   static bool isZooming;
   std::pair<int, int> mousePosition;
 

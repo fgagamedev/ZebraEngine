@@ -18,7 +18,9 @@
 #include "Customs/ThunderScript.h"
 #include "Customs/PlayerAttackScript.h"
 #include "Customs/FirstBossScript.h"
+#include "Customs/FirstBossLifeBorderScript.h"
 #include "Customs/FirstBossAttackScript.h"
+#include "Customs/CreditsScript.h"
 #include "Customs/FirstBossLifeScript.h"
 #include "Customs/FirstBossCentralEffectScript.h"
 #include "Customs/BulletCounterScript.h"
@@ -44,6 +46,7 @@ private:
   void CreateAmmoCounter();
   void CreatePlayerHit();
   void CreateFirstBossLife();
+  void CreateCreditAnimation();
 
 
 

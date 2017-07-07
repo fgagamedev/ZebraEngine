@@ -3,6 +3,7 @@
 
 void GamePlayScene::OnActivation() {
   CreateMap();//This must be the first function to be called
+  CreateCreditAnimation();
   CreateNakedMan();
   CreateFirstBoss();
   CreateFirstBossAttack();
@@ -36,6 +37,7 @@ void GamePlayScene::CreateMap() {
   // Script
   auto mapScript = new MapScript(map);
   AddGameObject(map);
+   FirstBossController::GetInstance()->AddMap(map);
 }
 
 void GamePlayScene::CreateNakedMan() {
@@ -59,7 +61,7 @@ void GamePlayScene::CreateFirstBoss() {
   FirstBossController::GetInstance()->DeactivateInsideBossFx();
 
   /** Boss **/
-  auto firstBoss = new GameObject("FirstBoss", new Vector(-4700,-1600),690,930, 2);
+  auto firstBoss = new GameObject("FirstBoss", new Vector(-3350,-1600),690,930, 2);
 
   //Tag
   firstBoss->SetTag("FirstBoss");
@@ -92,13 +94,21 @@ void GamePlayScene::CreateFirstBossAttack() {
 }
 
 void GamePlayScene::CreateFirstBossLife() {
-  auto firstBossLife = new GameObject("FirstBossLife", new Vector(-4550, -700),350, 25, 2);
-  auto lifeRectangle = new RectangleRenderer(firstBossLife, Vector(0, 0), 350, 25);
+  
+  /** Life Border **/
+  auto firstBossLifeBorderSprite = new GameObject("FirstBossBorderLife", new Vector(0, 0),344, 25, 3);
+  auto firstBossLifeBorderScript = new  FirstBossLifeBorderScript(firstBossLifeBorderSprite);
+  AddGameObject(firstBossLifeBorderSprite);
+  FirstBossController::GetInstance()->AddLifeBar(firstBossLifeBorderSprite);
+  
+  /** Life**/
+  auto firstBossLife = new GameObject("FirstBossLife", new Vector(0, 0),337, 25, 2);
+  auto lifeRectangle = new RectangleRenderer(firstBossLife, Vector(0, 0), 10, 25);
   lifeRectangle->SetColor(255, 48, 48, 255);
-  //Create Script
-
   auto firstBossLifeScript = new  FirstBossLifeScript(firstBossLife);
   AddGameObject(firstBossLife);
+  FirstBossController::GetInstance()->AddLifeBar(firstBossLife);// Add to controller
+  //FirstBossController::GetInstance()->DeactivateLifeBars();// Desable all life bars
 }
 
 void GamePlayScene::CreatePlayerAttack() {
@@ -121,9 +131,6 @@ void GamePlayScene::CreatePlayerAttack() {
   auto bulletText = new UIText(bulletCounter, "10", "assets/Fonts/advanced-pixel-7/advanced_pixel-7.ttf", 150, 0 , 0, 0, 0, 1);
   auto bulletCounterScript = new BulletCounterScript(bulletCounter);
   AddGameObject(bulletCounter);
-
-
-
 }
 
 void GamePlayScene::CreateRain() {
@@ -162,6 +169,19 @@ void GamePlayScene::CreateLight() {
  //auto mapRenderer = new Renderer(light, lightImage);
   auto lightScript = new LightScript(light);
   AddGameObject(light);
+}
+
+void GamePlayScene::CreateCreditAnimation() {
+  
+  /** Credits Animation **/
+  auto creditAnimation = new GameObject("CreditAnimation", new Vector(0, 0),1200, 800, 3);
+ 
+  auto creditRectangle = new RectangleRenderer(creditAnimation, Vector(0, 0), 1200, 800);
+  creditRectangle->SetColor(255, 48, 48, 255);
+  auto creditsScript = new  CreditsScript(creditAnimation);
+  AddGameObject(creditAnimation);
+  FirstBossController::GetInstance()->AddCreditsAnimation(creditAnimation);
+  FirstBossController::GetInstance()->DeactivateCreditsAnimation();
 }
 
 void GamePlayScene::CreateAmmoCounter() {

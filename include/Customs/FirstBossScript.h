@@ -33,18 +33,27 @@ private:
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
+  GameObject *player = nullptr;
+  Vector playerPosition = Vector(0,0);
+
   Timer timerFirstAttackCooldown;
   Timer timerFirstAttackGone;
-  Timer timerSecondAttack;
   Timer timerAttackCooldown;
+  Timer timerSecondAttack;
+  Timer timerSecondAttackFall;
+
   
   bool FirstAttack = false;
   bool goneFirstAttack = false;
   bool SecondAttack = false;
   bool SecondAttackJump = false;
+  bool SecondAttackFall = false;
+
+  bool shake = false;
+
 
   int firstAttackCounter = 0;
-  int randNumber = 1;
+  int randNum = -1;
 
 
 };

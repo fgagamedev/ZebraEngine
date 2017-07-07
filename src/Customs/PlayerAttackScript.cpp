@@ -82,6 +82,7 @@ void PlayerAttackScript::GameCollisionCheck() {
                    ->GetCurrentScene()
                    ->GetGameObject("FirstBossLife")
                    ->GetComponent("FirstBossLifeScript");
+      //cout << "flag" << endl;
       firstBossLifeScript->hit = true;
       GetOwner()->active = false;
       GetOwner()->ClearCollisions();

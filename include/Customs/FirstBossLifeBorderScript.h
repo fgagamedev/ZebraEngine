@@ -1,5 +1,5 @@
-#ifndef __FIRST_BOSS_LIFE_SCRIPT__
-#define __FIRST_BOSS_LIFE_SCRIPT__
+#ifndef __FIRST_BOSS_LIFE_BORDER_SCRIPT__
+#define __FIRST_BOSS_LIFE_BORDER_SCRIPT__
 
 #include "Components/Animator.h"
 #include "Engine/InputSystem.h"
@@ -10,25 +10,31 @@
 #include "Engine/CameraSystem.h"
 #include "Math/Vector.h"
 #include "Components/RectangleRenderer.h"
-#include "Customs/FirstBossController.h"
 #include "Components/UIText.h"
 
 #include <string>
 
-class FirstBossLifeScript : public Script {
+class FirstBossLifeBorderScript : public Script {
 
 public:
-  FirstBossLifeScript(GameObject *owner);
-  std::string GetComponentName() override { return "FirstBossLifeScript"; };
+  FirstBossLifeBorderScript(GameObject *owner);
+  std::string GetComponentName() override { return "FirstBossLifeBorderScript"; };
   void FixedComponentUpdate() override;
   void Start() override;
-  bool hit =  false;
+  void CreateAnimations();
+  
  
 
 protected:
   void ComponentUpdate() override;
 private:
   Vector *position = nullptr;
+  InputSystem *input = nullptr;
+  Animator *animator = nullptr;
+  
+  RectangleCollider* firstBossAttackCollider = nullptr;
+
+
 
 
  
