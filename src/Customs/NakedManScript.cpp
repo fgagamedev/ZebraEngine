@@ -1,7 +1,7 @@
 #include "Customs/NakedManScript.h"
 #include "Customs/FirstBossController.h"
 #include "Customs/MapScript.h"
-
+#include <math.h>
 #include <stdio.h>
 bool NakedManScript::isZooming=false;
 
@@ -23,11 +23,11 @@ void NakedManScript::Start() {
 }
 
 void NakedManScript::SetDirection(){
-mousePosition = input->GetMousePosition();
-
-
-//if(input->GetMouseButtonPressed(M_INPUT_LEFT))
-//x-axis
+if(!gamecontroller)
+{
+    mousePosition = input->GetMousePosition();
+   //if(input->GetMouseButtonPressed(M_INPUT_LEFT))
+   //x-axis
     if(mousePosition.first >= position->m_x && movements==4){
     isMovingLooking=true;
     }
@@ -41,7 +41,7 @@ mousePosition = input->GetMousePosition();
     else if(mousePosition.first < position->m_x && movements==4){
     isMovingLooking=false;
     }
-//y-axis
+    //y-axis
     if(mousePosition.second <= position->m_y && movements==1){
     isMovingLooking=true;
     }
@@ -55,7 +55,7 @@ mousePosition = input->GetMousePosition();
      else if(mousePosition.second > position->m_y && movements==1){
        isMovingLooking=false;
      }
-//Diagonal 1
+    //Diagonal 1
     if(mousePosition.first >= position->m_x && mousePosition.second <= position->m_y && movements == 6){
     isMovingLooking=true;
     }
@@ -63,13 +63,14 @@ mousePosition = input->GetMousePosition();
     isMovingLooking=false;
     }
 
- if(mousePosition.first <= position->m_x && mousePosition.second >= position->m_y && movements == 7){
+    if(mousePosition.first <= position->m_x && mousePosition.second >= position->m_y && movements == 7){
     isMovingLooking=true;
     }
     else if(mousePosition.first <= position->m_x && mousePosition.second >= position->m_y && movements == 6){
     isMovingLooking=false;
     }
-//Diagonal 2
+
+    //Diagonal 2
 
    if(mousePosition.first >= position->m_x && mousePosition.second >= position->m_y && movements == 8){
     isMovingLooking=true;
@@ -84,21 +85,463 @@ mousePosition = input->GetMousePosition();
     isMovingLooking=false;
     }
 
+}
+else{
+
+    if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800 && movements==4){
+    isMovingLooking=true;
+
+    }
+    else if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) > 800 && movements==3){
+    isMovingLooking=false;
+
+    }
+
+    if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) <=-800 && movements==3){
+    isMovingLooking=true;
+    }
+    else if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) < -800 && movements==4){
+    isMovingLooking=false;
+
+    }
+    //y-axis
+    if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800 && movements==1){
+    isMovingLooking=true;
+    }
+    else if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) < -800 && movements==2){
+    isMovingLooking=false;
+    }
+
+    if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800 && movements==2){
+      isMovingLooking=true;
+     }
+     else if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) > 800 && movements==1){
+       isMovingLooking=false;
+     }
+    //Diagonal 1
+    if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) > 800 && gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) <=-800 && movements == 6){
+    isMovingLooking=true;
+    }
+    else if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800 && gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800 && movements == 7){
+    isMovingLooking=false;
+    }
+
+    if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800 && gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800 && movements == 7){
+    isMovingLooking=true;
+    }
+    else if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800 && gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800 && movements == 6){
+    isMovingLooking=false;
+    }
+
+    //Diagonal 2
+
+   if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800 && gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800 && movements == 8){
+    isMovingLooking=true;
+    }
+    else if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800 && gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800 && movements == 5){
+    isMovingLooking=false;
+    }
+    if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800 && gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800 && movements == 5){
+    isMovingLooking=true;
+    }
+    else if(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800 && gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800 && movements == 8){
+    isMovingLooking=false;
+    }
 
 
+}
+
+}
+
+void NakedManScript::KeyBoardUpdate(){
+
+  if((input->GetKeyPressed(INPUT_DOWN)) || (input->GetKeyPressed(INPUT_UP)))
+  isZooming=true;
+
+  if((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP)))
+  isZooming=false;
+
+
+if(isMovingLooking){
+
+  if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
+  movements=5;
+  lastDirection=5;
+  animator->GetAnimation("Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Walk Side");
+  }
+  else if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_D)) {
+  movements=6;
+  lastDirection=6;
+  animator->GetAnimation("Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Walk Side");
+  }
+  else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_A)) {
+  movements=7;
+  lastDirection=7;
+  animator->GetAnimation("Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Walk Side");
+  }
+  else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_D)) {
+  movements=8;
+  lastDirection=8;
+  animator->GetAnimation("Walk Side")->SetFlip(false, false);
+   animator->PlayAnimation("Walk Side");
+  }
+  else if (input->GetKeyPressed(INPUT_W)) {
+  lastDirection=0;
+  movements = 1;
+  animator->PlayAnimation("Walk Up");
+  }
+  else if (input->GetKeyPressed(INPUT_S)) {
+  lastDirection=1;
+  movements = 2;
+  animator->PlayAnimation("Walk Down");
+  }
+  else if (input->GetKeyPressed(INPUT_A)) {
+  lastDirection=3;
+  movements = 3;
+  animator->GetAnimation("Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Walk Side");
+  }
+  else if (input->GetKeyPressed(INPUT_D)) {
+  lastDirection=3;
+  movements = 4;
+  animator->GetAnimation("Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Walk Side");
+  }
+    else {
+      if(lastDirection==2) {
+      animator->PlayAnimation("Stop Left");
+      }
+      else if(lastDirection==3|| lastDirection == 6 || lastDirection == 7|| lastDirection == 5 || lastDirection == 5 || lastDirection == 8 ) {
+      animator->PlayAnimation("Stop Right");
+      }
+      else if(lastDirection==0) {
+      animator->PlayAnimation("Stop Up");
+      }
+      else if(lastDirection==1) {
+      animator->PlayAnimation("Stop Down");
+      }
+    }
+}
+else{
+  if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
+  movements=5;
+  lastDirection=5;
+  animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_D)) {
+  movements=6;
+  lastDirection=6;
+  animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_A)) {
+  movements=7;
+  lastDirection=7;
+  animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_D)) {
+  movements=8;
+  lastDirection=8;
+  animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else if (input->GetKeyPressed(INPUT_W)) {
+  lastDirection=0;
+  movements = 1;
+  animator->PlayAnimation("Back Walk Down");
+  }
+  else if (input->GetKeyPressed(INPUT_S)) {
+  lastDirection=1;
+  movements = 2;
+  animator->PlayAnimation("Back Walk Up");
+  }
+  else if (input->GetKeyPressed(INPUT_A)) {
+  lastDirection=3;
+  movements = 3;
+  animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else if (input->GetKeyPressed(INPUT_D)) {
+  lastDirection=3;
+  movements = 4;
+  animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else {
+    if(lastDirection==0) {
+    animator->PlayAnimation("Stop Down");
+    }
+    else if(lastDirection==1) {
+    animator->PlayAnimation("Stop Up");
+    }
+    else if(lastDirection==2) {
+    animator->PlayAnimation("Stop Left");
+    }
+    else if(lastDirection==3) {
+    animator->PlayAnimation("Stop Right");
+    }
+  }
+
+  if(input->GetKeyDown(INPUT_L) && cameraLock==false) {
+  cameraLock=true;
+  deadzone_x = EngineGlobals::screen_width / 2;
+  deadzone_y = EngineGlobals::screen_height / 2;
+  }
+  else if(input->GetKeyDown(INPUT_L) && cameraLock==true){
+  cameraLock=false;
+  deadzone_x = EngineGlobals::screen_width;
+  deadzone_y = EngineGlobals::screen_height;
+  animator->StopAllAnimations();
+  }
+
+}
+
+  //Sair para o Menu
+ if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
+ auto var = (UIText *)SceneManager::GetInstance()
+ ->GetScene("Main")
+ ->GetGameObject("Play")
+ ->GetComponent("UIText");
+  var->SetText("Continue");
+  SceneManager::GetInstance()->SetCurrentScene("Main");
+ }
+
+  //Shoot gun
+  if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
+  cout << "ammo: " << bulletNumber << endl;
+  auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
+  ->GetCurrentScene()
+  ->GetGameObject("Bullet" + std::to_string(bulletNumber));
+  gameObjectBullet->active = true;
+  auto script = (PlayerAttackScript*)SceneManager::GetInstance()
+  ->GetCurrentScene()
+  ->GetGameObject("Bullet" + std::to_string(bulletNumber))
+  ->GetComponent("PlayerAttackScript");
+  script->SetShoot(true);
+
+  bulletNumber--;
+
+    /** Reload **/
+    if(bulletNumber == 0){
+    bulletNumber = 10;
+   //wait delay reload time
+    }
+  }
+
+}
+void NakedManScript::GameControllerUpdate(){
+isMovingLooking=true;
+
+  gameControllerAngle = atan2 (gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY)*-1,gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX)) * 180 / 3.14;
+  if(abs(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTY))<1000 && abs(gamecontroller->GetAxis(GC_INPUT_AXIS_RIGHTX))<1000)
+  gameControllerAngle = 0;
+  if(gameControllerAngle<0){
+   gameControllerAngle*=-1;
+   gameControllerAngle = 180 + (180-gameControllerAngle);
+  }
+  if(gameControllerAngle!=0)
+  gameControllerAngle = abs(360-gameControllerAngle);
+
+
+if(isMovingLooking && dashController==0){
+  if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)<-1000) && (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)<-1000)) {
+  movements=5;
+  lastDirection=5;
+  animator->GetAnimation("Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Walk Side");
+  }
+  else if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)<-1000) && (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)>1000)) {
+  movements=6;
+  lastDirection=6;
+  animator->GetAnimation("Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Walk Side");
+  }
+  else if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)>1000) && (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)<-1000)) {
+  movements=7;
+  lastDirection=7;
+  animator->GetAnimation("Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Walk Side");
+  }
+  else if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)>1000) && (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)>1000)) {
+  movements=8;
+  lastDirection=8;
+  animator->GetAnimation("Walk Side")->SetFlip(false, false);
+   animator->PlayAnimation("Walk Side");
+  }
+  else if (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)<-1000) {
+  lastDirection=0;
+  movements = 1;
+  animator->PlayAnimation("Walk Up");
+  }
+  else if (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)>200) {
+  lastDirection=1;
+  movements = 2;
+  animator->PlayAnimation("Walk Down");
+  }
+  else if (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)<-200) {
+  lastDirection=3;
+  movements = 3;
+  animator->GetAnimation("Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Walk Side");
+  }
+  else if (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)>200) {
+  lastDirection=3;
+  movements = 4;
+  animator->GetAnimation("Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Walk Side");
+  }
+  else{
+    if(lastDirection==2) {
+    animator->PlayAnimation("Stop Left");
+    }
+    else if(lastDirection==3|| lastDirection == 6 || lastDirection == 7|| lastDirection == 5 || lastDirection == 5 || lastDirection == 8 ) {
+    animator->PlayAnimation("Stop Right");
+    }
+    else if(lastDirection==0) {
+    animator->PlayAnimation("Stop Up");
+    }
+    else if(lastDirection==1) {
+    animator->PlayAnimation("Stop Down");
+    }
+  }
+}
+else if(!isMovingLooking && dashController==0){
+
+ if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)<-1000) && (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)<-1000)) {
+  movements=5;
+  lastDirection=5;
+  animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)<-1000) && (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)>1000)) {
+  movements=6;
+  lastDirection=6;
+  animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)>1000) && (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)<-1000)) {
+  movements=7;
+  lastDirection=7;
+  animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)<-1000)  && (gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)>1000)) {
+  movements=8;
+  lastDirection=8;
+  animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)<-1000)) {
+  lastDirection=0;
+  movements = 1;
+  animator->PlayAnimation("Back Walk Down");
+  }
+  else if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTY)>1000) ) {
+  lastDirection=1;
+  movements = 2;
+  animator->PlayAnimation("Back Walk Up");
+  }
+  else if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)<-1000)) {
+  lastDirection=3;
+  movements = 3;
+  animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else if ((gamecontroller->GetAxis(GC_INPUT_AXIS_LEFTX)>1000)) {
+  lastDirection=3;
+  movements = 4;
+  animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+  animator->PlayAnimation("Back Walk Side");
+  }
+  else {
+    if(lastDirection==0 || lastDirection==8) {
+    animator->PlayAnimation("Stop Down");
+    }
+    else if(lastDirection==1|| lastDirection==7) {
+    animator->PlayAnimation("Stop Up");
+    }
+    else if(lastDirection==2 ) {
+    animator->PlayAnimation("Stop Left");
+    }
+    else if(lastDirection==3 ||lastDirection==5 || lastDirection==6) {
+    animator->PlayAnimation("Stop Right");
+    }
+  }
 
 
 
 }
+  //attack
+  if(gamecontroller->GetButtonDown(GC_INPUT_X))
+  printf("Attack\n");
+
+  //Dash
+  if(gamecontroller->GetAxis( GC_INPUT_AXIS_TRIGGERLEFT) && dashController==0) {
+  animator->StopAllAnimations();
+    animator->PlayAnimation("Right Dash");
+  }
+  dashController = gamecontroller->GetAxis( GC_INPUT_AXIS_TRIGGERLEFT);
+ //Shoot gun
+   if(gamecontroller->GetAxis( GC_INPUT_AXIS_TRIGGERRIGHT) && bulletController==0 && gameControllerAngle!=0) {
+  cout << "ammo: " << bulletNumber << endl;
+  auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
+  ->GetCurrentScene()
+  ->GetGameObject("Bullet" + std::to_string(bulletNumber));
+  gameObjectBullet->active = true;
+  auto script = (PlayerAttackScript*)SceneManager::GetInstance()
+  ->GetCurrentScene()
+  ->GetGameObject("Bullet" + std::to_string(bulletNumber))
+  ->GetComponent("PlayerAttackScript");
+  script->SetShoot(true);
+
+  bulletNumber--;
+
+    /** Reload **/
+    if(bulletNumber == 0){
+    bulletNumber = 10;
+   //wait delay reload time
+    }
+  }
+  bulletController = gamecontroller->GetAxis( GC_INPUT_AXIS_TRIGGERRIGHT);
+
+    //Sair para o Menu
+  if(gamecontroller->GetButtonDown(GC_INPUT_BACK)){
+   auto var = (UIText *)SceneManager::GetInstance()
+   ->GetScene("Main")
+   ->GetGameObject("Play")
+   ->GetComponent("UIText");
+    var->SetText("Continue");
+    SceneManager::GetInstance()->SetCurrentScene("Main");
+   }
+
+}
+
 
 void NakedManScript::CreateAnimations(){
 
   // animator
   auto nakedManAnimator = new Animator(GetOwner());
 
+   auto dashrightSprite = new Image("assets/dashright.png", 0, 0, 210, 27);
+
+
+     auto dashrightAnimation = new Animation(GetOwner(), dashrightSprite);
+     for (int i = 0; i <5; i++){
+
+     dashrightAnimation->AddFrame(new Frame(i * 42, 27, 128, 128));
+    }
+     nakedManAnimator->AddAnimation("Right Dash", dashrightAnimation);
+
+     dashrightAnimation->SetFramesPerSecond(10);
+
  auto nakedManSprite = new Image("assets/player.png", 0, 0, 1664, 512);
 
-  auto StopDownAnimation = new Animation(GetOwner(), nakedManSprite);
+ auto StopDownAnimation = new Animation(GetOwner(), nakedManSprite);
     StopDownAnimation->AddFrame(new Frame(0, 256, 128, 128));
 
   auto StopRightAnimation = new Animation(GetOwner(), nakedManSprite);
@@ -131,6 +574,8 @@ void NakedManScript::CreateAnimations(){
 
 
 
+
+
   auto backwalkSideAnimation = new Animation(GetOwner(), nakedManSprite);
   for (int i = 12; i >0; i--)
     backwalkSideAnimation->AddFrame(new Frame(i * 128, 0, 128, 128));
@@ -143,6 +588,7 @@ void NakedManScript::CreateAnimations(){
   for (int i = 12; i >0; i--)
     backwalkDownAnimation->AddFrame(new Frame(i * 128, 256, 128, 128));
 
+
   nakedManAnimator->AddAnimation("Back Walk Side", backwalkSideAnimation);
   nakedManAnimator->AddAnimation("Back Walk Up", backwalkUpAnimation);
   nakedManAnimator->AddAnimation("Back Walk Down", backwalkDownAnimation);
@@ -150,276 +596,39 @@ void NakedManScript::CreateAnimations(){
   nakedManAnimator->AddAnimation("Stop Up", StopUpAnimation);
   nakedManAnimator->AddAnimation("Stop Left", StopLeftAnimation);
   nakedManAnimator->AddAnimation("Stop Right", StopRightAnimation);
+
 }
 
 void NakedManScript::ComponentUpdate() {
 
-/*
+//f("x = %f\ny = %f\n\n",position->m_x + CameraSystem::GetInstance()->GetPos_x()-3500,position->m_y+ CameraSystem::GetInstance()->GetPos_y()-3800);
+// auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,nakedManCollider->GetRectanglePoint().m_y);
+ //GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
 
-if(gamecontroller->GetButtonDown(GC_INPUT_INVALID))
-printf("-1\n");
-if(gamecontroller->GetButtonDown(GC_INPUT_A))
-printf("A\n");
-
-if(gamecontroller->GetButtonDown(GC_INPUT_B))
-printf("B\n");
-
-if(gamecontroller->GetButtonDown( GC_INPUT_X))
-printf("X\n");
-
-if(gamecontroller->GetButtonDown( GC_INPUT_Y))
-printf("Y\n");
-
-if(gamecontroller->GetButtonDown(GC_INPUT_BACK))
-printf("BACK\n");
-
-if(gamecontroller->GetButtonDown(GC_INPUT_GUIDE))
-printf("GUIDE\n");
-
-if(gamecontroller->GetButtonDown( GC_INPUT_START))
-printf("START\n");
-
-if(gamecontroller->GetButtonDown(GC_INPUT_LEFTSTICK))
-printf("LEFTSTIK\n");
-
-if(gamecontroller->GetButtonDown(GC_INPUT_RIGHTSTICK))
-printf("RIGHTSTICK\n");
-if(gamecontroller->GetButtonDown( GC_INPUT_LEFTSHOULDER))
-printf("LEFTSHOULDER\n");
-if(gamecontroller->GetButtonDown(GC_INPUT_RIGHTSHOULDER))
-printf("RIGHTSHOULDER\n");
-if(gamecontroller->GetButtonDown( GC_INPUT_DPAD_UP))
-printf("DPADUP\n");
-if(gamecontroller->GetButtonDown(GC_INPUT_DPAD_DOWN))
-printf("DPADDOWN\n");
-if(gamecontroller->GetButtonDown( GC_INPUT_DPAD_LEFT))
-printf("DPADLEFT\n");
-if(gamecontroller->GetButtonDown(GC_INPUT_DPAD_RIGHT))
-printf("DPADRIGHT\n");
-
-
-
-printf("%d\n",gamecontroller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT));
-
-
-*/
-//auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,nakedManCollider->GetRectanglePoint().m_y);
-//GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
-
-
-SetDirection();
-
-walkSpeed = fixedWalkSpeed;
+  walkSpeed = fixedWalkSpeed;
   movements = 0;
 
-  if((input->GetKeyPressed(INPUT_DOWN)) || (input->GetKeyPressed(INPUT_UP)))
-    isZooming=true;
-  if((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP)))
-    isZooming=false;
-
-
-
-  if((input->GetKeyDown(INPUT_V)) && (!isMovingLooking)){
-    isMovingLooking=true;
-  }else if((input->GetKeyDown(INPUT_V)) && (isMovingLooking)){
-    isMovingLooking=false;
+  gamecontroller = input->GetGameController(0);
+  if(!gamecontroller)
+  KeyBoardUpdate();
+  else{
+  GameControllerUpdate();
+  gameControllerActivated=true;
   }
+ SetDirection();
 
-if(isMovingLooking){
 
-    if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
-        movements=5;
-        lastDirection=5;
-        animator->GetAnimation("Walk Side")->SetFlip(true, false);
-        animator->PlayAnimation("Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_D)) {
-        movements=6;
-        lastDirection=6;
-        animator->GetAnimation("Walk Side")->SetFlip(false, false);
-       animator->PlayAnimation("Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_A)) {
-        movements=7;
-        lastDirection=7;
-        animator->GetAnimation("Walk Side")->SetFlip(true, false);
-        animator->PlayAnimation("Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_D)) {
-       movements=8;
-       lastDirection=8;
-       animator->GetAnimation("Walk Side")->SetFlip(false, false);
-       animator->PlayAnimation("Walk Side");
-     }
-
-  else if (input->GetKeyPressed(INPUT_W)) {
-    lastDirection=0;
-    movements = 1;
-    animator->PlayAnimation("Walk Up");
-
-  } else if (input->GetKeyPressed(INPUT_S)) {
-    lastDirection=1;
-    movements = 2;
-    animator->PlayAnimation("Walk Down");
-  } else if (input->GetKeyPressed(INPUT_A)) {
-   lastDirection=3;
-    movements = 3;
-    animator->GetAnimation("Walk Side")->SetFlip(true, false);
-    animator->PlayAnimation("Walk Side");
-  } else if (input->GetKeyPressed(INPUT_D)) {
-    lastDirection=3;
-    movements = 4;
-    animator->GetAnimation("Walk Side")->SetFlip(false, false);
-    animator->PlayAnimation("Walk Side");
-  } else {
-
-    if(lastDirection==0) {
-    animator->PlayAnimation("Stop Up");
-    }
-    else if(lastDirection==1) {
-    animator->PlayAnimation("Stop Down");
-    }
-    else if(lastDirection==2) {
-    animator->PlayAnimation("Stop Left");
-    }
-    else if(lastDirection==3) {
-    animator->PlayAnimation("Stop Right");
-    }
 
   }
-}else{
- if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
-        movements=5;
-        lastDirection=5;
-        animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-        animator->PlayAnimation("Back Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_D)) {
-        movements=6;
-        lastDirection=6;
-        animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-       animator->PlayAnimation("Back Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_A)) {
-        movements=7;
-        lastDirection=7;
-        animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-        animator->PlayAnimation("Back Walk Side");
-     }
-     else if (input->GetKeyPressed(INPUT_S) && input->GetKeyPressed(INPUT_D)) {
-       movements=8;
-       lastDirection=8;
-       animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-       animator->PlayAnimation("Back Walk Side");
-     }
-else if (input->GetKeyPressed(INPUT_W)) {
-    lastDirection=0;
-    movements = 1;
-    animator->PlayAnimation("Back Walk Down");
-
-  } else if (input->GetKeyPressed(INPUT_S)) {
-    lastDirection=1;
-    movements = 2;
-    animator->PlayAnimation("Back Walk Up");
-  } else if (input->GetKeyPressed(INPUT_A)) {
-   lastDirection=3;
-    movements = 3;
-    animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-    animator->PlayAnimation("Back Walk Side");
-  } else if (input->GetKeyPressed(INPUT_D)) {
-    lastDirection=3;
-    movements = 4;
-    animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-    animator->PlayAnimation("Back Walk Side");
-  } else {
-
-    if(lastDirection==0) {
-    animator->PlayAnimation("Stop Down");
-    }
-    else if(lastDirection==1) {
-    animator->PlayAnimation("Stop Up");
-    }
-    else if(lastDirection==2) {
-    animator->PlayAnimation("Stop Left");
-    }
-    else if(lastDirection==3) {
-    animator->PlayAnimation("Stop Right");
-    }
-
-  }
-
-}
-
-  //Sair para o Menu
-   if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
-     auto var = (UIText *)SceneManager::GetInstance()
-                    ->GetScene("Main")
-                    ->GetGameObject("Play")
-                    ->GetComponent("UIText");
-     var->SetText("Continue");
-     SceneManager::GetInstance()->SetCurrentScene("Main");
-   }
-
-  //Shoot gun
-  if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
-      
-      cout << "ammo: " << bulletNumber << endl;
-      
-      auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
-                   ->GetCurrentScene()
-                   ->GetGameObject("Bullet" + std::to_string(bulletNumber));
-      gameObjectBullet->active = true;
-
-      auto script = (PlayerAttackScript*)SceneManager::GetInstance()
-                   ->GetCurrentScene()
-                   ->GetGameObject("Bullet" + std::to_string(bulletNumber))
-                   ->GetComponent("PlayerAttackScript");
-      script->SetShoot(true);
-
-      
-                 
-
-      bulletNumber--;
-      
-
-      /** Reload **/ 
-      if(bulletNumber == 0){
-        bulletNumber = 10; 
-        //wait delay reload time
-        
-      }
-    
-    
-  }
-
-
-  if(input->GetKeyDown(INPUT_L) && cameraLock==false) {
-       cameraLock=true;
-       deadzone_x = EngineGlobals::screen_width / 2;
-       deadzone_y = EngineGlobals::screen_height / 2;
-  }else if(input->GetKeyDown(INPUT_L) && cameraLock==true){
-  cameraLock=false;
-      deadzone_x = EngineGlobals::screen_width;
-      deadzone_y = EngineGlobals::screen_height;
-  animator->StopAllAnimations();
-  }
-}
 
 void NakedManScript::FixedComponentUpdate() {
 
-
     GameCollisionCheck();
     WallCollisionResolution();
-
-
-    //GameCollisionCheck();
-    StartFirstBoss();
+   // StartFirstBoss();
+    if(!lockplayerMovements)
     Movements();
-
-
-
 }
-
 
 void NakedManScript::Movements(){
 

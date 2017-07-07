@@ -25,9 +25,9 @@ void MainScene::OnHidden() {}
 void MainScene::CreateLogo() {
   int xMiddle = EngineGlobals::screen_width / 2 - 240;
 
-  auto logo = new GameObject("Logo", new Vector(xMiddle, 100), 500, 325,1);
+  auto logo = new GameObject("Logo", new Vector(-30,0), 1024, 800,1);
 
-  auto logoImage = new Image("assets/logo.png", 0, 0, 2048, 2048);
+  auto logoImage = new Image("assets/logo2.png", 0, 0, 311, 256);
   auto logoRenderer = new Renderer(logo, logoImage);
 
   AddGameObject(logo);

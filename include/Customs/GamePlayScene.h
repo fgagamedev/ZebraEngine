@@ -22,6 +22,14 @@
 #include "Customs/FirstBossLifeScript.h"
 #include "Customs/FirstBossCentralEffectScript.h"
 #include "Customs/BulletCounterScript.h"
+#include "Customs/SnowActivatorScript.h"
+#include "Customs/ForestActivatorScript.h"
+#include "Customs/ForestActivatorScript2.h"
+#include "Customs/ForestActivatorScript3.h"
+#include "Customs/CentralLightScript1.h"
+#include "Customs/CentralLightScript2.h"
+#include "Customs/CentralLightScript3.h"
+#include "Customs/CentralLightScript4.h"
 
 
 class GamePlayScene : public Scene {
@@ -32,6 +40,7 @@ public:
   void OnHidden() override;
 
 private:
+  void CreateCentralLights();
   void CreateNakedMan();
   void CreatePlayerAttack();
   void CreateFirstBoss();
@@ -44,6 +53,8 @@ private:
   void CreateAmmoCounter();
   void CreatePlayerHit();
   void CreateFirstBossLife();
+  void CreateForestActivator();
+  void CreateSnowActivator();
 
 
 

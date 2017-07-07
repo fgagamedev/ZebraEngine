@@ -834,6 +834,36 @@ rightWalls[rightWallsAmmount]={387,150,30,30};
 rightWallsOriginal[rightWallsAmmount]={387,150,30,30};
 rightWallsAmmount++;
 
+//Buttons
+////////////
+rightWalls[rightWallsAmmount]={-981,2518,45,40};
+rightWallsOriginal[rightWallsAmmount]={-981,2518,45,40};
+rightWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={774,-509,29,30};
+rightWallsOriginal[rightWallsAmmount]={774,-509,29,30};
+rightWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={-520,-1506,30,30};
+rightWallsOriginal[rightWallsAmmount]={-539,-1506,30,30};
+rightWallsAmmount++;
+
+rightWalls[rightWallsAmmount]={1786,-3384,30,30};
+rightWallsOriginal[rightWallsAmmount]={1786,-3384,30,30};
+rightWallsAmmount++;
+///////////////
+//stairs
+///
+
+rightWalls[rightWallsAmmount]={-2392,-543,30,554};
+rightWallsOriginal[rightWallsAmmount]={-2392,-543,30,554};
+rightWallsAmmount++;
+
+downWalls[downWallsAmmount]={1472,-2711,1000,45};
+downWallsOriginal[downWallsAmmount]={1472,-2711,1000,45};
+downWallsAmmount++;
+
+///
 }
 
 int MapScript::DetectWallCollision(GameObject* object){
@@ -856,10 +886,35 @@ for(int j=0;j<rightWallsAmmount;j++)
 if(((rightWalls[j].m_x<= (object->GetPosition()->m_x + object->GetWidth())) && ((rightWalls[j].m_x + rightWalls[j].m_w)>=object->GetPosition()->m_x)) &&
 ((rightWalls[j].m_y <=(object->GetPosition()->m_y + object->GetHeight())) && ((rightWalls[j].m_y + rightWalls[j].m_h)>=object->GetPosition()->m_y))){
 
+        if(j==45){
+        auto script = (SnowActivatorScript*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("SNOW ACTIVATOR")->GetComponent("SnowActivatorScript");
+         script->Activate();
+         return 0;
+        }
+
+        //central
+        if(j==46){
+         auto script = (ForestActivatorScript2*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FOREST ACTIVATOR2")->GetComponent("ForestActivatorScript2");
+         script->Activate();
+         return 0;
+        }
+        //left
+        if(j==47){
+           auto script = (ForestActivatorScript3*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FOREST ACTIVATOR3")->GetComponent("ForestActivatorScript3");
+          script->Activate();
+         return 0;
+        }
+        //blue
+        if(j==48){
+          auto script = (ForestActivatorScript*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("FOREST ACTIVATOR")->GetComponent("ForestActivatorScript");
+          script->Activate();
+          return 0;
+        }
+
         Vector playerprevious_vec;
-          playerprevious_vec.m_x = rightWalls[j].m_x + rightWalls[j].m_w +1;
-          playerprevious_vec.m_y = object->GetPosition()->m_y;
-          object->SetPosition(playerprevious_vec);
+        playerprevious_vec.m_x = rightWalls[j].m_x + rightWalls[j].m_w +1;
+        playerprevious_vec.m_y = object->GetPosition()->m_y;
+        object->SetPosition(playerprevious_vec);
 
 
 }

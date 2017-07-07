@@ -4,6 +4,7 @@
 #include "Customs/FirstBossScene.h"
 #include "Customs/MainScene.h"
 #include "Customs/GamePlayScene.h"
+#include "Customs/PreMenuScene.h"
 
 // static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
@@ -41,7 +42,7 @@ void SDLSystem::Run() {
   m_isRunning = true;
 
   LoadCommons();
-  SceneManager::GetInstance()->SetCurrentScene("Main"); // must be called here but scene name can be changed
+  SceneManager::GetInstance()->SetCurrentScene("Pre Menu"); // must be called here but scene name can be changed
   SceneManager::GetInstance()->Start();
 
   while (m_isRunning) {
@@ -200,7 +201,9 @@ void SDLSystem::LoadCommons() {
   auto mainScene = new MainScene();
   auto gameplayScene = new GamePlayScene();
   auto firstBossScene = new FirstBossScene();
+  auto preMenuScene = new PreMenuScene();
 
+  SceneManager::GetInstance()->AddScene(std::make_pair("Pre Menu", preMenuScene));
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
   SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay", gameplayScene));
   SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene", firstBossScene));

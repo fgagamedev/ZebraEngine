@@ -1,5 +1,6 @@
 #include "Customs/PlayerAttackScript.h"
 #include "Globals/EngineGlobals.h"
+#include "Customs/NakedManScript.h"
 
 PlayerAttackScript::PlayerAttackScript(GameObject *owner) : Script(owner) {}
 void PlayerAttackScript::Start() {
@@ -32,12 +33,12 @@ void PlayerAttackScript::ComponentUpdate() {
 
     
     player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
-    
+    auto playerScript = (NakedManScript*)player->GetComponent("NakedManScript");
    
 
 
 
-    if(player){
+    if(player && playerScript){
         
       //Get player Position
       playerPosition.m_x  =  player->GetPosition()->m_x +  player->GetWidth()/2;
@@ -48,7 +49,7 @@ void PlayerAttackScript::ComponentUpdate() {
       mousePosition.m_y = input->GetMousePosition().second;
 
 
-      if(shoot){
+      if(shoot && !playerScript->gameControllerActivated){
         GetOwner()->active = true;
         angle = playerPosition.GetAngleRadians(mousePosition);
         bulletVelocity.m_x = bulletSpeed * cos(angle);
@@ -57,6 +58,15 @@ void PlayerAttackScript::ComponentUpdate() {
         position->m_y = playerPosition.m_y;
         shoot = false;
       }
+      if(shoot && playerScript->gameControllerActivated){
+        GetOwner()->active = true;
+        angle = playerScript->gameControllerAngle*3.14/180;
+        bulletVelocity.m_x = bulletSpeed * cos(angle);
+        bulletVelocity.m_y = bulletSpeed * sin(angle);
+        position->m_x = playerPosition.m_x;
+        position->m_y = playerPosition.m_y;
+        shoot = false;
+            }
     }
 
 
