@@ -1,4 +1,5 @@
 #include "Customs/PlayButtonScript.h"
+#include "Customs/AudioController.h"
 
 PlayButtonScript::PlayButtonScript(GameObject *owner) : Script(owner) {}
 
@@ -14,6 +15,7 @@ void PlayButtonScript::ComponentUpdate() {
   if (m_uiButton->IsClicked()) {
     soundButton->Play(0, -1);
     menuSound->Stop();
+    AudioController::GetInstance()->PlayAudio("mainSound", -1);
     SceneManager::GetInstance()->SetCurrentScene("Gameplay");
   }
 

@@ -10,6 +10,7 @@
 #include "Customs/MissileButtonScript.h"
 #include "Customs/PlayButtonScript.h"
 #include "Customs/QuitButtonScript.h"
+#include "Customs/GameOverScript.h"
 #include "Engine/Image.h"
 #include "Engine/Scene.h"
 #include "Globals/EngineGlobals.h"
@@ -26,6 +27,7 @@ private:
   void CreateAnimation();
   int m_width_middle;
   int m_height_middle;
+  void CreateQuitButton();
 
 
 };

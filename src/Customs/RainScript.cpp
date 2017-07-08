@@ -43,7 +43,7 @@ void RainScript::ComponentUpdate() {
     play=1;
   }else if(input->GetKeyDown(INPUT_R) && play==1){
     play=0;
-    AudioController::GetInstance()->StopAudio("rainSound");
+    //AudioController::GetInstance()->StopAudio("rainSound");
     animator->StopAllAnimations();
 
   }

@@ -59,8 +59,46 @@ void MapScript::FixedComponentUpdate() {
 
   if (script->life<=0) {
 
-    //SceneManager::GetInstance()->SetCurrentScene("EndScene1");
+    SceneManager::GetInstance()->SetCurrentScene("EndScene1");
   }
+
+
+
+
+    auto scriptBossLife =       (FirstBossLifeScript*) SceneManager::GetInstance()
+                         ->GetCurrentScene()
+                         ->GetGameObject("FirstBossLife")
+                         ->GetComponent("FirstBossLifeScript");
+
+    auto firstBossLifeRenderer = (RectangleRenderer*)SceneManager::GetInstance()
+                                                                   ->GetCurrentScene()
+                                                                        ->GetGameObject("FirstBossLife")->GetComponent("RectangleRenderer");
+    int actualLife = firstBossLifeRenderer->GetWidth();
+      if (actualLife<=0) {
+
+        SceneManager::GetInstance()->SetCurrentScene("EndScene2");
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       if(shake){
         //CameraShake(intensity,duration in seconds)

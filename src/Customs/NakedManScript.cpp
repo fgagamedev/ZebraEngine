@@ -2,6 +2,8 @@
 #include "Customs/FirstBossController.h"
 #include "Customs/AudioController.h"
 #include "Customs/MapScript.h"
+#include "Customs/SnowScript.h"
+#include "Customs/RainScript.h"
 #include <math.h>
 #include <stdio.h>
 bool NakedManScript::isZooming=false;
@@ -556,6 +558,36 @@ void NakedManScript::CreateAnimations(){
 void NakedManScript::ComponentUpdate() {
 
 
+ auto script2 = (RainScript*)SceneManager::GetInstance()
+                     ->GetCurrentScene()
+                     ->GetGameObject("Rain")
+                     ->GetComponent("RainScript");
+
+                      auto script3 = (SnowScript*)SceneManager::GetInstance()
+                                          ->GetCurrentScene()
+                                          ->GetGameObject("Snow")
+                                          ->GetComponent("SnowScript");
+
+
+ if( (CameraSystem::GetInstance()->worldCamera_y < 3435) && (CameraSystem::GetInstance()->worldCamera_x > 3410) && (CameraSystem::GetInstance()->worldCamera_x < 3500)){
+    script2->play=1;
+ }
+  if( (CameraSystem::GetInstance()->worldCamera_y > 3435) && (CameraSystem::GetInstance()->worldCamera_x > 3410) && (CameraSystem::GetInstance()->worldCamera_x < 3500)){
+     script2->play=0;
+  }
+//3835 3910
+ if( (CameraSystem::GetInstance()->worldCamera_x < 3315) && (CameraSystem::GetInstance()->worldCamera_y > 3860 )){
+
+
+    script3->play=1;
+ }
+
+ if( (CameraSystem::GetInstance()->worldCamera_x > 3315) && (CameraSystem::GetInstance()->worldCamera_y > 3860 )){
+
+
+    script3->play=0;
+ }
+
 
 
   //f("x = %f\ny = %f\n\n",position->m_x + CameraSystem::GetInstance()->GetPos_x()-3500,position->m_y+ CameraSystem::GetInstance()->GetPos_y()-3800);
@@ -583,6 +615,7 @@ void NakedManScript::ComponentUpdate() {
 
   /*
   if((input->GetKeyDown(INPUT_V)) && (!isMovingLooking)){
+
     isMovingLooking=true;
   }else if((input->GetKeyDown(INPUT_V)) && (isMovingLooking)){
     isMovingLooking=false;
@@ -644,7 +677,7 @@ void NakedManScript::ComponentUpdate() {
 void NakedManScript::MovementsSounds(){
   if (input->GetKeyPressed(INPUT_W) || input->GetKeyPressed(INPUT_A) || input->GetKeyPressed(INPUT_S) || input->GetKeyPressed(INPUT_D)){
     if(!walking)
-      //AudioController::GetInstance()->PlayAudio("runSound", -1);
+      //AudioController::GetInstance()->PlayAudio("runSound", 0);
     walking = true;
   }else{
     walking = false;
@@ -771,6 +804,7 @@ void NakedManScript::Movements(){
     walkSpeed = walkSpeed*0.70710;
     position->m_y -= walkSpeed;
     position->m_x -= walkSpeed;
+
 
   }else if (movements==6){
     walkSpeed = walkSpeed*0.70710;
@@ -931,7 +965,7 @@ void NakedManScript::StartFirstBoss(){
 
 
 
-
+    AudioController::GetInstance()->StopAudio("mainSound");
 
       AudioController::GetInstance()->PlayAudio("bossBattleSound", -1);
       bossFight = true;

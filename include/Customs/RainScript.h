@@ -19,7 +19,7 @@ public:
   std::string GetComponentName() override { return "RainScript"; };
   void FixedComponentUpdate() override;
   void Start() override;
-
+int play=0;
 protected:
   void ComponentUpdate() override;
 private:
@@ -27,7 +27,7 @@ private:
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;
-  int play=0;
+
 
 };
 

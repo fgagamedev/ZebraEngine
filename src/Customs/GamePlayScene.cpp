@@ -1,6 +1,7 @@
 #include "Customs/GamePlayScene.h"
 #include "Globals/EngineGlobals.h"
 #include "Customs/CutScene1Script.h"
+#include "Customs/AudioController.h"
 
 void GamePlayScene::OnActivation() {
   CreateMap();//This must be the first function to be called
@@ -55,6 +56,12 @@ void GamePlayScene::CreateMap() {
 
   auto bossBattleSound = new UISound(map, "bossBattleSound", "assets/Audio/Boss/heartfinal.ogg", false, false);
   AudioController::GetInstance()->AddAudio(bossBattleSound);
+
+  auto mainSound = new UISound(map, "mainSound", "assets/Audio/florestafinal.ogg", false, false);
+  AudioController::GetInstance()->AddAudio(mainSound);
+  AudioController::GetInstance()->PlayAudio("mainSound", -1);
+
+
 
 
 

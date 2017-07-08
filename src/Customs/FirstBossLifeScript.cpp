@@ -42,6 +42,8 @@ void FirstBossLifeScript::ComponentUpdate() {
   if(actualLife <= 0){
     FirstBossController::GetInstance()->ActivateCreditsAnimation();
     FirstBossController::GetInstance()->DeactivateLifeBars();
+      //SceneManager::GetInstance()->SetCurrentScene("EndScene1");
+
   }
 }
 void FirstBossLifeScript::FixedComponentUpdate() {

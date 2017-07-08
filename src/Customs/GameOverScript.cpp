@@ -16,8 +16,15 @@ void GameOverScript::CreateAnimations(){
     auto snowImage = new Image("assets/Ending_PARTE_FINAL.png",0,0,4096, 2048);
 
     auto gameOverAnimation= new Animation(GetOwner(),snowImage );
-    for (int i = 0; i < 30; i++)
-      gameOverAnimation->AddFrame(new Frame(i * 341,0, 341, 256));
+    for (int i = 0; i <22; i++){
+
+        for(int j=0 ; j <12 ; j++){
+
+              gameOverAnimation->AddFrame(new Frame(j * 341,i* 256, 341, 256));
+                gameOverAnimation->AddFrame(new Frame(j * 341,i* 256, 341, 256));
+
+        }
+    }
 
 
      // animator
@@ -29,7 +36,7 @@ void GameOverScript::CreateAnimations(){
 
 
 void GameOverScript::ComponentUpdate() {
-
+    animator->PlayAnimation("snowAnimation");
  if(play==1)
      animator->PlayAnimation("snowAnimation");
 
