@@ -1,5 +1,5 @@
-#include "Customs/UnbLogoScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/UnbLogoScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 UnbLogoScript::UnbLogoScript(GameObject *owner) : Script(owner) {}
 void UnbLogoScript::Start() {

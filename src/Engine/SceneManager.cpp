@@ -1,7 +1,8 @@
-#include <iostream>
+#include "Engine/SceneManager.hpp"
 
-#include "Engine/SceneManager.h"
-#include "Log/log.h"
+#include "Log/log.hpp"
+
+#include <iostream>
 
 SceneManager *SceneManager::m_instance = 0;
 

@@ -1,4 +1,4 @@
-#include "Customs/FirstBossLifeBorderScript.h"
+#include "Customs/FirstBossLifeBorderScript.hpp"
 
 FirstBossLifeBorderScript::FirstBossLifeBorderScript(GameObject *owner) : Script(owner) {}
 

@@ -1,4 +1,4 @@
-#include "Components/CircleCollider.h"
+#include "Components/CircleCollider.hpp"
 
 CircleCollider::CircleCollider(GameObject *owner, Vector &offset, float radius,
                                int layer)

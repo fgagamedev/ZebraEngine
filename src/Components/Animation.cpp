@@ -1,7 +1,8 @@
-#include "Components/Animation.h"
-#include "Engine/GameObject.h"
-#include "Engine/GraphicsSystem.h"
-#include "Log/log.h"
+#include "Engine/GameObject.hpp"
+#include "Engine/GraphicsSystem.hpp"
+
+#include "Components/Animation.hpp"
+#include "Log/log.hpp"
 
 Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
     : Component(owner, C_DRAW) {

@@ -1,5 +1,6 @@
-#include "Engine/GameObject.h"
-#include "Log/log.h"
+#include "Engine/GameObject.hpp"
+
+#include "Log/log.hpp"
 
 GameObject::GameObject(std::string name, Vector *position, int width,
                        int height, Uint8 layer) {

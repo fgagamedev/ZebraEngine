@@ -1,5 +1,5 @@
-#include "Customs/BulletCounterScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/BulletCounterScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 BulletCounterScript::BulletCounterScript(GameObject *owner) : Script(owner) {}
 void BulletCounterScript::Start() {

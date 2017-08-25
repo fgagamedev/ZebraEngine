@@ -1,7 +1,7 @@
-#include "Customs/ForestActivatorScript3.h"
-#include "Globals/EngineGlobals.h"
-#include "Customs/CentralLightScript4.h"
-#include "Customs/MapScript.h"
+#include "Customs/ForestActivatorScript3.hpp"
+#include "Globals/EngineGlobals.hpp"
+#include "Customs/CentralLightScript4.hpp"
+#include "Customs/MapScript.hpp"
 ForestActivatorScript3::ForestActivatorScript3(GameObject *owner) : Script(owner) {}
 void ForestActivatorScript3::Start() {
 

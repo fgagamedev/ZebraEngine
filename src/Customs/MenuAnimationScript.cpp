@@ -1,6 +1,6 @@
-#include "Customs/MenuAnimationScript.h"
-#include <stdio.h>
+#include "Customs/MenuAnimationScript.hpp"
 
+#include <stdio.h>
 
 MenuAnimationScript::MenuAnimationScript(GameObject *owner) : Script(owner) {}
 
@@ -68,4 +68,3 @@ void MenuAnimationScript::FixedComponentUpdate() {
 
 
 }
-

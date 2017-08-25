@@ -1,4 +1,4 @@
-#include "Customs/FirstBossScript.h"
+#include "Customs/FirstBossScript.hpp"
 
 FirstBossScript::FirstBossScript(GameObject *owner) : Script(owner) {}
 

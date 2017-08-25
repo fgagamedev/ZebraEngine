@@ -1,4 +1,4 @@
-#include "Customs/GameOverScript.h"
+#include "Customs/GameOverScript.hpp"
 
 GameOverScript::GameOverScript(GameObject *owner) : Script(owner) {}
 void GameOverScript::Start() {

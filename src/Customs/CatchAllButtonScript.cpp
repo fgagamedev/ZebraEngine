@@ -1,4 +1,4 @@
-#include "Customs/CatchAllButtonScript.h"
+#include "Customs/CatchAllButtonScript.hpp"
 
 CatchAllButtonScript::CatchAllButtonScript(GameObject *owner) : Script(owner) {}
 

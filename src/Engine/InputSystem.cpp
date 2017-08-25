@@ -1,7 +1,7 @@
 #include <algorithm>
 
-#include "Engine/InputSystem.h"
-#include "Log/log.h"
+#include "Engine/InputSystem.hpp"
+#include "Log/log.hpp"
 
 // static variables initialization
 InputSystem *InputSystem::m_instance = 0;

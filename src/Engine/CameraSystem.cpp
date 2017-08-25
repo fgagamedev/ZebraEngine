@@ -1,5 +1,5 @@
-#include "Engine/CameraSystem.h"
-#include "Customs/MapScript.h"
+#include "Engine/CameraSystem.hpp"
+#include "Customs/MapScript.hpp"
 
 CameraSystem *CameraSystem::m_instance = nullptr;
 

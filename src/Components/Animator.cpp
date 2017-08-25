@@ -1,4 +1,4 @@
-#include "Components/Animator.h"
+#include "Components/Animator.hpp"
 
 Animator::Animator(GameObject *owner) : Component(owner, C_DRAW) {}
 

@@ -1,7 +1,7 @@
-#include "Customs/GamePlayScene.h"
-#include "Globals/EngineGlobals.h"
-#include "Customs/CutScene1Script.h"
-#include "Customs/AudioController.h"
+#include "Customs/GamePlayScene.hpp"
+#include "Globals/EngineGlobals.hpp"
+#include "Customs/CutScene1Script.hpp"
+#include "Customs/AudioController.hpp"
 
 void GamePlayScene::OnActivation() {
   CreateMap();//This must be the first function to be called

@@ -1,4 +1,4 @@
-#include "Customs/MenuController.h"
+#include "Customs/MenuController.hpp"
 
 MenuController *MenuController::m_instance = nullptr;
 

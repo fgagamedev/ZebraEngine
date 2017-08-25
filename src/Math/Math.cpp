@@ -1,4 +1,4 @@
-#include "Math/Math.h"
+#include "Math/Math.hpp"
 
 float Math::Distance(float x0, float y0, float x1, float y1) {
   return sqrt(pow(x0 - x1, 2) + pow(y1 - y0, 2));

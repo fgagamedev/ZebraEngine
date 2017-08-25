@@ -1,5 +1,5 @@
-#include "Customs/CutScene1Script.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/CutScene1Script.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 CutScene1Script::CutScene1Script(GameObject *owner) : Script(owner) {}
 void CutScene1Script::Start() {

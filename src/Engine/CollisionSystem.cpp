@@ -1,5 +1,7 @@
-#include "Engine/CollisionSystem.h"
+#include "Engine/CollisionSystem.hpp"
+
 #include <math.h>
+
 CollisionSystem *CollisionSystem::m_instance = nullptr;
 
 CollisionSystem::CollisionSystem() {}
@@ -83,7 +85,7 @@ void CollisionSystem::RectRect(RectangleCollider *r1, RectangleCollider *r2) {
   auto posR2 = r2->GetRectanglePoint();
 
 if(((posR1.m_x <= (posR2.m_x + r2->GetWidth())) && ((posR1.m_x + r1->GetWidth())>=posR2.m_x)) &&
-   ((posR1.m_y <=(posR2.m_y + r2->GetHeight())) && ((posR1.m_y + r1->GetHeight())>=posR2.m_y)) && 
+   ((posR1.m_y <=(posR2.m_y + r2->GetHeight())) && ((posR1.m_y + r1->GetHeight())>=posR2.m_y)) &&
    (r1->m_owner->active) && (r2->m_owner->active))
   collision=true;
 

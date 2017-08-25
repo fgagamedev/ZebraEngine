@@ -1,4 +1,4 @@
-#include "Customs/FirstBossCentralEffectScript.h"
+#include "Customs/FirstBossCentralEffectScript.hpp"
 
 FirstBossCentralEffectScript::FirstBossCentralEffectScript(GameObject *owner) : Script(owner) {}
 

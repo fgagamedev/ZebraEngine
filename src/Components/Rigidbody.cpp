@@ -1,6 +1,6 @@
-#include "Components/Rigidbody.h"
-#include "Globals/ComponentTypes.h"
-#include "Math/Vector.h"
+#include "Components/Rigidbody.hpp"
+#include "Globals/ComponentTypes.hpp"
+#include "Math/Vector.hpp"
 
 Rigidbody::Rigidbody(GameObject *owner) : Component(owner, C_PHYSICS) {}
 

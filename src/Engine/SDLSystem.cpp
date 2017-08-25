@@ -1,12 +1,12 @@
-#include "Engine/SDLSystem.h"
+#include "Engine/SDLSystem.hpp"
 
 // load commons includes
-#include "Customs/FirstBossScene.h"
-#include "Customs/MainScene.h"
-#include "Customs/GamePlayScene.h"
-#include "Customs/PreMenuScene.h"
-#include "Customs/EndScene1.h"
-#include "Customs/EndScene2.h"
+#include "Customs/FirstBossScene.hpp"
+#include "Customs/MainScene.hpp"
+#include "Customs/GamePlayScene.hpp"
+#include "Customs/PreMenuScene.hpp"
+#include "Customs/EndScene1.hpp"
+#include "Customs/EndScene2.hpp"
 
 // static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;

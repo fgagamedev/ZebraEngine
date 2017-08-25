@@ -1,4 +1,4 @@
-#include "Components/RectangleCollider.h"
+#include "Components/RectangleCollider.hpp"
 
 RectangleCollider::RectangleCollider(GameObject *owner, Vector offset,
                                      float width, float height, int layer)

@@ -1,4 +1,4 @@
-#include "Components/RectangleRenderer.h"
+#include "Components/RectangleRenderer.hpp"
 
 RectangleRenderer::RectangleRenderer(GameObject *owner, Vector offset,
                                      int width, int height)

@@ -1,4 +1,4 @@
-#include "Customs/SnowScript.h"
+#include "Customs/SnowScript.hpp"
 
 SnowScript::SnowScript(GameObject *owner) : Script(owner) {}
 void SnowScript::Start() {

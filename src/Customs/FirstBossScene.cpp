@@ -1,4 +1,4 @@
-#include "Customs/FirstBossScene.h"
+#include "Customs/FirstBossScene.hpp"
 
 FirstBossScene::FirstBossScene() {}
 

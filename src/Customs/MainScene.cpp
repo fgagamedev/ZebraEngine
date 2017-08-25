@@ -1,5 +1,5 @@
-#include "Customs/MainScene.h"
-#include "Customs/MenuAnimationScript.h"
+#include "Customs/MainScene.hpp"
+#include "Customs/MenuAnimationScript.hpp"
 MainScene::MainScene() {}
 
 void MainScene::OnActivation() {

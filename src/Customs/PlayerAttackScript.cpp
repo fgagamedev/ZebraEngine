@@ -1,6 +1,6 @@
-#include "Customs/PlayerAttackScript.h"
-#include "Globals/EngineGlobals.h"
-#include "Customs/NakedManScript.h"
+#include "Customs/PlayerAttackScript.hpp"
+#include "Globals/EngineGlobals.hpp"
+#include "Customs/NakedManScript.hpp"
 
 PlayerAttackScript::PlayerAttackScript(GameObject *owner) : Script(owner) {}
 void PlayerAttackScript::Start() {

@@ -1,5 +1,5 @@
-#include "Customs/FirstBossLifeScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/FirstBossLifeScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 FirstBossLifeScript::FirstBossLifeScript(GameObject *owner) : Script(owner) {}
 void FirstBossLifeScript::Start() {

@@ -1,5 +1,5 @@
-#include "Customs/FirstBossAttackScript.h"
-#include "Customs/AudioController.h"
+#include "Customs/FirstBossAttackScript.hpp"
+#include "Customs/AudioController.hpp"
 
 FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) : Script(owner) {}
 
@@ -46,29 +46,29 @@ void FirstBossAttackScript::CreateAnimations(){
 
 void FirstBossAttackScript::ComponentUpdate() {
 
-  
+
 
   if(attack){
 
      Attack();
   }
-  
+
   if(InputSystem::GetInstance()->GetKeyUp(INPUT_M) && attack == false){// attack
      //FirstBossController::GetInstance()->PositTentacle();
       attack = true;
       //FirstBossController::GetInstance()->PositTentacle(1);
       //FirstBossController::GetInstance()->PositTentacle();
       //m_surgeAnimation = true;
-      //Attack();  
+      //Attack();
   }
 
-  
+
   //Debug
   //auto vec = Vector(firstBossAttackCollider->GetRectanglePoint().m_x,firstBossAttackCollider->GetRectanglePoint().m_y);
   //GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
 
- 
-    
+
+
 }
 void FirstBossAttackScript::FixedComponentUpdate() {
 
@@ -77,14 +77,14 @@ void FirstBossAttackScript::FixedComponentUpdate() {
 
   if(desactivateObj)
   timerGone.Update(EngineGlobals::fixed_update_interval);
-  
+
   CameraShakeAttack();
- 
+
 
 }
 
 void FirstBossAttackScript::Attack(){
-  
+
 
 
   if(m_surgeAnimation){
@@ -96,8 +96,8 @@ void FirstBossAttackScript::Attack(){
     //auto soundFX = (UISound *)GetOwner()->GetComponent("UISound");
     //soundFX->Play(0, -1);
     AudioController::GetInstance()->PlayAudio("secondAttackSound", 0);
-    
-    
+
+
   }
   if(m_idleAnimation && timerAnimation.GetTime()>=1*1000){
     animator->PlayAnimation("firstBossAttackIdleAnimation");
@@ -120,7 +120,7 @@ void FirstBossAttackScript::Attack(){
     timerGone.Restart();
     desactivateObj = false;
   }
-  
+
 }
 
 void FirstBossAttackScript::CameraShakeAttack(){

@@ -1,5 +1,5 @@
-#include "Customs/CreditsScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/CreditsScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 CreditsScript::CreditsScript(GameObject *owner) : Script(owner) {}
 void CreditsScript::Start() {

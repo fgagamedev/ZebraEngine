@@ -1,4 +1,4 @@
-#include "Components/UISound.h"
+#include "Components/UISound.hpp"
 
 UISound::UISound(GameObject *owner, string message, string audio_path, bool is_music, bool play_on_start)
 

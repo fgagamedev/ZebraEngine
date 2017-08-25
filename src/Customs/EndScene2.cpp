@@ -1,5 +1,5 @@
-#include "Customs/EndScene2.h"
-#include "Customs/MenuAnimationScript.h"
+#include "Customs/EndScene2.hpp"
+#include "Customs/MenuAnimationScript.hpp"
 EndScene2::EndScene2() {}
 
 void EndScene2::OnActivation() {

@@ -1,5 +1,6 @@
-#include "Engine/GameController.h"
-#include "Log/log.h"
+#include "Engine/GameController.hpp"
+
+#include "Log/log.hpp"
 
 GameController::GameController(SDL_GameController *gc) {
   if (gc) {

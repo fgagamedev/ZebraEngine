@@ -1,5 +1,5 @@
-#include "Customs/LightScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/LightScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 LightScript::LightScript(GameObject *owner) : Script(owner) {}
 void LightScript::Start() {

@@ -1,5 +1,5 @@
-#include "Customs/EndScene1.h"
-//#include "Customs/MenuAnimationScript.h"
+#include "Customs/EndScene1.hpp"
+//#include "Customs/MenuAnimationScript.hpp"
 EndScene1::EndScene1() {}
 
 void EndScene1::OnActivation() {

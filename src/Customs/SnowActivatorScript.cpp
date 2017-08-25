@@ -1,7 +1,7 @@
-#include "Customs/SnowActivatorScript.h"
-#include "Globals/EngineGlobals.h"
-#include "Customs/CentralLightScript2.h"
-#include "Customs/MapScript.h"
+#include "Customs/SnowActivatorScript.hpp"
+#include "Globals/EngineGlobals.hpp"
+#include "Customs/CentralLightScript2.hpp"
+#include "Customs/MapScript.hpp"
 
 SnowActivatorScript::SnowActivatorScript(GameObject *owner) : Script(owner) {}
 void SnowActivatorScript::Start() {

@@ -1,9 +1,10 @@
-#include "Components/UIButton.h"
-#include "Engine/GameObject.h"
-#include "Engine/SDLSystem.h"
-#include "Globals/ComponentTypes.h"
-#include "Globals/InputGlobals.h"
-#include "Log/log.h"
+#include "Engine/GameObject.hpp"
+#include "Engine/SDLSystem.hpp"
+
+#include "Components/UIButton.hpp"
+#include "Globals/ComponentTypes.hpp"
+#include "Globals/InputGlobals.hpp"
+#include "Log/log.hpp"
 
 UIButton::UIButton(GameObject *owner) : Component(owner, C_DRAW) {}
 

@@ -1,5 +1,5 @@
-#include "Customs/RainScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/RainScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 RainScript::RainScript(GameObject *owner) : Script(owner) {}
 void RainScript::Start() {

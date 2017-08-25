@@ -1,4 +1,4 @@
-#include "Math/Vector.h"
+#include "Math/Vector.hpp"
 
 Vector Vector::operator+(const Vector &vec) {
   return Vector(m_x + vec.m_x, m_y + vec.m_y);

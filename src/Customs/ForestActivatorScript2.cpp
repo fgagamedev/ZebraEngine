@@ -1,6 +1,6 @@
-#include "Customs/ForestActivatorScript2.h"
-#include "Globals/EngineGlobals.h"
-#include "Customs/CentralLightScript1.h"
+#include "Customs/ForestActivatorScript2.hpp"
+#include "Globals/EngineGlobals.hpp"
+#include "Customs/CentralLightScript1.hpp"
 ForestActivatorScript2::ForestActivatorScript2(GameObject *owner) : Script(owner) {}
 void ForestActivatorScript2::Start() {
 

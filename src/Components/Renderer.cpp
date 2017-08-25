@@ -1,8 +1,9 @@
-#include "Components/Renderer.h"
-#include "Engine/GameObject.h"
-#include "Engine/GraphicsSystem.h"
-#include "Globals/ComponentTypes.h"
-#include "Log/log.h"
+#include "Engine/GameObject.hpp"
+#include "Engine/GraphicsSystem.hpp"
+
+#include "Components/Renderer.hpp"
+#include "Globals/ComponentTypes.hpp"
+#include "Log/log.hpp"
 
 #include <math.h>
 

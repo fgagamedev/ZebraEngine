@@ -1,5 +1,5 @@
-#include "Customs/CentralLightScript2.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/CentralLightScript2.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 CentralLightScript2::CentralLightScript2(GameObject *owner) : Script(owner) {}
 void CentralLightScript2::Start() {

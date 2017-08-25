@@ -1,6 +1,8 @@
-#include "Customs/ControleLogoScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/ControleLogoScript.hpp"
+#include "Globals/EngineGlobals.hpp"
+
 #include <stdio.h>
+
 ControleLogoScript::ControleLogoScript(GameObject *owner) : Script(owner) {}
 void ControleLogoScript::Start() {
 

@@ -1,7 +1,8 @@
-#include "Engine/GraphicsSystem.h"
-#include "Engine/SDLSystem.h"
-#include "Engine/sdl2include.h"
-#include "Log/log.h"
+#include "Engine/GraphicsSystem.hpp"
+#include "Engine/SDLSystem.hpp"
+#include "Engine/sdl2include.hpp"
+
+#include "Log/log.hpp"
 
 #include <iostream>
 

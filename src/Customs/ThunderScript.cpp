@@ -1,5 +1,5 @@
-#include "Customs/ThunderScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/ThunderScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 ThunderScript::ThunderScript(GameObject *owner) : Script(owner) {}
 void ThunderScript::Start() {

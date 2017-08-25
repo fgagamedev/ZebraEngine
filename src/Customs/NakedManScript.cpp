@@ -1,11 +1,13 @@
-#include "Customs/NakedManScript.h"
-#include "Customs/FirstBossController.h"
-#include "Customs/AudioController.h"
-#include "Customs/MapScript.h"
-#include "Customs/SnowScript.h"
-#include "Customs/RainScript.h"
+#include "Customs/NakedManScript.hpp"
+#include "Customs/FirstBossController.hpp"
+#include "Customs/AudioController.hpp"
+#include "Customs/MapScript.hpp"
+#include "Customs/SnowScript.hpp"
+#include "Customs/RainScript.hpp"
+
 #include <math.h>
 #include <stdio.h>
+
 bool NakedManScript::isZooming=false;
 
 NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {}

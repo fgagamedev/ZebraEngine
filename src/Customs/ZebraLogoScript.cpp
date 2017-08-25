@@ -1,5 +1,5 @@
-#include "Customs/ZebraLogoScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/ZebraLogoScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 ZebraLogoScript::ZebraLogoScript(GameObject *owner) : Script(owner) {}
 void ZebraLogoScript::Start() {

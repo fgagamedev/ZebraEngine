@@ -1,4 +1,4 @@
-#include "Customs/QuitButtonScript.h"
+#include "Customs/QuitButtonScript.hpp"
 
 QuitButtonScript::QuitButtonScript(GameObject *owner) : Script(owner) {}
 

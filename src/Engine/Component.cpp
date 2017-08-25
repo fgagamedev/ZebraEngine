@@ -1,6 +1,7 @@
-#include "Engine/Component.h"
-#include "Engine/GameObject.h"
-#include "Log/log.h"
+#include "Engine/Component.hpp"
+#include "Engine/GameObject.hpp"
+
+#include "Log/log.hpp"
 
 Component::Component(GameObject *owner, ComponentType type) {
   if (!owner)

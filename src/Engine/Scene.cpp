@@ -1,5 +1,6 @@
-#include "Engine/Scene.h"
-#include "Log/log.h"
+#include "Engine/Scene.hpp"
+
+#include "Log/log.hpp"
 
 Scene::Scene() {}
 

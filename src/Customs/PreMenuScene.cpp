@@ -1,8 +1,8 @@
-#include "Customs/PreMenuScene.h"
-#include "Customs/SdlLogoScript.h"
-#include "Customs/UnbLogoScript.h"
-#include "Customs/ZebraLogoScript.h"
-#include "Customs/ControleLogoScript.h"
+#include "Customs/PreMenuScene.hpp"
+#include "Customs/SdlLogoScript.hpp"
+#include "Customs/UnbLogoScript.hpp"
+#include "Customs/ZebraLogoScript.hpp"
+#include "Customs/ControleLogoScript.hpp"
 
 void  PreMenuScene::OnActivation() {
 CreateLogoSdl();
