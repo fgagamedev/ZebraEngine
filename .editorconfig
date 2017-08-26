@@ -8,7 +8,6 @@ root = true
 end_of_line = lf
 trim_trailing_whitespace = true
 
-
 # Matches multiple files with brace expansion notation
 # Set default charset
 [*.{cpp,hpp}]
