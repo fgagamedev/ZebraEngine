@@ -14,10 +14,11 @@ Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
 }
 
 void Animation::Start() {
-    if (!m_isPlaying)
+    if (!m_isPlaying) {
         SetPlaying(false);
-    else
+    } else {
         SetPlaying(true);
+    }
 }
 
 void Animation::SetFlip(bool horizontal, bool vertical) {
@@ -25,7 +26,7 @@ void Animation::SetFlip(bool horizontal, bool vertical) {
 }
 
 void Animation::SetPlaying(bool condition) {
-    if (m_isPlaying == condition)
+    if (m_isPlaying == condition) 
         return;
 
     if (condition) {

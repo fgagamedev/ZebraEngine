@@ -11,7 +11,7 @@ void CircleRenderer::ComponentUpdate() {
     int y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
     auto center = Vector(x, y);
     GraphicsSystem::GetInstance()->DrawFillCircle(center, m_radius, m_red,
-                                                m_green, m_bluen, m_alpha);
+                                                m_green, m_blue, m_alpha);
 }
 
 void CircleRenderer::SetColor(int red, int green, int blue, int alpha) {
