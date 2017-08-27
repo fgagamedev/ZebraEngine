@@ -226,12 +226,12 @@ void CameraSystem::CameraShake(int intensity, float duration, Scene *scene) {
     }
 }
 
-float CameraSystem::GetPos_x() {
+float CameraSystem::GetPositionX() {
     return worldCameraX;
 
 }
 
-float CameraSystem::GetPos_y() {
+float CameraSystem::GetPositionY() {
     return worldCameraY;
 }
 

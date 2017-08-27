@@ -23,8 +23,8 @@ class CameraSystem{
         void MoveDown(int speed, Scene *scene);
 
         void Reset();
-        float GetPos_x();
-        float GetPos_y();
+        float GetPositionX();
+        float GetPositionY();
         int GetCameraSpeed();
 
         bool IsLocked() {
