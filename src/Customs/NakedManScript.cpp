@@ -608,15 +608,6 @@ void NakedManScript::ComponentUpdate() {
                                                        255,0,0,100);
     */
 
-    /*
-    Debug Collider
-    auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,
-                      nakedManCollider->GetRectanglePoint().m_y);
-    GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(),
-                                                     GetOwner()->GetHeight(),
-                                                     255,0,0,100);
-    */
-
     SetDirection();
     walkSpeed = fixedWalkSpeed;
 
