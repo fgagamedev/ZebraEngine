@@ -26,18 +26,21 @@ void Animation::SetFlip(bool horizontal, bool vertical) {
 }
 
 void Animation::SetPlaying(bool condition) {
-    if (m_isPlaying == condition) 
+    if (m_isPlaying == condition) {
         return;
+    }
 
     if (condition) {
-        if (auto comp = GetOwner()->GetComponent("Renderer"))
+        if (auto comp = GetOwner()->GetComponent("Renderer")) {
             comp->active = false;
+        }
     } else {
         if (m_hasExitTime && m_currentFrame != m_framesQuantity - 1) {
             return;
         } else {
-            if (auto comp = GetOwner()->GetComponent("Renderer"))
+            if (auto comp = GetOwner()->GetComponent("Renderer")) {
                 comp->active = true;
+            }
         }
     }
 
