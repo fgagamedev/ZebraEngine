@@ -14,17 +14,6 @@ VoiD é um jogo single-player de hack and slash e boss fight, exclusivamente par
 <b>Projectile:</b>  Right Mouse   / RT <br>
 <b>Dash:</b>        Space         / RB <br>
 
-# Team
-Desenvolvimento
-
-| Nome	| Email | GitHub | Papel|
-|:-----:|:-----:|:------:|:------:|
-| Arthur Barbosa Diniz | arthurbdiniz@gmail.com | @arthurbdiniz | Desenvolvedor | 
-| Vitor Falcão Costa | vitorfhcosta@gmail.com | @vitorfhc | Desenvolvedor | 
-| Walyson Maxwel Dias | walysonmaxwel@hotmail.com | @moorphe | Desenvolvedor | 
-| Sarah Wahrhaftig |  |  | Artista 2D | 
-| Lucas Gabriel Caldeira |  |  | Artista 2D | 
-| Gabriel Andrade de Souza |  |  | Músico | 
 
 # Installing and running
 
