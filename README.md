@@ -14,8 +14,11 @@ VoiD é um jogo single-player de hack and slash e boss fight, exclusivamente par
 <b>Projectile:</b>  Right Mouse   / RT <br>
 <b>Dash:</b>        Space         / RB <br>
 
+# Contribuição
+Para contribuir com o projeto você deve seguir o padrão estabelecido na folha de estilo a seguir
+https://github.com/Tecprog-voID/voID/wiki/Folha-de-Estilo
 
-# Installing and running
+# Instalação e execução
 
 ## Dependencies
 
