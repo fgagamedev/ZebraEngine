@@ -17,47 +17,31 @@
 class NakedManScript : public Script {
 public:
 
+    bool lockplayerMovements = false;
+    bool gameControllerActivated = false;
+    bool activated = true;
+    int bulletNumber = 10;
+    int life = 100;
+    float gameControllerAngle = 0;
+
     NakedManScript(GameObject *owner);
+
     std::string GetComponentName() override {
         return "NakedManScript";
     };
+
     void FixedComponentUpdate() override;
     void Start() override;
+
     char GetMovement() {
         return movements;
     };
-
-    bool lockplayerMovements = false;
-    int bulletNumber = 10;
-    bool gameControllerActivated = false;
-    float gameControllerAngle = 0;
-    bool activated = true;
-    int life = 100;
 
 protected:
 
     void ComponentUpdate() override;
 
 private:
-
-    void SetDirection();
-    void KeyBoardUpdate();
-    void GameControllerUpdate();
-    void CreateAnimations();
-    void WallCollisionResolution();
-    void GameCollisionCheck();
-    void StartFirstBoss();
-
-    //Player Movements
-    void Movements();
-
-    void Animations();
-
-    void Shoot();
-    void ReloadGun();
-    void PlayerLife();
-
-    void MovementsSounds();
 
     bool zoom = true;
 
@@ -82,16 +66,35 @@ private:
     int m_hitFrames = 0;
     bool m_hit = false;
 
-    Timer timerReload;
-    Timer lifeRecover;
-    Timer timerHit;
-
     bool cameraLock = true;
     bool isMovingLooking = true;
 
     bool endBossFight = false;
     static bool isZooming;
     std::pair<int, int> mousePosition;
+
+    Timer timerReload;
+    Timer lifeRecover;
+    Timer timerHit;
+
+    void SetDirection();
+    void KeyBoardUpdate();
+    void GameControllerUpdate();
+    void CreateAnimations();
+    void WallCollisionResolution();
+    void GameCollisionCheck();
+    void StartFirstBoss();
+
+    //Player Movements
+    void Movements();
+
+    void Animations();
+
+    void Shoot();
+    void ReloadGun();
+    void PlayerLife();
+
+    void MovementsSounds();
 };
 
 #endif

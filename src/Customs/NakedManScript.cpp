@@ -20,8 +20,8 @@ void NakedManScript::Start() {
     CameraSystem::GetInstance()->SetCameraSpeed(walkSpeed);
     game_controller = input->GetGameController(0);
 
-    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
-			   GetGameObject("Map");
+    auto map = SceneManager::GetInstance()->GetScene("Gameplay")
+               ->GetGameObject("Map");
     if (map) {
 		GetOwner()->SetZoomProportion(Vector(map->originalWidth
                                              / GetOwner()->originalWidth,
@@ -39,13 +39,17 @@ void NakedManScript::Start() {
 void NakedManScript::SetDirection() {
     mousePosition = input->GetMousePosition();
 
-    /* x-axis
-    if(mousePosition.first >= position->m_x && movements==4){ */
+    /*
+    x-axis
+    if(mousePosition.first >= position->m_x && movements==4){
+    */
 
     if (!game_controller) {
         mousePosition = input->GetMousePosition();
-        /*if(input->GetMouseButtonPressed(M_INPUT_LEFT))
-        x-axis */
+        /*
+        if(input->GetMouseButtonPressed(M_INPUT_LEFT))
+        x-axis
+        */
         if (mousePosition.first >= position->m_x && movements == 4){
             isMovingLooking = true;
         } else if (mousePosition.first > position->m_x && movements == 3) {
@@ -61,7 +65,7 @@ void NakedManScript::SetDirection() {
         // y-axis
         if (mousePosition.second <= position->m_y && movements == 1) {
             isMovingLooking = true;
-        } else if (mousePosition.second < position->m_y && movements==2) {
+        } else if (mousePosition.second < position->m_y && movements == 2) {
             isMovingLooking = false;
         }
 
@@ -111,7 +115,7 @@ void NakedManScript::SetDirection() {
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) < -800
                    && movements == 4) {
-            isMovingLooking=false;
+            isMovingLooking = false;
         }
 
         // y-axis
@@ -149,7 +153,7 @@ void NakedManScript::SetDirection() {
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
                    && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
                    && movements == 6) {
-            isMovingLooking=false;
+            isMovingLooking = false;
         }
 
         // Diagonal 2
@@ -318,7 +322,7 @@ void NakedManScript::GameControllerUpdate() {
     }
     if (gameControllerAngle < 0) {
         gameControllerAngle *= -1;
-        gameControllerAngle = 180 + (180-gameControllerAngle);
+        gameControllerAngle = 180 + (180 - gameControllerAngle);
     }
     if (gameControllerAngle != 0) {
         gameControllerAngle = abs(360 - gameControllerAngle);
@@ -443,12 +447,12 @@ void NakedManScript::GameControllerUpdate() {
     }
 
     // Dash
-    if (game_controller->GetAxis( GC_INPUT_AXIS_TRIGGERLEFT)
+    if (game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT)
         && dashController == 0) {
         animator->StopAllAnimations();
         animator->PlayAnimation("Right Dash");
     }
-    dashController = game_controller->GetAxis( GC_INPUT_AXIS_TRIGGERLEFT);
+    dashController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT);
 
     // Shoot gun
     if (game_controller->GetAxis( GC_INPUT_AXIS_TRIGGERRIGHT)
@@ -571,27 +575,28 @@ void NakedManScript::ComponentUpdate() {
                                 ->GetGameObject("Snow")
                                 ->GetComponent("SnowScript");
 
-    if ((CameraSystem::GetInstance()->worldCamera_y < 3435)
-         && (CameraSystem::GetInstance()->worldCamera_x > 3410)
-         && (CameraSystem::GetInstance()->worldCamera_x < 3500)) {
+    if ((CameraSystem::GetInstance()->worldCameraY < 3435)
+         && (CameraSystem::GetInstance()->worldCameraX > 3410)
+         && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
         script2->play = 1;
     }
-    if ((CameraSystem::GetInstance()->worldCamera_y > 3435)
-         && (CameraSystem::GetInstance()->worldCamera_x > 3410)
-         && (CameraSystem::GetInstance()->worldCamera_x < 3500)) {
+    if ((CameraSystem::GetInstance()->worldCameraY > 3435)
+         && (CameraSystem::GetInstance()->worldCameraX > 3410)
+         && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
         script2->play = 0;
     }
     //3835 3910
-    if ((CameraSystem::GetInstance()->worldCamera_x < 3315)
-         && (CameraSystem::GetInstance()->worldCamera_y > 3860)) {
+    if ((CameraSystem::GetInstance()->worldCameraX < 3315)
+         && (CameraSystem::GetInstance()->worldCameraY > 3860)) {
         script3->play = 1;
     }
-    if ((CameraSystem::GetInstance()->worldCamera_x > 3315)
-         && (CameraSystem::GetInstance()->worldCamera_y > 3860)) {
+    if ((CameraSystem::GetInstance()->worldCameraX > 3315)
+         && (CameraSystem::GetInstance()->worldCameraY > 3860)) {
         script3->play = 0;
     }
 
-    /* f ("x = %f\ny = %f\n\n", position->m_x + CameraSystem::GetInstance()
+    /*
+    if ("x = %f\ny = %f\n\n", position->m_x + CameraSystem::GetInstance()
                                               ->GetPos_x() - 3500,position->m_y
                                               + CameraSystem::GetInstance()
                                               ->GetPos_y() - 3800);
@@ -600,49 +605,58 @@ void NakedManScript::ComponentUpdate() {
       GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()
                                                        ->GetWidth(),
                                                        GetOwner()->GetHeight(),
-                                                       255,0,0,100); */
+                                                       255,0,0,100);
+    */
 
-    /*Debug Collider
+    /*
+    Debug Collider
     auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,
                       nakedManCollider->GetRectanglePoint().m_y);
     GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(),
                                                      GetOwner()->GetHeight(),
-                                                     255,0,0,100); */
+                                                     255,0,0,100);
+    */
 
     SetDirection();
     walkSpeed = fixedWalkSpeed;
 
-    /* if((input->GetKeyPressed(INPUT_DOWN)) || (input->GetKeyPressed(INPUT_UP)))
+    /*
+    if((input->GetKeyPressed(INPUT_DOWN)) || (input->GetKeyPressed(INPUT_UP)))
         isZooming=true;
     if((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP)))
-        isZooming=false; */
+        isZooming=false;
+    */
 
-    /* if ((input->GetKeyDown(INPUT_V)) && (!isMovingLooking)) {
+    /*
+    if ((input->GetKeyDown(INPUT_V)) && (!isMovingLooking)) {
         isMovingLooking=true;
     } else if ((input->GetKeyDown(INPUT_V)) && (isMovingLooking)) {
     isMovingLooking=false;
-    } */
+    }
+    */
 
     Animations();
     MovementsSounds();
 
-    //Sair para o Menu
+    // Sair para o Menu
     if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
-    /* auto var = (UIText *)SceneManager::GetInstance()
+    /*
+    auto var = (UIText *)SceneManager::GetInstance()
                    ->GetScene("Main")
                    ->GetGameObject("Play")
                    ->GetComponent("UIText");
         var->SetText("Continue");
-        SceneManager::GetInstance()->SetCurrentScene("Main"); */
+        SceneManager::GetInstance()->SetCurrentScene("Main");
+    */
         SDLSystem::GetInstance()->SetRunning(false);
     }
 
-    //Shoot gun
+    // Shoot gun
     if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
         Shoot();
     }
 
-    if(input->GetKeyDown(INPUT_L) && cameraLock==false) {
+    if (input->GetKeyDown(INPUT_L) && cameraLock == false) {
         cameraLock = true;
         deadzoneX = EngineGlobals::screen_width / 2;
         deadzoneY = EngineGlobals::screen_height / 2;
@@ -657,7 +671,7 @@ void NakedManScript::ComponentUpdate() {
     movements = 0;
 
     game_controller = input->GetGameController(0);
-    if(!game_controller) {
+    if (!game_controller) {
         KeyBoardUpdate();
     } else {
         GameControllerUpdate();
@@ -670,12 +684,12 @@ void NakedManScript::MovementsSounds() {
     if (input->GetKeyPressed(INPUT_W) || input->GetKeyPressed(INPUT_A)
         || input->GetKeyPressed(INPUT_S) || input->GetKeyPressed(INPUT_D)) {
         if (!walking) {
-            //AudioController::GetInstance()->PlayAudio("runSound", 0);
+            // AudioController::GetInstance()->PlayAudio("runSound", 0);
             walking = true;
         }
     } else {
         walking = false;
-        //AudioController::GetInstance()->StopAudio("runSound");
+        // AudioController::GetInstance()->StopAudio("runSound");
     }
 }
 
@@ -686,279 +700,308 @@ void NakedManScript::FixedComponentUpdate() {
     if (!lockplayerMovements) {
         Movements();
     }
-    /*printf("x = %f\ny = %f\n\n",position->m_x,position->m_y);
-      printf("x = %f\ny = %f\n\n",position->m_x + CameraSystem::GetInstance()
-                                                  ->GetPos_x()-3500,position->m_y
-                                                  + CameraSystem::GetInstance()
-                                                  ->GetPos_y()-3800); */
+    /*
+    printf("x = %f\ny = %f\n\n",position->m_x,position->m_y);
+    printf("x = %f\ny = %f\n\n",position->m_x + CameraSystem::GetInstance()
+                                                ->GetPos_x()-3500,position->m_y
+                                                + CameraSystem::GetInstance()
+                                                ->GetPos_y()-3800);
+    */
     ReloadGun();
     PlayerLife();
 
-    /*Shoot gun
+    /*
+    Shoot gun
     if (InputSystem::GetInstance()->GetKeyDown(INPUT_B)) {
         life = 0;
-    } */
-
-if(endBossFight){
-    FirstBossController::GetInstance()->EndBossFight();
-    //posit player on spawn
-    int xPos, yPos;
-    xPos =EngineGlobals::screen_width / 2 - 96/2;
-    yPos =EngineGlobals::screen_height / 2 - 96/2;
-
-    FirstBossController::GetInstance()->PositPlayer(Vector(xPos, yPos ));
-    //FirstBossController::GetInstance()->PositMap(Vector(-500, -3800 ));
-    CameraSystem::GetInstance()->MoveRight(200,SceneManager::GetInstance()->GetCurrentScene());
-    endBossFight =  false;
-  }
-}
-
-void NakedManScript::PlayerLife(){
-  if(life<100 && !endBossFight){
-    lifeRecover.Update(EngineGlobals::fixed_update_interval);
-    cout << life << endl;
-    if(lifeRecover.GetTime() >= 0.5*1000){
-      life ++;
-      lifeRecover.Restart();
     }
-  }
-  if(life <= 0){ //Player is dead
-    endBossFight = true;
-    //stop boss fight
-    //desactivate boos fight
-    //posit player outside boss fight
-  }
+    */
+
+    if (endBossFight) {
+        FirstBossController::GetInstance()->EndBossFight();
+        // Posit player on spawn
+        int xPos, yPos;
+        xPos = EngineGlobals::screen_width / 2 - 96 / 2;
+        yPos = EngineGlobals::screen_height / 2 - 96 / 2;
+
+        FirstBossController::GetInstance()->PositPlayer(Vector(xPos, yPos ));
+        // FirstBossController::GetInstance()->PositMap(Vector(-500, -3800 ));
+        CameraSystem::GetInstance()->MoveRight(200,SceneManager::GetInstance()->GetCurrentScene());
+        endBossFight =  false;
+    }
 }
 
-void NakedManScript::Shoot(){
-  if(bulletNumber > 0){
-
-    auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
-                     ->GetCurrentScene()
-                     ->GetGameObject("Bullet" + std::to_string(bulletNumber));
-    gameObjectBullet->active = true;
-
-    auto script = (PlayerAttackScript*)SceneManager::GetInstance()
-                     ->GetCurrentScene()
-                     ->GetGameObject("Bullet" + std::to_string(bulletNumber))
-                     ->GetComponent("PlayerAttackScript");
-    script->SetShoot(true);
-    //AudioController::GetInstance()->PlayAudio("bulletSound", 0);
-    bulletNumber--;
-  }
+void NakedManScript::PlayerLife() {
+    if (life < 100 && !endBossFight) {
+        lifeRecover.Update(EngineGlobals::fixed_update_interval);
+        cout << life << endl;
+        if(lifeRecover.GetTime() >= 0.5 * 1000) {
+            life ++;
+            lifeRecover.Restart();
+        }
+    }
+    if(life <= 0) { // Player is dead
+        endBossFight = true;
+        /*
+        stop boss fight
+        desactivate boos fight
+        posit player outside boss fight
+        */
+    }
 }
 
-void NakedManScript::ReloadGun(){
+void NakedManScript::Shoot() {
+    if (bulletNumber > 0) {
+        auto gameObjectBullet = (GameObject *)SceneManager::GetInstance()
+                                              ->GetCurrentScene()
+                                              ->GetGameObject("Bullet"
+                                              + std::to_string(bulletNumber));
+        gameObjectBullet->active = true;
+
+        auto script = (PlayerAttackScript *)SceneManager::GetInstance()
+                                            ->GetCurrentScene()
+                                            ->GetGameObject("Bullet"
+                                            + std::to_string(bulletNumber))
+                                            ->GetComponent("PlayerAttackScript");
+        script->SetShoot(true);
+        // AudioController::GetInstance()->PlayAudio("bulletSound", 0);
+        bulletNumber--;
+    }
+}
+
+void NakedManScript::ReloadGun() {
   /** Reload **/
-  if(bulletNumber == 0){
+    if (bulletNumber == 0) {
+        timerReload.Update(EngineGlobals::fixed_update_interval);
+    }
 
-    timerReload.Update(EngineGlobals::fixed_update_interval);
-  }
-
-  if(timerReload.GetTime() >= 2*1000){ // Waits 2 seconds to Reload
-    bulletNumber = 10;
-    timerReload.Restart();
-  }
+    if (timerReload.GetTime() >= 2 * 1000) { // Waits 2 seconds to Reload
+        bulletNumber = 10;
+        timerReload.Restart();
+    }
 }
 
-void NakedManScript::Animations(){
-  if(m_hit){
-    m_hitFrames++;
-    timerHit.Update(EngineGlobals::fixed_update_interval);
+void NakedManScript::Animations() {
+    if (m_hit) {
+        m_hitFrames++;
+        timerHit.Update(EngineGlobals::fixed_update_interval);
 
-    if(m_hitFrames >= 7){
-      animator->StopAllAnimations();
-      if(m_hitFrames >= 12){
-        m_hitFrames = 0;
-      }
+        if (m_hitFrames >= 7) {
+            animator->StopAllAnimations();
+            if (m_hitFrames >= 12) {
+                m_hitFrames = 0;
+            }
+        }
     }
-  }
 
-
-  if(timerHit.GetTime() >= 1*1000){
-    m_hit =  false;
-    timerHit.Restart();
-  }
+    if (timerHit.GetTime() >= 1 * 1000) {
+        m_hit =  false;
+        timerHit.Restart();
+    }
 }
 
-void NakedManScript::Movements(){
-
-  if (movements==5){
-    walkSpeed = walkSpeed*0.70710;
-    position->m_y -= walkSpeed;
-    position->m_x -= walkSpeed;
-
-
-  }else if (movements==6){
-    walkSpeed = walkSpeed*0.70710;
-    position->m_y -= walkSpeed;
-    position->m_x += walkSpeed;
-
-  }else if (movements==7){
-    walkSpeed = walkSpeed*0.70710;
-    position->m_y += walkSpeed;
-    position->m_x -= walkSpeed;
-
-  }else if (movements==8){
-    walkSpeed = walkSpeed*0.70710;
-    position->m_y += walkSpeed;
-    position->m_x += walkSpeed;
-  }else if (movements==1){
-
-    position->m_y -= walkSpeed;
-  }else if (movements==2){
-
-    position->m_y += walkSpeed;
-  }else if (movements==3){
-
-    position->m_x -= walkSpeed;
-  }else if (movements==4){
-
-    position->m_x += walkSpeed;
-  }
-
-  if(cameraLock){
-
-    if (position->m_x + GetOwner()->GetWidth() >= deadzoneX){ //Mount deadzode on x++
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveRight(2,SceneManager::GetInstance()->GetCurrentScene());
-      }else{
-        CameraSystem::GetInstance()->MoveRight(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-      }
+void NakedManScript::Movements() {
+    if (movements == 5) {
+        walkSpeed = walkSpeed * 0.70710;
+        position->m_y -= walkSpeed;
+        position->m_x -= walkSpeed;
+    } else if (movements == 6) {
+        walkSpeed = walkSpeed*0.70710;
+        position->m_y -= walkSpeed;
+        position->m_x += walkSpeed;
+    } else if (movements == 7) {
+        walkSpeed = walkSpeed * 0.70710;
+        position->m_y += walkSpeed;
+        position->m_x -= walkSpeed;
+    } else if (movements == 8) {
+        walkSpeed = walkSpeed * 0.70710;
+        position->m_y += walkSpeed;
+        position->m_x += walkSpeed;
+    } else if (movements == 1) {
+        position->m_y -= walkSpeed;
+    } else if (movements == 2) {
+        position->m_y += walkSpeed;
+    } else if (movements == 3){
+        position->m_x -= walkSpeed;
+    } else if (movements == 4){
+        position->m_x += walkSpeed;
     }
 
-    if (position->m_x <= deadzoneX){ //Mount deadzode on x-
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveLeft(2,SceneManager::GetInstance()->GetCurrentScene());
-      }else{
-        CameraSystem::GetInstance()->MoveLeft(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-      }
+    if (cameraLock) {
+        if (position->m_x + GetOwner()->GetWidth() >= deadzoneX) { // Mount deadzode on x++
+            if (isZooming) {
+                CameraSystem::GetInstance()->MoveRight(2,
+                                                       SceneManager::GetInstance()
+                                                       ->GetCurrentScene());
+            } else {
+                CameraSystem::GetInstance()->MoveRight(walkSpeed,
+                                                       SceneManager::GetInstance()
+                                                       ->GetCurrentScene());
+            }
+        }
+
+        if (position->m_x <= deadzoneX) { // Mount deadzode on x-
+            if (isZooming) {
+                CameraSystem::GetInstance()->MoveLeft(2,
+                                                      SceneManager::GetInstance()
+                                                      ->GetCurrentScene());
+            } else {
+                CameraSystem::GetInstance()->MoveLeft(walkSpeed,
+                                                      SceneManager::GetInstance()
+                                                      ->GetCurrentScene());
+            }
+        }
+
+        if (position->m_y + GetOwner()->GetWidth() >= deadzoneY) { // Mount deadzode on y++
+            if (isZooming) {
+                CameraSystem::GetInstance()->MoveDown(2,
+                                                      SceneManager::GetInstance()
+                                                      ->GetCurrentScene());
+            } else {
+                CameraSystem::GetInstance()->MoveDown(walkSpeed,
+                                                      SceneManager::GetInstance()
+                                                      ->GetCurrentScene());
+            }
+        }
+
+        if (position->m_y <= deadzoneY) { // Mount deadzode on y--
+            if (isZooming) {
+                CameraSystem::GetInstance()->MoveUp(2,
+                                                    SceneManager::GetInstance()
+                                                    ->GetCurrentScene());
+            } else {
+                CameraSystem::GetInstance()->MoveUp(walkSpeed,
+                                                    SceneManager::GetInstance()
+                                                    ->GetCurrentScene());
+            }
+        }
+
+    } else {
+        if (position->m_x + GetOwner()->GetWidth() >= deadzoneX) {
+            if (isZooming) {
+                CameraSystem::GetInstance()->MoveRight(2,
+                                                       SceneManager::GetInstance()
+                                                       ->GetCurrentScene());
+            } else {
+                CameraSystem::GetInstance()->MoveRight(walkSpeed,
+                                                       SceneManager::GetInstance()
+                                                       ->GetCurrentScene());
+            }
+        }
+
+        if (position->m_x <= 0) {
+            if (isZooming) {
+                CameraSystem::GetInstance()->MoveLeft(2,
+                                                      SceneManager::GetInstance()
+                                                      ->GetCurrentScene());
+            } else {
+                CameraSystem::GetInstance()->MoveLeft(walkSpeed,
+                                                      SceneManager::GetInstance()
+                                                      ->GetCurrentScene());
+            }
+        }
+
+        if (position->m_y + GetOwner()->GetWidth() >= deadzoneY) {
+            if (isZooming) {
+                CameraSystem::GetInstance()->MoveDown(2,
+                                                      SceneManager::GetInstance()
+                                                      ->GetCurrentScene());
+            } else {
+                CameraSystem::GetInstance()->MoveDown(walkSpeed,
+                                                      SceneManager::GetInstance()
+                                                      ->GetCurrentScene());
+            }
+        }
     }
 
-    if (position->m_y + GetOwner()->GetWidth() >= deadzoneY){ //Mount deadzode on y++
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveDown(2,SceneManager::GetInstance()->GetCurrentScene());
-      }else{
-        CameraSystem::GetInstance()->MoveDown(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-      }
-    }
-
-    if (position->m_y <= deadzoneY){//Mount deadzode on y--
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
-      }else{
-        CameraSystem::GetInstance()->MoveUp(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-      }
-
-    }
-
-  }else{
-
-    if (position->m_x + GetOwner()->GetWidth() >= deadzoneX){
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveRight(2,SceneManager::GetInstance()->GetCurrentScene());
-      }else{
-        CameraSystem::GetInstance()->MoveRight(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-      }
-    }
-
-    if (position->m_x <= 0){
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveLeft(2,SceneManager::GetInstance()->GetCurrentScene());
-      }else{
-        CameraSystem::GetInstance()->MoveLeft(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-      }
-    }
-
-    if (position->m_y + GetOwner()->GetWidth() >= deadzoneY){
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveDown(2,SceneManager::GetInstance()->GetCurrentScene());
-      }else{
-        CameraSystem::GetInstance()->MoveDown(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-      }
-    }
-
-
-  }
-    if (position->m_y <= 0){
-      if(isZooming){
-        CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
-      }else{
-        CameraSystem::GetInstance()->MoveUp(walkSpeed,SceneManager::GetInstance()->GetCurrentScene());
-      }
+    if (position->m_y <= 0) {
+        if (isZooming) {
+            CameraSystem::GetInstance()->MoveUp(2,
+                                                SceneManager::GetInstance()
+                                                ->GetCurrentScene());
+        } else {
+            CameraSystem::GetInstance()->MoveUp(walkSpeed,
+                                                SceneManager::GetInstance()
+                                                ->GetCurrentScene());
+        }
     }
 }
 
 void NakedManScript::GameCollisionCheck() {
-
-
-  for (auto obj : GetOwner()->GetCollisions()) {
-    if (obj->GetTag() == "Bullet") {
-      //cout << "Bullet Colider" << endl;
-      GetOwner()->ClearCollisions();
-
-    }else if(obj->GetTag() == "FirstBoss"){
-      cout << "Boss Colider" << endl;
-      if(obj->active){
-        m_hit = true;
-        life --;
-
-      }
-      GetOwner()->ClearCollisions();
-
-    }else if(obj->GetTag() == "FirstBossAtack"){
-      cout << "Boss Atack Colider" << endl;
-      if(obj->active){
-        m_hit = true;
-        life --;
-
-      }
-      GetOwner()->ClearCollisions();
+    for (auto obj : GetOwner()->GetCollisions()) {
+        if (obj->GetTag() == "Bullet") {
+            //cout << "Bullet Colider" << endl;
+            GetOwner()->ClearCollisions();
+        } else if (obj->GetTag() == "FirstBoss") {
+            cout << "Boss Colider" << endl;
+            if (obj->active) {
+                m_hit = true;
+                life --;
+            }
+            GetOwner()->ClearCollisions();
+        } else if (obj->GetTag() == "FirstBossAtack") {
+            cout << "Boss Atack Colider" << endl;
+            if (obj->active) {
+                m_hit = true;
+                life --;
+            }
+            GetOwner()->ClearCollisions();
+        }
     }
-
-  }
 }
 
-void NakedManScript::StartFirstBoss(){
-
-  //cout << position->m_y << endl;
-  if(input->GetKeyDown(INPUT_X)) {
-    cout << "X: " <<CameraSystem::GetInstance()->worldCamera_x << endl;
-    cout << "Y: " <<CameraSystem::GetInstance()->worldCamera_y << endl;
-  }
-  //cout << SceneManager::GetInstance()->GetCurrentScene()->GetName() <<  endl;
-
-
-  if(!bossFight){
-
-    if( (CameraSystem::GetInstance()->worldCamera_x < 500)){
-
-      CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->originalWidth/4 + 1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
-      CameraSystem::GetInstance()->ZoomIn(1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
-      CameraSystem::GetInstance()->currentZoom -=25;
-
-      CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->originalWidth/4 + 1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
-      CameraSystem::GetInstance()->ZoomIn(1,GetOwner(),SceneManager::GetInstance()->GetCurrentScene());
-      CameraSystem::GetInstance()->currentZoom -=25;
-
-
-      FirstBossController::GetInstance()->ActivateBoss();
-      FirstBossController::GetInstance()->ActivateInsideBossFx();
-      FirstBossController::GetInstance()->ActivateLifeBars();
-
-
-
-    AudioController::GetInstance()->StopAudio("mainSound");
-
-      AudioController::GetInstance()->PlayAudio("bossBattleSound", -1);
-      bossFight = true;
+void NakedManScript::StartFirstBoss() {
+    // cout << position->m_y << endl;
+    if (input->GetKeyDown(INPUT_X)) {
+        cout << "X: " << CameraSystem::GetInstance()->worldCameraX << endl;
+        cout << "Y: " << CameraSystem::GetInstance()->worldCameraY << endl;
     }
-  }
+    // cout << SceneManager::GetInstance()->GetCurrentScene()->GetName() <<  endl;
+
+    if (!bossFight) {
+        if ((CameraSystem::GetInstance()->worldCameraX < 500)) {
+            CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()
+                                                 ->GetCurrentScene()
+                                                 ->GetGameObject("Map")
+                                                 ->originalWidth / 4 + 1,
+                                                 GetOwner(),
+                                                 SceneManager::GetInstance()
+                                                 ->GetCurrentScene());
+            CameraSystem::GetInstance()->ZoomIn(1, GetOwner(),
+                                                SceneManager::GetInstance()
+                                                ->GetCurrentScene());
+            CameraSystem::GetInstance()->currentZoom -= 25;
+
+            CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()
+                                                 ->GetCurrentScene()
+                                                 ->GetGameObject("Map")
+                                                 ->originalWidth / 4 + 1,
+                                                 GetOwner(),
+                                                 SceneManager::GetInstance()
+                                                 ->GetCurrentScene());
+            CameraSystem::GetInstance()->ZoomIn(1, GetOwner(),
+                                                SceneManager::GetInstance()
+                                                ->GetCurrentScene());
+            CameraSystem::GetInstance()->currentZoom -= 25;
+
+            FirstBossController::GetInstance()->ActivateBoss();
+            FirstBossController::GetInstance()->ActivateInsideBossFx();
+            FirstBossController::GetInstance()->ActivateLifeBars();
+
+            AudioController::GetInstance()->StopAudio("mainSound");
+
+            AudioController::GetInstance()->PlayAudio("bossBattleSound", -1);
+            bossFight = true;
+        }
+    }
 }
 
-void NakedManScript::WallCollisionResolution(){
-
-    auto mapscript = (MapScript*)SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map")->GetComponent("MapScript");
-    if(mapscript)
+void NakedManScript::WallCollisionResolution() {
+    auto mapscript = (MapScript *)SceneManager::GetInstance()
+                                  ->GetScene("Gameplay")
+                                  ->GetGameObject("Map")
+                                  ->GetComponent("MapScript");
+    if (mapscript) {
         mapscript->DetectWallCollision(GetOwner());
+    }
 }
