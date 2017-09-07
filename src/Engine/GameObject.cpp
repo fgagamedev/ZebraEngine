@@ -130,10 +130,10 @@ void GameObject::FixedUpdate() {
 }
 
 /**
-    @brief that function is for set the size based on width and height.
-    @param[in] width and height in centimeters.
+    @brief that function set the size based on width and height.
+    @param[in] width and height in centimeters. Both are poiting for their self.
 */
-void GameObject::SetSize(int width, int height){
+void GameObject::SetSize(int width, int height{
     m_width = width;
     m_height = height;
 }

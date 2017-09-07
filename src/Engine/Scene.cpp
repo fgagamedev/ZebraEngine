@@ -7,7 +7,8 @@ Scene::Scene() {}
 Scene::~Scene() {}
 
 /**
-    @brief That function is for starts the scene of the game.
+    @brief The scene starts. See if there is objects and as long as there are
+    objects, the scene starts.
 */
 void Scene::Start() {
     for (auto obj : m_gameObjects) {
@@ -16,8 +17,7 @@ void Scene::Start() {
 }
 
 /**
-    @brief That function is for update the scene of the game.
-    Compare the game objects, the begin and end objects. Checks if is
+    @brief compare the game objects, the begin and end objects. Checks if is
     active and update it.
 */
 void Scene::Update() {
@@ -30,8 +30,7 @@ void Scene::Update() {
 }
 
 /**
-    @brief That function is for update the draws of the game.
-    Compare the game objects, the begin and end objects. Checks if is
+    @brief compare the game objects, the begin and end objects. Checks if is
     active and update the draws.
 */
 void Scene::DrawUpdate() {
@@ -56,8 +55,7 @@ void Scene::AddGameObject(std::vector<GameObject *> gameObjects) {
 }
 
 /**
-    @brief That function is for fix the updates made before.
-    Checks if gameObjects are active and fix the update.
+    @brief Checks if gameObjects are active and fix the update.
 */
 void Scene::FixedUpdate() {
     for (auto it : m_gameObjects) {
