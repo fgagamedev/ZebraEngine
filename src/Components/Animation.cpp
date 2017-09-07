@@ -13,6 +13,10 @@ Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
     m_isPlaying = playOnStart;
 }
 
+/**
+    @brief The animation starts. Check if someone are playing and set  it.
+    @param[in/out]
+*/
 void Animation::Start() {
     if (!m_isPlaying) {
         SetPlaying(false);
@@ -21,6 +25,11 @@ void Animation::Start() {
     }
 }
 
+/**
+    @brief Set the size of the image of the game based in horizontal and vertical.
+    @param[in] the horizontal size.
+    @param[in] the vertical size.
+*/
 void Animation::SetFlip(bool horizontal, bool vertical) {
     m_image->Flip(horizontal, vertical);
 }
