@@ -1,4 +1,4 @@
-/*
+/**
     @file Animation.cpp
     @brief Class that manages animated game behavior, 
     such as game behavior and picture frames.
@@ -10,7 +10,7 @@
 #include "Components/Animation.hpp"
 #include "Log/log.hpp"
 
-/*
+/**
     @brief Responsible for instantiating the class and starting the game animation.
     @param[in] owner Points to the game initializer.
     @param[in] image Points to the image initializer.
@@ -49,7 +49,7 @@ void Animation::SetFlip(bool horizontal, bool vertical) {
     m_image->Flip(horizontal, vertical);
 }
 
-/*
+/**
     @brief Set the animation for playing.
     @param[in] condition true/false
 */
@@ -82,7 +82,6 @@ void Animation::SetPlaying(bool condition) {
     m_currentFrame = 0;
 }
 
-
 /**
     @brief Adding frame on animation.
     @param[in] frame Points to the class responsible for creating frames.
@@ -97,7 +96,6 @@ void Animation::AddFrame(Frame *frame) {
     m_frames.push_back(frame);
     m_framesQuantity++;
 }
-
 
 /**
     @brief Update components if you are playing.
@@ -115,7 +113,7 @@ void Animation::ComponentUpdate() {
     }
 }
 
-/*
+/**
     @brief Updates the current frames on the screen.
 */
 void Animation::DrawCurrentFrame() {
