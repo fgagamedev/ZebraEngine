@@ -2,7 +2,7 @@
 
 #include "Log/log.hpp"
 
-GameObject::GameObject(std::string name, Vector *position, 
+GameObject::GameObject(std::string name, Vector *position,
     int width, int height, Uint8 layer) {
     m_name = name;
     m_position = position;
@@ -19,6 +19,10 @@ GameObject::~GameObject() {
     delete m_position;
 }
 
+/**
+    @brief that function starts the game. Checks if the key is on begins and
+    if the key is diferent of the end.
+*/
 void GameObject::Start() {
     for (auto key = m_components.begin(); key != m_components.end(); key++) {
         for (auto component : key->second) {
@@ -27,8 +31,15 @@ void GameObject::Start() {
   }
 }
 
+/**
+    @brief that function updates all the components of the game objects.
+*/
 void GameObject::Update() { ComponentsUpdate(); }
 
+/**
+    @brief that function updates all the draw components. Find the draws, check
+    if is active and update the component.
+*/
 void GameObject::DrawUpdate() {
     auto it = m_components.find(C_DRAW);
 
@@ -41,6 +52,10 @@ void GameObject::DrawUpdate() {
     }
 }
 
+/**
+    @brief that function updates all the physics components. Find the pyhsics
+    components, check if is active and update the component.
+*/
 void GameObject::PhysicsUpdate() {
     auto it = m_components.find(C_PHYSICS);
 
@@ -53,6 +68,10 @@ void GameObject::PhysicsUpdate() {
     }
 }
 
+/**
+    @brief that function updates all the general components. Find the common, check
+    if is active and update the component.
+*/
 void GameObject::ComponentsUpdate() {
     auto it = m_components.find(C_COMMON);
 
@@ -70,7 +89,7 @@ void GameObject::AddComponent(Component *component) {
     auto it = m_components.find(type);
 
     if (it != m_components.end()) {
-        it->second.push_back(component); 
+        it->second.push_back(component);
     } else {
         m_components.emplace(type, std::vector<Component *>());
         m_components.at(type).push_back(component);
@@ -104,7 +123,12 @@ void GameObject::FixedUpdate() {
   PhysicsUpdate();
 }
 
-void GameObject::SetSize(int width, int height) {
+/**
+    @brief that function set the size based on width and height.
+    @param[in] width and height in centimeters. Both are poiting for their self.
+
+*/
+void GameObject::SetSize(int width, int height{
     m_width = width;
     m_height = height;
 }

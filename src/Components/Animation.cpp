@@ -14,8 +14,7 @@ Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
 }
 
 /**
-    @brief The animation starts. Check if someone are playing and set  it.
-    @param[in/out]
+    @brief The animation starts. Check if someone are playing and set it.
 */
 void Animation::Start() {
     if (!m_isPlaying) {

@@ -13,6 +13,13 @@
 #include <utility>
 #include <vector>
 
+/**
+    @file GameObject.hpp
+    @brief Class that represents all the game objects, like name and velocity.
+    @copyright LGPL. MIT License.
+*/
+
+
 class GameObject {
 public:
   // active atribbute

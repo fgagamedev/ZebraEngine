@@ -6,12 +6,20 @@ Scene::Scene() {}
 
 Scene::~Scene() {}
 
+/**
+    @brief The scene starts. See if there is objects and as long as there are
+    objects, the scene starts.
+*/
 void Scene::Start() {
     for (auto obj : m_gameObjects) {
         obj->Start();
     }
 }
 
+/**
+    @brief compare the game objects, the begin and end objects. Checks if is
+    active and update it.
+*/
 void Scene::Update() {
     std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
     for (auto it : m_gameObjects) {
@@ -21,6 +29,10 @@ void Scene::Update() {
     }
 }
 
+/**
+    @brief compare the game objects, the begin and end objects. Checks if is
+    active and update the draws.
+*/
 void Scene::DrawUpdate() {
     std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
     for (auto it : m_gameObjects) {
@@ -39,6 +51,9 @@ void Scene::AddGameObject(std::vector<GameObject *> gameObjects) {
     std::end(gameObjects));
 }
 
+/**
+    @brief Checks if gameObjects are active and fix the update.
+*/
 void Scene::FixedUpdate() {
     for (auto it : m_gameObjects) {
         if (it->active) {
@@ -47,6 +62,12 @@ void Scene::FixedUpdate() {
     }
 }
 
+/**
+    @brief set the state of the scene. Check the states of the scene,
+    if is activated, deactivated, hidden and shown and change the state according
+    to the state.
+    @param[in] state = is the state of the scene.
+*/
 void Scene::SetState(SceneStates state) {
     m_currentState = state;
     INFO("[SCENE] " << m_name << " state: " << m_currentState);
