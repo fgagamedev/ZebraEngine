@@ -29,7 +29,7 @@ RectangleCollider::RectangleCollider(GameObject *owner, Vector offset,
 }
 
 /*
-    @brief Updates the position of a component.
+    @brief Updates the position x, y, height and width of a component.
     @return void
 */
 void RectangleCollider::FixedComponentUpdate() {
