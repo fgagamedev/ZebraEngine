@@ -2,11 +2,17 @@ language: cpp
 cpp:
 - '6.2.0'
 
-install:
-- sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+addons:
+  apt:
+    packages:
+     - libsdl2-image-dev
+     - libsdl2-dev
+     - libsdl2-mixer-dev
+     - libsdl2-ttf-dev
+     - libegl1-mesa-dev
+     - libgles2-mesa-dev        
 
 script:
 - cmake ./
 - make
-- ./ZebraEngine
 
