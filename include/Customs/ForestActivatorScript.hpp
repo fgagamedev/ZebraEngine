@@ -13,27 +13,35 @@
 
 #include <string>
 
+/*
+    @file ForestActivator.hpp
+    @brief Class that defines methods and attributes for activating the forest script.
+    @copyright MIT License.
+*/
 
 class ForestActivatorScript : public Script {
 
 public:
-  ForestActivatorScript(GameObject *owner);
-  std::string GetComponentName() override { return "ForestActivatorScript"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
-  void Activate(){activate=0;}
+    ForestActivatorScript(GameObject *owner);
+    std::string GetComponentName() override { return "ForestActivatorScript"; };
+    void FixedComponentUpdate() override;
+    void Start() override;
+    void Activate(){activate=0;}
+
 protected:
-  void ComponentUpdate() override;
+    void ComponentUpdate() override;
+
 private:
-  int activate=-1;
-  bool runned=false;
-  Timer time;
-  void CreateAnimations();
-  InputSystem *input = nullptr;
-   GameController* gamecontroller = nullptr;
-  Animator *animator = nullptr;
-  Vector *position = nullptr;
-  int play=0;
+    int activate=-1;
+    bool runned=false;
+    Timer time;
+    void CreateAnimations();
+    InputSystem *input = nullptr;
+    GameController* gamecontroller = nullptr;
+    Animator *animator = nullptr;
+    Vector *position = nullptr;
+    int play=0;
 
 };
+
 #endif
