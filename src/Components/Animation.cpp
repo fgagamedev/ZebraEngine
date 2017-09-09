@@ -27,8 +27,8 @@ Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
 
 
 /**
-    @brief Responsible for starting the animation. If the game is 
-    already running it sends to the SetPlaying method the release to start.
+    @brief The animation starts. Check if someone are playing and set it.
+    False if there is something diferent of playing, true if playing.
 */
 void Animation::Start() {
     if (!m_isPlaying) {
@@ -83,8 +83,9 @@ void Animation::SetPlaying(bool condition) {
 }
 
 /**
-    @brief Adding frame on animation.
-    @param[in] frame Points to the class responsible for creating frames.
+    @brief that function is for add frame at the game. Check if there is something
+    diferent of frame and ifs not, adds the frame.
+    @param[in] Frame pointer that points to the current frame.
 */
 void Animation::AddFrame(Frame *frame) {
     if (!frame) {
@@ -98,7 +99,8 @@ void Animation::AddFrame(Frame *frame) {
 }
 
 /**
-    @brief Update components if you are playing.
+    @brief that function is for update the componets of the Animation. Check if
+    is playing and draw the current frame.
 */
 void Animation::ComponentUpdate() {
     if (m_isPlaying) {
