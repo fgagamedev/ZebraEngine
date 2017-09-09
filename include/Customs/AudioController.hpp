@@ -13,6 +13,12 @@
 #include <stdlib.h>
 #include <time.h>
 
+/*
+    @file AudioController.hpp
+    @brief Class that defines methods and attributes for all game audio management.
+    @copyright MIT License.
+*/
+
 class AudioController {
     public:
         static AudioController *GetInstance();
