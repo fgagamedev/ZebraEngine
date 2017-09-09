@@ -13,26 +13,35 @@
 
 #include <string>
 
+/*
+    @file CentralLightScript2.hpp
+    @brief This class contains all attributes and methods that manages the central light in the game.
+    @copyright MIT License.
+*/
+
 class CentralLightScript2 : public Script {
 
 public:
-  CentralLightScript2(GameObject *owner);
-  std::string GetComponentName() override { return "CentralLightScript2"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
-  void Activate(){active = true;}
+    CentralLightScript2(GameObject *owner);
+    std::string GetComponentName() override { 
+        return "CentralLightScript2"; 
+    };
+    void FixedComponentUpdate() override;
+    void Start() override;
+    void Activate(){active = true;}
 
 protected:
-  void ComponentUpdate() override;
+    void ComponentUpdate() override;
+    
 private:
-  bool active=false;
-  Timer time;
-  void CreateAnimations();
-  InputSystem *input = nullptr;
-   GameController* gamecontroller = nullptr;
-  Animator *animator = nullptr;
-  Vector *position = nullptr;
-  int play=0;
-
+    void CreateAnimations();
+    bool active=false;
+    int play=0;
+    Timer time;
+    InputSystem *input = nullptr;
+    GameController* gamecontroller = nullptr;
+    Animator *animator = nullptr;
+    Vector *position = nullptr;
 };
+
 #endif
