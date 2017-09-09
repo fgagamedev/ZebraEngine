@@ -16,19 +16,25 @@
 #include "Customs/GameOverScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+/*
+    @file EndScene2.hpp
+    @brief This class contains all attributes and methods that manages some of the animated scenes in the game.
+    @copyright MIT License.
+*/
+
 class EndScene2 : public Scene {
 public:
-  EndScene2();
-  virtual void OnActivation() override;
-  virtual void OnDeactivation() override;
-  virtual void OnShown() override;
-  virtual void OnHidden() override;
+    EndScene2();
+    virtual void OnActivation() override;
+    virtual void OnDeactivation() override;
+    virtual void OnShown() override;
+    virtual void OnHidden() override;
 
 private:
-  void CreateAnimation();
-  int m_width_middle;
-  int m_height_middle;
-  void CreateQuitButton();
+    void CreateAnimation();
+    int m_width_middle;
+    int m_height_middle;
+    void CreateQuitButton();
 
 
 };
