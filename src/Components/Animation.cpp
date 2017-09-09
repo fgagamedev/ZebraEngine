@@ -15,6 +15,7 @@ Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
 
 /**
     @brief The animation starts. Check if someone are playing and set it.
+    False if there is something diferent of playing, true if playing.
 */
 void Animation::Start() {
     if (!m_isPlaying) {
@@ -56,6 +57,11 @@ void Animation::SetPlaying(bool condition) {
     m_currentFrame = 0;
 }
 
+/**
+    @brief that function is for add frame at the game. Check if there is something
+    diferent of frame and ifs not, adds the frame.
+    @param[in] Frame pointer that points to the current frame.
+*/
 void Animation::AddFrame(Frame *frame) {
     if (!frame) {
         ERROR("Null frame pointer");
@@ -64,6 +70,10 @@ void Animation::AddFrame(Frame *frame) {
     m_framesQuantity++;
 }
 
+/**
+    @brief that function is for update the componets of the Animation. Check if
+    is playing and draw the current frame.
+*/
 void Animation::ComponentUpdate() {
     if (m_isPlaying) {
         DrawCurrentFrame();

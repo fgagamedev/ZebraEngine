@@ -84,6 +84,10 @@ void GameObject::ComponentsUpdate() {
         }
 }
 
+/**
+    @brief that function is for add the components to the game
+    @param[in] Component pointer that points to the current component.
+*/
 void GameObject::AddComponent(Component *component) {
     auto type = component->GetType();
     auto it = m_components.find(type);
@@ -113,7 +117,9 @@ Component *GameObject::GetComponent(std::string name) {
  // INFO("Looking for null component " << name);
     return nullptr;
 }
-
+/**
+    @brief that function is for fix the updates that were done before.
+*/
 void GameObject::FixedUpdate() {
     for (auto key = m_components.begin(); key != m_components.end(); key++) {
         for (auto value : key->second) {
@@ -124,11 +130,10 @@ void GameObject::FixedUpdate() {
 }
 
 /**
-    @brief that function set the size based on width and height.
-    @param[in] width and height in centimeters. Both are poiting for their self.
-
+    @brief that function is for set the size based on width and height.
+    @param[in] width and height in centimeters.
 */
-void GameObject::SetSize(int width, int height{
+void GameObject::SetSize(int width, int height){
     m_width = width;
     m_height = height;
 }
@@ -137,6 +142,11 @@ bool GameObject::operator<(const GameObject &go) const {
     return m_layer < go.m_layer;
 }
 
+/**
+    @brief that function is for add velocity to the game.
+    @param[in] Vector velocity points for the variables x and y (horizontal and
+    vertical)
+*/
 void GameObject::AddVelocity(Vector velocity) {
     m_velocity->m_x += velocity.m_x;
     m_velocity->m_y += velocity.m_y;
@@ -144,10 +154,16 @@ void GameObject::AddVelocity(Vector velocity) {
 
 Vector GameObject::GetVelocity() { return *m_velocity; }
 
+/**
+    @brief that function is for add collisions to the game.
+    @param[in] GameObject pointer that points to the current gameobject.
+*/
 void GameObject::AddCollision(GameObject *gameobject) {
     m_colliding.push_back(gameobject);
 }
-
+/**
+    @brief that function is for clear the collisions tha were made before.
+*/
 void GameObject::ClearCollisions() { m_colliding.clear(); }
 
 std::vector<GameObject *> GameObject::GetCollisions() { return m_colliding; }

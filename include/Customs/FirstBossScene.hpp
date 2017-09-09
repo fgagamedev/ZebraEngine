@@ -25,6 +25,12 @@
 #include "Customs/FirstBossAttackScript.hpp"
 #include "Customs/FirstBossCentralEffectScript.hpp"
 
+/**
+    @file FirstBossScene.hpp
+    @brief Class that represents the creation of the First Boss Scene.
+    @copyright LGPL. MIT License.
+*/
+
 
 class FirstBossScene : public Scene {
 public:
