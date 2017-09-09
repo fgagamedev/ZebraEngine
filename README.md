@@ -1,5 +1,7 @@
 
-# TecProg 2017.2   [![Build Status](https://travis-ci.org/Tecprog-voID/voID.svg?branch=travis)](https://travis-ci.org/Tecprog-voID/voID)
+# TecProg 2017.2      
+[![tecprog](https://img.shields.io/badge/TecProg-2017--2-lightgrey.svg)]() [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]() [![Build Status](https://travis-ci.org/Tecprog-voID/voID.svg?branch=travis)](https://travis-ci.org/Tecprog-voID/voID)
+
 
 # VoiD
 

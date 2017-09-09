@@ -8,20 +8,30 @@
 
 #include <string>
 
-class UIButton : public Component {
-public:
-  // constructor and destructor
-  UIButton(GameObject *owner);
-  ~UIButton();
-  // overrides
-  std::string GetComponentName() override { return "UIButton"; };
-  void Start() override;
-  // uibutton methods
-  bool IsClicked();
-  bool IsOver();
+/*
+    @file UIButton.hpp
+    @brief Class that manages all game's buttons as 'quit' and 'start'.
+    @copyright MIT License.
+*/
 
-private:
-  Vector *m_position = nullptr;
+
+class UIButton : public Component {
+    public:
+
+        // Constructor and destructor
+        UIButton(GameObject *owner);
+        ~UIButton();
+
+        // Overrides
+        std::string GetComponentName() override { return "UIButton"; };
+        void Start() override;
+
+        // UIButton methods
+        bool IsClicked();
+        bool IsOver();
+
+    private:
+        Vector *m_position = nullptr;
 };
 
 #endif // __UI_BUTTON__

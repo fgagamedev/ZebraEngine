@@ -2,8 +2,19 @@
 #include "Globals/EngineGlobals.hpp"
 #include "Customs/CentralLightScript3.hpp"
 
+/*
+    @file UIButton.cpp
+    @brief Methods that manages(create and update) the forest script.
+    @copyright MIT License.
+*/
 
+// Constructor
 ForestActivatorScript::ForestActivatorScript(GameObject *owner) : Script(owner) {}
+
+/*
+    @brief Initializes the forest script.
+    @return void
+*/
 void ForestActivatorScript::Start() {
 
     CreateAnimations();
@@ -17,7 +28,12 @@ void ForestActivatorScript::Start() {
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
     }
 }
-void ForestActivatorScript::CreateAnimations(){
+
+/*
+    @brief Creates animations.
+    @return Void.
+*/
+void ForestActivatorScript::CreateAnimations() {
 
     auto forestactivatorSprite = new Image("assets/forestactivator.png", 0, 0,832, 64);
     auto forestactivatorAnimation = new Animation(GetOwner(), forestactivatorSprite);
@@ -32,13 +48,14 @@ void ForestActivatorScript::CreateAnimations(){
     forestactivatorAnimation->SetFramesPerSecond(9);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION", forestactivatorAnimation);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2", forestactivatorAnimation2);
-
-
 }
 
-
+/*
+    @brief Updates the animations components.
+    @return void.
+*/
 void ForestActivatorScript::ComponentUpdate() {
-
+    // Starts animator
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate==0 && runned==false) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate=1;
@@ -48,14 +65,17 @@ void ForestActivatorScript::ComponentUpdate() {
     if (runned && !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");
     }
+
     if (runned) {
         auto script = (CentralLightScript3*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("CENTRAL LIGHT 3")->GetComponent("CentralLightScript3");
         script->Activate();
-
     }
-
-
 }
+
+/*
+    @brief Updates the animations components.
+    @return void.
+*/
 void ForestActivatorScript::FixedComponentUpdate() {
 
 }

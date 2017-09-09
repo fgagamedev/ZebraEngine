@@ -15,19 +15,25 @@
 #include "Customs/QuitButtonScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+/*
+    @file EndScene1.hpp
+    @brief This class contains all attributes and methods that manages some of the scenes in the game.
+    @copyright MIT License.
+*/
+
 class EndScene1 : public Scene {
 public:
-  EndScene1();
-  virtual void OnActivation() override;
-  virtual void OnDeactivation() override;
-  virtual void OnShown() override;
-  virtual void OnHidden() override;
+    EndScene1();
+    virtual void OnActivation() override;
+    virtual void OnDeactivation() override;
+    virtual void OnShown() override;
+    virtual void OnHidden() override;
 
 private:
-  void CreateGameOver();
-  void CreateQuitButton();
-  int m_width_middle;
-  int m_height_middle;
+    void CreateGameOver();
+    void CreateQuitButton();
+    int m_width_middle;
+    int m_height_middle;
 
 };
 
