@@ -1,3 +1,9 @@
+/*
+    @file CameraSystem.hpp
+    @brief Class that manages the game image, 
+    including the scenes the zoom and speed that the screen moves.
+    @copyright LGPL. MIT License.
+*/
 #ifndef __CAMERA_H_SYSTEM__
 #define __CAMERA_H_SYSTEM__
 
@@ -65,18 +71,18 @@ class CameraSystem{
         CameraSystem();
         ~CameraSystem();
 
-        float proportionX;
-        float proportionY;
-        float beforePositionX;
-        float beforePositionY;
+        float m_proportionX;
+        float m_proportionY;
+        float m_beforePositionX;
+        float m_beforePositionY;
 
-        int cameraSpeed;
+        int m_cameraSpeed;
 
         bool isShaking;
         bool isLocked = true;
         bool isLerping = true;
 
-        Timer timer;
+        Timer m_timer;
 
         std::vector<GameObject*> m_gameObjects;
 
