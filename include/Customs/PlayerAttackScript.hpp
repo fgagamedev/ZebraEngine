@@ -17,6 +17,12 @@
 
 #include <string>
 
+/**
+    @file PlayerAttackScript.hpp
+    @brief Class that represents the Script of the player attack 
+    @copyright LGPL. MIT License.
+*/
+
 class PlayerAttackScript : public Script {
 
 public:
