@@ -16,7 +16,7 @@ void MenuAnimationScript::Start() {
 
 
 /**
-    @brief that function creates the menu animation. Create the MenuAnimationScriptAnimator
+    @brief that function creates the animation of the menu animstion. Create the MenuAnimationScriptAnimator
     as an animator, the mainSprite image, the main animation one and two.
     Set the frame and add the animations to the game.
 */
@@ -62,6 +62,6 @@ void MenuAnimationScript::ComponentUpdate() {
 }
 
 /**
-    @brief that function fixs the components update of the menu animation. 
+    @brief that function fixs the components update of the menu animation.
 */
 void MenuAnimationScript::FixedComponentUpdate() {}
