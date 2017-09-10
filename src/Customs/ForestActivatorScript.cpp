@@ -2,18 +2,17 @@
 #include "Globals/EngineGlobals.hpp"
 #include "Customs/CentralLightScript3.hpp"
 
-/*
+/**
     @file UIButton.cpp
     @brief Methods that manages(create and update) the forest script.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 // Constructor
 ForestActivatorScript::ForestActivatorScript(GameObject *owner) : Script(owner) {}
 
-/*
+/**
     @brief Initializes the forest script.
-    @return void
 */
 void ForestActivatorScript::Start() {
 
@@ -29,9 +28,8 @@ void ForestActivatorScript::Start() {
     }
 }
 
-/*
+/**
     @brief Creates animations.
-    @return Void.
 */
 void ForestActivatorScript::CreateAnimations() {
 
@@ -50,9 +48,8 @@ void ForestActivatorScript::CreateAnimations() {
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2", forestactivatorAnimation2);
 }
 
-/*
+/**
     @brief Updates the animations components.
-    @return void.
 */
 void ForestActivatorScript::ComponentUpdate() {
     // Starts animator
@@ -72,9 +69,8 @@ void ForestActivatorScript::ComponentUpdate() {
     }
 }
 
-/*
+/**
     @brief Updates the animations components.
-    @return void.
 */
 void ForestActivatorScript::FixedComponentUpdate() {
 

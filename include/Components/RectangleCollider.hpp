@@ -7,10 +7,10 @@
 #include "Math/Shapes.hpp"
 #include "Math/Vector.hpp"
 
-/*
+/**
     @file RectangleCollider.hpp
     @brief This class contains all attributes and methods that creates all collisions in-game.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 using namespace std;

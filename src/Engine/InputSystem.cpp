@@ -3,19 +3,18 @@
 #include "Engine/InputSystem.hpp"
 #include "Log/log.hpp"
 
-/*
+/**
     @file InputSystem.cpp
     @brief Methods for the actions of the buttons needed for playing the game.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 
 // Static variables initialization
 InputSystem *InputSystem::m_instance = 0;
 
-/*
+/**
     @brief Initializes InputSystem instance.
-    @return void
 */
 InputSystem::InputSystem() {
     SDL_PumpEvents();
@@ -35,7 +34,7 @@ InputSystem::~InputSystem() {
     m_oldStates = nullptr;
 }
 
-/*
+/**
     @brief Get the current instance of input system.
     @return m_instance.
 */
@@ -47,9 +46,8 @@ InputSystem *InputSystem::GetInstance() {
     return m_instance;
 }
 
-/*
+/**
     @brief Update the state of the input.
-    @return void.
 */
 void InputSystem::UpdateStates() {
     // Update old states to be equal to actual.
@@ -66,14 +64,14 @@ void InputSystem::UpdateStates() {
     m_mouseStates = SDL_GetMouseState(&m_mouseX, &m_mouseY);
 }
 
-/*
+/**
     @brief Get the current state of a button down on a keyboard.
     @param[in] key - state of a button from the keyboard.
     @return bool.
 */
 bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
     if (m_states[key] && !m_oldStates[key]) {
-        /*
+        /**
         char message[] = "Key down: ";
         strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
         INFO(message);
@@ -83,14 +81,14 @@ bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
     return false;
 }
 
-/*
+/**
     @brief Get the current state of a button up on a keyboard.
     @param[in] key - state of a button from the keyboard.
     @return bool.
 */
 bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
     if (!m_states[key] && m_oldStates[key]) {
-        /*
+        /**
         char message[] = "Key up: ";
         strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
         INFO(message);
@@ -100,14 +98,14 @@ bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
     return false;
 }
 
-/*
+/**
     @brief Get the current state of a pressed button up on a keyboard.
     @param[in] key - state of a button from the keyboard.
     @return bool.
 */
 bool InputSystem::GetKeyPressed(KeyboardInputGlobal key) {
     if (m_states[key]) {
-        /*
+        /**
         char message[] = "Key pressed: ";
         strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
         INFO(message);
@@ -117,7 +115,7 @@ bool InputSystem::GetKeyPressed(KeyboardInputGlobal key) {
     return false;
 }
 
-/*
+/**
     @brief Get the current state of a mouse pressed button, and returns the current button status
     pressed down.
     @param[in] button - state of a button from the mouse.
@@ -133,7 +131,7 @@ bool InputSystem::GetMouseButtonDown(MouseInputGlobal button) {
     return false;
 }
 
-/*
+/**
     @brief Get the current state of a mouse pressed button, and returns the current button status
     pressed up.
     @param[in] button - state of a button from the mouse.
@@ -149,7 +147,7 @@ bool InputSystem::GetMouseButtonUp(MouseInputGlobal button) {
     return false;
 }
 
-/*
+/**
     @brief Check if a mouse button was pressed.
     @param[in] button - state of a button from the mouse.
     @return bool.
@@ -161,7 +159,7 @@ bool InputSystem::GetMouseButtonPressed(MouseInputGlobal button) {
     return false;
 }
 
-/*
+/**
     @brief Defines the mouse position.
     @return position.
 */
@@ -171,10 +169,8 @@ std::pair<int, int> InputSystem::GetMousePosition() {
     return position;
 }
 
-
-/*
+/**
     @brief Count connected joysticks, and load them.
-    @return void.
 */
 void InputSystem::LoadGameControllers() {
     int quantity = SDL_NumJoysticks();
@@ -193,9 +189,8 @@ void InputSystem::LoadGameControllers() {
     }
 }
 
-/*
+/**
     @brief Update status of current joystick.
-    @return void.
 */
 void InputSystem::UpdateGameControllers() {
     CheckGameControllersConnections();
@@ -204,13 +199,12 @@ void InputSystem::UpdateGameControllers() {
     }
 }
 
-/*
+/**
     @brief Check connection status of current joystick.
-    @return void.
 */
 void InputSystem::CheckGameControllersConnections() {}
 
-/*
+/**
     @brief Defines the N'th game controller on the system.
     @param[in] index - the controller identifier.
     @return GameController.

@@ -1,10 +1,10 @@
 #ifndef __MENU_CONTROLLER__
 #define __MENU_CONTROLLER__
 
-/*
+/**
     @file MenuController.hpp
     @brief Class that defines methods and attributes for build and use the game menu.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 class MenuController {
