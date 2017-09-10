@@ -13,10 +13,10 @@
 
 #include <string>
 
-/*
+/**
     @file CentralLightScript2.hpp
     @brief This class contains all attributes and methods that manages the central light in the game.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 class CentralLightScript2 : public Script {

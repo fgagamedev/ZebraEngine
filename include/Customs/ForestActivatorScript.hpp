@@ -13,10 +13,10 @@
 
 #include <string>
 
-/*
+/**
     @file ForestActivator.hpp
     @brief Class that defines methods and attributes for activating the forest script.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 class ForestActivatorScript : public Script {
