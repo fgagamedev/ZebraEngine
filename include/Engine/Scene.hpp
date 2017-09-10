@@ -7,6 +7,12 @@
 #include <algorithm>
 #include <vector>
 
+/**
+    @file Scene.hpp
+    @brief Class that represents the scene of the game.
+    @copyright LGPL. MIT License.
+*/
+
 class Scene {
 public:
   // constructor and destructor

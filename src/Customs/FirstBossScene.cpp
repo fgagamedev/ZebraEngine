@@ -2,6 +2,10 @@
 
 FirstBossScene::FirstBossScene() {}
 
+/**
+    @brief that function is for when tha state is activated. Then is created the
+    map, player, boss, light, rain, show, thunder, player attack and hit.
+*/
 void FirstBossScene::OnActivation() {
     CreateMap();//This must be the first function to be called
     CreatePlayer();
@@ -27,17 +31,29 @@ void FirstBossScene::OnActivation() {
   */
 }
 
+/**
+    @brief that function is for when the state is deactivated, so nothing are
+    created.
+*/
 void FirstBossScene::OnDeactivation() {}
 
+/**
+    @brief that function is for when the state is shown. Nothing are create here.
+*/
 void FirstBossScene::OnShown() {
   //CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
   //CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
 }
 
+/**
+    @brief that function is for the state is hidden.
+*/
 void FirstBossScene::OnHidden() {}
 
 
-
+/**
+    @brief that function is for to create the map of the game.
+*/
 void FirstBossScene::CreateMap() {
   //Original resolution is 2048/2048
   //6144,6144 = 3x
@@ -53,6 +69,10 @@ void FirstBossScene::CreateMap() {
 
 }
 
+/**
+    @brief that function create the player when the state are active. After create,
+    they add the "nakedMan" (player) as a game object and add the player to the game.
+*/
 void FirstBossScene::CreatePlayer() {
     int xPos = 0, yPos = 0;
     xPos = EngineGlobals::screen_width / 2 - 96 / 2;
@@ -65,6 +85,10 @@ void FirstBossScene::CreatePlayer() {
     FirstBossController::GetInstance()->AddPlayer(nakedMan);
 }
 
+/**
+    @brief that function create the boss when the state are active. After create,
+    they add the "firstBoss" (boss) as a game object and add the boss to the game.
+*/
 void FirstBossScene::CreateBoss() {
 
     auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect",
@@ -84,6 +108,11 @@ void FirstBossScene::CreateBoss() {
     FirstBossController::GetInstance()->AddBoss(firstBoss);
 }
 
+
+/**
+    @brief that function create the first boss attack when the state are active. After create,
+    they add the "firstBossAttack" as a game object and add the boss attack.
+*/
 void FirstBossScene::CreateFirstBossAttack() {
 
     auto firstBossAttack = new GameObject("FirstBossAttack", new Vector(-4750,
@@ -98,6 +127,10 @@ void FirstBossScene::CreateFirstBossAttack() {
     FirstBossController::GetInstance()->AddTentacle(firstBossAttack);
 }
 
+/**
+    @brief that function create the player attack when the state are active. After create,
+    they add the "PlayerAttack" as a game object and add the player attack.
+*/
 void FirstBossScene::CreatePlayerAttack() {
 
     //Creating Bullets
@@ -114,6 +147,10 @@ void FirstBossScene::CreatePlayerAttack() {
   }
 }
 
+/**
+    @brief that function create the rain when the state are active. After create,
+    they add the "Rain" as a game object and add the rain to the game.
+*/
 void FirstBossScene::CreateRain() {
 
     auto rain = new GameObject("Rain", new Vector(0,0),1024,800,1);
@@ -121,6 +158,10 @@ void FirstBossScene::CreateRain() {
     AddGameObject(rain);
 }
 
+/**
+    @brief that function create the player hit when the state are active. After create,
+    they add the "Hit" as a game object and add the player attack.
+*/
 void FirstBossScene::CreatePlayerHit() {
 
     auto hit = new GameObject("Hit", new Vector(0,0),1024,800,1);
@@ -130,6 +171,10 @@ void FirstBossScene::CreatePlayerHit() {
 }
 
 
+/**
+    @brief that function create the thunder when the state are active. After create,
+    they add the "Rain" as a game object and add the thunder to the game.
+*/
 void FirstBossScene::CreateThunder() {
 
     auto thunder = new GameObject("Rain", new Vector(200,0),113,267,1);
@@ -138,6 +183,10 @@ void FirstBossScene::CreateThunder() {
 }
 
 
+/**
+    @brief that function create the snow when the state are active. After create,
+    they add the "Snow" as a game object and add the snow to the game.
+*/
 void FirstBossScene::CreateSnow(){
 
     auto snow = new GameObject("Snow", new Vector(0,0),1024,800,1);
@@ -145,6 +194,10 @@ void FirstBossScene::CreateSnow(){
     AddGameObject(snow);
 }
 
+/**
+    @brief that function create the light when the state are active. After create,
+    they add the "Light" as a game object and add the light to the game.
+*/
 void FirstBossScene::CreateLight() {
 
   auto light = new GameObject("Light", new Vector(0,0),2*1024,2*800,1);

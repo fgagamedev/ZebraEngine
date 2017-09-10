@@ -12,6 +12,12 @@
 
 #include <string>
 
+/**
+    @file GameOverScript.hpp
+    @brief Class that represents the scrip of the game over.
+    @copyright LGPL. MIT License.
+*/
+
 class GameOverScript : public Script {
 
 public:

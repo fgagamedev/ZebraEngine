@@ -3,6 +3,11 @@
 #include "Customs/NakedManScript.hpp"
 
 PlayerAttackScript::PlayerAttackScript(GameObject *owner) : Script(owner) {}
+
+/**
+    @brief that function starts the player attack, create animations and get
+    the component, scene and the GameObject to starts.
+*/
 void PlayerAttackScript::Start() {
 
     CreateAnimations();
@@ -21,6 +26,11 @@ void PlayerAttackScript::Start() {
 
 
 }
+
+/**
+    @brief that function create the animations of the game. First add the image,
+    and after that the image is renderer.
+*/
 void PlayerAttackScript::CreateAnimations(){
 
     // Renderer
@@ -30,10 +40,15 @@ void PlayerAttackScript::CreateAnimations(){
 }
 
 
+/**
+    @brief that function update the components of the "NakedMan" (the player of
+the game).
+*/
 void PlayerAttackScript::ComponentUpdate() {
 
 
-    player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
+    player =  SceneManager::GetInstance()->GetCurrentScene()->
+              GetGameObject("NakedMan");
     auto playerScript = (NakedManScript*)player->GetComponent("NakedManScript");
 
 
@@ -73,6 +88,10 @@ void PlayerAttackScript::ComponentUpdate() {
     }
 }
 
+/**
+    @brief that function fix the components update, using the game collision check,
+    to check the bullet speed.
+*/
 void PlayerAttackScript::FixedComponentUpdate() {
     GameCollisionCheck();
 
@@ -82,6 +101,10 @@ void PlayerAttackScript::FixedComponentUpdate() {
 
 }
 
+/**
+    @brief that function check the collision physics of the game. They get the
+    collisions, like the bullet, and check the velocity for exemple.
+*/
 void PlayerAttackScript::GameCollisionCheck() {
     for (auto obj : GetOwner()->GetCollisions()) {
         if (obj->GetTag() == "Bullet") {
@@ -105,6 +128,11 @@ void PlayerAttackScript::GameCollisionCheck() {
     }
 }
 
+/**
+    @brief that function set the shoots for the player of the game.
+    @param[in] When shoot is false, there are no shoots or bullets, and is the
+    opposite when shoot is true.
+*/
 void PlayerAttackScript::SetShoot(bool shoot){
     this->shoot = shoot;
 }

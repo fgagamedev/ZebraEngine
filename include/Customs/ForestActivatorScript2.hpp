@@ -13,6 +13,11 @@
 
 #include <string>
 
+/**
+    @file ForestActivatorScript2.hpp
+    @brief Class that represents the scrip activion of the Forest two.
+    @copyright LGPL. MIT License.
+*/
 
 class ForestActivatorScript2 : public Script {
 

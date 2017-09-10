@@ -9,6 +9,12 @@
 #include <string>
 #include <vector>
 
+/**
+    @file Animation.hpp
+    @brief Class that represents the entire game and manages the main screens.
+    @copyright LGPL. MIT License.
+*/
+
 class Animation : public Component {
 public:
   Animation(GameObject *owner, Image *image, bool playOnStart = false);

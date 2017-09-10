@@ -2,6 +2,11 @@
 #include "Globals/EngineGlobals.hpp"
 
 LightScript::LightScript(GameObject *owner) : Script(owner) {}
+
+/**
+    @brief that function starts the light script. Create the animation,
+    position, the animator and the input.
+*/
 void LightScript::Start() {
 
     CreateAnimations();
@@ -12,6 +17,11 @@ void LightScript::Start() {
     GetOwner()->SetZoomProportion(Vector(0,0));
 
 }
+
+/**
+    @brief that function creates the animations of the light script. Create the
+    light image, the light animation and animator.
+*/
 void LightScript::CreateAnimations(){
 
     auto lightImage = new Image("assets/luz.png",0,0,682, 512);
@@ -27,7 +37,10 @@ void LightScript::CreateAnimations(){
 
 }
 
-
+/**
+    @brief that function updates the components of the light script. Create the player
+    and get his instance, currante scene and object ("NakedMan")
+*/
 void LightScript::ComponentUpdate() {
     player = SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
     if (player) {
@@ -46,6 +59,10 @@ void LightScript::ComponentUpdate() {
     }
 }
 
+/**
+    @brief that function fixs the components update of the light script. Check if
+    there is a player and get his position x and y. 
+*/
 void LightScript::FixedComponentUpdate() {
     if (player) {
         position->m_x  =  player->GetPosition()->m_x -  GetOwner()->GetWidth()/2 + 40;
