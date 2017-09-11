@@ -3,6 +3,7 @@
 /**
     @file CircleRenderer.cpp
     @brief Manage circles rendered in the game.
+    @copyright MIT License.
 */
 CircleRenderer::CircleRenderer(GameObject *owner, Vector offset, float radius)
     : Component(owner, C_DRAW) {

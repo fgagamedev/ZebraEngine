@@ -16,19 +16,19 @@ using namespace std;
 
 class CollisionSystem {
 public:
-  static CollisionSystem *GetInstance();
-  void Update();
+    static CollisionSystem *GetInstance();
+    void Update();
 
 private:
-  CollisionSystem();
-  void DetectCollisions();
-  void PushColliders();
-  void CircleCircle(CircleCollider *c1, CircleCollider *c2);
-  void RectRect(RectangleCollider *r1, RectangleCollider *r2);
-  void CircleRect(CircleCollider *c, RectangleCollider *r);
+    CollisionSystem();
+    void DetectCollisions();
+    void PushColliders();
+    void CircleCircle(CircleCollider *c1, CircleCollider *c2);
+    void RectRect(RectangleCollider *r1, RectangleCollider *r2);
+    void CircleRect(CircleCollider *c, RectangleCollider *r);
 
-  static CollisionSystem *m_instance;
-  vector<Collider *> m_colliders;
+    static CollisionSystem *m_instance;
+    vector<Collider *> m_colliders;
 };
 
 #endif

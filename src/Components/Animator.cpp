@@ -3,6 +3,7 @@
 /**
     @file Animator.cpp
     @brief Manage the animations of the game.
+    @copyright MIT License.
 */
 
 /**
