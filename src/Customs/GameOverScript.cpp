@@ -1,6 +1,11 @@
 #include "Customs/GameOverScript.hpp"
 
 GameOverScript::GameOverScript(GameObject *owner) : Script(owner) {}
+
+/**
+    @brief that function starts the game over script. Create the animation,
+    position, the animator and the input.
+*/
 void GameOverScript::Start() {
 
     CreateAnimations();
@@ -11,6 +16,11 @@ void GameOverScript::Start() {
 
 
 }
+
+/**
+    @brief that function creates the animations. Create the snow image, the game
+    over animation and animator.
+*/
 void GameOverScript::CreateAnimations(){
 
     auto snowImage = new Image("assets/Ending_PARTE_FINAL.png",0,0,4096, 2048);
@@ -35,6 +45,9 @@ void GameOverScript::CreateAnimations(){
 }
 
 
+/**
+    @brief that function updates the components of the game over.
+*/
 void GameOverScript::ComponentUpdate() {
     animator->PlayAnimation("snowAnimation");
     if (play==1) {
@@ -53,6 +66,11 @@ void GameOverScript::ComponentUpdate() {
     }
 
 }
+
+/**
+    @brief that function fixs the component upddate of the game over Script.
+    They set the position x and y to zero.
+*/
 void GameOverScript::FixedComponentUpdate() {
 
     position->m_x=0;

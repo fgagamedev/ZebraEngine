@@ -1,14 +1,14 @@
 #include "Customs/AudioController.hpp"
 
-/*
+/**
     @file AudioController.cpp
     @brief Methods that manages all game's audio.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 AudioController *AudioController::m_instance = nullptr;
 
-/*
+/**
     @brief Checking the current game's audio state.
     @return m_instance.
 */
@@ -24,21 +24,19 @@ return m_instance;
 AudioController::AudioController() {
 } 
 
-/*
+/**
     @brief Initializes a sound object.
     @param[in] sound - the UI sound component.
-    @return void
 */
 void AudioController::AddAudio(UISound *sound) {
     // Add
     m_sounds.push_back(sound);
 }
 
-/*
+/**
     @brief Plays pre existent sounds.
     @param[in] sound - the name of the sound component.
     @param[in] loops - the number of times that the audio will play.
-    @return void
 */
 void AudioController::PlayAudio(string name, int loops){
     // Play
@@ -49,10 +47,9 @@ void AudioController::PlayAudio(string name, int loops){
     }
 }
 
-/*
+/**
     @brief Stops a current playing sound.
     @param[in] sound - the name of the sound component.
-    @return void
 */
 void AudioController::StopAudio(string name){
     // Stop
@@ -64,10 +61,9 @@ void AudioController::StopAudio(string name){
 
 }
 
-/*
+/**
     @brief Pause a current playing sound.
     @param[in] sound - the name of the sound component.
-    @return void
 */
 void AudioController::PauseAudio(string name){
     // Pause

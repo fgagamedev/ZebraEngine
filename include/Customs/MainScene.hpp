@@ -15,6 +15,12 @@
 #include "Customs/QuitButtonScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+/**
+    @file MainScene.hpp
+    @brief Class that represents the Main Scene of the game.
+    @copyright LGPL. MIT License.
+*/
+
 class MainScene : public Scene {
 public:
   MainScene();

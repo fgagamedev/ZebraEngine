@@ -1,18 +1,17 @@
 #include "Customs/EndScene1.hpp"
 //#include "Customs/MenuAnimationScript.hpp"
 
-/*
+/**
     @file EndScene1.cpp
     @brief Methods that manages the game over scene with a 'quit' button.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 // Constructor
 EndScene1::EndScene1() {}
 
-/*
+/**
     @brief On activation of the game over scene, creates 'quit' button.
-    @return void
 */
 void EndScene1::OnActivation() {
     m_width_middle = EngineGlobals::screen_width / 2;
@@ -21,27 +20,24 @@ void EndScene1::OnActivation() {
     CreateQuitButton();
 }
 
-/*
+/**
     @brief Method for handling deactivation state changing.
-    @return void
+    
 */
 void EndScene1::OnDeactivation() {}
 
-/*
+/**
     @brief Method for handling showing state changing.
-    @return void
 */
 void EndScene1::OnShown() {}
 
-/*
+/**
     @brief Method for handling on hidden state changing.
-    @return void
 */
 void EndScene1::OnHidden() {}
 
-/*
+/**
     @brief Creates game over scene.
-    @return void
 */
 void EndScene1::CreateGameOver() {
     int xMiddle = EngineGlobals::screen_width / 2 - 240;
@@ -51,9 +47,8 @@ void EndScene1::CreateGameOver() {
   AddGameObject(gameOver);
 }
 
-/*
+/**
     @brief Creates 'quit' button on the middle of the screen.
-    @return void
 */
 void EndScene1::CreateQuitButton() {
     int xMiddle = EngineGlobals::screen_width / 2 - 100;

@@ -6,6 +6,11 @@
 #include "Components/Animator.hpp"
 #include "Components/Script.hpp"
 
+/**
+    @file MenuAnimationScript.hpp
+    @brief Class that represents the scrip of the Menu Animation of the game.
+    @copyright LGPL. MIT License.
+*/
 
 class MenuAnimationScript : public Script {
 public:

@@ -9,12 +9,11 @@
 #include <utility>
 #include <vector>
 
-/*
+/**
     @file InputSystem.hpp
     @brief This class defines the actions of the buttons needed for playing the game.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
-
 
 class InputSystem {
 public:
@@ -41,10 +40,10 @@ private:
     InputSystem();
     ~InputSystem();
 
-     // Joystick handling
-     void LoadGameControllers();
-     void UpdateGameControllers();
-     void CheckGameControllersConnections();
+    // Joystick handling
+    void LoadGameControllers();
+    void UpdateGameControllers();
+    void CheckGameControllersConnections();
 
     // Private attributes
     static InputSystem *m_instance;

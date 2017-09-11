@@ -15,10 +15,10 @@
 #include "Customs/QuitButtonScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
-/*
+/**
     @file EndScene1.hpp
     @brief This class contains all attributes and methods that manages some of the scenes in the game.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 class EndScene1 : public Scene {

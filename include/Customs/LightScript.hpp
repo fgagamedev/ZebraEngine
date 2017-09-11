@@ -12,6 +12,12 @@
 
 #include <string>
 
+/**
+    @file LightScript.hpp
+    @brief Class that represents the scrip of light of the game.
+    @copyright LGPL. MIT License.
+*/
+
 class LightScript : public Script {
 
 public:

@@ -1,23 +1,22 @@
 #include "Customs/CentralLightScript2.hpp"
 #include "Globals/EngineGlobals.hpp"
 
-/*
+/**
     @file CentralLightScript.cpp
     @brief Methods that manages the central light during the game.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 
-/*
+/**
     @brief Initializes CentralLightScript instance.
     @param[in] GameObject *owner - owns the component.
 */
 CentralLightScript2::CentralLightScript2(GameObject *owner) : Script(owner) {}
 
 
-/*
+/**
     @brief Creates the animations in-game, with some of the gameobject properties.
-    @return void
 */
 void CentralLightScript2::Start() {
     CreateAnimations();
@@ -31,9 +30,8 @@ void CentralLightScript2::Start() {
     if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
 }
 
-/*
+/**
     @brief Positions the animations in-game, through the settings of frames, and image's position.
-    @return void
 */
 void CentralLightScript2::CreateAnimations(){
     auto centrallightSprite = new Image("assets/centro1.png", 0, 0,832, 64);
@@ -45,9 +43,8 @@ void CentralLightScript2::CreateAnimations(){
     centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION", centrallightAnimation);
 }
 
-/*
+/**
     @brief Updates the animator component by looking for a previous light animation.
-    @return void
 */
 void CentralLightScript2::ComponentUpdate() {
     if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active){
@@ -55,9 +52,8 @@ void CentralLightScript2::ComponentUpdate() {
     }
 }
 
-/*
-    @brief @brief Updates the animator component.
-    @return void
+/**
+    @brief Updates the animator component.
 */
 void CentralLightScript2::FixedComponentUpdate() {
 

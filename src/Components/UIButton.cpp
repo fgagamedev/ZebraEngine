@@ -6,24 +6,23 @@
 #include "Globals/InputGlobals.hpp"
 #include "Log/log.hpp"
 
-/*
+/**
     @file UIButton.cpp
     @brief Methods that manages all game's buttons as 'quit' and 'start'.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 UIButton::UIButton(GameObject *owner) : Component(owner, C_DRAW) {}
 
-/*
+/**
     @brief Creates a button.
-    @return Void.
 */
 void UIButton::Start() {
     // Case exists
     m_position = GetOwner()->GetPosition();
 }
 
-/*
+/**
     @brief Checking if mouse is over button and clicked.
     @return Boolean.
 */
@@ -33,7 +32,7 @@ bool UIButton::IsClicked() {
     return false;
   }
 
-/*
+/**
     @brief Gets button and mouse positions, and check if mouse is still there.
     @return Boolean.
 */

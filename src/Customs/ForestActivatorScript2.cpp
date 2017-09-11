@@ -1,9 +1,14 @@
+#include "Customs/CentralLightScript1.hpp"
 #include "Customs/ForestActivatorScript2.hpp"
 #include "Globals/EngineGlobals.hpp"
-#include "Customs/CentralLightScript1.hpp"
-ForestActivatorScript2::ForestActivatorScript2(GameObject *owner) : Script(owner) {}
-void ForestActivatorScript2::Start() {
 
+ForestActivatorScript2::ForestActivatorScript2(GameObject *owner) : Script(owner) {}
+
+/**
+    @brief that function starts the activion of the forest 2. Create the animation,
+    position, animator, controller, input and the map.
+*/
+void ForestActivatorScript2::Start() {
     CreateAnimations();
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -15,6 +20,11 @@ void ForestActivatorScript2::Start() {
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
     }
 }
+
+/**
+    @brief that function create the animations for the forest. Create the image of
+    the forest and the animation of the forest.
+*/
 void ForestActivatorScript2::CreateAnimations(){
 
     auto forestactivatorSprite = new Image("assets/forestactivator.png", 0, 0,832, 64);
@@ -36,6 +46,9 @@ void ForestActivatorScript2::CreateAnimations(){
 }
 
 
+/**
+    @brief that function updates the components of the forest two.
+*/
 void ForestActivatorScript2::ComponentUpdate() {
 
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate==0 && runned==false) {
@@ -49,10 +62,16 @@ void ForestActivatorScript2::ComponentUpdate() {
     }
 
     if (runned) {
-        auto script = (CentralLightScript1*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("CENTRAL LIGHT 1")->GetComponent("CentralLightScript1");
+        auto script = (CentralLightScript1*)SceneManager::GetInstance()->
+                       GetCurrentScene()->GetGameObject("CENTRAL LIGHT 1")->
+                       GetComponent("CentralLightScript1");
         script->Activate();
     }
 }
+
+/**
+    @brief that function fixs the components updates of the forest two.
+*/
 void ForestActivatorScript2::FixedComponentUpdate() {
 
 }

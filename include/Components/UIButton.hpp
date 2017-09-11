@@ -8,10 +8,10 @@
 
 #include <string>
 
-/*
+/**
     @file UIButton.hpp
     @brief Class that manages all game's buttons as 'quit' and 'start'.
-    @copyright MIT License.
+    @copyright LGPL. MIT License.
 */
 
 

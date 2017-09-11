@@ -4,6 +4,10 @@
 
 MenuAnimationScript::MenuAnimationScript(GameObject *owner) : Script(owner) {}
 
+/**
+    @brief that function starts the menu animation. Create the animation,
+    position and the animator.
+*/
 void MenuAnimationScript::Start() {
     CreateAnimations();
     position = GetOwner()->GetPosition();
@@ -11,6 +15,11 @@ void MenuAnimationScript::Start() {
 }
 
 
+/**
+    @brief that function creates the animation of the menu animstion. Create the MenuAnimationScriptAnimator
+    as an animator, the mainSprite image, the main animation one and two.
+    Set the frame and add the animations to the game.
+*/
 void MenuAnimationScript::CreateAnimations() {
     // animator
     auto MenuAnimationScriptAnimator = new Animator(GetOwner());
@@ -35,6 +44,9 @@ void MenuAnimationScript::CreateAnimations() {
     MenuAnimationScriptAnimator->AddAnimation("mainAnimation2", mainAnimation2);
 }
 
+/**
+    @brief that function updates the components of the menu animation.
+*/
 void MenuAnimationScript::ComponentUpdate() {
     if (!animator->IsPlaying("mainAnimation") && !initialanimation) {
         initialanimation = true;
@@ -49,4 +61,7 @@ void MenuAnimationScript::ComponentUpdate() {
     }
 }
 
+/**
+    @brief that function fixs the components update of the menu animation.
+*/
 void MenuAnimationScript::FixedComponentUpdate() {}
