@@ -1,4 +1,4 @@
-/*
+/**
     @file Script.cpp
     @brief Class responsible for starting the game, creating an owner.
     @copyright LGPL. MIT License.

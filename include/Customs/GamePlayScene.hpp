@@ -1,3 +1,9 @@
+/**
+    @file GamePlayScene.hpp
+    @brief Class responsible for creating and 
+    activating the information needed for game scenes.
+    @copyright LGPL. MIT License.
+*/
 #ifndef __GAMEPLAYSCENE__
 #define __GAMEPLAYSCENE__
 

@@ -1,4 +1,4 @@
-/*
+/**
     @file Script.hpp
     @brief Class responsible for starting the game, creating an owner.
     @copyright LGPL. MIT License.
@@ -10,12 +10,6 @@
 #include "Engine/GameObject.hpp"
 
 #include <utility>
-
-/**
-    @file Script.hpp
-    @brief Class that represents the script of the game.
-    @copyright LGPL. MIT License.
-*/
 
 class Script : public Component {
 	public:
