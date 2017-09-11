@@ -52,7 +52,7 @@ void SnowActivatorScript::CreateAnimations(){
 }
 
 /**
-    @brief Updates the component's status/ changes.
+    @brief Updates the component's status/ changes during the game.
 */
 void SnowActivatorScript::ComponentUpdate() {
 
