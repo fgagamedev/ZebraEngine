@@ -1,5 +1,5 @@
 /*
-    @file Animation.hpp
+    @file Animation.cpp
     @brief Class that manages animated game behavior, 
     such as game behavior and picture frames.
     @copyright LGPL. MIT License.
