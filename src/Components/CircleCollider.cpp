@@ -1,5 +1,17 @@
 #include "Components/CircleCollider.hpp"
+/**
+    @file CircleCollider.cpp
+    @brief Responsible for managing the animation of a collision.
+    @copyright MIT License.
+*/
 
+/**
+    @brief Sets the size of the circle rendered.
+    @param[in] owner.
+    @param[in] offset.
+    @param[in] radius float value to set the radius of the circle.
+    @param[in] layer is passed as a parameter but not used yet.
+*/
 CircleCollider::CircleCollider(GameObject *owner, Vector &offset, float radius,
                                int layer)
     : Collider(owner, layer) {
