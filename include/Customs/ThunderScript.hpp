@@ -13,22 +13,23 @@
 #include <string>
 
 class ThunderScript : public Script {
-
 public:
-  ThunderScript(GameObject *owner);
-  std::string GetComponentName() override { return "ThunderScript"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
+    ThunderScript(GameObject *owner);
+    std::string GetComponentName() override {
+        return "ThunderScript";
+    };
+    void FixedComponentUpdate() override;
+    void Start() override;
 
 protected:
-  void ComponentUpdate() override;
+    void ComponentUpdate() override;
+
 private:
-  void CreateAnimations();
-  InputSystem *input = nullptr;
-  Animator *animator = nullptr;
-  Vector *position = nullptr;
-  int play=0;
+    void CreateAnimations();
+    InputSystem *input = nullptr;
+    Animator *animator = nullptr;
+    Vector *position = nullptr;
+    int play=0;
 
 };
-
 #endif

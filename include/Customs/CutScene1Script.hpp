@@ -16,23 +16,28 @@
 class CutScene1Script : public Script {
 
 public:
-  CutScene1Script(GameObject *owner);
-  std::string GetComponentName() override { return "CutScene1Script"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
-  void Activate(){active = true;}
+    CutScene1Script(GameObject *owner);
+    std::string GetComponentName() override {
+        return "CutScene1Script";
+    };
+    void FixedComponentUpdate() override;
+    void Start() override;
+    void Activate() {
+        active = true;
+    }
 
 protected:
-  void ComponentUpdate() override;
+    void ComponentUpdate() override;
+
 private:
-  bool active=false;
-  Timer time;
-  void CreateAnimations();
-  InputSystem *input = nullptr;
-   GameController* gamecontroller = nullptr;
-  Animator *animator = nullptr;
-  Vector *position = nullptr;
-  int play=0;
+    bool active=false;
+    Timer time;
+    void CreateAnimations();
+    InputSystem *input = nullptr;
+    GameController* gamecontroller = nullptr;
+    Animator *animator = nullptr;
+    Vector *position = nullptr;
+    int play=0;
 
 };
 #endif
