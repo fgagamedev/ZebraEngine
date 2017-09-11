@@ -2,8 +2,20 @@
 #include "Globals/EngineGlobals.hpp"
 #include "Customs/CentralLightScript2.hpp"
 #include "Customs/MapScript.hpp"
+/**
+    @file SnowActivatorScript.cpp
+    @brief Manages the snow scenario during the game.
+    @copyright MIT License.
+*/
 
+/**
+    @brief Constructor for the class SnowActivatorScript.
+*/
 SnowActivatorScript::SnowActivatorScript(GameObject *owner) : Script(owner) {}
+
+/**
+    @brief Sets the SnowActivator first definitions.
+*/
 void SnowActivatorScript::Start() {
 
     CreateAnimations();
@@ -18,6 +30,9 @@ void SnowActivatorScript::Start() {
     }
 }
 
+/**
+    @brief Builds the snow animations.
+*/
 void SnowActivatorScript::CreateAnimations(){
 
     auto snowactivatorSprite = new Image("assets/snowactivator.png", 0, 0,832, 64);
@@ -36,9 +51,12 @@ void SnowActivatorScript::CreateAnimations(){
 
 }
 
+/**
+    @brief Updates the component's status/ changes.
+*/
 void SnowActivatorScript::ComponentUpdate() {
 
-    if (!animator->IsPlaying("SNOW ACTIVATOR ANIMATION") && activate==0 && runned==false) {
+    if (!animator->IsPlaying("SNOW ACTIVATOR ANIMATION") && activate == 0 && runned == false) {
         animator->PlayAnimation("SNOW ACTIVATOR ANIMATION");
         activate=1;
         runned=true;
@@ -55,7 +73,6 @@ void SnowActivatorScript::ComponentUpdate() {
         map->rightWalls[49].m_y=0;
         map->rightWalls[49].m_w=0;
         map->rightWalls[49].m_h=0;
-        //map->rightWallsAmmount-=1;
         map->rightWallsOriginal[49].m_x=0;
         map->rightWallsOriginal[49].m_y=0;
         map->rightWallsOriginal[49].m_w=0;
