@@ -1,5 +1,5 @@
-#include "Customs/PlayButtonScript.h"
-#include "Customs/AudioController.h"
+#include "Customs/PlayButtonScript.hpp"
+#include "Customs/AudioController.hpp"
 
 PlayButtonScript::PlayButtonScript(GameObject *owner) : Script(owner) {}
 

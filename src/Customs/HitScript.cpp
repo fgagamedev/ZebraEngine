@@ -1,5 +1,5 @@
-#include "Customs/HitScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/HitScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 HitScript::HitScript(GameObject *owner) : Script(owner) {}
 void HitScript::Start() {

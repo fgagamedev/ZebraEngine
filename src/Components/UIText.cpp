@@ -1,4 +1,4 @@
-#include "Components/UIText.h"
+#include "Components/UIText.hpp"
 
 UIText::UIText(GameObject *owner, string message, string fontPath, int size,
                Uint8 r, Uint8 g, Uint8 b, Uint8 a, Uint8 mode)

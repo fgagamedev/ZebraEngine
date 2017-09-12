@@ -1,7 +1,12 @@
-#include "Customs/MainScene.h"
-#include "Customs/MenuAnimationScript.h"
+#include "Customs/MainScene.hpp"
+#include "Customs/MenuAnimationScript.hpp"
+
 MainScene::MainScene() {}
 
+/**
+    @brief that function is for when the state is actived, and create the logo,
+    playButton, QuitButton, the music and animation.
+*/
 void MainScene::OnActivation() {
   m_width_middle = EngineGlobals::screen_width / 2;
   m_height_middle = EngineGlobals::screen_height / 2;
@@ -15,13 +20,29 @@ void MainScene::OnActivation() {
 
 }
 
+/**
+    @brief that function is for when the state is deactived and because of that,
+    nothing is created.
+*/
 void MainScene::OnDeactivation() {}
 
+/**
+    @brief that function is for when the state is on show and because of that,
+    nothing is created.
+*/
 void MainScene::OnShown() {}
 
+/**
+    @brief that function is for when the state is on hidden and because of that,
+    nothing is created.
+*/
 void MainScene::OnHidden() {}
 
 
+/**
+    @brief that function create the logo of the game. Select the place of the logo,
+    then create the logo as a game object. After create the logo image and renderer it.
+*/
 void MainScene::CreateLogo() {
   int xMiddle = EngineGlobals::screen_width / 2 - 240;
 
@@ -33,6 +54,10 @@ void MainScene::CreateLogo() {
   AddGameObject(logo);
 }
 
+/**
+    @brief that function create the play button for the game starts. Set the place of
+    the button, create the "Play" as a GameObject, the text of it, the button and the sound.
+*/
 void MainScene::CreatePlayButton() {
   int xMiddle = EngineGlobals::screen_width / 2 - 100;
 
@@ -50,6 +75,10 @@ void MainScene::CreatePlayButton() {
   AddGameObject(play);
 }
 
+/**
+    @brief that function create the play button for quit the game. Set the place of
+    the button, create the "Quit" as a GameObject, the text of it, the button and the sound.
+*/
 void MainScene::CreateQuitButton() {
   int xMiddle = EngineGlobals::screen_width / 2 - 100;
 
@@ -66,6 +95,12 @@ void MainScene::CreateQuitButton() {
 
   AddGameObject(quit);
 }
+
+/**
+    @brief that function create the animation of the main scene of the game. Add
+    the backgroundAnimation as a GameObject and the backgroundAnimationScript as a
+    MenuAnimationScript.
+*/
 void MainScene::CreateAnimation(){
 
 auto BackgroundAnimation = new GameObject("BackgroundAnimation", new Vector(0 ,0),1024,800,0);
@@ -74,6 +109,10 @@ auto BackgroundAnimation = new GameObject("BackgroundAnimation", new Vector(0 ,0
 }
 
 
+/**
+    @brief that function create the music theme of the game. Add the music as a
+    GameObject and the themeMusic as a UISound. 
+*/
 void MainScene::CreateMusic(){
 
   auto music = new GameObject("Music", new Vector(200, 200), 200, 100);

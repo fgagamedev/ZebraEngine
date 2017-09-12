@@ -1,3 +1,8 @@
+
+# TecProg 2017.2      
+[![tecprog](https://img.shields.io/badge/TecProg-2017--2-lightgrey.svg)]() [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]() [![Build Status](https://travis-ci.org/Tecprog-voID/voID.svg?branch=travis)](https://travis-ci.org/Tecprog-voID/voID)
+
+
 # VoiD
 
 VoiD é um jogo single-player de hack and slash e boss fight, exclusivamente para PC.
@@ -14,19 +19,11 @@ VoiD é um jogo single-player de hack and slash e boss fight, exclusivamente par
 <b>Projectile:</b>  Right Mouse   / RT <br>
 <b>Dash:</b>        Space         / RB <br>
 
-# Team
-Desenvolvimento
+# Contribuição
+Para contribuir com o projeto você deve seguir o padrão estabelecido na folha de estilo a seguir
+https://github.com/Tecprog-voID/voID/wiki/Folha-de-Estilo
 
-| Nome	| Email | GitHub | Papel|
-|:-----:|:-----:|:------:|:------:|
-| Arthur Barbosa Diniz | arthurbdiniz@gmail.com | @arthurbdiniz | Desenvolvedor | 
-| Vitor Falcão Costa | vitorfhcosta@gmail.com | @vitorfhc | Desenvolvedor | 
-| Walyson Maxwel Dias | walysonmaxwel@hotmail.com | @moorphe | Desenvolvedor | 
-| Sarah Wahrhaftig |  |  | Artista 2D | 
-| Lucas Gabriel Caldeira |  |  | Artista 2D | 
-| Gabriel Andrade de Souza |  |  | Músico | 
-
-# Installing and running
+# Instalação e execução
 
 ## Dependencies
 

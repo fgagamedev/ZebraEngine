@@ -1,4 +1,4 @@
-#include "Engine/Timer.h"
+#include "Engine/Timer.hpp"
 
 Timer::Timer(){time = 0;}
 void Timer::Update(float dt){time+=dt;}

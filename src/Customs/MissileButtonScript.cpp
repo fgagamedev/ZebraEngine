@@ -1,4 +1,4 @@
-#include "Customs/MissileButtonScript.h"
+#include "Customs/MissileButtonScript.hpp"
 
 MissileButtonScript::MissileButtonScript(GameObject *owner) : Script(owner) {}
 

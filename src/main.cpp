@@ -1,4 +1,4 @@
-#include "Engine/SDLSystem.h"
+#include "Engine/SDLSystem.hpp"
 
 int main() {
 

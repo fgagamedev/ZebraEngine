@@ -1,5 +1,5 @@
-#include "Customs/SdlLogoScript.h"
-#include "Globals/EngineGlobals.h"
+#include "Customs/SdlLogoScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 SdlLogoScript::SdlLogoScript(GameObject *owner) : Script(owner) {}
 void SdlLogoScript::Start() {

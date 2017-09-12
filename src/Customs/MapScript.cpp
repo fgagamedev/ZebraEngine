@@ -1,4 +1,5 @@
-#include "Customs/MapScript.h"
+#include "Customs/MapScript.hpp"
+
 #include <stdio.h>
 MapScript::MapScript(GameObject *owner) : Script(owner) {}
 

@@ -1,4 +1,4 @@
-#include "Engine/Frame.h"
+#include "Engine/Frame.hpp"
 
 Frame::Frame(int x, int y, int width, int height) {
   srcRect.x = x;

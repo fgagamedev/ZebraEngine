@@ -1,63 +1,75 @@
-#include "Customs/AudioController.h"
+#include "Customs/AudioController.hpp"
 
+/**
+    @file AudioController.cpp
+    @brief Methods that manages all game's audio.
+    @copyright LGPL. MIT License.
+*/
 
 AudioController *AudioController::m_instance = nullptr;
 
-AudioController *AudioController::GetInstance() { //Singleton class
-  if (!m_instance)
-    m_instance = new AudioController();
-
-  return m_instance;
+/**
+    @brief Checking the current game's audio state.
+    @return m_instance.
+*/
+AudioController *AudioController::GetInstance() { 
+    //Singleton class
+    if (!m_instance){
+        m_instance = new AudioController();
+    }
+return m_instance;
 }
 
-AudioController::AudioController() {} //Constructor void
+//Constructor void
+AudioController::AudioController() {
+} 
 
+/**
+    @brief Initializes a sound object.
+    @param[in] sound - the UI sound component.
+*/
+void AudioController::AddAudio(UISound *sound) {
+    // Add
+    m_sounds.push_back(sound);
+}
 
-/** Add **/
-void AudioController::AddAudio(UISound *sound) { m_sounds.push_back(sound); }
-
-
-
-
-/** Play **/
+/**
+    @brief Plays pre existent sounds.
+    @param[in] sound - the name of the sound component.
+    @param[in] loops - the number of times that the audio will play.
+*/
 void AudioController::PlayAudio(string name, int loops){
-  for (auto sound : m_sounds) {
-      if(sound->GetMessage() == name){
-        sound->Play(loops, -1);
-      }
-
-   }
-
+    // Play
+    for (auto sound : m_sounds) {
+        if(sound->GetMessage() == name) {
+            sound->Play(loops, -1);
+        }
+    }
 }
 
-/** Stop **/
+/**
+    @brief Stops a current playing sound.
+    @param[in] sound - the name of the sound component.
+*/
 void AudioController::StopAudio(string name){
-  for (auto sound : m_sounds) {
-      if(sound->GetMessage() == name){
-        sound->Stop(-1);
-      }
-
-   }
+    // Stop
+    for (auto sound : m_sounds) {
+        if(sound->GetMessage() == name) {
+            sound->Stop(-1);
+        }
+    }
 
 }
 
-/** Pause **/
+/**
+    @brief Pause a current playing sound.
+    @param[in] sound - the name of the sound component.
+*/
 void AudioController::PauseAudio(string name){
-  for (auto sound : m_sounds) {
-      if(sound->GetMessage() == name){
-        sound->Stop(-1);
-      }
-
-   }
-
+    // Pause
+    for (auto sound : m_sounds) {
+        if(sound->GetMessage() == name){
+            sound->Stop(-1);
+        }
+    }
 }
-
-
-
-
-
-//void FirstBossController::AddInsideBossFx(GameObject *bossInsideFx) {m_bossInsideFx = bossInsideFx; }
-
-
-
-
