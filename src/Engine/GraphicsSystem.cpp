@@ -5,6 +5,10 @@
 #include "Log/log.hpp"
 
 #include <iostream>
+/**
+	@file GraphicsSystem.cpp
+	@copyright MIT License.
+*/
 
 GraphicsSystem *GraphicsSystem::m_instance = 0;
 
@@ -27,11 +31,6 @@ void GraphicsSystem::Draw(Image *img, Vector *position,
     dest.x = position->m_x;
     dest.y = position->m_y;
 
-  /* SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), 0, 255, 0, 255);
-     SDL_RenderDrawRect(SDLSystem::GetInstance()->GetRenderer(), &dest);
-     SDL_RenderDrawLine(SDLSystem::GetInstance()->GetRenderer(), 0, 0, dest.x,dest.y);        
-  */
-
     int result;
     result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
                             img->GetTexture(), img->GetRect(), &dest,
@@ -50,10 +49,6 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,int de
     dest.x = position->m_x;
     dest.y = position->m_y;
 
-  /* SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), 0, 255, 0,255);
-     SDL_RenderDrawRect(SDLSystem::GetInstance()->GetRenderer(), &dest);
-     SDL_RenderDrawLine(SDLSystem::GetInstance()->GetRenderer(), 0, 0, dest.x,dest.y);
-  */
 
     int result;
     result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
@@ -71,12 +66,12 @@ void GraphicsSystem::DrawText(SDL_Texture *texture, SDL_Rect *destRect) {
 }
 
 void GraphicsSystem::DrawPoint(Vector point) {
-    int result = SDL_RenderDrawPoint(SDLSystem::GetInstance()->GetRenderer(), 
+    int result = SDL_RenderDrawPoint(SDLSystem::GetInstance()->GetRenderer(),
     point.m_x, point.m_y);
 
     if (result) {
-    SDL_ERROR("Drawing point error");
-  }
+        SDL_ERROR("Drawing point error");
+    }
 }
 
 void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 r, Uint8 g,
@@ -109,15 +104,15 @@ void GraphicsSystem::DrawFillCircle(Vector &center, float radius, Uint8 r,
         int result = SDL_RenderDrawLine(SDLSystem::GetInstance()->GetRenderer(),
         center.m_x, center.m_y, point.m_x, point.m_y);
 
-    if (result < 0) {
-        ERROR(SDL_GetError());
+        if (result < 0) {
+            ERROR(SDL_GetError());
+        }
     }
-  }
 }
 
 void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
                                        Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
-  
+
     SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), r, g, b, a);
 
     SDL_Rect rect;
@@ -128,9 +123,9 @@ void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
 
     int result = SDL_RenderFillRect(SDLSystem::GetInstance()->GetRenderer(), &rect);
 
-  if (result < 0) {
-      ERROR(SDL_GetError());
-  }
+    if (result < 0) {
+        ERROR(SDL_GetError());
+    }
 }
 
 void GraphicsSystem::DrawFillRectangle(SDL_Rect* source, int width, int height,

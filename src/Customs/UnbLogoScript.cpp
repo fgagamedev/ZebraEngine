@@ -1,7 +1,19 @@
 #include "Customs/UnbLogoScript.hpp"
 #include "Globals/EngineGlobals.hpp"
+/**
+	@file UnbLogoScript.cpp
+	@brief Creates the UnB's symbol that shows up during the game opening.
+	@copyright MIT License.
+*/
 
+/**
+    @brief Constructor for the classe UnbLogoScript.
+*/
 UnbLogoScript::UnbLogoScript(GameObject *owner) : Script(owner) {}
+
+/**
+    @brief Sets the initial definitions when starting the animation.
+*/
 void UnbLogoScript::Start() {
 
     CreateAnimations();
@@ -13,6 +25,9 @@ void UnbLogoScript::Start() {
 
 }
 
+/**
+    @brief Generates the animations on the screen.
+*/
 void UnbLogoScript::CreateAnimations(){
 
     auto unb_LogoSprite = new Image("assets/introunb.png", 0, 0, 5115, 512);
@@ -29,6 +44,9 @@ void UnbLogoScript::CreateAnimations(){
     unbAnimator->AddAnimation("UNB ANIMATION", unbAnimation);
 }
 
+/**
+    @brief Handles with changes on the component.
+*/
 void UnbLogoScript::ComponentUpdate() {
     if (gamecontroller) {
         if (gamecontroller->GetButtonDown(GC_INPUT_X)) {
@@ -41,8 +59,11 @@ void UnbLogoScript::ComponentUpdate() {
 
 }
 
+/**
+    @brief Updates the component's status every second and stops the animations after
+    100 seconds.
+*/
 void UnbLogoScript::FixedComponentUpdate() {
-
     time.Update(1);
 
     animator->PlayAnimation("UNB ANIMATION");
@@ -50,23 +71,4 @@ void UnbLogoScript::FixedComponentUpdate() {
     if (time.GetTime()>=100) {
         animator->StopAllAnimations();
     }
-
-/*
-if(!animator->IsPlaying("UNB ANIMATION")){
-printf("%f\n",time.GetTime());
-time.Restart();
-animator->PlayAnimation("UNB ANIMATION");
-}time.Update(1);
-
-
-if(time.GetTime()>=90){
-animator->PlayAnimation("SDL ANIMATION");
-}
-if(time.GetTime()>=160){
-animator->StopAllAnimations();
-}
-
-if(animator->IsPlaying("UNB ANIMATION"))
-time.Update(1);
-*/
 }

@@ -1,5 +1,13 @@
 #include "Customs/FirstBossScript.hpp"
+/**
+    @file FirstBossScript.cpp
+    @brief Creates and handles with the first boss behavior.
+    @copyright MIT License.
+*/
 
+/**
+    @brief Constructor for the class FirstBossScript.
+*/
 FirstBossScript::FirstBossScript(GameObject *owner) : Script(owner) {}
 
 void FirstBossScript::Start() {
@@ -22,6 +30,10 @@ void FirstBossScript::Start() {
     }
 }
 
+/**
+    @brief Creates logic behind the firs boss animations to be shown during the
+    game.
+*/
 void FirstBossScript::CreateAnimations() {
 
     auto firstBossImage = new Image("assets/boss1.png",0,0,1896, 324);
@@ -45,14 +57,14 @@ void FirstBossScript::CreateAnimations() {
         }
     }
 
-    //Second Attack
+    // Second Attack
     auto firstBossFallAnimation = new Animation(GetOwner(),firstBossJumpImage);
     for (int i = 5; i > 0; i--) {
-        firstBossFallAnimation->AddFrame(new Frame(i * 236,0, 236, 406));
-        firstBossFallAnimation->AddFrame(new Frame(i * 236,0, 236, 406));
+        firstBossFallAnimation->AddFrame(new Frame(i * 236, 0, 236, 406));
+        firstBossFallAnimation->AddFrame(new Frame(i * 236, 0, 236, 406));
     }
 
-    // animator
+    // Animator
     auto firstBossAnimator = new Animator(GetOwner());
     firstBossAnimator->AddAnimation("firstBossAnimation", firstBossAnimation);
     firstBossAnimator->AddAnimation("firstBossJumpAnimation",
@@ -61,28 +73,25 @@ void FirstBossScript::CreateAnimations() {
                                     firstBossFallAnimation);
 }
 
+/**
+    @brief Decides what happens to the boss depending on the game's circumstances.
+*/
 void FirstBossScript::ComponentUpdate() {
-    /*Debug Collider
-    auto vec = Vector(firstBossCollider->GetRectanglePoint().m_x,
-                      firstBossCollider->GetRectanglePoint().m_y);
-    GraphicsSystem::GetInstance()->DrawFillRectangle(vec,
-                                                     GetOwner()->GetWidth(),
-                                                     GetOwner()->GetHeight(),
-                                                     255,0,0,100);*/
 
     if (!SecondAttack && !SecondAttackFall) {
-        animator->PlayAnimation("firstBossAnimation"); //Idle animation
-
+        //Idle animation
+        animator->PlayAnimation("firstBossAnimation");
     }
 
     if (input->GetKeyPressed(INPUT_N)) {
         SecondAttack = true;
         animator->PlayAnimation("firstBossJumpAnimation");
     }
-
-    //animator->PlayAnimation("firstBossJumpAnimation");
 }
 
+/**
+    @brief Handles with the boss behavior depending on which attack is being shot.
+*/
 void FirstBossScript::FixedComponentUpdate() {
     if (FirstAttack) {
         timerFirstAttackCooldown.Update(EngineGlobals::fixed_update_interval);
@@ -105,7 +114,7 @@ void FirstBossScript::FixedComponentUpdate() {
     Attack();
 
     if (shake) {
-        //CameraShake(intensity,duration in seconds)
+        // CameraShake(intensity, duration in seconds)
         CameraSystem::GetInstance()->CameraShake(8,1,
                                 SceneManager::GetInstance()->GetCurrentScene());
         if (!CameraSystem::GetInstance()->IsShaking()) {
@@ -114,38 +123,41 @@ void FirstBossScript::FixedComponentUpdate() {
     }
 }
 
+/**
+    @brief Manages the shot's position and its behavior, the time it takes to
+    happen, etc.
+*/
 void FirstBossScript::Attack() {
     if (GetOwner()->active) {
-        //rand first attack or second attack
-        if (timerAttackCooldown.GetTime() >= 9*1000) { // chosse new number
+        // Rand first attack or second attack
+        if (timerAttackCooldown.GetTime() >= 9*1000) {
+            // Choose a new number
             randNum = rand() % 2;
             timerAttackCooldown.Restart();
-            //randNumber = 1;
             cout << randNum << endl;
         }
 
         if (randNum == 0 && SecondAttackFall == false) {
-            //cout << "First Attack" << endl;
             SecondAttack = true;
             animator->PlayAnimation("firstBossJumpAnimation");
         }
 
         if (randNum == 1) {
-            //cout << "Second Attack" << endl;
             FirstAttack = true;
-            /** First Attack **/
+            // First Attack
             if (timerFirstAttackCooldown.GetTime() >= 2*1000
                     && firstAttackCounter < 3) {
                 FirstBossController::GetInstance()->FirstAttackSurge();
                 timerFirstAttackCooldown.Restart();
                 firstAttackCounter++;
-                //delay for next sord
+                // Delay for next sord
             }
-            if (firstAttackCounter == 3) { //Activate timer to gone tentacle
+            if (firstAttackCounter == 3) {
+                // Activate timer to gone tentacle
                 goneFirstAttack = true;
             }
 
-            //wait 6 seconds to make attack gone
+            // Wait 6 seconds to make attack gone
             if (timerFirstAttackGone.GetTime() >= 2*1000) {
                 FirstBossController::GetInstance()->FirstAttackGone();
 
@@ -171,8 +183,7 @@ void FirstBossScript::Attack() {
         }
 
         if (timerSecondAttackFall.GetTime() >= 2*1000 && SecondAttackFall) {
-            //player position
-            //Get player Position
+            // Get player Position
             player = SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
             playerPosition.m_x = player->GetPosition()->m_x - 160;
             playerPosition.m_y = player->GetPosition()->m_y - 450;
@@ -191,11 +202,5 @@ void FirstBossScript::Attack() {
                 randNum = -1;
             }
         }
-        /*if (randNumber) {
-            } else {
-                //Second Attack
-                     SecondAttack = true;
-                     animator->PlayAnimation("firstBossJumpAnimation");
-                }*/
     }
 }
