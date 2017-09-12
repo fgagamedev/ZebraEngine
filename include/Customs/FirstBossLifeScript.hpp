@@ -19,17 +19,19 @@
 class FirstBossLifeScript : public Script {
 
 public:
-  FirstBossLifeScript(GameObject *owner);
-  std::string GetComponentName() override { return "FirstBossLifeScript"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
-  bool hit =  false;
-
+    FirstBossLifeScript(GameObject *owner);
+    std::string GetComponentName() override {
+        return "FirstBossLifeScript";
+    };
+    void FixedComponentUpdate() override;
+    void Start() override;
+    bool hit =  false;
 
 protected:
-  void ComponentUpdate() override;
+    void ComponentUpdate() override;
+
 private:
-  Vector *position = nullptr;
+    Vector *position = nullptr;
 
 
 

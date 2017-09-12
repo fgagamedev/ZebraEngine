@@ -1,44 +1,48 @@
 #include "Customs/FirstBossLifeScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+/**
+    @file FirstBossLifeScript.cpp
+    @brief Manage the first boss life.
+    @copyright MIT License.
+*/
+
+/**
+    @brief Constructor of the FirstBossLifeScript class.
+*/
 FirstBossLifeScript::FirstBossLifeScript(GameObject *owner) : Script(owner) {}
+
+/**
+    @brief Start the script that control the life of the first boss.
+*/
 void FirstBossLifeScript::Start() {
     position = GetOwner()->GetPosition();
-               GetOwner()->SetZoomProportion(Vector(0,0));
-
+    GetOwner()->SetZoomProportion(Vector(0,0));
 }
 
-
+/**
+    @brief Control the lifebar of the first boss.
+*/
 void FirstBossLifeScript::ComponentUpdate() {
-/*
-  auto nakedManScript = (NakedManScript*)SceneManager::GetInstance()
-                          ->GetCurrentScene()
-                          ->GetGameObject("NakedMan")
-                          ->GetComponent("NakedManScript");
-
-  m_numberBullet = nakedManScript->bulletNumber;
-
-
-  auto var = (UIText *)GetOwner()->GetComponent("UIText");
-  var->SetText(std::to_string(m_numberBullet));
-  */
     auto firstBossLifeRenderer = (RectangleRenderer*)GetOwner()->
-                                            GetComponent("RectangleRenderer");
+                                  GetComponent("RectangleRenderer");
     int actualLife = firstBossLifeRenderer->GetWidth();
-    //cout << actualLife << endl;
     if (hit && actualLife > 0) {
         cout << "hit" << endl;
         cout << actualLife << endl;
         firstBossLifeRenderer->SetWidth(actualLife - 10);
         hit = false;
-  }
+    }
     if (actualLife <= 0) {
         FirstBossController::GetInstance()->ActivateCreditsAnimation();
         FirstBossController::GetInstance()->DeactivateLifeBars();
-        //SceneManager::GetInstance()->SetCurrentScene("EndScene1");
-  }
+    }
 }
+
+/**
+    @brief Set the position of the first boss's lifebar.
+*/
 void FirstBossLifeScript::FixedComponentUpdate() {
-  position->m_x = 650;
-  position->m_y = 10;
+    position->m_x = 650;
+    position->m_y = 10;
 }
