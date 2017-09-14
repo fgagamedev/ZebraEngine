@@ -13,22 +13,22 @@
 #include <string>
 
 class FirstBossCentralEffectScript : public Script {
-
 public:
-  FirstBossCentralEffectScript(GameObject *owner);
-  std::string GetComponentName() override { return "FirstBossCentralEffectScript"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
+    FirstBossCentralEffectScript(GameObject *owner);
+    std::string GetComponentName() override {
+        return "FirstBossCentralEffectScript";
+    };
+    void FixedComponentUpdate() override;
+    void Start() override;
 
 protected:
-  void ComponentUpdate() override;
+    void ComponentUpdate() override;
+
 private:
-  void CreateAnimations();
-  InputSystem *input = nullptr;
-  Animator *animator = nullptr;
-  Vector *position = nullptr;
-  GameObject *boss = nullptr;
-
+    void CreateAnimations();
+    InputSystem *input = nullptr;
+    Animator *animator = nullptr;
+    Vector *position = nullptr;
+    GameObject *boss = nullptr;
 };
-
 #endif
