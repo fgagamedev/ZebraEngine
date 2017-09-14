@@ -1,16 +1,20 @@
-#ifndef TIMER_H
-#define TIMER_H
+/*
+    @file Timer.hpp
+    @brief Class responsible for managing time.
+    @copyright LGPL. MIT License.
+*/
+#ifndef __TIMER_H__
+#define __TIMER_H__
 
 class Timer{
+	public:
+		Timer();
+		void Update(float detectiontTime);
+		void Restart();
+		float GetTime();
 
-public:
-  Timer();
-  void Update(float dt);
-  void Restart();
-  float GetTime();
-
-private:
-  float time;
+	private:
+	 	float time;
 };
 
-#endif //TIMER_H
+#endif

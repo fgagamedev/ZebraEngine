@@ -1,10 +1,22 @@
+/**
+    @file GamePlayScene.cpp
+    @brief Class responsible for creating and 
+    activating the information needed for game scenes.
+    @copyright LGPL. MIT License.
+*/
+
 #include "Customs/GamePlayScene.hpp"
 #include "Globals/EngineGlobals.hpp"
 #include "Customs/CutScene1Script.hpp"
 #include "Customs/AudioController.hpp"
 
+/**
+    @brief Responsible for creating the inputs 
+    needed to run the game scene that are defined further down.
+*/
 void GamePlayScene::OnActivation() {
-    CreateMap();//This must be the first function to be called
+    //This must be the first function to be called
+    CreateMap();
     CreateCreditAnimation();
     CreateNakedMan();
     CreateFirstBoss();
@@ -15,13 +27,11 @@ void GamePlayScene::OnActivation() {
     CreateSnow();
     CreateThunder();
     CreatePlayerAttack();
-    //CreateAmmoCounter();
     CreatePlayerHit();
     CreateForestActivator();
     CreateSnowActivator();
     CreateCentralLights();
     CreateCutScenes();
-
     FirstBossController::GetInstance()->StartBossFight();
 
 }
@@ -32,6 +42,10 @@ void GamePlayScene::OnShown() {}
 
 void GamePlayScene::OnHidden() {}
 
+/**
+    @brief Create the game map by adding the 
+    trees and correcting the screen rendering.
+*/
 void GamePlayScene::CreateMap() {
 
 
@@ -73,6 +87,7 @@ void GamePlayScene::CreateMap() {
 
 }
 
+
 void GamePlayScene::CreateCutScenes(){
 
     auto scene1 = new GameObject("SCENE1", new Vector(0,0),1024,800,0);
@@ -81,7 +96,9 @@ void GamePlayScene::CreateCutScenes(){
     AddGameObject(scene1);
 }
 
-
+/**
+    @brief Responsible for creating three forest-activating objects.
+*/
 void  GamePlayScene::CreateForestActivator(){
     //left
     auto forestActivator = new GameObject("FOREST ACTIVATOR", new Vector(1720,-3463),192,192,1);
@@ -98,6 +115,10 @@ void  GamePlayScene::CreateForestActivator(){
 
 }
 
+/**
+    @brief responsible for creating the snow activator at 
+    the end it sends to the class that treats the objects of the game.
+*/
 void GamePlayScene::CreateSnowActivator(){
 
     auto snowActivator = new GameObject("SNOW ACTIVATOR", new Vector(-1044,2446),192,192,1);
@@ -106,6 +127,10 @@ void GamePlayScene::CreateSnowActivator(){
 
 }
 
+/**
+    @brief responsible for creating four central lights at 
+    the end it sends to the class that treats the objects of the game.
+*/
 void GamePlayScene::CreateCentralLights(){
 
     auto centralLight1= new GameObject("CENTRAL LIGHT 1", new Vector(424,422),192,192,1);
@@ -126,16 +151,18 @@ void GamePlayScene::CreateCentralLights(){
 
 }
 
+
 void GamePlayScene::CreateNakedMan() {
 
     int xPos, yPos;
-    xPos =EngineGlobals::screen_width / 2 - 96/2;
-    yPos =EngineGlobals::screen_height / 2 - 96/2;
+    xPos = EngineGlobals::screen_width / 2 - 96 / 2;
+    yPos = EngineGlobals::screen_height / 2 - 96 / 2;
     auto nakedMan = new GameObject("NakedMan", new Vector(xPos,yPos),96 , 96, 2);
     // Script
     auto nakedManScript = new NakedManScript(nakedMan);
 
-    auto runSound = new UISound(nakedMan, "runSound", "assets/Audio/Player/runcrushed.ogg", false, false);
+    auto runSound = new UISound(nakedMan, "runSound", "assets/Audio/Player/runcrushed.ogg", 
+                                false, false);
     AudioController::GetInstance()->AddAudio(runSound);
 
     AddGameObject(nakedMan);
@@ -143,9 +170,15 @@ void GamePlayScene::CreateNakedMan() {
 
 }
 
+/**
+    @brief Responsible for creating and defining 
+    the location that the first boss will be and which special 
+    effect he will have when he is found.
+*/
 void GamePlayScene::CreateFirstBoss() {
     /** Boss Inside FX **/
-    auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect", new Vector(0,0),211.86,211.86, 1);
+    auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect", 
+                                                 new Vector(0,0),211.86,211.86, 1);
     auto firstBossCentralEffectScript = new  FirstBossCentralEffectScript(FirstBossCentralEffect);
     AddGameObject(FirstBossCentralEffect);
     FirstBossController::GetInstance()->AddInsideBossFx(FirstBossCentralEffect);
@@ -165,6 +198,11 @@ void GamePlayScene::CreateFirstBoss() {
     FirstBossController::GetInstance()->DeactivateBoss();
 }
 
+/**
+    @brief Responsible for creating the first attack of the boss 
+    defining the sound effect of the attacks and 
+    the cries of the first three attacks.
+*/
 void GamePlayScene::CreateFirstBossAttack() {
 
     for (int i = 1; i < 5; i++) {
@@ -177,16 +215,20 @@ void GamePlayScene::CreateFirstBossAttack() {
         auto firstBossAttackScript = new  FirstBossAttackScript(firstBossAttack);
 
         //Sounds
-        auto firstAttackSound = new UISound(firstBossAttack, "firstAttackSound", "assets/Audio/Boss/grito1.ogg", false, false);
+        auto firstAttackSound = new UISound(firstBossAttack, "firstAttackSound", 
+                                            "assets/Audio/Boss/grito1.ogg", false, false);
         AudioController::GetInstance()->AddAudio(firstAttackSound);
 
-        auto secondAttackSound = new UISound(firstBossAttack, "secondAttackSound", "assets/Audio/Boss/grito2.ogg", false, false);
+        auto secondAttackSound = new UISound(firstBossAttack, "secondAttackSound", 
+                                            "assets/Audio/Boss/grito2.ogg", false, false);
         AudioController::GetInstance()->AddAudio(secondAttackSound);
 
-        auto thirdAttackSound = new UISound(firstBossAttack, "thirdAttackSound", "assets/Audio/Boss/grito3.ogg", false, false);
+        auto thirdAttackSound = new UISound(firstBossAttack, "thirdAttackSound", 
+                                            "assets/Audio/Boss/grito3.ogg", false, false);
         AudioController::GetInstance()->AddAudio(thirdAttackSound);
 
-        auto fourthAttackSound = new UISound(firstBossAttack, "fourthAttackSound", "assets/Audio/Boss/heart_attack.ogg", false, false);
+        auto fourthAttackSound = new UISound(firstBossAttack, "fourthAttackSound", 
+                                            "assets/Audio/Boss/heart_attack.ogg", false, false);
         AudioController::GetInstance()->AddAudio(fourthAttackSound);
 
 
@@ -198,25 +240,36 @@ void GamePlayScene::CreateFirstBossAttack() {
 
     }
 }
-
+/**
+    @brief Responsible for creating the first boss life by setting the 
+    life bar and sending it to the class that creates the game objects.
+*/
 void GamePlayScene::CreateFirstBossLife() {
 
-    /** Life Border **/
+    // Life Border
     auto firstBossLifeBorderSprite = new GameObject("FirstBossBorderLife", new Vector(0, 0),344, 25, 3);
     auto firstBossLifeBorderScript = new  FirstBossLifeBorderScript(firstBossLifeBorderSprite);
     AddGameObject(firstBossLifeBorderSprite);
     FirstBossController::GetInstance()->AddLifeBar(firstBossLifeBorderSprite);
 
-    /** Life**/
+    // Life
     auto firstBossLife = new GameObject("FirstBossLife", new Vector(0, 0),337, 25, 2);
     auto lifeRectangle = new RectangleRenderer(firstBossLife, Vector(0, 0), 337, 25);
     lifeRectangle->SetColor(255, 48, 48, 255);
     auto firstBossLifeScript = new  FirstBossLifeScript(firstBossLife);
     AddGameObject(firstBossLife);
-    FirstBossController::GetInstance()->AddLifeBar(firstBossLife);// Add to controller
-    FirstBossController::GetInstance()->DeactivateLifeBars();// Desable all life bars
+
+    // Add to controller
+    FirstBossController::GetInstance()->AddLifeBar(firstBossLife);
+
+    // Desable all life bars
+    FirstBossController::GetInstance()->DeactivateLifeBars();
 }
 
+/**
+    @brief Responsible for creating the bullets that 
+    the player launches against the boss.
+*/
 void GamePlayScene::CreatePlayerAttack() {
 
     /** Creating Bullets **/
@@ -227,7 +280,9 @@ void GamePlayScene::CreatePlayerAttack() {
         auto bulletScript = new  PlayerAttackScript(bullet);
         AddGameObject(bullet);
 
-        auto bulletSound = new UISound(bullet, "bulletSound", "assets/Audio/Player/fireball.ogg", false, false);
+        auto bulletSound = new UISound(bullet, "bulletSound", 
+                                       "assets/Audio/Player/fireball.ogg", 
+                                        false, false);
         AudioController::GetInstance()->AddAudio(bulletSound);
 
         bullet->active = false;
@@ -238,20 +293,31 @@ void GamePlayScene::CreatePlayerAttack() {
     /** Bullet Counter **/
     auto bulletCounter = new GameObject("Score", new Vector(0, 0), 75 , 75, 2);
     bulletCounter->SetTag("BulletCounter");
-    auto bulletText = new UIText(bulletCounter, "10", "assets/Fonts/advanced-pixel-7/advanced_pixel-7.ttf", 150, 0 , 0, 0, 0, 1);
+    auto bulletText = new UIText(bulletCounter, "10", 
+                                 "assets/Fonts/advanced-pixel-7/advanced_pixel-7.ttf", 
+                                  150, 0 , 0, 0, 0, 1);
     auto bulletCounterScript = new BulletCounterScript(bulletCounter);
     AddGameObject(bulletCounter);
 }
 
+/**
+    @brief Responsible for creating 
+    raindrops and the sound effect of rain.
+*/
 void GamePlayScene::CreateRain() {
 
     auto rain = new GameObject("Rain", new Vector(0,0),1024,800,1);
     auto rainScript = new RainScript(rain);
-    auto rainSound = new UISound(rain, "rainSound", "assets/Audio/Boss/chuva.ogg", false, false);
+    auto rainSound = new UISound(rain, "rainSound", 
+                                 "assets/Audio/Boss/chuva.ogg", 
+                                 false, false);
     AudioController::GetInstance()->AddAudio(rainSound);
     AddGameObject(rain);
 }
 
+/**
+    @brief Responsible for creating the hit object, which is the game's music.
+*/
 void GamePlayScene::CreatePlayerHit() {
 
     auto hit = new GameObject("Hit", new Vector(0,0),1024,800,1);
@@ -260,6 +326,9 @@ void GamePlayScene::CreatePlayerHit() {
     AddGameObject(hit);
 }
 
+/**
+    @grief Responsible for creating the visual effects of thunder.
+*/
 void GamePlayScene::CreateThunder() {
 
     auto thunder = new GameObject("Rain", new Vector(200,0),113,267,1);
@@ -267,24 +336,33 @@ void GamePlayScene::CreateThunder() {
     AddGameObject(thunder);
 }
 
+/**
+    @grief Responsible for creating the visual effects of snow and the effect.
+*/
 void GamePlayScene::CreateSnow(){
 
     auto snow = new GameObject("Snow", new Vector(0,0),1024,800,1);
     auto snowScript = new SnowScript(snow);
-    auto snowSound = new UISound(snow, "snowSound", "assets/Audio/Clima/winteriscomming.ogg", false, false);
+    auto snowSound = new UISound(snow, "snowSound", 
+                                "assets/Audio/Clima/winteriscomming.ogg", 
+                                false, false);
     AudioController::GetInstance()->AddAudio(snowSound);
     AddGameObject(snow);
 }
 
+/**
+    @grief Responsible for creating the visual effect of light.
+*/
 void GamePlayScene::CreateLight() {
 
     auto light = new GameObject("Light", new Vector(0,0),2*1024,2*800,2);
-    //auto lightImage = new Image("assets/luz.png",0,0,682, 512);
-    //auto mapRenderer = new Renderer(light, lightImage);
     auto lightScript = new LightScript(light);
     AddGameObject(light);
 }
 
+/**
+    @grief Creates the visual effect of game credits.
+*/
 void GamePlayScene::CreateCreditAnimation() {
 
     /** Credits Animation **/
@@ -298,11 +376,13 @@ void GamePlayScene::CreateCreditAnimation() {
     FirstBossController::GetInstance()->DeactivateCreditsAnimation();
 }
 
+/**
+    @grief Creates a player monition counter.
+*/
 void GamePlayScene::CreateAmmoCounter() {
 
   auto ammo = new GameObject("Ammo", new Vector(2,2),200,200,3);
   auto messengerText = new UIText(ammo, "15", "assets/UIpack/Font/kenvector_future_thin.ttf",
                  100, 255, 255, 255, 255, 1);
-  //auto lightScript = new LightScript(light);
   AddGameObject(ammo);
 }
