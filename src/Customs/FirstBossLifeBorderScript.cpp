@@ -1,8 +1,23 @@
+/**
+    @file FirstBossLifeBorderScript.cpp
+    @brief Class that defines methods and attributes for 
+    activating the first boss life border script.
+    @copyright LGPL. MIT License.
+*/
+
 #include "Customs/FirstBossLifeBorderScript.hpp"
 
+/**
+    @brief Initializes irstBossLifeBorderScript instance.
+    @param[in] GameObject *owner - owns the component.
+*/
 FirstBossLifeBorderScript::FirstBossLifeBorderScript(GameObject *owner) :
     Script(owner) {}
 
+
+/**
+    @brief Start the animation for the first boss life border effect.
+*/
 void FirstBossLifeBorderScript::Start() {
 
     CreateAnimations();
@@ -16,10 +31,12 @@ void FirstBossLifeBorderScript::Start() {
                                                   GetOwner()->GetHeight(), 0);
 
 }
+
+/**
+    @brief Create the first boss life border effect animations.
+*/
 void FirstBossLifeBorderScript::CreateAnimations() {
 
-    //Image Attacks
-    //332 L por 9 A
     auto firstBossLifeBorderImage = new Image("assets/Barra_Life_Boss.png",0,0,
                                                                     996, 171);
 
@@ -39,11 +56,16 @@ void FirstBossLifeBorderScript::CreateAnimations() {
                                                 firstBossLifeBorderAnimation);
 }
 
-
+/**
+    @brief Updates the component of boss life border.
+*/
 void FirstBossLifeBorderScript::ComponentUpdate() {
 
 }
 
+/**
+    @brief Updates the animator component and boss position.
+*/
 void FirstBossLifeBorderScript::FixedComponentUpdate() {
     animator->PlayAnimation("firstBossLifeBorderAnimation");
     position->m_x = 646;

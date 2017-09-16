@@ -1,3 +1,9 @@
+/**
+    @file FirstBossLifeBorderScript.cpp
+    @brief Class that defines methods and attributes for 
+    activating the first boss life border script.
+    @copyright LGPL. MIT License.
+*/
 #ifndef __FIRST_BOSS_LIFE_BORDER_SCRIPT__
 #define __FIRST_BOSS_LIFE_BORDER_SCRIPT__
 
@@ -17,29 +23,23 @@
 
 class FirstBossLifeBorderScript : public Script {
 
-public:
-  FirstBossLifeBorderScript(GameObject *owner);
-  std::string GetComponentName() override { return "FirstBossLifeBorderScript"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
-  void CreateAnimations();
+    public:
+        FirstBossLifeBorderScript(GameObject *owner);
+        std::string GetComponentName() override {
+            return "FirstBossLifeBorderScript"; 
+        };
+        void FixedComponentUpdate() override;
+        void Start() override;
+        void CreateAnimations();
 
+    protected:
+    void ComponentUpdate() override;
 
-
-protected:
-  void ComponentUpdate() override;
-private:
-  Vector *position = nullptr;
-  InputSystem *input = nullptr;
-  Animator *animator = nullptr;
-
-  RectangleCollider* firstBossAttackCollider = nullptr;
-
-
-
-
-
-
+    private:
+    Vector *position = nullptr;
+    InputSystem *input = nullptr;
+    Animator *animator = nullptr;
+    RectangleCollider* firstBossAttackCollider = nullptr;
 };
 
 #endif
