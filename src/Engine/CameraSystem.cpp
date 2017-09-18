@@ -1,6 +1,6 @@
 /*
     @file CameraSystem.cpp
-    @brief Class that manages the game image, 
+    @brief Class that manages the game image,
     including the scenes the zoom and speed that the screen moves.
     @copyright LGPL. MIT License.
 */
@@ -37,31 +37,30 @@ void CameraSystem::MoveUp(int speed, Scene *scene) {
 
     //Move all scene objects
     for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++) {
-
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x, (*it)->GetPosition()->m_y + speed));
+    }
 
-        auto mapscript = (MapScript*)SceneManager::GetInstance()
-           ->GetScene("Gameplay")
-           ->GetGameObject("Map")
-           ->GetComponent("MapScript");
+    auto mapscript = (MapScript*)SceneManager::GetInstance()
+       ->GetScene("Gameplay")
+       ->GetGameObject("Map")
+       ->GetComponent("MapScript");
 
-        if (mapscript) {
+    if (mapscript) {
 
-            for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
-                mapscript->leftWalls[i].m_y = mapscript->leftWalls[i].m_y + speed;
-            }
+        for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
+            mapscript->leftWalls[i].m_y += speed;
+        }
 
-            for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
-                mapscript->rightWalls[j].m_y = mapscript->rightWalls[j].m_y + speed;
-            }
+        for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
+            mapscript->rightWalls[j].m_y += speed;
+        }
 
-            for (int k = 0; k < mapscript->upWallsAmmount; k++) {
-                mapscript->upWalls[k].m_y = mapscript->upWalls[k].m_y + speed;
-            }
+        for (int k = 0; k < mapscript->upWallsAmmount; k++) {
+            mapscript->upWalls[k].m_y += speed;
+        }
 
-            for (int l = 0; l < mapscript->downWallsAmmount; l++) {
-                mapscript->downWalls[l].m_y = mapscript->downWalls[l].m_y + speed;
-            }
+        for (int l = 0; l < mapscript->downWallsAmmount; l++) {
+            mapscript->downWalls[l].m_y += speed;
         }
     }
 
@@ -89,31 +88,29 @@ void CameraSystem::MoveDown(int speed, Scene *scene) {
 
     // Move all scene objects
     for (auto it = m_gameObjects.begin();it!=m_gameObjects.end();it++) {
-    
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x ,(*it)->GetPosition()->m_y - speed));
+    }
 
-        auto mapscript = (MapScript*)SceneManager::GetInstance()
-               ->GetScene("Gameplay")
-               ->GetGameObject("Map")
-               ->GetComponent("MapScript");
-                // mapscript->target.y-= speed;
+    auto mapscript = (MapScript*)SceneManager::GetInstance()
+           ->GetScene("Gameplay")
+           ->GetGameObject("Map")
+           ->GetComponent("MapScript");
 
-        if (mapscript) {
-            for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
-                mapscript->leftWalls[i].m_y = mapscript->leftWalls[i].m_y - speed;
-            }
+    if (mapscript) {
+        for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
+            mapscript->leftWalls[i].m_y -= speed;
+        }
 
-            for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
-                mapscript->rightWalls[j].m_y = mapscript->rightWalls[j].m_y - speed;
-            }
+        for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
+            mapscript->rightWalls[j].m_y -= speed;
+        }
 
-            for (int k = 0; k < mapscript->upWallsAmmount; k++) {
-                mapscript->upWalls[k].m_y = mapscript->upWalls[k].m_y - speed;
-            }
+        for (int k = 0; k < mapscript->upWallsAmmount; k++) {
+            mapscript->upWalls[k].m_y -= speed;
+        }
 
-            for (int l = 0; l < mapscript->downWallsAmmount;l ++) {
-                mapscript->downWalls[l].m_y = mapscript->downWalls[l].m_y - speed;
-            }
+        for (int l = 0; l < mapscript->downWallsAmmount;l ++) {
+            mapscript->downWalls[l].m_y -= speed;
         }
     }
 
@@ -142,30 +139,30 @@ void CameraSystem::MoveLeft(int speed,Scene *scene) {
 
     //Move all scene objects
     for (auto it = m_gameObjects.begin();it != m_gameObjects.end(); it++) {
-    
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x + speed ,(*it)->GetPosition()->m_y ));
-        auto mapscript = (MapScript*)SceneManager::GetInstance()
-                   ->GetScene("Gameplay")
-                   ->GetGameObject("Map")
-                   ->GetComponent("MapScript");
-         // mapscript->target.x += speed;
+    }
 
-        if (mapscript) {
-            for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
-                mapscript->leftWalls[i].m_x = mapscript->leftWalls[i].m_x + speed;
-            }
+    auto mapscript = (MapScript*)SceneManager::GetInstance()
+               ->GetScene("Gameplay")
+               ->GetGameObject("Map")
+               ->GetComponent("MapScript");
+     // mapscript->target.x += speed;
 
-            for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
-                mapscript->rightWalls[j].m_x = mapscript->rightWalls[j].m_x + speed;
-            }
+    if (mapscript) {
+        for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
+            mapscript->leftWalls[i].m_x += speed;
+        }
 
-            for (int k = 0; k < mapscript->upWallsAmmount; k++) {
-                mapscript->upWalls[k].m_x = mapscript->upWalls[k].m_x + speed;
-            }
+        for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
+            mapscript->rightWalls[j].m_x += speed;
+        }
 
-            for (int l = 0; l < mapscript->downWallsAmmount; l++) {
-                mapscript->downWalls[l].m_x = mapscript->downWalls[l].m_x + speed;
-            }
+        for (int k = 0; k < mapscript->upWallsAmmount; k++) {
+            mapscript->upWalls[k].m_x += speed;
+        }
+
+        for (int l = 0; l < mapscript->downWallsAmmount; l++) {
+            mapscript->downWalls[l].m_x += speed;
         }
     }
 
@@ -193,31 +190,30 @@ void CameraSystem::MoveRight(int speed, Scene *scene) {
 
     //Move all scene objects
     for(auto it = m_gameObjects.begin();it!=m_gameObjects.end();it++){
-        
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x - speed ,(*it)->GetPosition()->m_y));
+    }
 
-        auto mapscript = (MapScript*)SceneManager::GetInstance()
-                           ->GetScene("Gameplay")
-                           ->GetGameObject("Map")
-                           ->GetComponent("MapScript");
-                            // mapscript->target.x-= speed;
+    auto mapscript = (MapScript*)SceneManager::GetInstance()
+                       ->GetScene("Gameplay")
+                       ->GetGameObject("Map")
+                       ->GetComponent("MapScript");
+                        // mapscript->target.x-= speed;
 
-        if(mapscript){
-            for(int i = 0; i < mapscript->leftWallsAmmount; i++) {
-                mapscript->leftWalls[i].m_x = mapscript->leftWalls[i].m_x - speed;
-            }
+    if(mapscript){
+        for(int i = 0; i < mapscript->leftWallsAmmount; i++) {
+            mapscript->leftWalls[i].m_x -= speed;
+        }
 
-            for(int j = 0; j < mapscript->rightWallsAmmount; j++) {
-                mapscript->rightWalls[j].m_x = mapscript->rightWalls[j].m_x - speed;
-            }
+        for(int j = 0; j < mapscript->rightWallsAmmount; j++) {
+            mapscript->rightWalls[j].m_x -= speed;
+        }
 
-            for(int k = 0; k < mapscript->upWallsAmmount;k++ ) {
-                mapscript->upWalls[k].m_x = mapscript->upWalls[k].m_x - speed;
-            }
+        for(int k = 0; k < mapscript->upWallsAmmount;k++ ) {
+            mapscript->upWalls[k].m_x -= speed;
+        }
 
-            for(int l = 0; l < mapscript->downWallsAmmount;l ++) {
-                mapscript->downWalls[l].m_x = mapscript->downWalls[l].m_x - speed;
-            }
+        for(int l = 0; l < mapscript->downWallsAmmount;l ++) {
+            mapscript->downWalls[l].m_x -= speed;
         }
     }
 
@@ -426,7 +422,7 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
     @param[in] scene Pointer that points to the current scene.
 */
 void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *scene){
-  
+
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     if(!map){
         return;
@@ -434,7 +430,7 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
 
     m_beforePositionX = objectToFollow->GetPosition()->m_x;
     m_beforePositionY = objectToFollow->GetPosition()->m_y;
-    
+
     this->m_cameraSpeed = zoomSpeed;
 
     auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
