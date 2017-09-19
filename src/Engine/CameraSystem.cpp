@@ -1,6 +1,6 @@
 /*
     @file CameraSystem.cpp
-    @brief Class that manages the game image, 
+    @brief Class that manages the game image,
     including the scenes the zoom and speed that the screen moves.
     @copyright LGPL. MIT License.
 */
@@ -37,31 +37,30 @@ void CameraSystem::MoveUp(int speed, Scene *scene) {
 
     //Move all scene objects
     for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++) {
-
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x, (*it)->GetPosition()->m_y + speed));
+    }
 
-        auto mapscript = (MapScript*)SceneManager::GetInstance()
-           ->GetScene("Gameplay")
-           ->GetGameObject("Map")
-           ->GetComponent("MapScript");
+    auto mapscript = (MapScript*)SceneManager::GetInstance()
+       ->GetScene("Gameplay")
+       ->GetGameObject("Map")
+       ->GetComponent("MapScript");
 
-        if (mapscript) {
+    if (mapscript) {
 
-            for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
-                mapscript->leftWalls[i].m_y = mapscript->leftWalls[i].m_y + speed;
-            }
+        for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
+            mapscript->leftWalls[i].m_y += speed;
+        }
 
-            for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
-                mapscript->rightWalls[j].m_y = mapscript->rightWalls[j].m_y + speed;
-            }
+        for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
+            mapscript->rightWalls[j].m_y += speed;
+        }
 
-            for (int k = 0; k < mapscript->upWallsAmmount; k++) {
-                mapscript->upWalls[k].m_y = mapscript->upWalls[k].m_y + speed;
-            }
+        for (int k = 0; k < mapscript->upWallsAmmount; k++) {
+            mapscript->upWalls[k].m_y += speed;
+        }
 
-            for (int l = 0; l < mapscript->downWallsAmmount; l++) {
-                mapscript->downWalls[l].m_y = mapscript->downWalls[l].m_y + speed;
-            }
+        for (int l = 0; l < mapscript->downWallsAmmount; l++) {
+            mapscript->downWalls[l].m_y += speed;
         }
     }
 
@@ -89,31 +88,29 @@ void CameraSystem::MoveDown(int speed, Scene *scene) {
 
     // Move all scene objects
     for (auto it = m_gameObjects.begin();it!=m_gameObjects.end();it++) {
-    
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x ,(*it)->GetPosition()->m_y - speed));
+    }
 
-        auto mapscript = (MapScript*)SceneManager::GetInstance()
-               ->GetScene("Gameplay")
-               ->GetGameObject("Map")
-               ->GetComponent("MapScript");
-                // mapscript->target.y-= speed;
+    auto mapscript = (MapScript*)SceneManager::GetInstance()
+           ->GetScene("Gameplay")
+           ->GetGameObject("Map")
+           ->GetComponent("MapScript");
 
-        if (mapscript) {
-            for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
-                mapscript->leftWalls[i].m_y = mapscript->leftWalls[i].m_y - speed;
-            }
+    if (mapscript) {
+        for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
+            mapscript->leftWalls[i].m_y -= speed;
+        }
 
-            for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
-                mapscript->rightWalls[j].m_y = mapscript->rightWalls[j].m_y - speed;
-            }
+        for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
+            mapscript->rightWalls[j].m_y -= speed;
+        }
 
-            for (int k = 0; k < mapscript->upWallsAmmount; k++) {
-                mapscript->upWalls[k].m_y = mapscript->upWalls[k].m_y - speed;
-            }
+        for (int k = 0; k < mapscript->upWallsAmmount; k++) {
+            mapscript->upWalls[k].m_y -= speed;
+        }
 
-            for (int l = 0; l < mapscript->downWallsAmmount;l ++) {
-                mapscript->downWalls[l].m_y = mapscript->downWalls[l].m_y - speed;
-            }
+        for (int l = 0; l < mapscript->downWallsAmmount; l++) {
+            mapscript->downWalls[l].m_y -= speed;
         }
     }
 
@@ -142,30 +139,30 @@ void CameraSystem::MoveLeft(int speed,Scene *scene) {
 
     //Move all scene objects
     for (auto it = m_gameObjects.begin();it != m_gameObjects.end(); it++) {
-    
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x + speed ,(*it)->GetPosition()->m_y ));
-        auto mapscript = (MapScript*)SceneManager::GetInstance()
-                   ->GetScene("Gameplay")
-                   ->GetGameObject("Map")
-                   ->GetComponent("MapScript");
-         // mapscript->target.x += speed;
+    }
 
-        if (mapscript) {
-            for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
-                mapscript->leftWalls[i].m_x = mapscript->leftWalls[i].m_x + speed;
-            }
+    auto mapscript = (MapScript*)SceneManager::GetInstance()
+               ->GetScene("Gameplay")
+               ->GetGameObject("Map")
+               ->GetComponent("MapScript");
+     // mapscript->target.x += speed;
 
-            for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
-                mapscript->rightWalls[j].m_x = mapscript->rightWalls[j].m_x + speed;
-            }
+    if (mapscript) {
+        for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
+            mapscript->leftWalls[i].m_x += speed;
+        }
 
-            for (int k = 0; k < mapscript->upWallsAmmount; k++) {
-                mapscript->upWalls[k].m_x = mapscript->upWalls[k].m_x + speed;
-            }
+        for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
+            mapscript->rightWalls[j].m_x += speed;
+        }
 
-            for (int l = 0; l < mapscript->downWallsAmmount; l++) {
-                mapscript->downWalls[l].m_x = mapscript->downWalls[l].m_x + speed;
-            }
+        for (int k = 0; k < mapscript->upWallsAmmount; k++) {
+            mapscript->upWalls[k].m_x += speed;
+        }
+
+        for (int l = 0; l < mapscript->downWallsAmmount; l++) {
+            mapscript->downWalls[l].m_x += speed;
         }
     }
 
@@ -187,37 +184,36 @@ void CameraSystem::MoveRight(int speed, Scene *scene) {
 
     m_gameObjects = scene->GetAllGameObjects();
 
-    if(m_gameObjects.empty()) {
+    if (m_gameObjects.empty()) {
         return;
     }
 
     //Move all scene objects
-    for(auto it = m_gameObjects.begin();it!=m_gameObjects.end();it++){
-        
+    for (auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++) {
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x - speed ,(*it)->GetPosition()->m_y));
+    }
 
-        auto mapscript = (MapScript*)SceneManager::GetInstance()
-                           ->GetScene("Gameplay")
-                           ->GetGameObject("Map")
-                           ->GetComponent("MapScript");
-                            // mapscript->target.x-= speed;
+    auto mapscript = (MapScript*)SceneManager::GetInstance()
+                       ->GetScene("Gameplay")
+                       ->GetGameObject("Map")
+                       ->GetComponent("MapScript");
+                        // mapscript->target.x-= speed;
 
-        if(mapscript){
-            for(int i = 0; i < mapscript->leftWallsAmmount; i++) {
-                mapscript->leftWalls[i].m_x = mapscript->leftWalls[i].m_x - speed;
-            }
+    if (mapscript) {
+        for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
+            mapscript->leftWalls[i].m_x -= speed;
+        }
 
-            for(int j = 0; j < mapscript->rightWallsAmmount; j++) {
-                mapscript->rightWalls[j].m_x = mapscript->rightWalls[j].m_x - speed;
-            }
+        for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
+            mapscript->rightWalls[j].m_x -= speed;
+        }
 
-            for(int k = 0; k < mapscript->upWallsAmmount;k++ ) {
-                mapscript->upWalls[k].m_x = mapscript->upWalls[k].m_x - speed;
-            }
+        for (int k = 0; k < mapscript->upWallsAmmount; k++) {
+            mapscript->upWalls[k].m_x -= speed;
+        }
 
-            for(int l = 0; l < mapscript->downWallsAmmount;l ++) {
-                mapscript->downWalls[l].m_x = mapscript->downWalls[l].m_x - speed;
-            }
+        for (int l = 0; l < mapscript->downWallsAmmount; l++) {
+            mapscript->downWalls[l].m_x -= speed;
         }
     }
 
@@ -234,7 +230,7 @@ void CameraSystem::MoveRight(int speed, Scene *scene) {
 */
 void CameraSystem::CameraShake(int intensity, float duration, Scene *scene) {
 
-    if(!scene){
+    if (!scene) {
         return;
     }
 
@@ -242,17 +238,17 @@ void CameraSystem::CameraShake(int intensity, float duration, Scene *scene) {
     m_timer.Update(EngineGlobals::fixed_update_interval);
     isShaking = true;
 
-    if(m_timer.GetTime() >= duration * 1000) {
+    if (m_timer.GetTime() >= duration * 1000) {
         isShaking = false;
         m_timer.Restart();
         return;
     }
 
-    if(last == 0){
+    if (last == 0) {
         MoveRight(intensity, scene);
         MoveUp(intensity, scene);
         last = 1;
-    }else if(last == 1){
+    } else if(last == 1) {
         MoveLeft(intensity, scene);
         MoveDown(intensity, scene);
         last = 0;
@@ -336,13 +332,13 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
 
     auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
 
-    for (auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++ ) {
+    for (auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++) {
         if ((*it)->GetName()!="Map") {
             m_proportionX = 100*(((*it)->GetPosition()->m_x + worldCameraX) / (map->GetWidth()));
             m_proportionY = 100*(((*it)->GetPosition()->m_y + worldCameraY) / (map->GetHeight()));
             //if getzoomProportion==(0,0) the object wont be affected by the zoom
 
-            if((*it)->GetZoomProportion()->m_x != 0, (*it)->GetZoomProportion()->m_y != 0) {
+            if ((*it)->GetZoomProportion()->m_x != 0, (*it)->GetZoomProportion()->m_y != 0) {
                 (*it)->SetSize(map->GetWidth() / (*it)->GetZoomProportion()->m_x, map->GetHeight() / (*it)->GetZoomProportion()->m_y);
                 (*it)->GetPosition()->m_x = ((m_proportionX/100) * (map->GetWidth() + zoomSpeed)) - worldCameraX;
                 (*it)->GetPosition()->m_y = ((m_proportionY/100) * (map->GetHeight() + zoomSpeed)) - worldCameraY;
@@ -356,8 +352,8 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
                     ->GetComponent("MapScript");
                     // mapscript->target.x-= speed;
 
-    if(mapscript) {
-        for(int i = 0; i < mapscript->leftWallsAmmount; i++) {
+    if (mapscript) {
+        for (int i = 0; i < mapscript->leftWallsAmmount; i++) {
             m_proportionX = 100 * ((mapscript->leftWalls[i].m_x + worldCameraX) / (map->GetWidth()));
             m_proportionY = 100 * ((mapscript->leftWalls[i].m_y + worldCameraY) / (map->GetHeight()));
 
@@ -368,7 +364,7 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
             mapscript->leftWalls[i].m_y = ((m_proportionY/100) * (map->GetHeight() + zoomSpeed)) - worldCameraY;
         }
 
-        for(int j = 0; j < mapscript->rightWallsAmmount; j++){
+        for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
             m_proportionX = 100 * ((mapscript->rightWalls[j].m_x + worldCameraX) / (map->GetWidth()));
             m_proportionY = 100 * ((mapscript->rightWalls[j].m_y + worldCameraY) / (map->GetHeight()));
 
@@ -379,7 +375,7 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
             mapscript->rightWalls[j].m_y = ((m_proportionY/100) * (map->GetHeight() + zoomSpeed)) - worldCameraY;
         }
 
-        for(int k = 0; k < mapscript->upWallsAmmount; k++){
+        for (int k = 0; k < mapscript->upWallsAmmount; k++) {
             m_proportionX = 100 * ((mapscript->upWalls[k].m_x + worldCameraX) / (map->GetWidth()));
             m_proportionY = 100 * ((mapscript->upWalls[k].m_y + worldCameraY) / (map->GetHeight()));
 
@@ -390,7 +386,7 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
             mapscript->upWalls[k].m_y = ((m_proportionY/100) * (map->GetHeight() + zoomSpeed)) - worldCameraY;
         }
 
-        for(int l = 0; l < mapscript->downWallsAmmount; l++){
+        for (int l = 0; l < mapscript->downWallsAmmount; l++) {
             m_proportionX = 100 * ((mapscript->downWalls[l].m_x + worldCameraX) / (map->GetWidth()));
             m_proportionY = 100 * ((mapscript->downWalls[l].m_y + worldCameraY) / (map->GetHeight()));
 
@@ -405,15 +401,15 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
 
     map->SetSize(map->GetWidth() + zoomSpeed, map->GetHeight() + zoomSpeed);
 
-    if(m_beforePositionX < objectToFollow->GetPosition()->m_x){
+    if (m_beforePositionX < objectToFollow->GetPosition()->m_x) {
         MoveRight(objectToFollow->GetPosition()->m_x - m_beforePositionX,scene);
-    }else if(m_beforePositionX > objectToFollow->GetPosition()->m_x){
+    } else if (m_beforePositionX > objectToFollow->GetPosition()->m_x) {
         MoveLeft(m_beforePositionX - objectToFollow->GetPosition()->m_x,scene);
     }
 
-    if(m_beforePositionY < objectToFollow->GetPosition()->m_y){
+    if (m_beforePositionY < objectToFollow->GetPosition()->m_y) {
         MoveDown(objectToFollow->GetPosition()->m_y - m_beforePositionY,scene);
-    }else if(m_beforePositionY > objectToFollow->GetPosition()->m_y){
+    } else if (m_beforePositionY > objectToFollow->GetPosition()->m_y) {
         MoveDown(m_beforePositionY - objectToFollow->GetPosition()->m_y,scene);
     }
 
@@ -426,31 +422,30 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
     @param[in] scene Pointer that points to the current scene.
 */
 void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *scene){
-  
+
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
-    if(!map){
+    if (!map) {
         return;
     }
 
     m_beforePositionX = objectToFollow->GetPosition()->m_x;
     m_beforePositionY = objectToFollow->GetPosition()->m_y;
-    
+
     this->m_cameraSpeed = zoomSpeed;
 
     auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
 
-    for(auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++){
-        if((*it)->GetName()!="Map"){
+    for (auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++) {
+        if ((*it)->GetName()!="Map") {
             m_proportionX = 100*(((*it)->GetPosition()->m_x + worldCameraX)/(map->GetWidth()));
             m_proportionY = 100*(((*it)->GetPosition()->m_y + worldCameraY)/(map->GetHeight()));
 
-            if((*it)->GetZoomProportion()->m_x!=0 && (*it)->GetZoomProportion()->m_y!=0){
+            if ((*it)->GetZoomProportion()->m_x!=0 && (*it)->GetZoomProportion()->m_y != 0) {
                 (*it)->SetSize(map->GetWidth()/(*it)->GetZoomProportion()->m_x,map->GetHeight()/(*it)->GetZoomProportion()->m_y);
                 (*it)->GetPosition()->m_x = ((m_proportionX/100) * (map->GetWidth() - zoomSpeed)) - worldCameraX;
                 (*it)->GetPosition()->m_y = ((m_proportionY/100) * (map->GetHeight() - zoomSpeed)) - worldCameraY;
             }
         }
-
     }
 
     auto mapscript = (MapScript*)SceneManager::GetInstance()
@@ -459,8 +454,8 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
              ->GetComponent("MapScript");
               // mapscript->target.x-= speed;
 
-    if(mapscript){
-        for(int i = 0; i<mapscript->leftWallsAmmount; i++){
+    if (mapscript) {
+        for (int i = 0; i<mapscript->leftWallsAmmount; i++) {
             m_proportionX = 100 * ((mapscript->leftWalls[i].m_x + worldCameraX) / (map->GetWidth()));
             m_proportionY = 100 * ((mapscript->leftWalls[i].m_y + worldCameraY) / (map->GetHeight()));
 
@@ -471,7 +466,7 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
             mapscript->leftWalls[i].m_y = ((m_proportionY/100) * (map->GetHeight() - zoomSpeed)) - worldCameraY;
         }
 
-        for(int j = 0; j < mapscript->rightWallsAmmount; j++){
+        for (int j = 0; j < mapscript->rightWallsAmmount; j++) {
             m_proportionX = 100 * ((mapscript->rightWalls[j].m_x + worldCameraX) / (map->GetWidth()));
             m_proportionY = 100 * ((mapscript->rightWalls[j].m_y + worldCameraY) / (map->GetHeight()));
 
@@ -482,7 +477,7 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
             mapscript->rightWalls[j].m_y = ((m_proportionY/100) * (map->GetHeight() - zoomSpeed)) - worldCameraY;
         }
 
-        for(int k = 0; k < mapscript->upWallsAmmount; k++){
+        for (int k = 0; k < mapscript->upWallsAmmount; k++) {
             m_proportionX = 100 * ((mapscript->upWalls[k].m_x + worldCameraX) / (map->GetWidth()));
             m_proportionY = 100 * ((mapscript->upWalls[k].m_y + worldCameraY) / (map->GetHeight()));
 
@@ -493,7 +488,7 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
             mapscript->upWalls[k].m_y = ((m_proportionY/100) * (map->GetHeight() - zoomSpeed)) - worldCameraY;
         }
 
-        for(int l = 0; l < mapscript->downWallsAmmount; l++){
+        for (int l = 0; l < mapscript->downWallsAmmount; l++) {
             m_proportionX = 100 * ((mapscript->downWalls[l].m_x + worldCameraX) / (map->GetWidth()));
             m_proportionY = 100 * ((mapscript->downWalls[l].m_y + worldCameraY) / (map->GetHeight()));
 
@@ -503,20 +498,19 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
             mapscript->downWalls[l].m_x = ((m_proportionX/100) * (map->GetWidth() - zoomSpeed)) - worldCameraX;
             mapscript->downWalls[l].m_y = ((m_proportionY/100) * (map->GetHeight() - zoomSpeed)) - worldCameraY;
         }
-
     }
 
     map->SetSize(map->GetWidth() - zoomSpeed ,map->GetHeight() - zoomSpeed);
 
-    if(m_beforePositionX < objectToFollow->GetPosition()->m_x){
+    if (m_beforePositionX < objectToFollow->GetPosition()->m_x) {
         MoveRight(objectToFollow->GetPosition()->m_x - m_beforePositionX,scene);
-    }else if(m_beforePositionX > objectToFollow->GetPosition()->m_x){
+    } else if (m_beforePositionX > objectToFollow->GetPosition()->m_x) {
         MoveLeft(m_beforePositionX - objectToFollow->GetPosition()->m_x,scene);
     }
 
-    if(m_beforePositionY < objectToFollow->GetPosition()->m_y){
+    if (m_beforePositionY < objectToFollow->GetPosition()->m_y) {
         MoveUp(objectToFollow->GetPosition()->m_y - m_beforePositionY,scene);
-    }else if(m_beforePositionY > objectToFollow->GetPosition()->m_y){
+    } else if (m_beforePositionY > objectToFollow->GetPosition()->m_y) {
         MoveUp(m_beforePositionY - objectToFollow->GetPosition()->m_y,scene);
     }
 }
@@ -526,7 +520,7 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
     @return m_instance New class.
 */
 CameraSystem *CameraSystem::GetInstance(){
-    if (!m_instance){
+    if (!m_instance) {
         m_instance = new CameraSystem();
     }
     return m_instance;
