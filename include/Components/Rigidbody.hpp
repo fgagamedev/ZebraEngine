@@ -1,3 +1,9 @@
+/**
+    @file Rigidbody.hpp
+    @brief This class defines gravity an its intesity in the game.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __RIGIDBODY__
 #define __RIGIDBODY__
 
@@ -8,14 +14,14 @@
 
 class Rigidbody : public Component {
 public:
-  Rigidbody(GameObject *owner);
-  std::string GetComponentName() override { return "Rigidbody"; };
-  void FixedComponentUpdate() override;
-  inline void SetGravityForce(int force) { m_gravityForce = force; };
+    Rigidbody(GameObject *owner);
+    std::string GetComponentName() override { return "Rigidbody"; };
+    void FixedComponentUpdate() override;
+    inline void SetGravityForce(int force) { m_gravityForce = force; };
 
 private:
-  bool m_gravity = true;
-  float m_gravityForce = 0.4;
+    bool m_gravity = true;
+    float m_gravityForce = 0.4;
 };
 
 #endif
