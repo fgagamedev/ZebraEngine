@@ -40,8 +40,11 @@ bool UIButton::IsOver() {
 
     // Getting button and mouse position
     m_position = GetOwner()->GetPosition();
+    // responsible for rendering width
     int rendererWidth = GetOwner()->GetWidth();
+    // responsible for rendering height
     int rendererHeight = GetOwner()->GetHeight();
+    // sets mouse's position
     std::pair<int, int> mousePos = InputSystem::GetInstance()->GetMousePosition();
 
     // Checking if mouse is over
