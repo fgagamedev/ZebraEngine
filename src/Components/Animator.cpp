@@ -1,10 +1,9 @@
-#include "Components/Animator.hpp"
-
 /**
     @file Animator.cpp
     @brief Manage the animations of the game.
     @copyright MIT License.
 */
+#include "Components/Animator.hpp"
 
 /**
     @brief Animator constructor.
