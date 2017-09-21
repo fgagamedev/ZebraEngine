@@ -1,12 +1,13 @@
-#include "Components/CircleRenderer.hpp"
-
 /**
     @file CircleRenderer.cpp
     @brief Manage circles rendered in the game.
     @copyright MIT License.
 */
+#include "Components/CircleRenderer.hpp"
+
+
 CircleRenderer::CircleRenderer(GameObject *owner, Vector offset, float radius)
-    : Component(owner, C_DRAW) {
+                                                    : Component(owner, C_DRAW) {
     m_offset = offset;
     m_radius = radius;
 }
@@ -19,7 +20,7 @@ void CircleRenderer::ComponentUpdate() {
     int y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
     auto center = Vector(x, y);
     GraphicsSystem::GetInstance()->DrawFillCircle(center, m_radius, m_red,
-                                                m_green, m_blue, m_alpha);
+                                                  m_green, m_blue, m_alpha);
 }
 
 /**
