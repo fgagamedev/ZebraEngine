@@ -20,7 +20,10 @@ public:
     inline void SetGravityForce(int force) { m_gravityForce = force; };
 
 private:
+    // Sets a bool to represent gravity's state.
     bool m_gravity = true;
+
+    // Sets a float to represent gravity's force.
     float m_gravityForce = 0.4;
 };
 

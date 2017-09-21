@@ -32,11 +32,17 @@ public:
     void SetOffset(Vector &offset);
 
 private:
+
+    // Sets the object offset, of type vector.
     Vector m_offset = Vector(0, 0);
+
+    // Sets the object mode, an unsigned 8-bit integer type.
     Uint8 m_mode = 0;
+
+    // Sets the message of the uitext as a string.
     string m_message;
 
-    // A collection of pixels used in software blitting.
+    // Sets the object's surface as a collection of pixels used in software blitting.
     SDL_Surface *m_surface = nullptr;
 
     // The internal structure containing font information.
@@ -49,7 +55,7 @@ private:
     // An driver-specific representation of pixel data.
     SDL_Texture *m_texture = nullptr;
 
-    // A rectangle.
+    // Sets a rectangle with the origin at the upper left.
     SDL_Rect m_rect;
 
     void OnPropertyChange();
