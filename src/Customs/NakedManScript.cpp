@@ -8,10 +8,24 @@
 #include <math.h>
 #include <stdio.h>
 
+/**
+    @file NakedManScript.cpp
+    @brief Manages the functions of the player in the game.
+    @copyright LGPL. MIT License.
+*/
+
+
 bool NakedManScript::isZooming = false;
 
+/**
+    @brief Constructor of the class NakedManScript.
+    @param[in] GameObject *owner - Owns the component.
+*/
 NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {}
 
+/**
+    @brief Starts the first definitions of the player.
+*/
 void NakedManScript::Start() {
     CreateAnimations();
     position = GetOwner()->GetPosition();
@@ -32,24 +46,16 @@ void NakedManScript::Start() {
     nakedManCollider = new RectangleCollider(GetOwner(), Vector(0, 0),
 	                                         GetOwner()->GetWidth(),
 											 GetOwner()->GetHeight(), 0);
-
-	// FirstBossController::GetInstance();
 }
 
+/**
+    @brief Sets the direction of the player based on the mouse position.
+*/
 void NakedManScript::SetDirection() {
     mousePosition = input->GetMousePosition();
 
-    /*
-    x-axis
-    if(mousePosition.first >= position->m_x && movements==4){
-    */
-
     if (!game_controller) {
         mousePosition = input->GetMousePosition();
-        /*
-        if(input->GetMouseButtonPressed(M_INPUT_LEFT))
-        x-axis
-        */
         if (mousePosition.first >= position->m_x && movements == 4){
             isMovingLooking = true;
         } else if (mousePosition.first > position->m_x && movements == 3) {
@@ -178,6 +184,9 @@ void NakedManScript::SetDirection() {
     }
 }
 
+/**
+    @brief Detects the keyboards that are being pressed to move the player.
+*/
 void NakedManScript::KeyBoardUpdate() {
     if ((input->GetKeyPressed(INPUT_DOWN))
          || (input->GetKeyPressed(INPUT_UP))) {
@@ -310,6 +319,9 @@ void NakedManScript::KeyBoardUpdate() {
     }
 }
 
+/**
+    @brief Detects the actions of the game controller to move the player.
+*/
 void NakedManScript::GameControllerUpdate() {
     isMovingLooking = true;
 
@@ -492,6 +504,9 @@ void NakedManScript::GameControllerUpdate() {
     }
 }
 
+/**
+    @brief Creates the animations related with the player.
+*/
 void NakedManScript::CreateAnimations() {
     // Animator
     auto nakedManAnimator = new Animator(GetOwner());
@@ -565,6 +580,9 @@ void NakedManScript::CreateAnimations() {
     nakedManAnimator->AddAnimation("Stop Right", StopRightAnimation);
 }
 
+/**
+    @brief Updates the components of the player.
+*/
 void NakedManScript::ComponentUpdate() {
     auto script2 = (RainScript *)SceneManager::GetInstance()
                                 ->GetCurrentScene()
@@ -595,50 +613,13 @@ void NakedManScript::ComponentUpdate() {
         script3->play = 0;
     }
 
-    /*
-    if ("x = %f\ny = %f\n\n", position->m_x + CameraSystem::GetInstance()
-                                              ->GetPos_x() - 3500,position->m_y
-                                              + CameraSystem::GetInstance()
-                                              ->GetPos_y() - 3800);
-      auto vec = Vector(nakedManCollider->GetRectanglePoint().m_x,
-                        nakedManCollider->GetRectanglePoint().m_y);
-      GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()
-                                                       ->GetWidth(),
-                                                       GetOwner()->GetHeight(),
-                                                       255,0,0,100);
-    */
-
     SetDirection();
     walkSpeed = fixedWalkSpeed;
-
-    /*
-    if((input->GetKeyPressed(INPUT_DOWN)) || (input->GetKeyPressed(INPUT_UP)))
-        isZooming=true;
-    if((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP)))
-        isZooming=false;
-    */
-
-    /*
-    if ((input->GetKeyDown(INPUT_V)) && (!isMovingLooking)) {
-        isMovingLooking=true;
-    } else if ((input->GetKeyDown(INPUT_V)) && (isMovingLooking)) {
-    isMovingLooking=false;
-    }
-    */
-
     Animations();
     MovementsSounds();
 
     // Sair para o Menu
     if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
-    /*
-    auto var = (UIText *)SceneManager::GetInstance()
-                   ->GetScene("Main")
-                   ->GetGameObject("Play")
-                   ->GetComponent("UIText");
-        var->SetText("Continue");
-        SceneManager::GetInstance()->SetCurrentScene("Main");
-    */
         SDLSystem::GetInstance()->SetRunning(false);
     }
 
@@ -671,19 +652,23 @@ void NakedManScript::ComponentUpdate() {
     SetDirection();
 }
 
+/**
+    @brief Detects if the player is moving.
+*/
 void NakedManScript::MovementsSounds() {
     if (input->GetKeyPressed(INPUT_W) || input->GetKeyPressed(INPUT_A)
         || input->GetKeyPressed(INPUT_S) || input->GetKeyPressed(INPUT_D)) {
         if (!walking) {
-            // AudioController::GetInstance()->PlayAudio("runSound", 0);
             walking = true;
         }
     } else {
         walking = false;
-        // AudioController::GetInstance()->StopAudio("runSound");
     }
 }
 
+/**
+    @brief Updates the components of the player.
+*/
 void NakedManScript::FixedComponentUpdate() {
     GameCollisionCheck();
     WallCollisionResolution();
@@ -691,22 +676,9 @@ void NakedManScript::FixedComponentUpdate() {
     if (!lockplayerMovements) {
         Movements();
     }
-    /*
-    printf("x = %f\ny = %f\n\n",position->m_x,position->m_y);
-    printf("x = %f\ny = %f\n\n",position->m_x + CameraSystem::GetInstance()
-                                                ->GetPos_x()-3500,position->m_y
-                                                + CameraSystem::GetInstance()
-                                                ->GetPos_y()-3800);
-    */
+
     ReloadGun();
     PlayerLife();
-
-    /*
-    Shoot gun
-    if (InputSystem::GetInstance()->GetKeyDown(INPUT_B)) {
-        life = 0;
-    }
-    */
 
     if (endBossFight) {
         FirstBossController::GetInstance()->EndBossFight();
@@ -716,12 +688,15 @@ void NakedManScript::FixedComponentUpdate() {
         yPos = EngineGlobals::screen_height / 2 - 96 / 2;
 
         FirstBossController::GetInstance()->PositPlayer(Vector(xPos, yPos ));
-        // FirstBossController::GetInstance()->PositMap(Vector(-500, -3800 ));
         CameraSystem::GetInstance()->MoveRight(200,SceneManager::GetInstance()->GetCurrentScene());
         endBossFight =  false;
     }
 }
 
+/**
+    @brief Detects the amount of player's life to recover it or end the fight
+    with the boss.
+*/
 void NakedManScript::PlayerLife() {
     if (life < 100 && !endBossFight) {
         lifeRecover.Update(EngineGlobals::fixed_update_interval);
@@ -741,6 +716,9 @@ void NakedManScript::PlayerLife() {
     }
 }
 
+/**
+    @brief Allows the player to shoot if he has bullets.
+*/
 void NakedManScript::Shoot() {
     if (bulletNumber > 0) {
         auto gameObjectBullet = (GameObject *)SceneManager::GetInstance()
@@ -755,11 +733,13 @@ void NakedManScript::Shoot() {
                                             + std::to_string(bulletNumber))
                                             ->GetComponent("PlayerAttackScript");
         script->SetShoot(true);
-        // AudioController::GetInstance()->PlayAudio("bulletSound", 0);
         bulletNumber--;
     }
 }
 
+/**
+    @brief Reloads the player's gun based on number of shots or time.
+*/
 void NakedManScript::ReloadGun() {
   /** Reload **/
     if (bulletNumber == 0) {
@@ -772,6 +752,9 @@ void NakedManScript::ReloadGun() {
     }
 }
 
+/**
+    @brief Constantly updates the animations based on collisions and time.
+*/
 void NakedManScript::Animations() {
     if (m_hit) {
         m_hitFrames++;
@@ -791,6 +774,10 @@ void NakedManScript::Animations() {
     }
 }
 
+/**
+    @brief Defines the direction in which the player will move based
+    on the pressed keys or the game controller buttons actions.
+*/
 void NakedManScript::Movements() {
     if (movements == 5) {
         walkSpeed = walkSpeed * 0.70710;
@@ -918,10 +905,12 @@ void NakedManScript::Movements() {
     }
 }
 
+/**
+    @brief Check the collisions that occur during the game.
+*/
 void NakedManScript::GameCollisionCheck() {
     for (auto obj : GetOwner()->GetCollisions()) {
         if (obj->GetTag() == "Bullet") {
-            //cout << "Bullet Colider" << endl;
             GetOwner()->ClearCollisions();
         } else if (obj->GetTag() == "FirstBoss") {
             cout << "Boss Colider" << endl;
@@ -941,13 +930,15 @@ void NakedManScript::GameCollisionCheck() {
     }
 }
 
+/**
+    @brief Starts the first boss depending on the position of the Camera
+    of the game.
+*/
 void NakedManScript::StartFirstBoss() {
-    // cout << position->m_y << endl;
     if (input->GetKeyDown(INPUT_X)) {
         cout << "X: " << CameraSystem::GetInstance()->worldCameraX << endl;
         cout << "Y: " << CameraSystem::GetInstance()->worldCameraY << endl;
     }
-    // cout << SceneManager::GetInstance()->GetCurrentScene()->GetName() <<  endl;
 
     if (!bossFight) {
         if ((CameraSystem::GetInstance()->worldCameraX < 500)) {
@@ -987,6 +978,9 @@ void NakedManScript::StartFirstBoss() {
     }
 }
 
+/**
+    @brief Detects collisions between the player and the wall.
+*/
 void NakedManScript::WallCollisionResolution() {
     auto mapscript = (MapScript *)SceneManager::GetInstance()
                                   ->GetScene("Gameplay")
