@@ -45,7 +45,7 @@ private:
     // Instantiating animations.
     Animator *animator = nullptr;
 
-    // Instantiating vector.
+    // Instantiating position,type vector.
     Vector *position = nullptr;
 
     // Instantiating player's collisions.

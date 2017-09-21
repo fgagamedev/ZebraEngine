@@ -1,3 +1,9 @@
+/**
+    @file LightScript.hpp
+    @brief Class that represents the script of light of the game.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __LIGHT_SCRIPT__
 #define __LIGHT_SCRIPT__
 
@@ -12,29 +18,35 @@
 
 #include <string>
 
-/**
-    @file LightScript.hpp
-    @brief Class that represents the scrip of light of the game.
-    @copyright LGPL. MIT License.
-*/
 
 class LightScript : public Script {
 
 public:
-  LightScript(GameObject *owner);
-  std::string GetComponentName() override { return "RainScript"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
+    LightScript(GameObject *owner);
+    std::string GetComponentName() override { return "RainScript"; };
+    void FixedComponentUpdate() override;
+    void Start() override;
 
 protected:
-  void ComponentUpdate() override;
+    void ComponentUpdate() override;
+
 private:
-  void CreateAnimations();
-  InputSystem *input = nullptr;
-  Animator *animator = nullptr;
-  Vector *position = nullptr;
-  GameObject *player = nullptr;
-  int play=1;
+    void CreateAnimations();
+
+    // Instantiating input system of the keyboard.
+    InputSystem *input = nullptr;
+
+    // Instantiating animations.
+    Animator *animator = nullptr;
+
+    // Instantiating lightscript position, type vector.
+    Vector *position = nullptr;
+
+    // Instantiating player, type gameobject, that has all the fundamental game functionalities.
+    GameObject *player = nullptr;
+
+    //State of the script.
+    int play=1;
 
 };
 
