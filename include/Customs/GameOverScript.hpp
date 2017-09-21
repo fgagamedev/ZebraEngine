@@ -1,3 +1,9 @@
+/**
+    @file GameOverScript.hpp
+    @brief Class that represents the scrip of the game over.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __GAME_OVER_SCRIPT__
 #define __GAME_OVER_SCRIPT__
 
@@ -12,30 +18,33 @@
 
 #include <string>
 
-/**
-    @file GameOverScript.hpp
-    @brief Class that represents the scrip of the game over.
-    @copyright LGPL. MIT License.
-*/
 
 class GameOverScript : public Script {
 
 public:
-  GameOverScript(GameObject *owner);
-  std::string GetComponentName() override { return "SnowScript"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
- // char GetMovement() { return movements; };
+    GameOverScript(GameObject *owner);
+    std::string GetComponentName() override { return "SnowScript"; };
+    void FixedComponentUpdate() override;
+    void Start() override;
+    // char GetMovement() { return movements; };
 
 protected:
-  void ComponentUpdate() override;
-private:
-  void CreateAnimations();
-  InputSystem *input = nullptr;
-  Animator *animator = nullptr;
-  Vector *position = nullptr;
-  int play=0;
+    void ComponentUpdate() override;
 
+private:
+    void CreateAnimations();
+
+    // Instantiating input system of the keyboard.
+    InputSystem *input = nullptr;
+
+    // Instantiating animations.
+    Animator *animator = nullptr;
+
+    // Instantiating object position, type vector.
+    Vector *position = nullptr;
+
+    //State of the script.
+    int play=0;
 };
 
 #endif

@@ -1,3 +1,9 @@
+/**
+    @file MainScene.hpp
+    @brief Class that represents the Main Scene of the game.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __MAIN_SCENE__
 #define __MAIN_SCENE__
 
@@ -15,32 +21,29 @@
 #include "Customs/QuitButtonScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
-/**
-    @file MainScene.hpp
-    @brief Class that represents the Main Scene of the game.
-    @copyright LGPL. MIT License.
-*/
 
 class MainScene : public Scene {
 public:
-  MainScene();
-  virtual void OnActivation() override;
-  virtual void OnDeactivation() override;
-  virtual void OnShown() override;
-  virtual void OnHidden() override;
-
+    MainScene();
+    virtual void OnActivation() override;
+    virtual void OnDeactivation() override;
+    virtual void OnShown() override;
+    virtual void OnHidden() override;
+  
 private:
-  void CreateAnimation();
-  int m_width_middle;
-  int m_height_middle;
-  void CreateLogo();
-  void CreatePlayButton();
-  void CreateQuitButton();
+    void CreateAnimation();
+    void CreateLogo();
+    void CreatePlayButton();
+    void CreateQuitButton();    
+    void CreateMusic();
+    //void CreateBackground();
+    //void CreateGamemodes();
+    
+    //Middle position of width.
+    int m_width_middle;
 
-  void CreateMusic();
-  //void CreateBackground();
-  //void CreateGamemodes();
-
+    //Middle position of height.
+    int m_height_middle;
 };
 
 #endif
