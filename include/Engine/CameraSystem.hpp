@@ -1,6 +1,6 @@
 /*
     @file CameraSystem.hpp
-    @brief Class that manages the game image, 
+    @brief Class that manages the game image,
     including the scenes the zoom and speed that the screen moves.
     @copyright LGPL. MIT License.
 */
@@ -37,9 +37,11 @@ class CameraSystem{
             return isLocked;
         }
         void Lock() {
+            // Represents the state of the camera.
             isLocked = true;
         }
         void Unlock() {
+            // Represents the state of the camera.
             isLocked = false;
         }
         bool IsLerping() {
@@ -54,13 +56,14 @@ class CameraSystem{
         bool IsShaking() {
             return isShaking;
         }
-        
+
         void CameraShake(int intensity, float duration, Scene *scene);
 
         // Zoom
         void ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scene);
         void ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *scene);
 
+        // Represents the current zoom of the camera.
         float currentZoom = 0;
 
         float  worldCameraX;
@@ -79,7 +82,11 @@ class CameraSystem{
         int m_cameraSpeed;
 
         bool isShaking;
+
+        // Represents the state of the camera.
         bool isLocked = true;
+
+        // Represents the state of movement of the camera.
         bool isLerping = true;
 
         Timer m_timer;
