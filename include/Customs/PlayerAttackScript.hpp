@@ -48,14 +48,14 @@ private:
     // Instantiating vector.
     Vector *position = nullptr;
 
-    // Instantiating collisions system.
+    // Instantiating player's collisions.
     RectangleCollider* playerCollider =  nullptr;
 
     // Instantiating mouse and player positions.
     Vector mousePosition = Vector(0,0);
     Vector playerPosition = Vector(0,0);
 
-    // Instantiating gameobject, it brings all the fundamental game functionalities.
+    // Instantiating player, type gameobject, that has all the fundamental game functionalities.
     GameObject *player = nullptr;
 
     //State of a shoot.
