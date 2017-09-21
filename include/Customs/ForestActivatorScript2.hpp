@@ -1,3 +1,9 @@
+/**
+    @file ForestActivatorScript2.hpp
+    @brief Class that represents the scrip activion of the Forest two.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __FOREST_ACTIVATOR_SCRIPT2__
 #define __FOREST_ACTIVATOR_SCRIPT2__
 
@@ -13,32 +19,42 @@
 
 #include <string>
 
-/**
-    @file ForestActivatorScript2.hpp
-    @brief Class that represents the scrip activion of the Forest two.
-    @copyright LGPL. MIT License.
-*/
-
 class ForestActivatorScript2 : public Script {
 
 public:
-  ForestActivatorScript2(GameObject *owner);
-  std::string GetComponentName() override { return "ForestActivatorScript2"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
-  void Activate(){activate=0;}
+    ForestActivatorScript2(GameObject *owner);
+    std::string GetComponentName() override { return "ForestActivatorScript2"; };
+    void FixedComponentUpdate() override;
+    void Start() override;
+    void Activate(){activate=0;}
+
 protected:
-  void ComponentUpdate() override;
+    void ComponentUpdate() override;
+
 private:
-  int activate=-1;
-  bool runned=false;
-  Timer time;
-  void CreateAnimations();
-  InputSystem *input = nullptr;
-   GameController* gamecontroller = nullptr;
-  Animator *animator = nullptr;
-  Vector *position = nullptr;
-  int play=0;
+    void CreateAnimations();
+
+    //Activation of script.
+    int activate =-1;
+    bool runned = false;
+
+    // Instantiating time system. 
+    Timer time;
+  
+    // Instantiating input system of the keyboard. 
+    InputSystem *input = nullptr;
+
+    // Instantiating joystick.
+    GameController* gamecontroller = nullptr;
+    
+    // Instantiating animations.
+    Animator *animator = nullptr;
+  
+    // Instantiating vector.
+    Vector *position = nullptr;
+  
+    //State of the script.
+    int play=0;
 
 };
 #endif
