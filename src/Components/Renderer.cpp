@@ -1,3 +1,9 @@
+/**
+    @file Renderer.cpp
+    @brief Manages renderings of images on the screen.
+    @copyright LGPL. MIT License.
+*/
+
 #include "Engine/GameObject.hpp"
 #include "Engine/GraphicsSystem.hpp"
 
@@ -8,16 +14,10 @@
 #include <math.h>
 
 /**
-    @file Renderer.cpp
-    @brief Manages renderings of images on the screen.
-    @copyright LGPL. MIT License.
-*/
-
-/**
     @brief Update the images informations on the screen.
 */
 void Renderer::ComponentUpdate() {
-    std::pair<int, int> sizes = 
+    std::pair<int, int> sizes =
         std::make_pair(GetOwner()->GetWidth(), GetOwner()->GetHeight());
         GraphicsSystem::GetInstance()->Draw(m_image, m_position, sizes);
 }
