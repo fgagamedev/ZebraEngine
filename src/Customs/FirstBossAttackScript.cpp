@@ -1,24 +1,40 @@
+/**
+    @file FirstBossAttackScript.cpp
+    @brief  Manage the animations for the first boss attack effect.
+    @copyright MIT License.
+*/
+
 #include "Customs/FirstBossAttackScript.hpp"
 #include "Customs/AudioController.hpp"
 
+/**
+    @brief Constructor for the FirstBossAttackScript class.
+*/
 FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) :
     Script(owner) {}
 
+/**
+    @brief Start the animation for the first boss attack effect.
+*/
 void FirstBossAttackScript::Start() {
 
     CreateAnimations();
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
-    input = InputSystem::GetInstance();
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_input = InputSystem::GetInstance();
     auto map = SceneManager::GetInstance()->
                              GetScene("Gameplay")->GetGameObject("Map");
     if (map) GetOwner()->SetZoomProportion(
                        Vector(map->originalWidth/GetOwner()->originalWidth,
                               map->originalHeight/GetOwner()->originalHeight));
-    firstBossAttackCollider = new RectangleCollider(GetOwner(), Vector(0, 0),
+    m_firstBossAttackCollider = new RectangleCollider(GetOwner(), Vector(0, 0),
                                                    GetOwner()->GetWidth(),
                                                    GetOwner()->GetHeight(), 0);
 }
+
+/**
+    @brief Create the first boss attack effect animations.
+*/
 void FirstBossAttackScript::CreateAnimations() {
 
     //Image Attacks
@@ -59,29 +75,25 @@ void FirstBossAttackScript::CreateAnimations() {
                                             firstBossAttackGoneAnimation);
 }
 
+/**
+    @brief Start a boss attack animation  if he is in the scene.
+    If the attack is inactive, it is active.
 
+*/
 void FirstBossAttackScript::ComponentUpdate() {
     if(attack) {
        Attack();
     }
 
-    if(InputSystem::GetInstance()->GetKeyUp(INPUT_M) && attack == false){// attack
-     //FirstBossController::GetInstance()->PositTentacle();
+    if(InputSystem::GetInstance()->GetKeyUp(INPUT_M) && attack == false){
         attack = true;
-      //FirstBossController::GetInstance()->PositTentacle(1);
-      //FirstBossController::GetInstance()->PositTentacle();
-      //m_surgeAnimation = true;
-      //Attack();
     }
 
-
-  //Debug
-  //auto vec = Vector(firstBossAttackCollider->GetRectanglePoint().m_x,firstBossAttackCollider->GetRectanglePoint().m_y);
-  //GraphicsSystem::GetInstance()->DrawFillRectangle(vec, GetOwner()->GetWidth(), GetOwner()->GetHeight(), 255,0,0,100);
-
-
-
 }
+
+/**
+    @brief Determine the time of attack os boss.
+*/
 void FirstBossAttackScript::FixedComponentUpdate() {
     timerAnimation.Update(EngineGlobals::fixed_update_interval);
 
@@ -91,47 +103,46 @@ void FirstBossAttackScript::FixedComponentUpdate() {
     CameraShakeAttack();
 }
 
+/**
+    @brief Creates the attack by setting the animation.
+*/
 void FirstBossAttackScript::Attack() {
 
     if (m_surgeAnimation) {
         CameraSystem::GetInstance()->CameraShake(8,3,
                       SceneManager::GetInstance()->GetCurrentScene());
-        animator->PlayAnimation("firstBossAttackSurgeAnimation");
+        m_animator->PlayAnimation("firstBossAttackSurgeAnimation");
         m_surgeAnimation = false;
         m_idleAnimation = true;
         timerAnimation.Restart();
-        //auto soundFX = (UISound *)GetOwner()->GetComponent("UISound");
-        //soundFX->Play(0, -1);
         AudioController::GetInstance()->PlayAudio("secondAttackSound", 0);
 
     }
     if (m_idleAnimation && timerAnimation.GetTime() >= 1 * 1000) {
-        animator->PlayAnimation("firstBossAttackIdleAnimation");
-        //m_goneAnimation =  true;
-        //timerAnimation.Restart();
+        m_animator->PlayAnimation("firstBossAttackIdleAnimation");
     }
-    if (m_goneAnimation) {
-        animator->PlayAnimation("firstBossAttackGoneAnimation");
-        AudioController::GetInstance()->PlayAudio("fourthAttackSound", 0);
-        m_goneAnimation = false;
+    if (goneAnimation) {
+        m_animator->PlayAnimation("firstBossAttackGoneAnimation");
+        AudioController::GetInstance() -> PlayAudio("fourthAttackSound", 0);
+        goneAnimation = false;
         m_idleAnimation = false;
         attack = false;
         m_surgeAnimation = true;
         desactivateObj = true;
         GetOwner()->active = false;
-  }
+    }
     if(timerGone.GetTime() >= 1 * 1000) {
         timerGone.Restart();
         desactivateObj = false;
-  }
+    }
 }
 
 void FirstBossAttackScript::CameraShakeAttack(){
     if (shake) {
-        //CameraShake(intensity,duration in seconds)
-        CameraSystem::GetInstance()->CameraShake(8,1,
-                              SceneManager::GetInstance()->GetCurrentScene());
-        if (!CameraSystem::GetInstance()->IsShaking())
-        shake = false;
+        CameraSystem::GetInstance() -> CameraShake(8, 1, SceneManager::GetInstance()
+                                                 -> GetCurrentScene());
+        if (!CameraSystem::GetInstance() -> IsShaking()){
+            shake = false;
+        }
   }
 }

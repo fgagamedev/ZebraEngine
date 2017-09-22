@@ -184,7 +184,7 @@ void FirstBossController::FirstAttackGone() {
         auto firstBossAttackScript = (FirstBossAttackScript*)tentacle->
                                   GetComponent("FirstBossAttackScript");
         //Perform gone animation
-        firstBossAttackScript->m_goneAnimation = true;
+        firstBossAttackScript   -> goneAnimation = true;
   }
 }
 
