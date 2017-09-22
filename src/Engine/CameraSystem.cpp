@@ -25,17 +25,18 @@ CameraSystem::CameraSystem() {
 */
 void CameraSystem::MoveUp(int speed, Scene *scene) {
 
+    // Check if is diferent of scene and return.
     if (!scene) {
         return;
     }
 
-    //Get all scene game objects
+    // Get all scene game objects.
     m_gameObjects = scene->GetAllGameObjects();
     if (m_gameObjects.empty()) {
         return;
     }
 
-    //Move all scene objects
+    // Move all scene objects.
     for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++) {
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x, (*it)->GetPosition()->m_y + speed));
     }
@@ -64,7 +65,7 @@ void CameraSystem::MoveUp(int speed, Scene *scene) {
         }
     }
 
-    // Set a new position
+    // Set a new position.
     worldCameraY = worldCameraY - speed;
 
 }
@@ -76,17 +77,19 @@ void CameraSystem::MoveUp(int speed, Scene *scene) {
 */
 void CameraSystem::MoveDown(int speed, Scene *scene) {
 
+    // Check if is diferent of scene and return.
     if (!scene) {
         return;
     }
 
+    // Get the scene game objects.
     m_gameObjects = scene->GetAllGameObjects();
 
     if (m_gameObjects.empty()) {
         return;
     }
 
-    // Move all scene objects
+    // Move all scene objects.
     for (auto it = m_gameObjects.begin();it!=m_gameObjects.end();it++) {
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x ,(*it)->GetPosition()->m_y - speed));
     }
@@ -115,7 +118,7 @@ void CameraSystem::MoveDown(int speed, Scene *scene) {
     }
 
 
-    //Move the camera
+    // Move the camera.
     worldCameraY = worldCameraY + speed;
 
 }
@@ -127,17 +130,19 @@ void CameraSystem::MoveDown(int speed, Scene *scene) {
 */
 void CameraSystem::MoveLeft(int speed,Scene *scene) {
 
+    // Check if is diferent of scene and return.
     if (!scene) {
         return;
     }
 
+    // Get the scene game objects.
     m_gameObjects = scene->GetAllGameObjects();
 
     if (m_gameObjects.empty()) {
         return;
     }
 
-    //Move all scene objects
+    // Move all scene objects.
     for (auto it = m_gameObjects.begin();it != m_gameObjects.end(); it++) {
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x + speed ,(*it)->GetPosition()->m_y ));
     }
@@ -166,7 +171,7 @@ void CameraSystem::MoveLeft(int speed,Scene *scene) {
         }
     }
 
-    //Set new position
+    // Set new position camera.
     worldCameraX = worldCameraX - speed;
 
 }
@@ -178,25 +183,27 @@ void CameraSystem::MoveLeft(int speed,Scene *scene) {
 */
 void CameraSystem::MoveRight(int speed, Scene *scene) {
 
+    // Check if is diferent of scene and return.
     if(!scene) {
         return;
     }
 
+    // Get the scene game objects.
     m_gameObjects = scene->GetAllGameObjects();
 
     if (m_gameObjects.empty()) {
         return;
     }
 
-    //Move all scene objects
+    // Move all scene objects.
     for (auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++) {
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x - speed ,(*it)->GetPosition()->m_y));
     }
 
     auto mapscript = (MapScript*)SceneManager::GetInstance()
-                       ->GetScene("Gameplay")
-                       ->GetGameObject("Map")
-                       ->GetComponent("MapScript");
+                                ->GetScene("Gameplay")
+                                ->GetGameObject("Map")
+                                ->GetComponent("MapScript");
                         // mapscript->target.x-= speed;
 
     if (mapscript) {
@@ -217,7 +224,7 @@ void CameraSystem::MoveRight(int speed, Scene *scene) {
         }
     }
 
-    //Move the camera
+    // Moves the camera.
     worldCameraX = worldCameraX + speed;
 
 }
@@ -230,6 +237,7 @@ void CameraSystem::MoveRight(int speed, Scene *scene) {
 */
 void CameraSystem::CameraShake(int intensity, float duration, Scene *scene) {
 
+    // Check if is diferent of scene and return.
     if (!scene) {
         return;
     }
@@ -320,7 +328,8 @@ void CameraSystem::Reset() {
 */
 void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scene) {
 
-    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
+                                            GetGameObject("Map");
 
     if (!map) {
         return;
@@ -330,12 +339,15 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
     m_beforePositionY = objectToFollow->GetPosition()->m_y;
     this->m_cameraSpeed = zoomSpeed;
 
-    auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
+    auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->
+                                                      GetAllGameObjects();
 
     for (auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++) {
         if ((*it)->GetName()!="Map") {
-            m_proportionX = 100*(((*it)->GetPosition()->m_x + worldCameraX) / (map->GetWidth()));
-            m_proportionY = 100*(((*it)->GetPosition()->m_y + worldCameraY) / (map->GetHeight()));
+            m_proportionX = 100*(((*it)->GetPosition()->m_x + worldCameraX) /
+                                                            (map->GetWidth()));
+            m_proportionY = 100*(((*it)->GetPosition()->m_y + worldCameraY) /
+                                                            (map->GetHeight()));
             //if getzoomProportion==(0,0) the object wont be affected by the zoom
 
             if ((*it)->GetZoomProportion()->m_x != 0, (*it)->GetZoomProportion()->m_y != 0) {
@@ -423,7 +435,8 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
 */
 void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *scene){
 
-    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
+                                            GetGameObject("Map");
     if (!map) {
         return;
     }
@@ -449,10 +462,10 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
     }
 
     auto mapscript = (MapScript*)SceneManager::GetInstance()
-             ->GetScene("Gameplay")
-             ->GetGameObject("Map")
-             ->GetComponent("MapScript");
-              // mapscript->target.x-= speed;
+                                               ->GetScene("Gameplay")
+                                               ->GetGameObject("Map")
+                                               ->GetComponent("MapScript");
+                                               // mapscript->target.x-= speed;
 
     if (mapscript) {
         for (int i = 0; i<mapscript->leftWallsAmmount; i++) {
@@ -519,7 +532,7 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
     @brief instance of the new class CameraSystem() if not exist.
     @return m_instance New class.
 */
-CameraSystem *CameraSystem::GetInstance(){
+CameraSystem *CameraSystem::GetInstance() {
     if (!m_instance) {
         m_instance = new CameraSystem();
     }

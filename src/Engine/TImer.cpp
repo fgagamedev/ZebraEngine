@@ -14,7 +14,7 @@ Timer::Timer() {
 
 /*
     @brief Update time.
-    @param[in] detectiontTime 
+    @param[in] detectiontTime.
 */
 void Timer::Update(float detectiontTime){
 	time = time + detectiontTime;

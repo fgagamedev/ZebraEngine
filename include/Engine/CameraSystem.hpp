@@ -22,7 +22,7 @@ class CameraSystem{
     public:
         static CameraSystem *GetInstance();
 
-        // Camera Movement
+        // Camera Movement.
         void MoveRight(int speed, Scene *scene);
         void MoveLeft(int speed, Scene *scene);
         void MoveUp(int speed, Scene *scene);
@@ -52,14 +52,14 @@ class CameraSystem{
         void SetAndMovePos_x(float x);
         void SetAndMovePos_y(float y);
 
-        // Camera shake
+        // Camera shake.
         bool IsShaking() {
             return isShaking;
         }
 
         void CameraShake(int intensity, float duration, Scene *scene);
 
-        // Zoom
+        // Zoom.
         void ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scene);
         void ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *scene);
 
