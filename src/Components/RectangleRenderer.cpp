@@ -1,10 +1,10 @@
-#include "Components/RectangleRenderer.hpp"
-
 /**
     @file RectangleRenderer.cpp
     @brief Manages the rectangles of the game.
     @copyright LGPL. MIT License.
 */
+
+#include "Components/RectangleRenderer.hpp"
 
 /**
     @brief Constructor for the class RectangleRenderer.
