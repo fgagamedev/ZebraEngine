@@ -1,3 +1,9 @@
+/**
+    @file Frame.hpp
+    @brief Manages the frame of the game.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __FRAME__
 #define __FRAME__
 
@@ -9,6 +15,7 @@ public:
     SDL_Rect *GetRect();
 
 private:
+    // Rectangular area of the frame
     SDL_Rect srcRect;
 };
 

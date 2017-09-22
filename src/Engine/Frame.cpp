@@ -1,10 +1,10 @@
-#include "Engine/Frame.hpp"
-
 /**
     @file Frame.cpp
     @brief Manages the frame of the game.
     @copyright LGPL. MIT License.
 */
+
+#include "Engine/Frame.hpp"
 
 /**
     @brief Set start coordinates and frame size.
