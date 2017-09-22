@@ -10,8 +10,9 @@
 /**
     @brief Constructor for the FirstBossAttackScript class.
 */
-FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) :
-    Script(owner) {}
+FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) : Script(owner) {
+  
+}
 
 /**
     @brief Start the animation for the first boss attack effect.

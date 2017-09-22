@@ -11,6 +11,10 @@ CutScene1Script::CutScene1Script(GameObject *owner) : Script(owner) {}
     @brief Start the animation for the cut scene 1.
 */
 void CutScene1Script::Start() {
+    /*
+        Creates the animations defining position the place to insert
+        and the scene that will be inserted.
+    */
     CreateAnimations();
     m_position = GetOwner()->GetPosition();
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -19,8 +23,10 @@ void CutScene1Script::Start() {
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     if(map) {
-        GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,
-                               map->originalHeight/GetOwner()->originalHeight));
+        GetOwner()->SetZoomProportion(Vector(map -> originalWidth / GetOwner()
+                                             ->originalWidth, map
+                                             -> originalHeight / GetOwner()
+                                             -> originalHeight));
     }
 }
 
@@ -28,13 +34,19 @@ void CutScene1Script::Start() {
     @brief Create the animations of the cut scene 1.
 */
 void CutScene1Script::CreateAnimations() {
-    auto centrallightSprite = new Image("assets/cut1.png", 0, 0,1705, 255);
+
+    // Image light sprite.
+    auto centrallightSprite = new Image("assets/cut1.png", 0, 0, 1705, 255);
+
+    // Animation light.
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
     centrallightAnimation->AddFrame(new Frame(0, 0, 341, 255));
 
+    // Animation.
     auto centrallightAnimator = new Animator(GetOwner());
     centrallightAnimation->SetFramesPerSecond(9);
-    centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION", centrallightAnimation);
+    centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION",
+                                       centrallightAnimation);
 }
 
 /**
