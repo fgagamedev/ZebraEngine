@@ -22,6 +22,8 @@ class ControleLogoScript : public Script {
 
 public:
     ControleLogoScript(GameObject *owner);
+
+    // // Get the component name and replace it by returning its string name.
     std::string GetComponentName() override {
         return "ControleLogoScript";
     };

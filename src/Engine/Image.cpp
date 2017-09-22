@@ -12,7 +12,9 @@
 /**
     @brief Simple constructor of the Image class.
 */
-Image::Image() {}
+Image::Image() {
+
+}
 
 /**
     @brief Constructor of the Image class that loads the image.
@@ -34,8 +36,9 @@ Image::Image(std::string path, int _x, int _y, int _width, int _height) {
     @param[in] _width Vertical size of the image.
     @param[in] _height Horizontal size of the image.
 */
-void Image::LoadImage(std::string path, int _x, int _y, int _width,
-                      int _height) {
+void Image::LoadImage(std::string path, int _x, int _y, int _width, int _height) {
+
+    // Responsible for loading the image and checking for errors.
     SDL_Surface *surface = IMG_Load(path.c_str());
 
     if (!surface) {

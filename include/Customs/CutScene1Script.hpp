@@ -17,6 +17,8 @@ class CutScene1Script : public Script {
 
 public:
     CutScene1Script(GameObject *owner);
+
+    // Get the component name and replace it by returning its string name.
     std::string GetComponentName() override {
         return "CutScene1Script";
     };

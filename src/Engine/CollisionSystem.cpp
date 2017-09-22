@@ -7,7 +7,7 @@
 
 #include <math.h>
 
-//Initializes the instance pointer of type Collision System as nullptr
+//Initializes the instance pointer of type Collision System as nullptr.
 CollisionSystem *CollisionSystem::m_instance = nullptr;
 
 /**
@@ -37,6 +37,8 @@ void CollisionSystem::Update() {
     @brief Determine if collisions between elements have happened.
 */
 void CollisionSystem::DetectCollisions() {
+
+    // Defines the boundaries as trees and walls.
     for (int i = 0; i < m_colliders.size(); i++) {
         for (int k = i + 1; k < m_colliders.size(); k++) {
             if (m_colliders[i]->GetComponentName() == m_colliders[k]->GetComponentName()
@@ -142,24 +144,24 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
     // Boolean variable of type true or false that defines collisions.
     bool collision = false;
 
-    // Distance between centers in x-axis
+    // Distance between centers in x-axis.
     double distanceX = abs(circle->GetCenter().m_x - rectangle->GetRectanglePoint().m_x
                            - rectangle->GetWidth() / 2);
 
-    // Distance between centers in y-axis
+    // Distance between centers in y-axis.
     double distanceY = abs(circle->GetCenter().m_y - rectangle->GetRectanglePoint().m_y
                            - rectangle->GetHeight() / 2);
 
-    // Distance between centers  in x-axis
+    // Distance between centers  in x-axis.
     double distancex = distanceX - rectangle -> GetWidth() / 2;
 
-    // Distance between centers  in y-axis
+    // Distance between centers  in y-axis.
     double distancey = distanceY - rectangle -> GetHeight() / 2;
 
     /*
         Checks if the distance on x-axis between centers are greater than
-        RectWidth/2 + CircleRadius,in that case there is no Collision.
-        The same logic is used on y-axis.
+        TextWidth divided by 2 in addition to Circle Radius, in that case
+        there is in Collision. The same logic is used on y-axis.
     */
     if (!((distanceX > (rectangle->GetWidth() / 2 + circle->GetRadius()))
         || (distanceY > (rectangle->GetHeight() / 2 + circle->GetRadius())))){

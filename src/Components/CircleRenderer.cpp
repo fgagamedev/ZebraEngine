@@ -16,6 +16,7 @@ CircleRenderer::CircleRenderer(GameObject *owner, Vector offset, float radius)
     @brief Update the position of the circle and draw it.
 */
 void CircleRenderer::ComponentUpdate() {
+    // Sets the positions the circle radius and color.
     int x = GetOwner()->GetPosition()->m_x + m_offset.m_x;
     int y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
     auto center = Vector(x, y);
@@ -32,6 +33,7 @@ void CircleRenderer::ComponentUpdate() {
     the lower is the value, bigger is the transparency.
 */
 void CircleRenderer::SetColor(int red, int green, int blue, int alpha) {
+    // Sets the primary colors to use in the game.
     m_red = red;
     m_green = green;
     m_blue = blue;

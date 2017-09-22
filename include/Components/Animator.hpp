@@ -18,6 +18,7 @@ typedef std::unordered_map<std::string, Animation *> AnimationMap;
 
 class Animator : public Component {
 public:
+    // Responsible for declaring and creating all the game animations.
     Animator(GameObject *owner);
     void AddAnimation(std::string name, Animation *animation);
     void PlayAnimation(std::string name);

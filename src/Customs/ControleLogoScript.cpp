@@ -19,6 +19,10 @@ ControleLogoScript::ControleLogoScript(GameObject *owner) : Script(owner) {}
     @brief Start the animation of the controle logo.
 */
 void ControleLogoScript::Start() {
+    /*
+        Creates the animations defining position the place to insert
+        and the scene that will be inserted.
+    */
     CreateAnimations();
     m_position = GetOwner()->GetPosition();
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -30,8 +34,11 @@ void ControleLogoScript::Start() {
     @brief Create the animations for controle logo.
 */
 void ControleLogoScript::CreateAnimations() {
+
+    // Image logo sprite.
     auto controle_LogoSprite = new Image("assets/introcontrole.png", 0, 0, 5115,
                                          512);
+    // Aniamtion logo sprite.
     auto controleAnimation = new Animation(GetOwner(), controle_LogoSprite);
     for (int i = 0; i < 15; i++) {
         controleAnimation -> AddFrame(new Frame(i * 341, 0, 341, 256));
@@ -54,6 +61,8 @@ void ControleLogoScript::ComponentUpdate() {}
     @brief Control the duration of the controle logo's animation.
 */
 void ControleLogoScript::FixedComponentUpdate() {
+
+    // Update time and set play animator.
     time.Update(1);
     if (time.GetTime() >= 390) {
         m_animator->PlayAnimation("CONTROLE ANIMATION");

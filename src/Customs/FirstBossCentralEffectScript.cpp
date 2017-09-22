@@ -16,6 +16,10 @@ FirstBossCentralEffectScript::FirstBossCentralEffectScript(GameObject *owner) :
     @brief Start the animation for the first boss central effect.
 */
 void FirstBossCentralEffectScript::Start() {
+    /*
+        Creates the animations defining position the place to insert
+        and the scene that will be inserted.
+    */
     CreateAnimations();
     m_position = GetOwner()->GetPosition();
     m_animator = (Animator *)GetOwner() -> GetComponent("Animator");
@@ -32,14 +36,17 @@ void FirstBossCentralEffectScript::Start() {
     @brief Create the first boss central effect animations.
 */
 void FirstBossCentralEffectScript::CreateAnimations() {
+
+    // Image Attacks.
     auto firstBossCentralImage1 = new Image("assets/centroboss11.png", 0, 0,
                                             700, 70);
+    // Surge Animation.
     auto firstBossCentralAnimation1 = new Animation(GetOwner(),
                                                     firstBossCentralImage1);
     for (int counter = 0; counter < 10; counter++) {
         firstBossCentralAnimation1->AddFrame(new Frame(counter * 70,0,
                                                        70, 70));
-        // animator
+        // Animator.
         auto firstBossAnimator = new Animator(GetOwner());
         firstBossAnimator->AddAnimation("firstBossCentralAnimation1",
                                         firstBossCentralAnimation1);
@@ -61,6 +68,11 @@ void FirstBossCentralEffectScript::ComponentUpdate() {
     @brief Determine the boss position horizontally and vertically.
 */
 void FirstBossCentralEffectScript::FixedComponentUpdate() {
+
+    /*
+        If the boss is initialized arrow to a new position for it
+        according to the player's position.
+    */
     if (m_boss) {
         m_position->m_x = m_boss->GetPosition()->m_x + m_boss->GetWidth() / 2
                                              - GetOwner()->GetWidth() / 2
