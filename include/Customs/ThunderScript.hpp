@@ -1,3 +1,7 @@
+/**
+    @file ThunderScript.hpp
+    @brief Manage the thunders animations of the game.
+*/
 #ifndef __THUNDER_SCRIPT__
 #define __THUNDER_SCRIPT__
 
@@ -26,10 +30,17 @@ protected:
 
 private:
     void CreateAnimations();
-    InputSystem *input = nullptr;
-    Animator *animator = nullptr;
-    Vector *position = nullptr;
-    int play=0;
+
+    // Pointer to game controls
+    InputSystem *m_input = nullptr;
+
+    // Pointer to animator game.
+    Animator *m_animator = nullptr;
+
+    // Poiter to position of gamer.
+    Vector *m_position = nullptr;
+
+    int play = 0;
 
 };
 #endif

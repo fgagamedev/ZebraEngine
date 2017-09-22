@@ -7,30 +7,28 @@
 
 FirstBossController *FirstBossController::m_instance = nullptr;
 
-FirstBossController *FirstBossController::GetInstance() { //Singleton class
+FirstBossController *FirstBossController::GetInstance() {
     if (!m_instance)
         m_instance = new FirstBossController();
 
     return m_instance;
 }
 
-FirstBossController::FirstBossController() {} //Constructor void
+FirstBossController::FirstBossController() {
+
+}
 
 void FirstBossController::StartBossFight() {
-  //PositAllTentacles();
-  //PositBoss();
-  //->boss resurge animation
-  //wait time
-  //set player movement free
+
 }
+
 void FirstBossController::EndBossFight() {
-    //DeactivatePlayer();
     DeactivateTentacles();
     DeactivateBoss();
     DeactivateInsideBossFx();
 }
 
-/*Add*/
+
 void FirstBossController::AddPlayer(GameObject *player) {
     m_player = player;
 }
@@ -53,7 +51,6 @@ void FirstBossController::AddMap(GameObject *map) {
     m_map = map;
 }
 
-/*Posit*/
 void FirstBossController::PositPlayer(Vector newPosition) {
     m_player->SetPosition(newPosition);
 }
@@ -160,23 +157,22 @@ std::pair <int, int> FirstBossController::GetRandomPosition() {
 
 void FirstBossController::FirstAttackSurge() {
     cout << "FirstAttack" << endl;
-    if (actualTentacle == 4) {
-      actualTentacle = 1;
+    if (m_actualTentacle == 4) {
+      m_actualTentacle = 1;
     }
 
-    m_tentacles[actualTentacle]->ClearCollisions();
-    //m_tentacles[actualTentacle]->active = true;
-    ActivateTentacle(actualTentacle);
-    PositTentacle(actualTentacle);
+    m_tentacles[m_actualTentacle]->ClearCollisions();
+    ActivateTentacle(m_actualTentacle);
+    PositTentacle(m_actualTentacle);
 
     auto firstBossAttackScript = (FirstBossAttackScript*)
-                                m_tentacles[actualTentacle]->
+                                m_tentacles[m_actualTentacle]->
                                 GetComponent("FirstBossAttackScript");
     //Perform attack
     firstBossAttackScript->attack = true;
     //Shake camera
     firstBossAttackScript->shake = true;
-    actualTentacle++;
+    m_actualTentacle++;
 }
 
 void FirstBossController::FirstAttackGone() {
