@@ -11,14 +11,22 @@
     @brief Initializes the script of snow instance.
     @param[in] GameObject *owner - owns the component.
 */
-SnowScript::SnowScript(GameObject *owner) : Script(owner) {}
+SnowScript::SnowScript(GameObject *owner) : Script(owner) {
+    
+}
 
 /**
     @brief Start the snow animation by setting the starting position.
 */
 void SnowScript::Start() {
+
+    // Creates the animations.
     CreateAnimations();
+
+    // Get the position.
     position = GetOwner()->GetPosition();
+
+    // Get the animator.
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
     GetOwner()->SetZoomProportion(Vector(0,0));
@@ -27,13 +35,17 @@ void SnowScript::Start() {
 /**
     @brief Create the snow animation by setting the frames of snow.
 */
-void SnowScript::CreateAnimations(){
+void SnowScript::CreateAnimations() {
+
+    // Creates the show image.
     auto snowImage = new Image("assets/neve.png",0,0,6820, 256);
+
+    // Creates the snow animation.
     auto snowAnimation= new Animation(GetOwner(),snowImage );
     for (int i = 0; i < 20; i++) {
         snowAnimation->AddFrame(new Frame(i * 341,0, 341, 256));
     }
-    // animator
+    // Creates the animator.
     auto weatherAnimator = new Animator(GetOwner());
     weatherAnimator->AddAnimation("snowAnimation", snowAnimation);
 }
@@ -61,6 +73,10 @@ void SnowScript::ComponentUpdate() {
     @brief Updates the initial position of the beginning snow.
 */
 void SnowScript::FixedComponentUpdate() {
+
+    // Sets the x position.
     position->m_x = 0;
+
+    // Sets the y position.
     position->m_y = 0;
 }

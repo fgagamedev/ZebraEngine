@@ -9,6 +9,7 @@
 
 #include "Components/Script.hpp"
 #include "Components/UIButton.hpp"
+
 #include "Customs/MenuController.hpp"
 
 using namespace std;
@@ -24,10 +25,10 @@ class MissileButtonScript : public Script {
         };
     private:
 
-        // Sets the position of a UiButton
+        // Sets the position of a UiButton.
         UIButton *m_uiButton = nullptr;
 
-        // Sets the position of a gameobject of a checkbox
+        // Sets the position of a gameobject of a checkbox.
         GameObject *m_checkbox = nullptr;
 };
 

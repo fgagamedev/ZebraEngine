@@ -16,6 +16,7 @@
 #include "Components/Renderer.hpp"
 #include "Components/Rigidbody.hpp"
 #include "Components/UIText.hpp"
+
 #include "Customs/MapScript.hpp"
 #include "Customs/NakedManScript.hpp"
 #include "Customs/SnowScript.hpp"
