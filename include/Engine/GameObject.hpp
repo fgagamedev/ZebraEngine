@@ -43,6 +43,7 @@ public:
     std::unordered_map<Uint32, std::vector<Component *>> GetAllComponents() {
       return m_components;
     };
+
     std::string GetName() { return m_name; };
 
     // Getter and setter
@@ -77,7 +78,7 @@ public:
     void ClearCollisions();
     std::vector<GameObject *> GetCollisions();
 
-    // Sets the position of a vector of a gameobject.
+    // Sets the position of a gameobject, type vector.
     Vector *m_position = new Vector(0, 0);
   
 private:
@@ -99,7 +100,7 @@ private:
     Uint8 m_layer;
     std::string m_tag = "";
 
-    //Sets the velocity of the vector.
+    //Sets the velocity of the gameobject, type vector.
     Vector *m_velocity;
 
     //Sets a vector for gameobject's collisions.
