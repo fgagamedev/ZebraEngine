@@ -1,10 +1,10 @@
-#include "Customs/CatchAllButtonScript.hpp"
-
 /**
     @file CatchAllButtonScript.cpp
     @brief Manages the Catch All button functions.
     @copyright LGPL. MIT License.
 */
+
+#include "Customs/CatchAllButtonScript.hpp"
 
 /**
     @brief Constructor of the class CatchAllButtonScript.

@@ -1,3 +1,9 @@
+/**
+    @file CatchAllButtonScript.hpp
+    @brief Manages the Catch All button functions.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __CATCH_ALL_BUTTON_SCRIPT__
 #define __CATCH_ALL_BUTTON_SCRIPT__
 
@@ -12,14 +18,17 @@ using namespace std;
 
 class CatchAllButtonScript : public Script {
 public:
-  CatchAllButtonScript(GameObject *owner);
-  virtual void Start() override;
-  virtual void ComponentUpdate() override;
-  virtual string GetComponentName() override { return "CatchAllButtonScript"; };
+    CatchAllButtonScript(GameObject *owner);
+    virtual void Start() override;
+    virtual void ComponentUpdate() override;
+    virtual string GetComponentName() override { return "CatchAllButtonScript"; };
 
 private:
-  UIButton *m_uiButton = nullptr;
-  GameObject *m_checkbox = nullptr;
+    // Sets the CatchAll button as a UIButton
+    UIButton *m_uiButton = nullptr;
+
+    // Sets a checkbox game object
+    GameObject *m_checkbox = nullptr;
 };
 
 #endif
