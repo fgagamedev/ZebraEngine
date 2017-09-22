@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 
+// Constructor
 MenuAnimationScript::MenuAnimationScript(GameObject *owner) : Script(owner) {}
 
 /**
@@ -9,6 +10,7 @@ MenuAnimationScript::MenuAnimationScript(GameObject *owner) : Script(owner) {}
     position and the animator.
 */
 void MenuAnimationScript::Start() {
+    // Create animations
     CreateAnimations();
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -21,16 +23,20 @@ void MenuAnimationScript::Start() {
     Set the frame and add the animations to the game.
 */
 void MenuAnimationScript::CreateAnimations() {
-    // animator
+    // Instantiating the menu script animator.
     auto MenuAnimationScriptAnimator = new Animator(GetOwner());
 
+    // Instantiating the menu image and its position.
     auto mainSprite = new Image("assets/menu_animation.png", 0, 0, 5456, 256);
-
+    
+    /* 
+        Instantiating the main animation and its position.
+        A for loop defines the frames in the main animation and in the second main animation.
+    */
     auto mainAnimation = new Animation(GetOwner(), mainSprite);
     for (int i = 0; i < 16; i++) {
         mainAnimation->AddFrame(new Frame(i * 341, 0, 341, 256));
     }
-
 
     auto mainAnimation2 = new Animation(GetOwner(), mainSprite);
     for (int i = 0; i <16; i++) {
@@ -48,11 +54,15 @@ void MenuAnimationScript::CreateAnimations() {
     @brief that function updates the components of the menu animation.
 */
 void MenuAnimationScript::ComponentUpdate() {
+    // Check the current state of the initial animation and animator, if false, plays it.
     if (!animator->IsPlaying("mainAnimation") && !initialanimation) {
         initialanimation = true;
         animator->PlayAnimation("mainAnimation");
     }
-
+    /* 
+        Check the current state of the initial animation,if true,
+        checks the animator state, if false, plays the animator.
+    */
     if (initialanimation) {
         if (!animator->IsPlaying("mainAnimation"))
         if (!animator->IsPlaying("mainAnimation2") && initialanimation) {
