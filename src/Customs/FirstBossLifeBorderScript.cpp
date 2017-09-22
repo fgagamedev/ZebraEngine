@@ -1,6 +1,6 @@
 /**
     @file FirstBossLifeBorderScript.cpp
-    @brief Class that defines methods and attributes for 
+    @brief Class that defines methods and attributes for
     activating the first boss life border script.
     @copyright LGPL. MIT License.
 */
@@ -22,6 +22,7 @@ void FirstBossLifeBorderScript::Start() {
 
     CreateAnimations();
 
+    // Creates the animator.
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
     position = GetOwner()->GetPosition();
@@ -37,9 +38,11 @@ void FirstBossLifeBorderScript::Start() {
 */
 void FirstBossLifeBorderScript::CreateAnimations() {
 
+    // Creates the image.
     auto firstBossLifeBorderImage = new Image("assets/Barra_Life_Boss.png",0,0,
                                                                     996, 171);
 
+    // Creates the animation
     auto firstBossLifeBorderAnimation = new Animation(GetOwner(),
                                         firstBossLifeBorderImage );
     for (int column = 0; column < 19; column++) {
@@ -50,7 +53,7 @@ void FirstBossLifeBorderScript::CreateAnimations() {
   }
 
 
-    //Animator
+    // Creates and add the animator.
     auto firstBossLifeBorderAnimator = new Animator(GetOwner());
     firstBossLifeBorderAnimator->AddAnimation("firstBossLifeBorderAnimation",
                                                 firstBossLifeBorderAnimation);
@@ -68,6 +71,10 @@ void FirstBossLifeBorderScript::ComponentUpdate() {
 */
 void FirstBossLifeBorderScript::FixedComponentUpdate() {
     animator->PlayAnimation("firstBossLifeBorderAnimation");
+
+    // Sets the position x.
     position->m_x = 646;
+
+    // Sets the position y.
     position->m_y = 10;
 }
