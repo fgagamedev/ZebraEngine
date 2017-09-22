@@ -33,7 +33,7 @@ public:
 
 private:
 
-    // Sets the object offset, of type vector.
+    // Sets the object offset, type vector.
     Vector m_offset = Vector(0, 0);
 
     // Sets the object mode, an unsigned 8-bit integer type.
