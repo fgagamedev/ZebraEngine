@@ -17,7 +17,10 @@ FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) :
     @brief Start the animation for the first boss attack effect.
 */
 void FirstBossAttackScript::Start() {
-
+    /*
+        Creates the animations defining position the place to insert
+        and the scene that will be inserted.
+    */
     CreateAnimations();
     m_position = GetOwner()->GetPosition();
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -37,23 +40,23 @@ void FirstBossAttackScript::Start() {
 */
 void FirstBossAttackScript::CreateAnimations() {
 
-    //Image Attacks
+    //Image Attacks.
     auto firstBossAttackImage = new Image("assets/firstBossAttack.png",0,0,600,
-                                                                        151);
-    //Surge Animation
+                                          151);
+    //Surge Animation.
     auto firstBossAttackSurgeAnimation = new Animation(GetOwner(),
-                                                    firstBossAttackImage);
+                                                       firstBossAttackImage);
     for (int counter = 0; counter < 15; counter++) {
         firstBossAttackSurgeAnimation->AddFrame(new Frame(counter * 40, 0,
-                                                                    40, 151));
+                                                            40, 151));
     }
 
-    //Idle Animation
+    //Idle Animation.
     auto firstBossAttackIdleAnimation = new Animation(GetOwner(),
-                                                    firstBossAttackImage);
+                                                      firstBossAttackImage);
     firstBossAttackIdleAnimation->AddFrame(new Frame(14 * 40, 0, 40, 151));
 
-    //Gone Animation
+    //Gone Animation.
     auto firstBossAttackGoneAnimation = new Animation(GetOwner(),
                                                     firstBossAttackImage );
     for (int counter = 14; counter != 0; counter--) {
@@ -62,15 +65,15 @@ void FirstBossAttackScript::CreateAnimations() {
     }
 
 
-    //Animator
+    //Animator of boss attack.
     auto firstBossAttackAnimator = new Animator(GetOwner());
-    //Surge Animator
+    //Surge Animator of boss attack.
     firstBossAttackAnimator->AddAnimation("firstBossAttackSurgeAnimation",
                                              firstBossAttackSurgeAnimation);
-    //Idle Animator
+    //Idle Animator of boss attack.
     firstBossAttackAnimator->AddAnimation("firstBossAttackIdleAnimation",
                                             firstBossAttackIdleAnimation);
-    //Gone Animator
+    //Gone Animator of boss attack.
     firstBossAttackAnimator->AddAnimation("firstBossAttackGoneAnimation",
                                             firstBossAttackGoneAnimation);
 }
@@ -81,6 +84,10 @@ void FirstBossAttackScript::CreateAnimations() {
 
 */
 void FirstBossAttackScript::ComponentUpdate() {
+    /*
+        Checks if the attack variable is true,
+        if it starts the attack function.
+    */
     if(attack) {
        Attack();
     }
@@ -97,8 +104,9 @@ void FirstBossAttackScript::ComponentUpdate() {
 void FirstBossAttackScript::FixedComponentUpdate() {
     timerAnimation.Update(EngineGlobals::fixed_update_interval);
 
-    if (desactivateObj)
-    timerGone.Update(EngineGlobals::fixed_update_interval);
+    if (desactivateObj){
+        timerGone.Update(EngineGlobals::fixed_update_interval);
+    }
 
     CameraShakeAttack();
 }
@@ -107,19 +115,24 @@ void FirstBossAttackScript::FixedComponentUpdate() {
     @brief Creates the attack by setting the animation.
 */
 void FirstBossAttackScript::Attack() {
+    /*
+        Starts an attack, causes the camera to shake, restarts the attack time,
+        and sets the sound effect.
+    */
 
     if (m_surgeAnimation) {
-        CameraSystem::GetInstance()->CameraShake(8,3,
-                      SceneManager::GetInstance()->GetCurrentScene());
-        m_animator->PlayAnimation("firstBossAttackSurgeAnimation");
+        CameraSystem::GetInstance()->CameraShake(8,3, SceneManager::GetInstance()
+                                                 -> GetCurrentScene());
+        m_animator -> PlayAnimation("firstBossAttackSurgeAnimation");
         m_surgeAnimation = false;
         m_idleAnimation = true;
         timerAnimation.Restart();
         AudioController::GetInstance()->PlayAudio("secondAttackSound", 0);
 
     }
+
     if (m_idleAnimation && timerAnimation.GetTime() >= 1 * 1000) {
-        m_animator->PlayAnimation("firstBossAttackIdleAnimation");
+        m_animator -> PlayAnimation("firstBossAttackIdleAnimation");
     }
     if (goneAnimation) {
         m_animator->PlayAnimation("firstBossAttackGoneAnimation");
@@ -138,9 +151,10 @@ void FirstBossAttackScript::Attack() {
 }
 
 void FirstBossAttackScript::CameraShakeAttack(){
+    // Creates the effect that makes the camera shake.
     if (shake) {
         CameraSystem::GetInstance() -> CameraShake(8, 1, SceneManager::GetInstance()
-                                                 -> GetCurrentScene());
+                                                   -> GetCurrentScene());
         if (!CameraSystem::GetInstance() -> IsShaking()){
             shake = false;
         }

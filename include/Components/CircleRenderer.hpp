@@ -19,9 +19,12 @@ using namespace std;
 
 class CircleRenderer : public Component {
 public:
+    // Instances and manages colors, information, and creates CircleRenderer.
     CircleRenderer(GameObject *owner, Vector offset, float radius);
     void SetColor(int red, int green, int blue, int alpha);
-    virtual string GetComponentName() override { return "CircleRenderer"; };
+    virtual string GetComponentName() override {
+        return "CircleRenderer";
+    };
     virtual void ComponentUpdate() override;
 private:
     //Red color integer value. The initialize in 0.
