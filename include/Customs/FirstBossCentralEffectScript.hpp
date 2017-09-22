@@ -20,6 +20,8 @@
 class FirstBossCentralEffectScript : public Script {
 public:
     FirstBossCentralEffectScript(GameObject *owner);
+
+    // Get the component name and replace it by returning its string name.
     std::string GetComponentName() override {
         return "FirstBossCentralEffectScript";
     };

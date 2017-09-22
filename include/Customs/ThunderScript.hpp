@@ -19,14 +19,13 @@
 class ThunderScript : public Script {
 public:
     ThunderScript(GameObject *owner);
+
+    // Get the component name and replace it by returning its string name.
     std::string GetComponentName() override {
         return "ThunderScript";
     };
     void FixedComponentUpdate() override;
     void Start() override;
-
-protected:
-    void ComponentUpdate() override;
 
 private:
     void CreateAnimations();
@@ -41,6 +40,9 @@ private:
     Vector *m_position = nullptr;
 
     int play = 0;
+
+protected:
+    void ComponentUpdate() override;
 
 };
 #endif

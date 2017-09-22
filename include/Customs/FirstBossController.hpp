@@ -16,7 +16,7 @@ public:
   void StartBossFight();
   void EndBossFight();
 
-  /*Add*/
+  // Add.
   void AddPlayer(GameObject *player);
   void AddBoss(GameObject *boss);
   void AddInsideBossFx(GameObject *bossInsideFx);
@@ -25,14 +25,14 @@ public:
   void AddCreditsAnimation(GameObject *creditsAnimation);
   void AddMap(GameObject *map);
 
-  /*Posit*/
+  // Posit.
   void PositPlayer(Vector newPosition);
   void PositBoss();
   void PositTentacle(int index);
   void PositAllTentacles();
   void PositMap(Vector newPosition);
 
-  /*Activate*/
+  // Activate.
   void ActivatePlayer();
   void ActivateBoss();
   void ActivateInsideBossFx();
@@ -41,7 +41,7 @@ public:
   void ActivateLifeBars();
   void ActivateCreditsAnimation();
 
-  /*Deactive*/
+  // Deactive.
   void DeactivatePlayer();
   void DeactivateBoss();
   void DeactivateInsideBossFx();
@@ -50,6 +50,7 @@ public:
   void DeactivateLifeBars();
   void DeactivateCreditsAnimation();
 
+  // Define the attack of boss.
   void FirstAttackSurge();
   void FirstAttackGone();
   void SecondAttack();

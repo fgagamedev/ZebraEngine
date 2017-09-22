@@ -1,8 +1,11 @@
 /**
     @file ThunderScript.cpp
     @brief Manage the thunders animations of the game.
+    @copyright MIT License.
 */
+
 #include "Customs/ThunderScript.hpp"
+
 #include "Globals/EngineGlobals.hpp"
 
 /**
@@ -15,6 +18,10 @@ ThunderScript::ThunderScript(GameObject *owner) : Script(owner) {}
     @brief Start the animation for thunder in game.
 */
 void ThunderScript::Start() {
+    /*
+        Creates the animations defining position the place to insert
+        and the scene that will be inserted.
+    */
     CreateAnimations();
     m_position = GetOwner()->GetPosition();
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -26,25 +33,28 @@ void ThunderScript::Start() {
     @brief Create animations of thunders with different colors.
 */
 void ThunderScript::CreateAnimations() {
+    //Image Thunder.
     auto thunderImage = new Image("assets/Sprites/dashes.png", 0, 0, 2952, 815);
 
+    // Animation thunder blue.
     auto thunderBlueAnimation = new Animation(GetOwner(), thunderImage);
     for (int i = 0; i < 6; i++) {
         thunderBlueAnimation->AddFrame(new Frame(i * 100, 135, 100, 267));
     }
 
+    // Animation thunder wellow.
     auto thunderYellowAnimation = new Animation(GetOwner(),thunderImage);
     for (int i = 0; i < 5; i++) {
         thunderYellowAnimation->AddFrame(new Frame(555 + (i * 59), 135, 59,
                                                    267));
     }
 
-    // animator
+    // Animator thunder.
     auto thunderAnimator = new Animator(GetOwner());
 
     thunderAnimator->AddAnimation("thunderBlueAnimation", thunderBlueAnimation);
     thunderAnimator->AddAnimation("thunderYellowAnimation",
-    thunderYellowAnimation);
+                                  thunderYellowAnimation);
 }
 
 /**
