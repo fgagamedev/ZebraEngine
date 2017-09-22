@@ -14,10 +14,10 @@
 class Script : public Component {
 	public:
 
-		// constructor and destructor
+		// constructor and destructor.
 		Script(GameObject *owner);
 
-		// pure virtual name getter
+		// pure virtual name getter.
 		virtual std::string GetComponentName() = 0;
 };
 
