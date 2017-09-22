@@ -1,10 +1,9 @@
-#include "Customs/ThunderScript.hpp"
-#include "Globals/EngineGlobals.hpp"
-
 /**
     @file ThunderScript.cpp
     @brief Manage the thunders animations of the game.
 */
+#include "Customs/ThunderScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 /**
     @brief Constructor for the ThunderScript class.
@@ -17,9 +16,9 @@ ThunderScript::ThunderScript(GameObject *owner) : Script(owner) {}
 */
 void ThunderScript::Start() {
     CreateAnimations();
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
-    input = InputSystem::GetInstance();
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_input = InputSystem::GetInstance();
     GetOwner()->SetZoomProportion(Vector(0,0));
 }
 
@@ -52,14 +51,14 @@ void ThunderScript::CreateAnimations() {
     @brief Change the thunder animation based on the pressed button.
 */
 void ThunderScript::ComponentUpdate() {
-    if (input->GetKeyDown(INPUT_1)) {
-        animator->PlayAnimation("thunderBlueAnimation");
+    if (m_input->GetKeyDown(INPUT_1)) {
+        m_animator->PlayAnimation("thunderBlueAnimation");
     }
 
-    if (input->GetKeyDown(INPUT_2)) {
-        animator->PlayAnimation("thunderYellowAnimation");
+    if (m_input->GetKeyDown(INPUT_2)) {
+        m_animator->PlayAnimation("thunderYellowAnimation");
     } else {
-        //animator->StopAllAnimations();
+        //nothing to do.
     }
 
 }
@@ -68,6 +67,4 @@ void ThunderScript::ComponentUpdate() {
     @brief Do nothing.
 */
 void ThunderScript::FixedComponentUpdate() {
-    //position->m_x=0;
-    //position->m_y=0;
 }

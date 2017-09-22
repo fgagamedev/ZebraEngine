@@ -1,13 +1,13 @@
-#include "Engine/Image.hpp"
-#include "Engine/SDLSystem.hpp"
-
-#include "Log/log.hpp"
-
 /**
     @file Image.cpp
     @brief Manage images used in the game.
     @copyright MIT License.
 */
+
+#include "Engine/Image.hpp"
+#include "Engine/SDLSystem.hpp"
+
+#include "Log/log.hpp"
 
 /**
     @brief Simple constructor of the Image class.
@@ -42,9 +42,9 @@ void Image::LoadImage(std::string path, int _x, int _y, int _width,
         ERROR(IMG_GetError());
     }
 
-    m_texture = SDL_CreateTextureFromSurface(
-                                        SDLSystem::GetInstance()->GetRenderer(),
-                                        surface);
+    m_texture = SDL_CreateTextureFromSurface(SDLSystem::GetInstance()
+                                             -> GetRenderer(),
+                                             surface);
 
     if (!m_texture) {
         ERROR(SDL_GetError());
@@ -76,11 +76,11 @@ SDL_Rect *Image::GetRect() {
 }
 
 void Image::SetPivot(int _x, int _y) {
-    if (!sdlPivotPtr) {
-        sdlPivotPtr = &sdlPivot;
+    if (!m_sdlPivotPtr) {
+        m_sdlPivotPtr = &m_sdlPivot;
     }
-    sdlPivot.x = _x;
-    sdlPivot.y = _y;
+    m_sdlPivot.x = _x;
+    m_sdlPivot.y = _y;
 
     if (!m_pivot) {
         m_pivot = new Vector(0, 0);
@@ -106,5 +106,5 @@ void Image::Flip(bool horizontal, bool vertical) {
         flag = (SDL_RendererFlip)(flag | SDL_FLIP_VERTICAL);
     }
 
-    sdlFlip = flag;
+    m_sdlFlip = flag;
 }

@@ -1,3 +1,8 @@
+/**
+    @file ControleLogoScript.hpp
+    @brief Manage the animations of the control logo, at the start of the game.
+    @copyright MIT License.
+*/
 #ifndef __CONTROLE_LOGO_SCRIPT__
 #define __CONTROLE_LOGO_SCRIPT__
 
@@ -14,6 +19,7 @@
 
 
 class ControleLogoScript : public Script {
+
 public:
     ControleLogoScript(GameObject *owner);
     std::string GetComponentName() override {
@@ -22,15 +28,25 @@ public:
     void FixedComponentUpdate() override;
     void Start() override;
 
+private:
+
+    // Variable of the type Timer responsible for storing the duration time.
+    Timer time;
+    void CreateAnimations();
+
+    // Pointer to game controls
+    InputSystem *m_input = nullptr;
+
+    // Pointer to animator game.
+    Animator *m_animator = nullptr;
+
+    // Poiter to position of gamer.
+    Vector *m_position = nullptr;
+
+
 protected:
     void ComponentUpdate() override;
 
-private:
-    Timer time;
-    void CreateAnimations();
-    InputSystem *input = nullptr;
-    Animator *animator = nullptr;
-    Vector *position = nullptr;
-    int play=0;
 };
+
 #endif

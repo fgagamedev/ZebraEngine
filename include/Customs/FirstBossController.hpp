@@ -59,22 +59,37 @@ public:
 
 private:
   FirstBossController();
+
+  // Pointer that instantiates the control of the first boss.
   static FirstBossController *m_instance;
 
-  //Objects
+  // Pointer pointing to the player.
   GameObject *m_player = nullptr;
+
+  // Pointer pointing to the boss.
   GameObject *m_boss = nullptr;
+
+  // Pointer pointing to the boss inside.
   GameObject *m_bossInsideFx =  nullptr;
+
+  // Pointer pointing to the credits animation.
   GameObject *m_creditsAnimation =  nullptr;
+
+  // Pointer pointing to the map.
   GameObject *m_map =  nullptr;
+
+  // Vector GameObject that defines the tentacles that appear in the attack of the boss.
   std::vector<GameObject *> m_tentacles;
+
+  // Vector GameObject that defines the life bar of the boss.
   std::vector<GameObject *> m_lifeBars;
 
   //Positions
   int m_wPos;
   int m_hPos;
 
-  int actualTentacle = 1;
+  // Variable count of tentacles released by boss attack.
+  int m_actualTentacle = 1;
   std::pair <int, int> randomPosition;
 
 };

@@ -1,3 +1,8 @@
+/**
+    @file Animator.hpp
+    @brief Manage the animations of the game.
+    @copyright MIT License.
+*/
 #ifndef __ANIMATOR__
 #define __ANIMATOR__
 
@@ -25,6 +30,7 @@ public:
     };
 
 private:
+    //local variable map animation.
     AnimationMap m_aMap;
 };
 

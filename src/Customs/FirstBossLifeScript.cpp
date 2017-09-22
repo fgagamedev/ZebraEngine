@@ -1,11 +1,12 @@
-#include "Customs/FirstBossLifeScript.hpp"
-#include "Globals/EngineGlobals.hpp"
-
 /**
     @file FirstBossLifeScript.cpp
     @brief Manage the first boss life.
     @copyright MIT License.
 */
+
+#include "Customs/FirstBossLifeScript.hpp"
+
+#include "Globals/EngineGlobals.hpp"
 
 /**
     @brief Constructor of the FirstBossLifeScript class.
