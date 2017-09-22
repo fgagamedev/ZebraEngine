@@ -1,18 +1,18 @@
+/**
+    @file SDLSystem.cpp
+    @brief Manages the SDL functions.
+    @copyright LGPL. MIT License.
+*/
+
 #include "Engine/SDLSystem.hpp"
 
-// load commons includes
+// Load commons includes
 #include "Customs/FirstBossScene.hpp"
 #include "Customs/MainScene.hpp"
 #include "Customs/GamePlayScene.hpp"
 #include "Customs/PreMenuScene.hpp"
 #include "Customs/EndScene1.hpp"
 #include "Customs/EndScene2.hpp"
-
-/**
-    @file SDLSystem.cpp
-    @brief Manages the SDL functions.
-    @copyright LGPL. MIT License.
-*/
 
 // static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;

@@ -1,3 +1,9 @@
+/**
+    @file SDLSystem.hpp
+    @brief Manages the SDL functions.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __SDLSYSTEM_H__
 #define __SDLSYSTEM_H__
 
@@ -16,27 +22,34 @@ using namespace EngineGlobals;
 
 class SDLSystem {
 public:
-  // initialize all systems
+  // Initialize all systems
   void Init();
-  // run system
+
+  // Run system
   void Run();
-  // systems shutdown
+
+  // Systems shutdown
   void Shutdown();
-  // get singleton instance
+
+  // Get singleton instance
   static SDLSystem *GetInstance();
-  // getters and setters
+
+  // Getters and setters
   SDL_Window *GetWindow() const { return m_window; };
   SDL_Renderer *GetRenderer() const { return m_renderer; };
-  // change loop variable
+
+  // Change loop variable
   inline void SetRunning(bool condition) { m_isRunning = condition; };
 
 private:
   // SDL attributes
   SDL_Window *m_window = nullptr;
   SDL_Renderer *m_renderer = nullptr;
-  // singleton instance
+
+  // Singleton instance
   static SDLSystem *m_instance;
-  // game attributes
+
+  // Game attributes
   bool m_isRunning;
   int m_framerate;
   int m_frameCounter;
@@ -47,20 +60,24 @@ private:
   Uint32 m_currentFix;
   Uint32 m_lastFix;
 
-  // constructor and destructor
+  // Constructor and destructor
   SDLSystem();
   ~SDLSystem();
-  // systems init
+
+  // Systems init
   bool InitSDL();
   bool InitIMG();
   bool InitMixer();
   bool InitTTF();
-  // commons init
+
+  // Commons init
   void LoadCommons();
-  // graphics methods
+
+  // Graphics methods
   bool CreateWindow();
   bool CreateRenderer();
-  // system framerate counter
+
+  // System framerate counter
   void CalculateFramerate();
   bool FixFramerate();
 };
