@@ -22,13 +22,22 @@ ForestActivatorScript3::ForestActivatorScript3(GameObject *owner) : Script(owner
 */
 void ForestActivatorScript3::Start() {
 
+    // Creates the animator.
     CreateAnimations();
+
+    // Gets the position.
     position = GetOwner()->GetPosition();
+
+    // Gets the animator.
     animator = (Animator *)GetOwner()->GetComponent("Animator");
+
     input = InputSystem::GetInstance();
+
+    // Gets the game controller.
     gamecontroller = input->GetGameController(0);
     GetOwner()->SetZoomProportion(Vector(0,0));
-    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
+                                            GetGameObject("Map");
     if (map) {
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()
                                              ->originalWidth,
@@ -40,10 +49,13 @@ void ForestActivatorScript3::Start() {
 /**
     @brief That function create the image and animation of the forest three.
 */
-void ForestActivatorScript3::CreateAnimations(){
+void ForestActivatorScript3::CreateAnimations() {
 
+    // Creates the image.
     auto forestactivatorSprite = new Image("assets/forestactivator.png", 0, 0,
                                            832, 64);
+
+    // Creates and get the animation.
     auto forestactivatorAnimation = new Animation(GetOwner(),
                                                   forestactivatorSprite);
     for (int i = 0; i < 13; i++) {

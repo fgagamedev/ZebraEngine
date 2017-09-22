@@ -29,6 +29,8 @@ class SnowScript : public Script {
         };
         void FixedComponentUpdate() override;
         void Start() override;
+
+        // State of the script.
         int play = 0;
 
     protected:
@@ -36,8 +38,14 @@ class SnowScript : public Script {
 
     private:
         void CreateAnimations();
+
+        // Instantiating input system of the keyboard.
         InputSystem *input = nullptr;
+
+        // Instantiating animations.
         Animator *animator = nullptr;
+
+        // Instantiating vector.
         Vector *position = nullptr;
 };
 

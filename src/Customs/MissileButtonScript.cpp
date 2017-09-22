@@ -20,7 +20,8 @@ MissileButtonScript::MissileButtonScript(GameObject *owner) : Script(owner) {
 */
 void MissileButtonScript::Start() {
     m_uiButton = (UIButton *)GetOwner()->GetComponent("UIButton");
-    m_checkbox = SceneManager::GetInstance()->GetScene("Main")->GetGameObject("Missile_CB");
+    m_checkbox = SceneManager::GetInstance()->GetScene("Main")->
+                                              GetGameObject("Missile_CB");
 }
 
 /**
