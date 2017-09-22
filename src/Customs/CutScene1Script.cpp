@@ -12,10 +12,10 @@ CutScene1Script::CutScene1Script(GameObject *owner) : Script(owner) {}
 */
 void CutScene1Script::Start() {
     CreateAnimations();
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
-    input = InputSystem::GetInstance();
-    gamecontroller = input->GetGameController(0);
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_input = InputSystem::GetInstance();
+    m_gamecontroller = m_input -> GetGameController(0);
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     if(map) {
@@ -41,12 +41,12 @@ void CutScene1Script::CreateAnimations() {
     @brief Update the animation of the cut scene 1.
 */
 void CutScene1Script::ComponentUpdate() {
-    if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active) {
-        animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
+    if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active) {
+        m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
 
-    if(animator->IsPlaying("CENTRAL LIGHT ANIMATION")) {
-        animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
+    if(m_animator->IsPlaying("CENTRAL LIGHT ANIMATION")) {
+        m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
 }
 

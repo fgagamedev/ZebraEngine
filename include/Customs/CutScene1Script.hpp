@@ -26,18 +26,28 @@ public:
         active = true;
     }
 
+private:
+
+    // Boolean variable that stores true or false that turns the scene on or off.
+    bool m_active = false;
+
+    void CreateAnimations();
+
+    // Pointer to game controls.
+    InputSystem *m_input = nullptr;
+
+    // Pointer to game controller.
+    GameController* m_gamecontroller = nullptr;
+
+    // Pointer to animator game.
+    Animator *m_animator = nullptr;
+
+    // Poiter to position of gamer.
+    Vector *m_position = nullptr;
+    int play = 0;
+
 protected:
     void ComponentUpdate() override;
-
-private:
-    bool active=false;
-    Timer time;
-    void CreateAnimations();
-    InputSystem *input = nullptr;
-    GameController* gamecontroller = nullptr;
-    Animator *animator = nullptr;
-    Vector *position = nullptr;
-    int play=0;
 
 };
 #endif
