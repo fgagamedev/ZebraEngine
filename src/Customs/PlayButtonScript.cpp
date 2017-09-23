@@ -1,11 +1,11 @@
-#include "Customs/PlayButtonScript.hpp"
-#include "Customs/AudioController.hpp"
-
 /**
     @file PlayButtonScript.cpp
     @brief Manages the Play button functions.
     @copyright LGPL. MIT License.
 */
+
+#include "Customs/PlayButtonScript.hpp"
+#include "Customs/AudioController.hpp"
 
 /**
     @brief Constructor of the class PlayButtonScript.
@@ -25,8 +25,13 @@ void PlayButtonScript::Start() {
 */
 void PlayButtonScript::ComponentUpdate() {
 
+    // Text component to updates the colors of the Play Button
     auto textButton = (UIText *)GetOwner()->GetComponent("UIText");
+
+    // Sound component to updates the sound of the Play Button
     auto soundButton = (UISound *)GetOwner()->GetComponent("UISound");
+
+    // Sound component to turn off the sound of the menu
     auto menuSound = (UISound *)SceneManager::GetInstance()->GetCurrentScene()
                                 ->GetGameObject("Music")->GetComponent("UISound");
     if (m_uiButton->IsClicked()) {
