@@ -1,10 +1,10 @@
-#include "Customs/QuitButtonScript.hpp"
-
 /**
-    @file QuitButtonScript.hpp
+    @file QuitButtonScript.cpp
     @brief Manages the Quit button functions.
     @copyright LGPL. MIT License.
 */
+
+#include "Customs/QuitButtonScript.hpp"
 
 /**
     @brief Constructor of the class QuitButtonScript.
@@ -23,7 +23,10 @@ void QuitButtonScript::Start() {
     @brief Updates the text and sound of the Quit button.
 */
 void QuitButtonScript::ComponentUpdate() {
+    // Text component to set the colors of the Quit Button
     auto textButton = (UIText *)GetOwner()->GetComponent("UIText");
+
+    // Sound component to play the sound of the Play Button
     auto soundButton = (UISound *)GetOwner()->GetComponent("UISound");
 
     if (m_uiButton->IsClicked()) {

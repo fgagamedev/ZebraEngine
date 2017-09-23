@@ -1,3 +1,9 @@
+/**
+    @file QuitButtonScript.hpp
+    @brief Manages the Quit button functions.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __QUIT_BUTTON_SCRIPT__
 #define __QUIT_BUTTON_SCRIPT__
 
@@ -19,6 +25,7 @@ public:
     void Start() override;
 
 private:
+    // Sets the QuitButton as a UIButton
     UIButton *m_uiButton = nullptr;
 };
 #endif
