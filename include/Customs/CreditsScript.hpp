@@ -1,3 +1,9 @@
+/**
+    @file CreditsScript.hpp
+    @brief Manages the credits script of the game.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __CREDITS_SCRIPT__
 #define __CREDITS_SCRIPT__
 
@@ -28,6 +34,7 @@ protected:
     void ComponentUpdate() override;
 
 private:
+    // Sets the CreditsScript position as a vector
     Vector *position = nullptr;
 
 };
