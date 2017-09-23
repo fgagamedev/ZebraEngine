@@ -1,3 +1,9 @@
+/**
+    @file PlayerAttackScript.cpp
+    @brief Methods that manages the player attack script.
+    @copyright LGPL. MIT License.
+*/
+
 #include "Customs/PlayerAttackScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 #include "Customs/NakedManScript.hpp"

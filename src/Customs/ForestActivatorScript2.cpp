@@ -9,6 +9,11 @@ ForestActivatorScript2::ForestActivatorScript2(GameObject *owner) : Script(owner
     position, animator, controller, input and the map.
 */
 void ForestActivatorScript2::Start() {
+    /*
+        Create animations, define position, animator through gameobject.
+        Defines map and sets its zoom proportion vector using width and height.
+        Sets the joystick.  
+    */
     CreateAnimations();
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -26,31 +31,32 @@ void ForestActivatorScript2::Start() {
     the forest and the animation of the forest.
 */
 void ForestActivatorScript2::CreateAnimations(){
-
+    // Instantiating forest activator Sprite image and its position.
     auto forestactivatorSprite = new Image("assets/forestactivator.png", 0, 0,832, 64);
+    
+    // Instantiating forest activator animation by gameobject components, and setting its image and frame.
     auto forestactivatorAnimation = new Animation(GetOwner(), forestactivatorSprite);
     for (int i = 0; i < 13; i++) {
         forestactivatorAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
     }
 
+    // Instantiating forest activator animation2, by gameobject, and setting its image and animation.
     auto forestactivatorAnimation2 = new Animation(GetOwner(), forestactivatorSprite);
     forestactivatorAnimation2->AddFrame(new Frame(12 * 64, 0, 64, 64));
 
+    // Instantiating animator, setting its animation and frames per second.
     auto forestactivatorAnimator = new Animator(GetOwner());
     forestactivatorAnimation->SetFramesPerSecond(9);
     //forestactivatorAnimation2->SetFramesPerSecond(1);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION", forestactivatorAnimation);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2", forestactivatorAnimation2);
-
-
 }
-
 
 /**
     @brief that function updates the components of the forest two.
 */
 void ForestActivatorScript2::ComponentUpdate() {
-
+    // Cheack the animator's state, if true, play animation and activate it. 
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate==0 && runned==false) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate=1;
@@ -61,6 +67,7 @@ void ForestActivatorScript2::ComponentUpdate() {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");
     }
 
+    // Checking script running state, if true, activate the script.
     if (runned) {
         auto script = (CentralLightScript1*)SceneManager::GetInstance()->
                        GetCurrentScene()->GetGameObject("CENTRAL LIGHT 1")->
