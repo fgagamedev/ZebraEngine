@@ -5,11 +5,11 @@
 
 class Frame {
 public:
-  Frame(int x, int y, int width, int height);
-  SDL_Rect *GetRect();
+    Frame(int x, int y, int width, int height);
+    SDL_Rect *GetRect();
 
 private:
-  SDL_Rect srcRect;
+    SDL_Rect srcRect;
 };
 
 #endif // __FRAME__

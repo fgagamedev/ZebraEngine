@@ -8,20 +8,35 @@
 #include "Customs/EndScene1.hpp"
 #include "Customs/EndScene2.hpp"
 
-// static variables initialization
-    SDLSystem *SDLSystem::m_instance = nullptr;
+/**
+    @file SDLSystem.cpp
+    @brief Manages the SDL functions.
+    @copyright LGPL. MIT License.
+*/
 
+// static variables initialization
+SDLSystem *SDLSystem::m_instance = nullptr;
+
+/**
+    @brief Initializes the frame counter and the frame ticks counter.
+*/
 SDLSystem::SDLSystem() {
     m_frameCounter = 0;
     m_lastFrameTicks = 0;
 }
 
+/**
+    @brief Initializes the instance, window and renderer pointers.
+*/
 SDLSystem::~SDLSystem() {
-   m_instance = nullptr;
+    m_instance = nullptr;
     m_window = nullptr;
     m_renderer = nullptr;
 }
 
+/**
+    @brief Initializes all systems.
+*/
 void SDLSystem::Init() {
     INFO("SDLSystem::Init() initialized");
 
@@ -38,13 +53,16 @@ void SDLSystem::Init() {
     INFO("SDLSystem::Init() completed");
 }
 
+/**
+    @brief Runs the SDL library.
+*/
 void SDLSystem::Run() {
     INFO("Starting Run().");
 
     m_isRunning = true;
 
     LoadCommons();
-    SceneManager::GetInstance()->SetCurrentScene("Pre Menu"); 
+    SceneManager::GetInstance()->SetCurrentScene("Pre Menu");
     // must be called here but scene name can be changed
     SceneManager::GetInstance()->Start();
 
@@ -71,13 +89,16 @@ void SDLSystem::Run() {
             m_lastFixedUpdate = SDL_GetTicks();
     }
 
-    // getting back buffer and sending to front buffer
+        // getting back buffer and sending to front buffer
         SDL_RenderPresent(m_renderer);
   }
 
     INFO("Ending Run().");
 }
 
+/**
+    @brief Shut downs SDL library and its subsystems used in the game.
+*/
 void SDLSystem::Shutdown() {
     INFO("Shutdown() Initialized.")
 
@@ -92,6 +113,10 @@ void SDLSystem::Shutdown() {
     INFO("Shutdown completed.")
 }
 
+/**
+    @brief Gets the singleton instance of the game.
+    @return The singleton instance of the game
+*/
 SDLSystem *SDLSystem::GetInstance() {
     if (!m_instance) {
         m_instance = new SDLSystem();
@@ -99,6 +124,10 @@ SDLSystem *SDLSystem::GetInstance() {
     return m_instance;
 }
 
+/**
+    @brief Initializes the SDL library and starts its subsystems used in the game.
+    @return False if the system initialization fails and true if it's succeed.
+*/
 bool SDLSystem::InitSDL() {
     INFO("Initializing SDL");
 
@@ -114,6 +143,10 @@ bool SDLSystem::InitSDL() {
         return true;
 }
 
+/**
+    @brief Initializes image support.
+    @return False if the initialization fails and true if it's succeed.
+*/
 bool SDLSystem::InitIMG() {
     INFO("Initializing IMG");
 
@@ -129,6 +162,10 @@ bool SDLSystem::InitIMG() {
     return true;
 }
 
+/**
+    @brief Initializes the SDL's sound mixing library.
+    @return False if the initialization fails and true if it's succeed.
+*/
 bool SDLSystem::InitMixer() {
     INFO("Initializing Mixer");
 
@@ -143,6 +180,10 @@ bool SDLSystem::InitMixer() {
     return true;
 }
 
+/**
+    @brief Initializes the SDL's TrueType font rendering library.
+    @return False if the initialization fails and true if it's succeed.
+*/
 bool SDLSystem::InitTTF() {
     INFO("Initializing TTF");
 
@@ -157,6 +198,10 @@ bool SDLSystem::InitTTF() {
     return true;
 }
 
+/**
+    @brief Creates a window with the specified title, position and dimensions.
+    @return False if the window creation fails and true if it's succeed.
+*/
 bool SDLSystem::CreateWindow() {
     INFO("Creating window.");
 
@@ -174,6 +219,10 @@ bool SDLSystem::CreateWindow() {
         return true;
 }
 
+/**
+    @brief Creates a 2D rendering context for the window.
+    @return False if the renderer creation fails and true if it's succeed.
+*/
 bool SDLSystem::CreateRenderer() {
     INFO("Creating renderer.");
 
@@ -189,6 +238,9 @@ bool SDLSystem::CreateRenderer() {
         return true;
 }
 
+/**
+    @brief Calculates the frame rate.
+*/
 void SDLSystem::CalculateFramerate() {
     m_currentTicks = SDL_GetTicks();
 
@@ -201,6 +253,9 @@ void SDLSystem::CalculateFramerate() {
     m_frameCounter++;
 }
 
+/**
+    @brief Loads necessary game scenes.
+*/
 void SDLSystem::LoadCommons() {
     auto mainScene = new MainScene();
     auto gameplayScene = new GamePlayScene();
@@ -220,6 +275,11 @@ void SDLSystem::LoadCommons() {
 
 }
 
+/**
+    @brief Adjusts the Frame rate based in the update rate interval.
+    @return False if the calculated interval is less than the update rate
+    interval and true if it's not.
+*/
 bool SDLSystem::FixFramerate() {
     m_currentFix = SDL_GetTicks();
     float interval = m_currentFix - m_lastFix;
@@ -229,5 +289,5 @@ bool SDLSystem::FixFramerate() {
     }
 
     m_lastFix = SDL_GetTicks();
-        return true;
+    return true;
 }

@@ -1,43 +1,82 @@
+/**
+    @file nowScript.cpp
+    @brief This class contains all attributes and methods that manages the
+    snow in the game.
+    @copyright LGPL. MIT License.
+*/
+
 #include "Customs/SnowScript.hpp"
 
-SnowScript::SnowScript(GameObject *owner) : Script(owner) {}
+/**
+    @brief Initializes the script of snow instance.
+    @param[in] GameObject *owner - owns the component.
+*/
+SnowScript::SnowScript(GameObject *owner) : Script(owner) {
+    
+}
 
+/**
+    @brief Start the snow animation by setting the starting position.
+*/
 void SnowScript::Start() {
+
+    // Creates the animations.
     CreateAnimations();
+
+    // Get the position.
     position = GetOwner()->GetPosition();
+
+    // Get the animator.
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
     GetOwner()->SetZoomProportion(Vector(0,0));
 }
 
-void SnowScript::CreateAnimations(){
+/**
+    @brief Create the snow animation by setting the frames of snow.
+*/
+void SnowScript::CreateAnimations() {
+
+    // Creates the show image.
     auto snowImage = new Image("assets/neve.png",0,0,6820, 256);
+
+    // Creates the snow animation.
     auto snowAnimation= new Animation(GetOwner(),snowImage );
     for (int i = 0; i < 20; i++) {
         snowAnimation->AddFrame(new Frame(i * 341,0, 341, 256));
     }
-    // animator
+    // Creates the animator.
     auto weatherAnimator = new Animator(GetOwner());
     weatherAnimator->AddAnimation("snowAnimation", snowAnimation);
 }
 
+/**
+    @brief Update the components of snow.
+*/
 void SnowScript::ComponentUpdate() {
-    if (play==1) {
+    if (play == 1) {
         animator->PlayAnimation("snowAnimation");
     }
 
-    if (input->GetKeyDown(INPUT_T) && play==0) {
+    if (input->GetKeyDown(INPUT_T) && play == 0) {
    // animator->StopAllAnimations();
         AudioController::GetInstance()->PlayAudio("snowSound", -1);
-        play=1;
-    } else if (input->GetKeyDown(INPUT_T) && play==1) {
-        play=0;
+        play = 1;
+    } else if (input->GetKeyDown(INPUT_T) && play == 1) {
+        play = 0;
         AudioController::GetInstance()->StopAudio("snowSound");
         animator->StopAllAnimations();
     }
 }
 
+/**
+    @brief Updates the initial position of the beginning snow.
+*/
 void SnowScript::FixedComponentUpdate() {
-    position->m_x=0;
-    position->m_y=0;
+
+    // Sets the x position.
+    position->m_x = 0;
+
+    // Sets the y position.
+    position->m_y = 0;
 }

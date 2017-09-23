@@ -16,7 +16,7 @@ public:
   void StartBossFight();
   void EndBossFight();
 
-  /*Add*/
+  // Add.
   void AddPlayer(GameObject *player);
   void AddBoss(GameObject *boss);
   void AddInsideBossFx(GameObject *bossInsideFx);
@@ -25,14 +25,14 @@ public:
   void AddCreditsAnimation(GameObject *creditsAnimation);
   void AddMap(GameObject *map);
 
-  /*Posit*/
+  // Posit.
   void PositPlayer(Vector newPosition);
   void PositBoss();
   void PositTentacle(int index);
   void PositAllTentacles();
   void PositMap(Vector newPosition);
 
-  /*Activate*/
+  // Activate.
   void ActivatePlayer();
   void ActivateBoss();
   void ActivateInsideBossFx();
@@ -41,7 +41,7 @@ public:
   void ActivateLifeBars();
   void ActivateCreditsAnimation();
 
-  /*Deactive*/
+  // Deactive.
   void DeactivatePlayer();
   void DeactivateBoss();
   void DeactivateInsideBossFx();
@@ -50,6 +50,7 @@ public:
   void DeactivateLifeBars();
   void DeactivateCreditsAnimation();
 
+  // Define the attack of boss.
   void FirstAttackSurge();
   void FirstAttackGone();
   void SecondAttack();
@@ -59,22 +60,37 @@ public:
 
 private:
   FirstBossController();
+
+  // Pointer that instantiates the control of the first boss.
   static FirstBossController *m_instance;
 
-  //Objects
+  // Pointer pointing to the player.
   GameObject *m_player = nullptr;
+
+  // Pointer pointing to the boss.
   GameObject *m_boss = nullptr;
+
+  // Pointer pointing to the boss inside.
   GameObject *m_bossInsideFx =  nullptr;
+
+  // Pointer pointing to the credits animation.
   GameObject *m_creditsAnimation =  nullptr;
+
+  // Pointer pointing to the map.
   GameObject *m_map =  nullptr;
+
+  // Vector GameObject that defines the tentacles that appear in the attack of the boss.
   std::vector<GameObject *> m_tentacles;
+
+  // Vector GameObject that defines the life bar of the boss.
   std::vector<GameObject *> m_lifeBars;
 
   //Positions
   int m_wPos;
   int m_hPos;
 
-  int actualTentacle = 1;
+  // Variable count of tentacles released by boss attack.
+  int m_actualTentacle = 1;
   std::pair <int, int> randomPosition;
 
 };

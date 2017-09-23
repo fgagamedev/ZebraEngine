@@ -13,12 +13,12 @@ using namespace std;
 
 class QuitButtonScript : public Script {
 public:
-  QuitButtonScript(GameObject *owner);
-  string GetComponentName() override { return "QuitButtonScript"; };
-  void ComponentUpdate() override;
-  void Start() override;
+    QuitButtonScript(GameObject *owner);
+    string GetComponentName() override { return "QuitButtonScript"; };
+    void ComponentUpdate() override;
+    void Start() override;
 
 private:
-  UIButton *m_uiButton = nullptr;
+    UIButton *m_uiButton = nullptr;
 };
 #endif

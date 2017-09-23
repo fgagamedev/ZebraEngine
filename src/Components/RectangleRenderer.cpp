@@ -1,5 +1,18 @@
 #include "Components/RectangleRenderer.hpp"
 
+/**
+    @file RectangleRenderer.cpp
+    @brief Manages the rectangles of the game.
+    @copyright LGPL. MIT License.
+*/
+
+/**
+    @brief Constructor for the class RectangleRenderer.
+    @param[in] *owner - Owns the component.
+    @param[in] offset - The positions x and y of the component.
+    @param[in] width - Width of the rectangle.
+    @param[in] height - Height of the rectangle.
+*/
 RectangleRenderer::RectangleRenderer(GameObject *owner, Vector offset,
                                      int width, int height)
     : Component(owner, C_DRAW) {
@@ -8,6 +21,9 @@ RectangleRenderer::RectangleRenderer(GameObject *owner, Vector offset,
     m_height = height;
 }
 
+/**
+    @brief Update the rectangle informations on the screen.
+*/
 void RectangleRenderer::ComponentUpdate() {
     int x = GetOwner()->GetPosition()->m_x + m_offset.m_x;
     int y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
@@ -17,6 +33,13 @@ void RectangleRenderer::ComponentUpdate() {
                                                    m_alpha);
 }
 
+/**
+    @brief Set the colors of the rectangle.
+    @param[in] red - Specific value of red color.
+    @param[in] green - Specific value of green color.
+    @param[in] blue - Specific value of blue color.
+    @param[in] alpha - Specific value of alpha.
+*/
 void RectangleRenderer::SetColor(int red, int green, int blue, int alpha) {
     m_red = red;
     m_green = green;

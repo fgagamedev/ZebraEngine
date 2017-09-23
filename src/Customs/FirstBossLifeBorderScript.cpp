@@ -1,12 +1,28 @@
+/**
+    @file FirstBossLifeBorderScript.cpp
+    @brief Class that defines methods and attributes for
+    activating the first boss life border script.
+    @copyright LGPL. MIT License.
+*/
+
 #include "Customs/FirstBossLifeBorderScript.hpp"
 
+/**
+    @brief Initializes irstBossLifeBorderScript instance.
+    @param[in] GameObject *owner - owns the component.
+*/
 FirstBossLifeBorderScript::FirstBossLifeBorderScript(GameObject *owner) :
     Script(owner) {}
 
+
+/**
+    @brief Start the animation for the first boss life border effect.
+*/
 void FirstBossLifeBorderScript::Start() {
 
     CreateAnimations();
 
+    // Creates the animator.
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
     position = GetOwner()->GetPosition();
@@ -16,13 +32,17 @@ void FirstBossLifeBorderScript::Start() {
                                                   GetOwner()->GetHeight(), 0);
 
 }
+
+/**
+    @brief Create the first boss life border effect animations.
+*/
 void FirstBossLifeBorderScript::CreateAnimations() {
 
-    //Image Attacks
-    //332 L por 9 A
+    // Creates the image.
     auto firstBossLifeBorderImage = new Image("assets/Barra_Life_Boss.png",0,0,
                                                                     996, 171);
 
+    // Creates the animation
     auto firstBossLifeBorderAnimation = new Animation(GetOwner(),
                                         firstBossLifeBorderImage );
     for (int column = 0; column < 19; column++) {
@@ -33,19 +53,28 @@ void FirstBossLifeBorderScript::CreateAnimations() {
   }
 
 
-    //Animator
+    // Creates and add the animator.
     auto firstBossLifeBorderAnimator = new Animator(GetOwner());
     firstBossLifeBorderAnimator->AddAnimation("firstBossLifeBorderAnimation",
                                                 firstBossLifeBorderAnimation);
 }
 
-
+/**
+    @brief Updates the component of boss life border.
+*/
 void FirstBossLifeBorderScript::ComponentUpdate() {
 
 }
 
+/**
+    @brief Updates the animator component and boss position.
+*/
 void FirstBossLifeBorderScript::FixedComponentUpdate() {
     animator->PlayAnimation("firstBossLifeBorderAnimation");
+
+    // Sets the position x.
     position->m_x = 646;
+
+    // Sets the position y.
     position->m_y = 10;
 }
