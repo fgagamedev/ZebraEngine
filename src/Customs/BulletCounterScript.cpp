@@ -1,11 +1,11 @@
-#include "Customs/BulletCounterScript.hpp"
-#include "Globals/EngineGlobals.hpp"
-
 /**
     @file BulletCounterScript.cpp
     @brief Manages the bullet counting.
     @copyright LGPL. MIT License.
 */
+
+#include "Customs/BulletCounterScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 /**
     @brief Constructor of the class BulletCounterScript.
@@ -25,6 +25,7 @@ void BulletCounterScript::Start() {
     @brief Updates the Bullet Counter informations.
 */
 void BulletCounterScript::ComponentUpdate() {
+    // Player component
     auto nakedManScript = (NakedManScript *)SceneManager::GetInstance()
                           ->GetCurrentScene()
                           ->GetGameObject("NakedMan")
@@ -32,6 +33,7 @@ void BulletCounterScript::ComponentUpdate() {
 
     m_numberBullet = nakedManScript->bulletNumber;
 
+    // Text component to updates the text of the Bullet Counter
     auto var = (UIText *)GetOwner()->GetComponent("UIText");
     var->SetText(std::to_string(m_numberBullet));
 }
