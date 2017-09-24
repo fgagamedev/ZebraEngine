@@ -16,8 +16,9 @@ MenuController::MenuController() {}
     @return m_instance of MenuController
 */
 MenuController *MenuController::GetInstance() {
-  if (!m_instance)
+  if (!m_instance){
     m_instance = new MenuController();
+  }
   return m_instance;
 }
 
@@ -33,6 +34,6 @@ void MenuController::SelectGamemode(char gamemode) {
     @brief Gets the selected game mode.
     @return char
 */
-char MenuController::GetGamemode() { 
-    return m_selectedGamemode; 
+char MenuController::GetGamemode() {
+    return m_selectedGamemode;
 }

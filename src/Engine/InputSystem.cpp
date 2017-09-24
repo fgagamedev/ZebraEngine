@@ -88,11 +88,6 @@ bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
 */
 bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
     if (!m_states[key] && m_oldStates[key]) {
-        /**
-        char message[] = "Key up: ";
-        strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
-        INFO(message);
-        */
         return true;
     }
     return false;
@@ -105,11 +100,6 @@ bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
 */
 bool InputSystem::GetKeyPressed(KeyboardInputGlobal key) {
     if (m_states[key]) {
-        /**
-        char message[] = "Key pressed: ";
-        strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
-        INFO(message);
-        */
         return true;
     }
     return false;
@@ -125,7 +115,6 @@ bool InputSystem::GetMouseButtonDown(MouseInputGlobal button) {
     bool isPressed = m_mouseStates & SDL_BUTTON(button);
     bool wasPressed = m_oldMouseStates & SDL_BUTTON(button);
     if (isPressed && !wasPressed) {
-        // INFO("Mouse button down");
         return true;
     }
     return false;
@@ -141,7 +130,6 @@ bool InputSystem::GetMouseButtonUp(MouseInputGlobal button) {
     bool isPressed = m_mouseStates & SDL_BUTTON(button);
     bool wasPressed = m_oldMouseStates & SDL_BUTTON(button);
     if (!isPressed && wasPressed) {
-        // INFO("Mouse button up");
         return true;
     }
     return false;
