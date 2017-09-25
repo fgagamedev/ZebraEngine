@@ -29,11 +29,13 @@ void QuitButtonScript::ComponentUpdate() {
     // Sound component to play the sound of the Play Button
     auto soundButton = (UISound *)GetOwner()->GetComponent("UISound");
 
+    // Change sound and running status when mouse is clicked.
     if (m_uiButton->IsClicked()) {
         soundButton->Play(0, -1);
         SDLSystem::GetInstance()->SetRunning(false);
     }
 
+    // Change collor when mouse is over.
     if (m_uiButton->IsOver()) {
         textButton->SetColor(160,160,160, 255);
     } else {
