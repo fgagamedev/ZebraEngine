@@ -1,3 +1,9 @@
+/**
+    @file CircleCollider.hpp
+    @brief Responsible for managing the animation of a collision.
+    @copyright MIT License.
+*/
+
 #ifndef __CIRCLE_COLLIDER__
 #define __CIRCLE_COLLIDER__
 
@@ -12,28 +18,27 @@
 using namespace std;
 
 class CircleCollider : public Collider {
+    public:
+        CircleCollider(GameObject *owner, Vector &offset, float radius, int layer);
+        Vector GetCenter() {
+            return Vector(m_shape.x, m_shape.y);
+        };
 
-	public:
+        float GetRadius() {
+            return m_shape.radius;
+        };
 
-		CircleCollider(GameObject *owner, Vector &offset, float radius, int layer);
-		Vector GetCenter() {
-			return Vector(m_shape.x, m_shape.y);
-		};
+        void FixedComponentUpdate() override;
 
-		float GetRadius() {
-			return m_shape.radius;
-		};
+        virtual string GetComponentName() override {
+            return "CircleCollider";
+        };
 
-		void FixedComponentUpdate() override;
-
-		virtual string GetComponentName() override {
-			return "CircleCollider";
-		};
-
-	private:
-
-		Circle m_shape;
-		Vector m_offset;
+    private:
+        // Store the size and position of a circle envolved in a collision.
+        Circle m_shape;
+        // Store the offset of the circle after the collision.
+        Vector m_offset;
 };
 
 #endif

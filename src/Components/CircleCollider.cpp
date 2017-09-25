@@ -1,9 +1,10 @@
-#include "Components/CircleCollider.hpp"
 /**
     @file CircleCollider.cpp
     @brief Responsible for managing the animation of a collision.
     @copyright MIT License.
 */
+
+#include "Components/CircleCollider.hpp"
 
 /**
     @brief Sets the size of the circle rendered.
