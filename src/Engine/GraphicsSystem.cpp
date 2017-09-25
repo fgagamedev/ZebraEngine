@@ -1,3 +1,9 @@
+/**
+    @file GraphicsSystem.cpp
+    @brief Manage the graphic's system of the game.
+	@copyright MIT License.
+*/
+
 #include "Engine/GraphicsSystem.hpp"
 #include "Engine/SDLSystem.hpp"
 #include "Engine/sdl2include.hpp"
@@ -5,16 +11,14 @@
 #include "Log/log.hpp"
 
 #include <iostream>
-/**
-	@file GraphicsSystem.cpp
-	@copyright MIT License.
-*/
 
 GraphicsSystem *GraphicsSystem::m_instance = 0;
 
 GraphicsSystem::GraphicsSystem() {}
 
-GraphicsSystem::~GraphicsSystem() { m_instance = nullptr; }
+GraphicsSystem::~GraphicsSystem() {
+    m_instance = nullptr;
+}
 
 GraphicsSystem *GraphicsSystem::GetInstance() {
     if (!m_instance) {
@@ -33,16 +37,17 @@ void GraphicsSystem::Draw(Image *img, Vector *position,
 
     int result;
     result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
-                            img->GetTexture(), img->GetRect(), &dest,
-                            img->GetRotationAngle(), img->GetSDLPivot(),
-                            img->GetSDLFlip());
+                              img->GetTexture(), img->GetRect(), &dest,
+                              img->GetRotationAngle(), img->GetSDLPivot(),
+                              img->GetSDLFlip());
 
     if (result < 0) {
         ERROR(SDL_GetError());
     }
 }
 
-void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,int destw,int desth) {
+void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,
+                               int destw, int desth) {
     SDL_Rect dest;
     dest.w = destw;
     dest.h = desth;
@@ -52,9 +57,9 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,int de
 
     int result;
     result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
-                            img->GetTexture(), frame->GetRect(), &dest,
-                            img->GetRotationAngle(), img->GetSDLPivot(),
-                            img->GetSDLFlip());
+                              img->GetTexture(), frame->GetRect(), &dest,
+                              img->GetRotationAngle(), img->GetSDLPivot(),
+                              img->GetSDLFlip());
 
     if (result < 0) {
         ERROR(SDL_GetError());
@@ -62,7 +67,8 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,int de
 }
 
 void GraphicsSystem::DrawText(SDL_Texture *texture, SDL_Rect *destRect) {
-    SDL_RenderCopy(SDLSystem::GetInstance()->GetRenderer(), texture, NULL, destRect);
+    SDL_RenderCopy(SDLSystem::GetInstance()->GetRenderer(), texture, NULL,
+                   destRect);
 }
 
 void GraphicsSystem::DrawPoint(Vector point) {
@@ -76,7 +82,6 @@ void GraphicsSystem::DrawPoint(Vector point) {
 
 void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 r, Uint8 g,
                                 Uint8 b, Uint8 a) {
-
     SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), r, g, b, a);
     Vector point;
 
@@ -84,7 +89,7 @@ void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 r, Uint8 g,
         point.m_x = center.m_x + cos(angle) * radius;
         point.m_y = center.m_y - sin(angle) * radius;
         int result = SDL_RenderDrawPoint(SDLSystem::GetInstance()->GetRenderer(),
-                                     point.m_x, point.m_y);
+                                         point.m_x, point.m_y);
     if (result < 0) {
         ERROR(SDL_GetError());
     }
@@ -102,7 +107,8 @@ void GraphicsSystem::DrawFillCircle(Vector &center, float radius, Uint8 r,
         point.m_y = center.m_y - sin(angle) * radius;
 
         int result = SDL_RenderDrawLine(SDLSystem::GetInstance()->GetRenderer(),
-        center.m_x, center.m_y, point.m_x, point.m_y);
+                                        center.m_x, center.m_y, point.m_x,
+                                        point.m_y);
 
         if (result < 0) {
             ERROR(SDL_GetError());
@@ -121,7 +127,8 @@ void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
     rect.w = width;
     rect.h = height;
 
-    int result = SDL_RenderFillRect(SDLSystem::GetInstance()->GetRenderer(), &rect);
+    int result = SDL_RenderFillRect(SDLSystem::GetInstance()->GetRenderer(),
+                                    &rect);
 
     if (result < 0) {
         ERROR(SDL_GetError());
@@ -139,7 +146,8 @@ void GraphicsSystem::DrawFillRectangle(SDL_Rect* source, int width, int height,
     rect.w = source->w;
     rect.h = source->h;
 
-    int result = SDL_RenderFillRect(SDLSystem::GetInstance()->GetRenderer(), &rect);
+    int result = SDL_RenderFillRect(SDLSystem::GetInstance()->GetRenderer(),
+                                    &rect);
 
     if (result < 0) {
         ERROR(SDL_GetError());
