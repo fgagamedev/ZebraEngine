@@ -19,12 +19,16 @@ using namespace std;
 class PlayButtonScript : public Script {
 public:
     PlayButtonScript(GameObject *owner);
-    string GetComponentName() override { return "PlayButtonScript"; };
+
+    // Replace the component name and return it.
+    string GetComponentName() override {
+        return "PlayButtonScript";
+    };
     void ComponentUpdate() override;
     void Start() override;
 
 private:
-    // Sets the Play button as a UIButton
+    // Set the Play button as a UIButton
     UIButton *m_uiButton = nullptr;
 };
 
