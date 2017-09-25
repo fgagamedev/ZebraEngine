@@ -1,3 +1,9 @@
+/**
+    @file NakedManScript.cpp
+    @brief Manages the functions of the player in the game.
+    @copyright LGPL. MIT License.
+*/
+
 #include "Customs/NakedManScript.hpp"
 #include "Customs/FirstBossController.hpp"
 #include "Customs/AudioController.hpp"
@@ -7,12 +13,6 @@
 
 #include <math.h>
 #include <stdio.h>
-
-/**
-    @file NakedManScript.cpp
-    @brief Manages the functions of the player in the game.
-    @copyright LGPL. MIT License.
-*/
 
 
 bool NakedManScript::isZooming = false;
@@ -24,7 +24,7 @@ bool NakedManScript::isZooming = false;
 NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {}
 
 /**
-    @brief Starts the first definitions of the player.
+    @brief Start the first definitions of the player.
 */
 void NakedManScript::Start() {
     CreateAnimations();
@@ -49,12 +49,18 @@ void NakedManScript::Start() {
 }
 
 /**
-    @brief Sets the direction of the player based on the mouse position.
+    @brief Sets the direction of the player based on the mouse position
+    or game controller.
 */
 void NakedManScript::SetDirection() {
+	// Get current mouse position
     mousePosition = input->GetMousePosition();
 
     if (!game_controller) {
+        /*
+            Detect if player is moving and looking in same direction
+            based in x, y player's positions and x, y mouse positions.
+        */
         mousePosition = input->GetMousePosition();
         if (mousePosition.first >= position->m_x && movements == 4){
             isMovingLooking = true;
@@ -108,6 +114,10 @@ void NakedManScript::SetDirection() {
             isMovingLooking = false;
         }
     } else {
+        /*
+            Detect if player is moving and looking in same direction
+            based in x, y player's positions and x, y game controller positions.
+        */
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
             && movements == 4) {
             isMovingLooking = true;
@@ -124,7 +134,7 @@ void NakedManScript::SetDirection() {
             isMovingLooking = false;
         }
 
-        // y-axis
+        // Y-axis
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)
             <= -800 && movements == 1) {
             isMovingLooking = true;
@@ -185,18 +195,23 @@ void NakedManScript::SetDirection() {
 }
 
 /**
-    @brief Detects the keyboards that are being pressed to move the player.
+    @brief Detect the keyboards that are being pressed to move the player.
 */
 void NakedManScript::KeyBoardUpdate() {
+    // Detect if zoom is required.
     if ((input->GetKeyPressed(INPUT_DOWN))
          || (input->GetKeyPressed(INPUT_UP))) {
         isZooming = true;
     }
-
     if ((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP))) {
         isZooming = false;
     }
 
+
+    /*
+        Define move direction and adjust player's image according
+        to the direction he's looking and the presseds keys.
+    */
     if (isMovingLooking) {
         if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
             movements = 5;
@@ -320,11 +335,12 @@ void NakedManScript::KeyBoardUpdate() {
 }
 
 /**
-    @brief Detects the actions of the game controller to move the player.
+    @brief Detect the actions of the game controller to move the player.
 */
 void NakedManScript::GameControllerUpdate() {
     isMovingLooking = true;
 
+    // Calculate game controller angle in degrees
     gameControllerAngle = atan2 (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)
                                  * -1, game_controller
                                  ->GetAxis(GC_INPUT_AXIS_RIGHTX)) * 180 / 3.14;
@@ -340,6 +356,11 @@ void NakedManScript::GameControllerUpdate() {
         gameControllerAngle = abs(360 - gameControllerAngle);
     }
 
+
+    /*
+        Define move direction and adjust player's image according
+        to the direction he's looking and the game controller buttons actions.
+    */
     if (isMovingLooking && dashController == 0) {
         if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
              && (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
@@ -484,16 +505,16 @@ void NakedManScript::GameControllerUpdate() {
 
         bulletNumber--;
 
-        // Reload
+        // Reload gun.
         if (bulletNumber == 0) {
             bulletNumber = 10;
-        // Wait delay reload time
+           // Wait delay reload time
         }
     }
 
     bulletController = game_controller->GetAxis( GC_INPUT_AXIS_TRIGGERRIGHT);
 
-    // Sair para o Menu
+    // Back to menu.
     if (game_controller->GetButtonDown(GC_INPUT_BACK)) {
         auto var = (UIText *)SceneManager::GetInstance()
                                            ->GetScene("Main")
@@ -505,7 +526,7 @@ void NakedManScript::GameControllerUpdate() {
 }
 
 /**
-    @brief Creates the animations related with the player.
+    @brief Create the animations related with the player.
 */
 void NakedManScript::CreateAnimations() {
     // Animator
@@ -581,7 +602,7 @@ void NakedManScript::CreateAnimations() {
 }
 
 /**
-    @brief Updates the components of the player.
+    @brief Update the components of the player.
 */
 void NakedManScript::ComponentUpdate() {
     auto script2 = (RainScript *)SceneManager::GetInstance()
@@ -618,12 +639,12 @@ void NakedManScript::ComponentUpdate() {
     Animations();
     MovementsSounds();
 
-    // Sair para o Menu
+    // Back to menu.
     if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
         SDLSystem::GetInstance()->SetRunning(false);
     }
 
-    // Shoot gun
+    // Shoot gun.
     if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
         Shoot();
     }
@@ -653,9 +674,10 @@ void NakedManScript::ComponentUpdate() {
 }
 
 /**
-    @brief Detects if the player is moving.
+    @brief Detect if the player is moving.
 */
 void NakedManScript::MovementsSounds() {
+	// Set walking value based on pressed keys.
     if (input->GetKeyPressed(INPUT_W) || input->GetKeyPressed(INPUT_A)
         || input->GetKeyPressed(INPUT_S) || input->GetKeyPressed(INPUT_D)) {
         if (!walking) {
@@ -667,7 +689,7 @@ void NakedManScript::MovementsSounds() {
 }
 
 /**
-    @brief Updates the components of the player.
+    @brief Update the components of the player.
 */
 void NakedManScript::FixedComponentUpdate() {
     GameCollisionCheck();
@@ -682,6 +704,7 @@ void NakedManScript::FixedComponentUpdate() {
 
     if (endBossFight) {
         FirstBossController::GetInstance()->EndBossFight();
+
         // Posit player on spawn
         int xPos, yPos;
         xPos = EngineGlobals::screen_width / 2 - 96 / 2;
@@ -694,10 +717,11 @@ void NakedManScript::FixedComponentUpdate() {
 }
 
 /**
-    @brief Detects the amount of player's life to recover it or end the fight
+    @brief Detect the amount of player's life to recover it or end the fight
     with the boss.
 */
 void NakedManScript::PlayerLife() {
+    // Recover life.
     if (life < 100 && !endBossFight) {
         lifeRecover.Update(EngineGlobals::fixed_update_interval);
         cout << life << endl;
@@ -706,18 +730,20 @@ void NakedManScript::PlayerLife() {
             lifeRecover.Restart();
         }
     }
-    if(life <= 0) { // Player is dead
+    
+    // Detect when player dies.
+    if(life <= 0) {
         endBossFight = true;
         /*
-        stop boss fight
-        desactivate boos fight
-        posit player outside boss fight
+            Stop boss fight
+            Desactivate boos fight
+            Posit player outside boss fight
         */
     }
 }
 
 /**
-    @brief Allows the player to shoot if he has bullets.
+    @brief Allow the player to shoot if he has bullets.
 */
 void NakedManScript::Shoot() {
     if (bulletNumber > 0) {
@@ -741,19 +767,19 @@ void NakedManScript::Shoot() {
     @brief Reloads the player's gun based on number of shots or time.
 */
 void NakedManScript::ReloadGun() {
-  /** Reload **/
     if (bulletNumber == 0) {
         timerReload.Update(EngineGlobals::fixed_update_interval);
     }
 
-    if (timerReload.GetTime() >= 2 * 1000) { // Waits 2 seconds to Reload
+    // Time in seconds
+    if (timerReload.GetTime() >= 2 * 1000) {
         bulletNumber = 10;
         timerReload.Restart();
     }
 }
 
 /**
-    @brief Constantly updates the animations based on collisions and time.
+    @brief Constantly update the animations based on collisions and time.
 */
 void NakedManScript::Animations() {
     if (m_hit) {
@@ -775,7 +801,7 @@ void NakedManScript::Animations() {
 }
 
 /**
-    @brief Defines the direction in which the player will move based
+    @brief Define the direction in which the player will move based
     on the pressed keys or the game controller buttons actions.
 */
 void NakedManScript::Movements() {
@@ -806,7 +832,8 @@ void NakedManScript::Movements() {
     }
 
     if (cameraLock) {
-        if (position->m_x + GetOwner()->GetWidth() >= deadzoneX) { // Mount deadzode on x++
+        // Mount deadzode on x++
+        if (position->m_x + GetOwner()->GetWidth() >= deadzoneX) { 
             if (isZooming) {
                 CameraSystem::GetInstance()->MoveRight(2,
                                                        SceneManager::GetInstance()
@@ -818,7 +845,8 @@ void NakedManScript::Movements() {
             }
         }
 
-        if (position->m_x <= deadzoneX) { // Mount deadzode on x-
+        // Mount deadzode on x-
+        if (position->m_x <= deadzoneX) { 
             if (isZooming) {
                 CameraSystem::GetInstance()->MoveLeft(2,
                                                       SceneManager::GetInstance()
@@ -830,7 +858,8 @@ void NakedManScript::Movements() {
             }
         }
 
-        if (position->m_y + GetOwner()->GetWidth() >= deadzoneY) { // Mount deadzode on y++
+        // Mount deadzode on y++
+        if (position->m_y + GetOwner()->GetWidth() >= deadzoneY) { 
             if (isZooming) {
                 CameraSystem::GetInstance()->MoveDown(2,
                                                       SceneManager::GetInstance()
@@ -842,7 +871,8 @@ void NakedManScript::Movements() {
             }
         }
 
-        if (position->m_y <= deadzoneY) { // Mount deadzode on y--
+        // Mount deadzode on y--
+        if (position->m_y <= deadzoneY) { 
             if (isZooming) {
                 CameraSystem::GetInstance()->MoveUp(2,
                                                     SceneManager::GetInstance()
@@ -931,7 +961,7 @@ void NakedManScript::GameCollisionCheck() {
 }
 
 /**
-    @brief Starts the first boss depending on the position of the Camera
+    @brief Start the first boss depending on the position of the Camera
     of the game.
 */
 void NakedManScript::StartFirstBoss() {
@@ -979,7 +1009,7 @@ void NakedManScript::StartFirstBoss() {
 }
 
 /**
-    @brief Detects collisions between the player and the wall.
+    @brief Detect collisions between the player and the wall.
 */
 void NakedManScript::WallCollisionResolution() {
     auto mapscript = (MapScript *)SceneManager::GetInstance()

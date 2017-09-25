@@ -1,3 +1,9 @@
+/**
+    @file NakedManScript.hpp
+    @brief Manages the functions of the player in the game.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __NAKED_MAN_SCRIPT__
 #define __NAKED_MAN_SCRIPT__
 
@@ -15,8 +21,10 @@
 #include "Customs/HitScript.hpp"
 
 class NakedManScript : public Script {
+
 public:
 
+    // Initicial values of the player informations in the game
     bool lockplayerMovements = false;
     bool gameControllerActivated = false;
     bool activated = true;
@@ -49,17 +57,27 @@ private:
     bool walking = false;
 
     int bulletController = 0;
+
     int dashController = 0;
 
     InputSystem *input = nullptr;
     GameController *game_controller = nullptr;
     Animator *animator = nullptr;
     Vector *position = nullptr;
+
     float walkSpeed = 15;
     float fixedWalkSpeed = 15;
-    int movements = 0; // 1=UP, 2=DOWN,3=LEFT,4=RIGHT,5=UP LEFT.6=UP RIGHT,7=DOWN LEFT,8=DOWN RIGHT
+
+    /*
+        1 = UP, 2 = DOWN, 3 = LEFT, 4 = RIGHT, 5 = UP LEFT,
+        6 = UP RIGHT, 7 = DOWN LEFT, 8 = DOWN RIGHT
+    */
+    int movements = 0;
+
+    //
     int deadzoneX = EngineGlobals::screen_width / 2;
     int deadzoneY = EngineGlobals::screen_height / 2;
+
     int lastDirection = 1;
     RectangleCollider *nakedManCollider = nullptr;
 
