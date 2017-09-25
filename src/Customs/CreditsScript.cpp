@@ -17,7 +17,7 @@ CreditsScript::CreditsScript(GameObject *owner) : Script(owner) {
 }
 
 /**
-    @brief Starts the credit position.
+    @brief Start the credit position.
 */
 void CreditsScript::Start() {
     position = GetOwner()->GetPosition();
@@ -32,7 +32,7 @@ void CreditsScript::ComponentUpdate() {
 }
 
 /**
-    @brief Sets the credits x and y positions to zero.
+    @brief Set the credits x and y positions to zero.
 */
 void CreditsScript::FixedComponentUpdate() {
     position->m_x = 0;

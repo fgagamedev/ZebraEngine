@@ -26,7 +26,11 @@ class CreditsScript : public Script {
 
 public:
     CreditsScript(GameObject *owner);
-    std::string GetComponentName() override { return "CreditsScript"; };
+
+    // Replace the component name and return it.
+    std::string GetComponentName() override {
+        return "CreditsScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
 
