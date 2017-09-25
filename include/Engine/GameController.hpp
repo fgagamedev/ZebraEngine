@@ -8,7 +8,7 @@
 
 /**
     @file GameController.hpp
-    @brief This class defines the actions of the buttons needed for playing 
+    @brief This class defines the actions of the buttons needed for playing
            the game in a game controller.
     @copyright LGPL. MIT License.
 */
@@ -23,7 +23,9 @@ public:
     bool GetButtonUp(GameControllerButton button);
     bool GetButtonPressed(GameControllerButton button);
     int GetAxis(GameControllerAxis axis);
-    int GetButtonsQuantity() { return m_buttonsQnt; };
+    int GetButtonsQuantity() {
+        return m_buttonsQnt;
+    };
 
 private:
     SDL_GameController *m_gameController = nullptr;

@@ -22,7 +22,7 @@ void EndScene1::OnActivation() {
 
 /**
     @brief Method for handling deactivation state changing.
-    
+
 */
 void EndScene1::OnDeactivation() {}
 
@@ -40,6 +40,7 @@ void EndScene1::OnHidden() {}
     @brief Creates game over scene.
 */
 void EndScene1::CreateGameOver() {
+    // defines the current center position
     int xMiddle = EngineGlobals::screen_width / 2 - 240;
     auto gameOver = new GameObject("Logo", new Vector(xMiddle,0), 500, 500,1);
     auto playText = new UIText(gameOver, "GAME OVER", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
@@ -51,6 +52,7 @@ void EndScene1::CreateGameOver() {
     @brief Creates 'quit' button on the middle of the screen.
 */
 void EndScene1::CreateQuitButton() {
+    // defines the current center position
     int xMiddle = EngineGlobals::screen_width / 2 - 100;
     auto quit = new GameObject("Quit", new Vector(xMiddle, 500), 200, 100,1);
     auto quitText = new UIText(quit, "Quit", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
@@ -58,6 +60,6 @@ void EndScene1::CreateQuitButton() {
     auto quitButton = new UIButton(quit);
     auto quitSound = new UISound(quit, "playSound", "assets/Audio/Button/MusicButton1.wav", false, false);
     auto script = new QuitButtonScript(quit);
-    
+
     AddGameObject(quit);
 }

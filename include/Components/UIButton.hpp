@@ -23,7 +23,9 @@ class UIButton : public Component {
         ~UIButton();
 
         // Overrides
-        std::string GetComponentName() override { return "UIButton"; };
+        std::string GetComponentName() override {
+            return "UIButton";
+        };
         void Start() override;
 
         // UIButton methods

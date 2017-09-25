@@ -14,6 +14,7 @@ EndScene2::EndScene2() {}
     @brief On activation of the second scene, creates 'quit' button and animation in the middle of the screen.
 */
 void EndScene2::OnActivation() {
+    // defines the current center position (vertical and horizontal)
     m_width_middle = EngineGlobals::screen_width / 2;
     m_height_middle = EngineGlobals::screen_height / 2;
 
@@ -49,6 +50,7 @@ void EndScene2::CreateAnimation(){
     @brief Method that creates 'quit' button on the middle of the screen, and plays a button sound.
 */
 void EndScene2::CreateQuitButton() {
+    // defines the current center position
     int xMiddle = EngineGlobals::screen_width / 2 - 100;
     auto quit = new GameObject("Quit", new Vector(xMiddle, 500), 200, 100,0);
     auto quitText = new UIText(quit, "Quit", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
