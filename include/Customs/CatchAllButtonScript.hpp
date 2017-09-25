@@ -21,13 +21,18 @@ public:
     CatchAllButtonScript(GameObject *owner);
     virtual void Start() override;
     virtual void ComponentUpdate() override;
-    virtual string GetComponentName() override { return "CatchAllButtonScript"; };
+
+    // Replace the component name and return it.
+    virtual string GetComponentName() override {
+        return "CatchAllButtonScript";
+    };
+
 
 private:
-    // Sets the CatchAll button as a UIButton
+    // Set the CatchAll button as a UIButton
     UIButton *m_uiButton = nullptr;
 
-    // Sets a checkbox game object
+    // Set a checkbox game object
     GameObject *m_checkbox = nullptr;
 };
 
