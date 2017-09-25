@@ -34,13 +34,6 @@ class RectangleRenderer : public Component {
         return m_width;
     };
 
-    inline void SetWidth(int width) {
-        this->m_width = width;
-    };
-    inline int GetWidth() {
-        return m_width;
-    };
-
 private:
     // Width and height of the rectangle
     int m_width = 0, m_height = 0;
