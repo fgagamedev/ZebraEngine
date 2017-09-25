@@ -20,7 +20,7 @@ public:
     Renderer(GameObject *owner, Image *img);
     ~Renderer();
 
-    // Overriding method for getting component name
+    // Replace the component name and return it.
     inline std::string GetComponentName() override {
         return "Renderer";
     };
