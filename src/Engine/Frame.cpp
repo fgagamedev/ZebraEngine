@@ -14,14 +14,16 @@
     @param[in] height - Vertical frame size.
 */
 Frame::Frame(int x, int y, int width, int height) {
-  srcRect.x = x;
-  srcRect.y = y;
-  srcRect.w = width;
-  srcRect.h = height;
+    srcRect.x = x;
+    srcRect.y = y;
+    srcRect.w = width;
+    srcRect.h = height;
 }
 
 /**
     @brief Get informations about the frame.
     @return - The rectangular area of the frame
 */
-SDL_Rect *Frame::GetRect() { return &srcRect; }
+SDL_Rect *Frame::GetRect() {
+    return &srcRect;
+}
