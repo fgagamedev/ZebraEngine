@@ -22,6 +22,8 @@ class ZebraLogoScript : public Script {
 
 public:
     ZebraLogoScript(GameObject *owner);
+
+    // Replace the component name and return it.
     std::string GetComponentName() override {
         return "ZebraLogoScript";
     };
@@ -30,16 +32,16 @@ public:
 
 protected:
   void ComponentUpdate() override;
+
 private:
     void CreateAnimations();
 
-    // Timer to regulate the time that ZebraLogo will be displayed in the screen
     Timer time;
 
     // Input instance of the ZebraLogo to get the buttons actions in the game
     InputSystem *input = nullptr;
 
-    // Animator instance of the ZebraLogo to handle with the animations in the map
+    // Animator instance to handle with the animations in the map
     Animator *animator = nullptr;
 
     // Position vector of the ZebraLogo
