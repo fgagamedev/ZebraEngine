@@ -29,21 +29,36 @@ class CentralLightScript4 : public Script {
 
 		void FixedComponentUpdate() override;
 		void Start() override;
+
+        // Represents if this is script is activeted or not.
 		void Activate(){active = true;}
 
 	protected:
 		void ComponentUpdate() override;
 
 	private:
+
+        // Represents if this is script is activeted or not.
 		bool active = false;
+
+        // Instantiating time system.
 		Timer time;
 
 		void CreateAnimations();
 
+        // Instantiating input system of the keyboard.
 		InputSystem *input = nullptr;
-		 GameController* gamecontroller = nullptr;
+
+        // Instantiating joystick.
+		GameController* gamecontroller = nullptr;
+
+        // Instantiating animations.
 		Animator *animator = nullptr;
+
+        // Instantiating vector.
 		Vector *position = nullptr;
+
+        // State of the script.
 		int play = 0;
 
 };

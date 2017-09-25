@@ -1,3 +1,8 @@
+/**
+    @file Animator.hpp
+    @brief Manage the animations of the game.
+    @copyright MIT License.
+*/
 #ifndef __ANIMATOR__
 #define __ANIMATOR__
 
@@ -13,6 +18,7 @@ typedef std::unordered_map<std::string, Animation *> AnimationMap;
 
 class Animator : public Component {
 public:
+    // Responsible for declaring and creating all the game animations.
     Animator(GameObject *owner);
     void AddAnimation(std::string name, Animation *animation);
     void PlayAnimation(std::string name);
@@ -25,6 +31,7 @@ public:
     };
 
 private:
+    //local variable map animation.
     AnimationMap m_aMap;
 };
 

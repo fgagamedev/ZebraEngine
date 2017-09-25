@@ -1,3 +1,8 @@
+/**
+    @file FirstBossLifeScript.cpp
+    @brief Manage the animations for the first boss central effect.
+    @copyright MIT License.
+*/
 #ifndef _BOSS_1_CENTRAL_SCRIPT__
 #define _BOSS_1_CENTRAL_SCRIPT__
 
@@ -15,20 +20,31 @@
 class FirstBossCentralEffectScript : public Script {
 public:
     FirstBossCentralEffectScript(GameObject *owner);
+
+    // Get the component name and replace it by returning its string name.
     std::string GetComponentName() override {
         return "FirstBossCentralEffectScript";
     };
     void FixedComponentUpdate() override;
     void Start() override;
 
+private:
+    void CreateAnimations();
+
+    // Pointer to game controls
+    InputSystem *m_input = nullptr;
+
+    // Pointer to animator game.
+    Animator *m_animator = nullptr;
+
+    // Poiter to position of gamer.
+    Vector *m_position = nullptr;
+
+    // Poiter to object boss.
+    GameObject *m_boss = nullptr;
+
 protected:
     void ComponentUpdate() override;
 
-private:
-    void CreateAnimations();
-    InputSystem *input = nullptr;
-    Animator *animator = nullptr;
-    Vector *position = nullptr;
-    GameObject *boss = nullptr;
 };
 #endif

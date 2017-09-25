@@ -22,13 +22,16 @@ CentralLightScript4::CentralLightScript4(GameObject *owner) : Script(owner) {
 void CentralLightScript4::Start() {
 
     CreateAnimations();
+
+    // Gets the position.
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
     gamecontroller = input->GetGameController(0);
     GetOwner()->SetZoomProportion(Vector(0,0));
-    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
-    if(map){
+    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
+               GetGameObject("Map");
+    if(map) {
       GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,
                                            map->originalHeight/GetOwner()->originalHeight));
     }
@@ -39,9 +42,12 @@ void CentralLightScript4::Start() {
     @brief Positions the animations in-game, through the settings of frames,
     and image's position.
 */
-void CentralLightScript4::CreateAnimations(){
+void CentralLightScript4::CreateAnimations() {
 
+    // Creates the image.
     auto centrallightSprite = new Image("assets/centro2.png", 0, 0,832, 64);
+
+    // Creates the animation of central light.
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
     centrallightAnimation->AddFrame(new Frame(0, 0, 64, 64));
 
@@ -63,6 +69,7 @@ void CentralLightScript4::ComponentUpdate() {
     animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
 
 }
+
 void CentralLightScript4::FixedComponentUpdate() {
 
 }

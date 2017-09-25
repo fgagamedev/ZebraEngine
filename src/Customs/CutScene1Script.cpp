@@ -11,16 +11,22 @@ CutScene1Script::CutScene1Script(GameObject *owner) : Script(owner) {}
     @brief Start the animation for the cut scene 1.
 */
 void CutScene1Script::Start() {
+    /*
+        Creates the animations defining position the place to insert
+        and the scene that will be inserted.
+    */
     CreateAnimations();
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
-    input = InputSystem::GetInstance();
-    gamecontroller = input->GetGameController(0);
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_input = InputSystem::GetInstance();
+    m_gamecontroller = m_input -> GetGameController(0);
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     if(map) {
-        GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,
-                               map->originalHeight/GetOwner()->originalHeight));
+        GetOwner()->SetZoomProportion(Vector(map -> originalWidth / GetOwner()
+                                             ->originalWidth, map
+                                             -> originalHeight / GetOwner()
+                                             -> originalHeight));
     }
 }
 
@@ -28,25 +34,31 @@ void CutScene1Script::Start() {
     @brief Create the animations of the cut scene 1.
 */
 void CutScene1Script::CreateAnimations() {
-    auto centrallightSprite = new Image("assets/cut1.png", 0, 0,1705, 255);
+
+    // Image light sprite.
+    auto centrallightSprite = new Image("assets/cut1.png", 0, 0, 1705, 255);
+
+    // Animation light.
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
     centrallightAnimation->AddFrame(new Frame(0, 0, 341, 255));
 
+    // Animation.
     auto centrallightAnimator = new Animator(GetOwner());
     centrallightAnimation->SetFramesPerSecond(9);
-    centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION", centrallightAnimation);
+    centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION",
+                                       centrallightAnimation);
 }
 
 /**
     @brief Update the animation of the cut scene 1.
 */
 void CutScene1Script::ComponentUpdate() {
-    if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active) {
-        animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
+    if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active) {
+        m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
 
-    if(animator->IsPlaying("CENTRAL LIGHT ANIMATION")) {
-        animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
+    if(m_animator->IsPlaying("CENTRAL LIGHT ANIMATION")) {
+        m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
 }
 

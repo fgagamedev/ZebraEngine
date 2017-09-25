@@ -16,7 +16,8 @@
     needed to run the game scene that are defined further down.
 */
 void GamePlayScene::OnActivation() {
-    //This must be the first function to be called
+
+    //This must be the first function to be called.
     CreateMap();
     CreateCreditAnimation();
     CreateNakedMan();
@@ -37,11 +38,17 @@ void GamePlayScene::OnActivation() {
 
 }
 
-void GamePlayScene::OnDeactivation() {}
+void GamePlayScene::OnDeactivation() {
 
-void GamePlayScene::OnShown() {}
+}
 
-void GamePlayScene::OnHidden() {}
+void GamePlayScene::OnShown() {
+
+}
+
+void GamePlayScene::OnHidden() {
+
+}
 
 /**
     @brief Create the game map by adding the
@@ -50,21 +57,23 @@ void GamePlayScene::OnHidden() {}
 void GamePlayScene::CreateMap() {
 
 
-    //Original resolution is 2048/2048
-    //6144,6144 = 3x
+    //Original resolution is 2048/2048.
+    //6144,6144 = 3x.
     auto map = new GameObject("Map", new Vector(-3500 ,-3800),8034,8034,0);
-    // Renderer
+
+    // Renderer the map image.
     auto mapImage = new Image("assets/mapa2.png", 0, 0, 2678, 2678);
-    //  auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
+    //auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
     auto mapRenderer = new Renderer(map, mapImage);
 
 
     auto trees = new GameObject("Tree", new Vector(-3500 ,-3800),8034,8034,1);
-    // Renderer
+
+    // Renderer the trees image.
     auto treesImage = new Image("assets/trees.png", 0, 0, 2678, 2678);
     auto treesRenderer = new Renderer(trees, treesImage);
 
-    // Script
+    // Script.
     auto mapScript = new MapScript(map);
 
 
@@ -79,18 +88,23 @@ void GamePlayScene::CreateMap() {
                                  "assets/Audio/florestafinal.ogg",
                                  false, false);
 
+    // Add the audio in the scene.
     AudioController::GetInstance()->AddAudio(mainSound);
+
+    // Play the audio that was added before.
     AudioController::GetInstance()->PlayAudio("mainSound", -1);
 
+    // Add the map.
     AddGameObject(map);
 
     FirstBossController::GetInstance()->AddMap(map);
 
+    // Add the trees.
     AddGameObject(trees);
 
 }
 
-void GamePlayScene::CreateCutScenes(){
+void GamePlayScene::CreateCutScenes() {
 
     auto scene1 = new GameObject("SCENE1", new Vector(0,0),1024,800,0);
     auto  scene1Script = new CutScene1Script(scene1);
@@ -101,7 +115,7 @@ void GamePlayScene::CreateCutScenes(){
 /**
     @brief Responsible for creating three forest-activating objects.
 */
-void  GamePlayScene::CreateForestActivator(){
+void  GamePlayScene::CreateForestActivator() {
     //left
     auto forestActivator = new GameObject("FOREST ACTIVATOR",
                                           new Vector(1720, -3463), 192, 192, 1);
@@ -168,7 +182,8 @@ void GamePlayScene::CreateNakedMan() {
     xPos = EngineGlobals::screen_width / 2 - 96 / 2;
     yPos = EngineGlobals::screen_height / 2 - 96 / 2;
     auto nakedMan = new GameObject("NakedMan", new Vector(xPos,yPos),96 , 96, 2);
-    // Script
+
+    // Script.
     auto nakedManScript = new NakedManScript(nakedMan);
 
     auto runSound = new UISound(nakedMan, "runSound",
@@ -190,7 +205,7 @@ void GamePlayScene::CreateFirstBoss() {
     /** Boss Inside FX **/
     auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect",
                                                  new Vector(0,0),211.86,211.86, 1);
-    auto firstBossCentralEffectScript = new  FirstBossCentralEffectScript(FirstBossCentralEffect);
+    auto firstBossCentralEffectScript = new FirstBossCentralEffectScript(FirstBossCentralEffect);
     AddGameObject(FirstBossCentralEffect);
     FirstBossController::GetInstance()->AddInsideBossFx(FirstBossCentralEffect);
     FirstBossController::GetInstance()->DeactivateInsideBossFx();
@@ -198,10 +213,10 @@ void GamePlayScene::CreateFirstBoss() {
     /** Boss **/
     auto firstBoss = new GameObject("FirstBoss", new Vector(-3350,-1600),690,930, 2);
 
-    //Tag
+    // Tag.
     firstBoss->SetTag("FirstBoss");
 
-    // Script
+    // Script.
     auto firstBossScript = new  FirstBossScript(firstBoss);
     AddGameObject(firstBoss);
 
@@ -221,13 +236,13 @@ void GamePlayScene::CreateFirstBossAttack() {
         auto firstBossAttack = new GameObject(tentacleName,
                                               new Vector(-4750, -1700), 100, 377,
                                                           2);
-        //Tag
+        // Tag.
         firstBossAttack->SetTag("FirstBossAtack");
 
-        // Script
+        // Script.
         auto firstBossAttackScript = new  FirstBossAttackScript(firstBossAttack);
 
-        //Sounds
+        //Sounds.
         auto firstAttackSound = new UISound(firstBossAttack, "firstAttackSound",
                                             "assets/Audio/Boss/grito1.ogg",
                                             false, false);
@@ -263,14 +278,14 @@ void GamePlayScene::CreateFirstBossAttack() {
 */
 void GamePlayScene::CreateFirstBossLife() {
 
-    // Life Border
+    // Life Border.
     auto firstBossLifeBorderSprite = new GameObject("FirstBossBorderLife",
                                                     new Vector(0, 0),344, 25, 3);
     auto firstBossLifeBorderScript = new  FirstBossLifeBorderScript(firstBossLifeBorderSprite);
     AddGameObject(firstBossLifeBorderSprite);
     FirstBossController::GetInstance()->AddLifeBar(firstBossLifeBorderSprite);
 
-    // Life
+    // Life.
     auto firstBossLife = new GameObject("FirstBossLife",
                                         new Vector(0, 0),337, 25, 2);
     auto lifeRectangle = new RectangleRenderer(firstBossLife, Vector(0, 0), 337, 25);

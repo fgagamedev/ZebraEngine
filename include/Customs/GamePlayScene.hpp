@@ -1,6 +1,6 @@
 /**
     @file GamePlayScene.hpp
-    @brief Class responsible for creating and 
+    @brief Class responsible for creating and
     activating the information needed for game scenes.
     @copyright LGPL. MIT License.
 */
@@ -16,6 +16,7 @@
 #include "Components/Renderer.hpp"
 #include "Components/Rigidbody.hpp"
 #include "Components/UIText.hpp"
+
 #include "Customs/MapScript.hpp"
 #include "Customs/NakedManScript.hpp"
 #include "Customs/SnowScript.hpp"
@@ -44,36 +45,32 @@
 
 
 class GamePlayScene : public Scene {
-public:
-  void OnActivation() override;
-  void OnDeactivation() override;
-  void OnShown() override;
-  void OnHidden() override;
 
-private:
-  void CreateCutScenes();
-  void CreateCentralLights();
-  void CreateNakedMan();
-  void CreatePlayerAttack();
-  void CreateFirstBoss();
-  void CreateMap();
-  void CreateLight();
-  void CreateRain();
-  void CreateSnow();
-  void CreateThunder();
-  void CreateFirstBossAttack();
-  void CreateAmmoCounter();
-  void CreatePlayerHit();
-  void CreateFirstBossLife();
-  void CreateCreditAnimation();
-  void CreateSounds();
-  void CreateForestActivator();
-  void CreateSnowActivator();
+    public:
+        void OnActivation() override;
+        void OnDeactivation() override;
+        void OnShown() override;
+        void OnHidden() override;
 
-
-
-
-
+    private:
+        void CreateCutScenes();
+        void CreateCentralLights();
+        void CreateNakedMan();
+        void CreatePlayerAttack();
+        void CreateFirstBoss();
+        void CreateMap();
+        void CreateLight();
+        void CreateRain();
+        void CreateSnow();
+        void CreateThunder();
+        void CreateFirstBossAttack();
+        void CreateAmmoCounter();
+        void CreatePlayerHit();
+        void CreateFirstBossLife();
+        void CreateCreditAnimation();
+        void CreateSounds();
+        void CreateForestActivator();
+        void CreateSnowActivator();
 };
 
 #endif
