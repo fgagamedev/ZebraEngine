@@ -24,7 +24,11 @@ class BulletCounterScript : public Script {
 
 public:
     BulletCounterScript(GameObject *owner);
-    std::string GetComponentName() override { return "BulletCounterScript"; };
+
+    // Replace the component name and return it.
+    std::string GetComponentName() override {
+        return "BulletCounterScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
 
@@ -41,3 +45,4 @@ private:
 };
 
 #endif
+

@@ -11,7 +11,9 @@
     @brief Constructor of the class BulletCounterScript.
     @param[in] GameObject *owner - Owns the component.
 */
-BulletCounterScript::BulletCounterScript(GameObject *owner) : Script(owner) {}
+BulletCounterScript::BulletCounterScript(GameObject *owner) : Script(owner) {
+
+}
 
 /**
     @brief Starts the Bullet Counter position.
@@ -25,21 +27,20 @@ void BulletCounterScript::Start() {
     @brief Updates the Bullet Counter informations.
 */
 void BulletCounterScript::ComponentUpdate() {
-    // Player component
+    // Get player's component number of bullets.
     auto nakedManScript = (NakedManScript *)SceneManager::GetInstance()
                           ->GetCurrentScene()
                           ->GetGameObject("NakedMan")
                           ->GetComponent("NakedManScript");
-
     m_numberBullet = nakedManScript->bulletNumber;
 
-    // Text component to updates the text of the Bullet Counter
+    // Update the text of the left number of bullets.
     auto var = (UIText *)GetOwner()->GetComponent("UIText");
     var->SetText(std::to_string(m_numberBullet));
 }
 
 /**
-    @brief Sets the Bullet Counter's x and y positions.
+    @brief Set the Bullet Counter's x and y positions.
 */
 void BulletCounterScript::FixedComponentUpdate() {
     position->m_x = 900;
