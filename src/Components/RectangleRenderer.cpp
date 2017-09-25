@@ -25,8 +25,11 @@ RectangleRenderer::RectangleRenderer(GameObject *owner, Vector offset,
     @brief Update the rectangle informations on the screen.
 */
 void RectangleRenderer::ComponentUpdate() {
+    // sets the horizontal position
     int x = GetOwner()->GetPosition()->m_x + m_offset.m_x;
+    // sets the vertical position
     int y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
+    // sets the position using x and y values
     auto pos = Vector(x, y);
     GraphicsSystem::GetInstance()->DrawFillRectangle(pos, m_width, m_height,
                                                    m_red, m_green, m_blue,

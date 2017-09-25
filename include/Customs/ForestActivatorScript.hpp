@@ -23,25 +23,30 @@ class ForestActivatorScript : public Script {
 
 public:
     ForestActivatorScript(GameObject *owner);
-    std::string GetComponentName() override { return "ForestActivatorScript"; };
+    std::string GetComponentName() override {
+        return "ForestActivatorScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
-    void Activate(){activate=0;}
+    void Activate(){
+        activate = 0;
+    }
 
 protected:
     void ComponentUpdate() override;
 
 private:
-    int activate=-1;
-    bool runned=false;
+    // tells whether the forest is activated or not
+    int activate = -1;
+    // tells whether the forest has been already shown or not
+    bool runned = false;
     Timer time;
     void CreateAnimations();
+    // user inputs (mouse, keyboard commands)
     InputSystem *input = nullptr;
-    GameController* gamecontroller = nullptr;
+    GameController *gamecontroller = nullptr;
     Animator *animator = nullptr;
     Vector *position = nullptr;
-    int play=0;
-
 };
 
 #endif

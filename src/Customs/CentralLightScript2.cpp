@@ -34,6 +34,7 @@ void CentralLightScript2::Start() {
     @brief Positions the animations in-game, through the settings of frames, and image's position.
 */
 void CentralLightScript2::CreateAnimations(){
+    // sets the image of the little square placed on the map, where the player has to go to
     auto centrallightSprite = new Image("assets/centro1.png", 0, 0,832, 64);
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
     centrallightAnimation->AddFrame(new Frame(0, 0, 64, 64));
