@@ -24,7 +24,9 @@ class UISound : public Component {
 public:
     UISound(GameObject *owner, string message, string audio_path, bool is_music, bool play_on_start);
 
-    string GetComponentName() override { return "UISound"; };
+    string GetComponentName() override {
+        return "UISound";
+    };
 
     void Start() override;
     void FixedComponentUpdate() override;
@@ -36,7 +38,9 @@ public:
     void Stop(int channel = -1);
     void Pause(int channel = -1);
 
-    inline string GetMessage(){ return m_message; };
+    inline string GetMessage(){
+        return m_message;
+    };
 
 private:
     // Store if the music is playing.
