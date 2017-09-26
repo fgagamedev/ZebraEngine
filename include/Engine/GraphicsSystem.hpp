@@ -1,6 +1,6 @@
 /**
     @file GraphicsSystem.hpp
-    @brief Manage the graphic's system of the game.
+    @brief Manage the draw of texts and diferent types of images in the game.
     @copyright MIT License.
 */
 

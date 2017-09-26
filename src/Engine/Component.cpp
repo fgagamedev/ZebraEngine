@@ -12,9 +12,11 @@
     @brief Constructor of Component's class.
 */
 Component::Component(GameObject *owner, ComponentType type) {
+    // Test if owner exists
     if (!owner) {
         ERROR("Invalid null owner");
     }
+    // Instance the owner and type objects
     m_owner = owner;
     m_type = type;
     m_owner->AddComponent(this);
