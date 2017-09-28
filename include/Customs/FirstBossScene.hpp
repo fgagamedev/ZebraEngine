@@ -1,3 +1,9 @@
+/**
+    @file FirstBossScene.hpp
+    @brief Class that represents the creation of the First Boss Scene.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __FIRST_BOSS_SCENE__
 #define __FIRST_BOSS_SCENE__
 
@@ -24,12 +30,6 @@
 #include "Customs/FirstBossScript.hpp"
 #include "Customs/FirstBossAttackScript.hpp"
 #include "Customs/FirstBossCentralEffectScript.hpp"
-
-/**
-    @file FirstBossScene.hpp
-    @brief Class that represents the creation of the First Boss Scene.
-    @copyright LGPL. MIT License.
-*/
 
 
 class FirstBossScene : public Scene {
