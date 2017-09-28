@@ -29,18 +29,20 @@ UIText::UIText(GameObject *owner, string message, string fontPath, int size,
     m_rect.y = owner->GetPosition()->m_y;
     m_rect.w = owner->GetWidth();
     m_rect.h = owner->GetHeight();
-  
-    /* 
+
+    /*
         Sets the font based on a font file and create a font of the specified point size.
         Sets its color and background color.
     */
     m_font = TTF_OpenFont(fontPath.c_str(), size);
+
+    // Check if there is something diferent of the font and if is diferent print a error message.
     if (!m_font)
         SDL_TTF_ERROR("Font could not be loaded");
     m_color = {r, g, b, a};
-  
+
     m_background = {0, 0, 0, 0};
-  
+
     m_mode = mode;
   
     OnPropertyChange();
@@ -50,11 +52,11 @@ UIText::UIText(GameObject *owner, string message, string fontPath, int size,
 void UIText::Start() {}
 
 /**
-    @brief Sets the UIText offset. Offset is the mean value of a wave, 
+    @brief Sets the UIText offset. Offset is the mean value of a wave,
     that creates periodic effect.
     @param[in] offset vector reference.
 */
-void UIText::SetOffset(Vector &offset){ 
+void UIText::SetOffset(Vector &offset){
     m_offset = offset;
 }
 
@@ -64,8 +66,8 @@ void UIText::SetOffset(Vector &offset){
 */
 void UIText::ComponentUpdate() {
 
-    /* 
-        Sets the x, y, width and height positions of the rectangle component. 
+    /*
+        Sets the x, y, width and height positions of the rectangle component.
         Positions x and y are updated with the offset values.
         The new positions are used with the texture value to render the draw.
     */
@@ -73,7 +75,7 @@ void UIText::ComponentUpdate() {
     m_rect.y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
     m_rect.w = GetOwner()->GetWidth();
     m_rect.h = GetOwner()->GetHeight();
-  
+
     GraphicsSystem::GetInstance()->DrawText(m_texture, &m_rect);
 }
 
@@ -89,7 +91,7 @@ void UIText::FixedComponentUpdate() {}
 */
 void UIText::OnPropertyChange() {
     m_surface = nullptr;
-  
+
     // Sets the surface type based on the mode, to render the appropriated texture.
     switch (m_mode) {
     case 0:
@@ -102,10 +104,10 @@ void UIText::OnPropertyChange() {
         m_surface =
               TTF_RenderText_Shaded(m_font, m_message.c_str(), m_color, m_background);
   }
-  
+
     m_texture = SDL_CreateTextureFromSurface(
         SDLSystem::GetInstance()->GetRenderer(), m_surface);
-  
+
     SDL_FreeSurface(m_surface);
 }
 
