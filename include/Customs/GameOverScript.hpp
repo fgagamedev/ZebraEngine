@@ -44,7 +44,7 @@ private:
     Vector *position = nullptr;
 
     //State of the script.
-    int play=0;
+    int play = 0;
 };
 
 #endif

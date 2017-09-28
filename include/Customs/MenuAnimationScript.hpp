@@ -27,13 +27,13 @@ private:
     void CreateAnimations();
 
     // Sets the state of the initial animation.
-    bool initialanimation=false;
+    bool initialanimation = false;
 
     // Sets the number of current frames in the script.
-    int currentframe=0;
-    
+    int currentframe = 0;
+
     // Sets state of the game.
-    bool isPlaying=false;
+    bool isPlaying = false;
 
     // Instantiating animations.
     Animator *animator = nullptr;

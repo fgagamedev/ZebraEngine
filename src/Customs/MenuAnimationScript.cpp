@@ -3,14 +3,16 @@
 #include <stdio.h>
 
 // Constructor
-MenuAnimationScript::MenuAnimationScript(GameObject *owner) : Script(owner) {}
+MenuAnimationScript::MenuAnimationScript(GameObject *owner) : Script(owner) {
+
+}
 
 /**
     @brief that function starts the menu animation. Create the animation,
     position and the animator.
 */
 void MenuAnimationScript::Start() {
-    // Create animations
+    // Create animations.
     CreateAnimations();
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -28,8 +30,8 @@ void MenuAnimationScript::CreateAnimations() {
 
     // Instantiating the menu image and its position.
     auto mainSprite = new Image("assets/menu_animation.png", 0, 0, 5456, 256);
-    
-    /* 
+
+    /*
         Instantiating the main animation and its position.
         A for loop defines the frames in the main animation and in the second main animation.
     */
@@ -59,10 +61,8 @@ void MenuAnimationScript::ComponentUpdate() {
         initialanimation = true;
         animator->PlayAnimation("mainAnimation");
     }
-    /* 
-        Check the current state of the initial animation,if true,
-        checks the animator state, if false, plays the animator.
-    */
+
+    // Check the current state of the initial animation, if true, checks the animator state. If false, plays the animator.
     if (initialanimation) {
         if (!animator->IsPlaying("mainAnimation"))
         if (!animator->IsPlaying("mainAnimation2") && initialanimation) {
@@ -74,4 +74,6 @@ void MenuAnimationScript::ComponentUpdate() {
 /**
     @brief that function fixs the components update of the menu animation.
 */
-void MenuAnimationScript::FixedComponentUpdate() {}
+void MenuAnimationScript::FixedComponentUpdate() {
+
+}
