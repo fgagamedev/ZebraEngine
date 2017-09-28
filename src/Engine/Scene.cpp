@@ -8,10 +8,14 @@
 
 #include "Log/log.hpp"
 
-// Constructor
-Scene::Scene() {}
+// Constructor.
+Scene::Scene() {
 
-Scene::~Scene() {}
+}
+
+Scene::~Scene() {
+
+}
 
 /**
     @brief That function is for start the scene of the game.
@@ -32,6 +36,7 @@ void Scene::Update() {
     // Sort and compares the gameobjects by the first element in its vector, and the last one, for update them.
     std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
     for (auto it : m_gameObjects) {
+        // Check if is active and them update it.
         if (it->active) {
             it->Update();
         }
@@ -47,6 +52,7 @@ void Scene::DrawUpdate() {
     // Sort and compares the gameobjects by the first element in its vector, and the last one, for update the object's draw.
     std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
     for (auto it : m_gameObjects) {
+        // Check if is active and them update it.
         if (it->active) {
             it->DrawUpdate();
         }
@@ -75,6 +81,7 @@ void Scene::AddGameObject(std::vector<GameObject *> gameObjects) {
 void Scene::FixedUpdate() {
     //Run through the gameobjects vector, and updates the active gameObjects.
     for (auto it : m_gameObjects) {
+        // Check if is active and them update it.
         if (it->active) {
             it->FixedUpdate();
         }
@@ -92,12 +99,16 @@ void Scene::SetState(SceneStates state) {
     m_currentState = state;
     INFO("[SCENE] " << m_name << " state: " << m_currentState);
 
+    // Check if the state is scene activated and call for Activation.
     if (state == SCENE_ACTIVATED) {
         Activation();
+    // Check if the state is scene deactivated and call for Deactivation.
     } else if (state == SCENE_DEACTIVATED) {
         Deactivation();
+    // Check if the state is scene hidden and call for Hidden.
     } else if (state == SCENE_HIDDEN) {
         Hidden();
+    // Check if the state is scene shown and call for shown.
     } else if (state == SCENE_SHOWN) {
         Shown();
     }

@@ -28,7 +28,7 @@ GameObject::GameObject(std::string name, Vector *position,
     originalHeight = height;
 }
 
-// Destructor
+// Destructor.
 GameObject::~GameObject() {
     delete m_position;
     delete m_position;
@@ -119,8 +119,8 @@ void GameObject::AddComponent(Component *component) {
     if (it != m_components.end()) {
         it->second.push_back(component);
     } else {
-        /* 
-            Extends the components vector size by one, by inserting a new element at type's position. 
+        /*
+            Extends the components vector size by one, by inserting a new element at type's position.
             Then inserts type's position in the end of components vector.
         */
         m_components.emplace(type, std::vector<Component *>());
@@ -161,9 +161,9 @@ Component *GameObject::GetComponent(std::string name) {
     @brief that function is for fix the updates that were done before.
 */
 void GameObject::FixedUpdate() {
-    /* 
-        Run through the map of components, and puts them in a struct that holds 
-        two objects of arbitrary type. Then updates it with the FixedComponent and PhysicsUpdate();.    
+    /*
+        Run through the map of components, and puts them in a struct that holds
+        two objects of arbitrary type. Then updates it with the FixedComponent and PhysicsUpdate();.
     */
     for (auto key = m_components.begin(); key != m_components.end(); key++) {
         for (auto value : key->second) {
@@ -177,7 +177,7 @@ void GameObject::FixedUpdate() {
     @brief that function is for set the size based on width and height.
     @param[in] width and height in centimeters.
 */
-void GameObject::SetSize(int width, int height){
+void GameObject::SetSize(int width, int height) {
     // Sets the gameobject width and height with the given values.
     m_width = width;
     m_height = height;
@@ -202,8 +202,8 @@ void GameObject::AddVelocity(Vector velocity) {
     @brief Get the velocity of a gameobject.
     @return the vector of gameobject's velocity.
 */
-Vector GameObject::GetVelocity() { 
-    return *m_velocity; 
+Vector GameObject::GetVelocity() {
+    return *m_velocity;
 }
 
 /**
@@ -224,6 +224,6 @@ void GameObject::ClearCollisions() { m_colliding.clear(); }
     @brief Get the gameobject's collisions.
     @return the vector of gameobject's collisions.
 */
-std::vector<GameObject *> GameObject::GetCollisions() { 
-    return m_colliding; 
+std::vector<GameObject *> GameObject::GetCollisions() {
+    return m_colliding;
 }
