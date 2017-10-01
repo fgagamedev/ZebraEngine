@@ -27,6 +27,7 @@ public:
 
 protected:
   void ComponentUpdate() override;
+
 private:
   void CreateAnimations();
 

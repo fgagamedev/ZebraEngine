@@ -10,10 +10,14 @@
 */
 FirstBossScript::FirstBossScript(GameObject *owner) : Script(owner) {}
 
+/**
+    @brief Starts the script of the first boss of the game.
+*/
 void FirstBossScript::Start() {
-
+    // Create the animations of the first boss
     CreateAnimations();
 
+    // Positions the boss in the game's map.
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
@@ -35,10 +39,11 @@ void FirstBossScript::Start() {
     game.
 */
 void FirstBossScript::CreateAnimations() {
-
+    // Get images from the first boss.
     auto firstBossImage = new Image("assets/boss1.png",0,0,1896, 324);
     auto firstBossJumpImage = new Image("assets/boss1_jump.png",0,0,1180, 406);
 
+    // Create animations for the first boss.
     auto firstBossAnimation = new Animation(GetOwner(),firstBossImage);
     for (int i = 0; i < 8; i++) {
         firstBossAnimation->AddFrame(new Frame(i * 237,0, 237, 406));
@@ -57,14 +62,14 @@ void FirstBossScript::CreateAnimations() {
         }
     }
 
-    // Second Attack
+    // Second Attack.
     auto firstBossFallAnimation = new Animation(GetOwner(),firstBossJumpImage);
     for (int i = 5; i > 0; i--) {
         firstBossFallAnimation->AddFrame(new Frame(i * 236, 0, 236, 406));
         firstBossFallAnimation->AddFrame(new Frame(i * 236, 0, 236, 406));
     }
 
-    // Animator
+    // Creates the animator for the first boss.
     auto firstBossAnimator = new Animator(GetOwner());
     firstBossAnimator->AddAnimation("firstBossAnimation", firstBossAnimation);
     firstBossAnimator->AddAnimation("firstBossJumpAnimation",
