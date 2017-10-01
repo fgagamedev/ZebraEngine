@@ -13,10 +13,10 @@
     @param[in] message - A string of the message that will be displayed.
     @param[in] fontPath - The path of the font that will be used.
     @param[in] size - The size of the character's sequence of the message.
-    @param[in] r - The red component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] g - The green component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] b - The blue component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] a - The alpha component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] red - The red component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] green - The green component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] blue - The blue component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] alpha - The alpha component of the pixel in the range 0-255, type unsigned 8-bit integer.
     @param[in] mode - The surface mode.
 */
 UIText::UIText(GameObject *owner, string message, string fontPath, int size,

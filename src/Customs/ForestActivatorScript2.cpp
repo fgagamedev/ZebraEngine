@@ -39,8 +39,8 @@ void ForestActivatorScript2::CreateAnimations(){
 
     // Instantiating forest activator animation by gameobject components, and setting its image and frame.
     auto forestactivatorAnimation = new Animation(GetOwner(), forestactivatorSprite);
-    for (int i = 0; i < 13; i++) {
-        forestactivatorAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
+    for (int counter = 0; counter < 13; counter++) {
+        forestactivatorAnimation->AddFrame(new Frame(counter * 64, 0, 64, 64));
     }
 
     // Instantiating forest activator animation2, by gameobject, and setting its image and animation.
@@ -59,7 +59,7 @@ void ForestActivatorScript2::CreateAnimations(){
     @brief that function updates the components of the forest two.
 */
 void ForestActivatorScript2::ComponentUpdate() {
-    // Check the animator's state, and ifs true, play animation and activate it. 
+    // Check the animator's state, and ifs true, play animation and activate it.
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate==0 && runned==false) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate=1;

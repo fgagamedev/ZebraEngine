@@ -57,15 +57,15 @@ void MenuAnimationScript::CreateAnimations() {
 */
 void MenuAnimationScript::ComponentUpdate() {
     // Check the current state of the initial animation and animator, if false, plays it.
-    if (!animator->IsPlaying("mainAnimation") && !initialanimation) {
-        initialanimation = true;
+    if (!animator->IsPlaying("mainAnimation") && !initialAnimation) {
+        initialAnimation = true;
         animator->PlayAnimation("mainAnimation");
     }
 
     // Check the current state of the initial animation, if true, checks the animator state. If false, plays the animator.
-    if (initialanimation) {
+    if (initialAnimation) {
         if (!animator->IsPlaying("mainAnimation"))
-        if (!animator->IsPlaying("mainAnimation2") && initialanimation) {
+        if (!animator->IsPlaying("mainAnimation2") && initialAnimation) {
             animator->PlayAnimation("mainAnimation2");
         }
     }

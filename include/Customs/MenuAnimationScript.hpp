@@ -27,10 +27,10 @@ private:
     void CreateAnimations();
 
     // Sets the state of the initial animation.
-    bool initialanimation = false;
+    bool initialAnimation = false;
 
     // Sets the number of current frames in the script.
-    int currentframe = 0;
+    int currentFrame = 0;
 
     // Sets state of the game.
     bool isPlaying = false;

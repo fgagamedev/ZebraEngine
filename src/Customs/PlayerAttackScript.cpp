@@ -118,12 +118,12 @@ void PlayerAttackScript::FixedComponentUpdate() {
 */
 void PlayerAttackScript::GameCollisionCheck() {
     // The loop get the collisions according to the tag set in the ifs.
-    for (auto obj : GetOwner()->GetCollisions()) {
+    for (auto object : GetOwner()->GetCollisions()) {
         // If that collisions is the bullet, get his collisions.
-        if (obj->GetTag() == "Bullet") {
+        if (object->GetTag() == "Bullet") {
             GetOwner()->ClearCollisions();
         // If the collisions is the FirstBoss.
-        } else if (obj->GetTag() == "FirstBoss") {
+    } else if (object->GetTag() == "FirstBoss") {
             cout << "Boss Colider" << endl;
             auto firstBossLifeScript = (FirstBossLifeScript*)SceneManager::GetInstance()
                ->GetCurrentScene()
@@ -134,7 +134,7 @@ void PlayerAttackScript::GameCollisionCheck() {
             GetOwner()->active = false;
             GetOwner()->ClearCollisions();
         // If the collisions is the FirstBossAtack.
-        } else if(obj->GetTag() == "FirstBossAtack") {
+    } else if(object->GetTag() == "FirstBossAtack") {
             cout << "Boss Atack Colider" << endl;
             GetOwner()->ClearCollisions();
         }
