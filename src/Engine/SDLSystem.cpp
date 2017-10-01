@@ -1,6 +1,11 @@
+/**
+    @file SDLSystem.cpp
+    @brief Manages the SDL functions.
+    @copyright LGPL. MIT License.
+*/
+
 #include "Engine/SDLSystem.hpp"
 
-// load commons includes
 #include "Customs/FirstBossScene.hpp"
 #include "Customs/MainScene.hpp"
 #include "Customs/GamePlayScene.hpp"
@@ -8,17 +13,11 @@
 #include "Customs/EndScene1.hpp"
 #include "Customs/EndScene2.hpp"
 
-/**
-    @file SDLSystem.cpp
-    @brief Manages the SDL functions.
-    @copyright LGPL. MIT License.
-*/
-
-// static variables initialization
+// Static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
 
 /**
-    @brief Initializes the frame counter and the frame ticks counter.
+    @brief Initialize the frame counter and the frame ticks counter.
 */
 SDLSystem::SDLSystem() {
     m_frameCounter = 0;
@@ -26,7 +25,7 @@ SDLSystem::SDLSystem() {
 }
 
 /**
-    @brief Initializes the instance, window and renderer pointers.
+    @brief Initialize the instance, window and renderer pointers.
 */
 SDLSystem::~SDLSystem() {
     m_instance = nullptr;
@@ -35,20 +34,20 @@ SDLSystem::~SDLSystem() {
 }
 
 /**
-    @brief Initializes all systems.
+    @brief Initialize all systems.
 */
 void SDLSystem::Init() {
     INFO("SDLSystem::Init() initialized");
 
+    // Check initialization fails.
     if (!(InitSDL() && InitIMG() && InitMixer() && InitTTF())) {
         ERROR("SDLSystem::Init() failed.");
             return;
-  }
-
+    }
     if (!(CreateWindow() && CreateRenderer())) {
         ERROR("SDLSystem::Init() failed.");
             return;
-  }
+    }
 
     INFO("SDLSystem::Init() completed");
 }
@@ -63,7 +62,7 @@ void SDLSystem::Run() {
 
     LoadCommons();
     SceneManager::GetInstance()->SetCurrentScene("Pre Menu");
-    // must be called here but scene name can be changed
+
     SceneManager::GetInstance()->Start();
 
     while (m_isRunning) {
@@ -71,25 +70,31 @@ void SDLSystem::Run() {
             continue;
         }
 
-        // clearing front buffer
+        // Clear front buffer.
         SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
         SDL_RenderClear(m_renderer);
-        // draw update changing the back buffer
+
+        // Draw update changing the back buffer.
         SceneManager::GetInstance()->DrawUpdate();
 
         CalculateFramerate();
         InputSystem::GetInstance()->UpdateStates();
 
-        // all updates but draw are called here
+        // All updates but draw are called here.
         SceneManager::GetInstance()->Update();
 
-        if (SDL_GetTicks() - m_lastFixedUpdate > EngineGlobals::fixed_update_interval) {
+        /*
+            Update scene manager and collision system based on
+            fixed interval of ticks.
+        */
+        if (SDL_GetTicks() - m_lastFixedUpdate >
+            EngineGlobals::fixed_update_interval) {
             SceneManager::GetInstance()->FixedUpdate();
             CollisionSystem::GetInstance()->Update();
             m_lastFixedUpdate = SDL_GetTicks();
-    }
+        }
 
-        // getting back buffer and sending to front buffer
+        // Getting back buffer and sending to front buffer.
         SDL_RenderPresent(m_renderer);
   }
 
@@ -97,12 +102,15 @@ void SDLSystem::Run() {
 }
 
 /**
-    @brief Shut downs SDL library and its subsystems used in the game.
+    @brief Shut down SDL library and its subsystems used in the game.
 */
 void SDLSystem::Shutdown() {
     INFO("Shutdown() Initialized.")
 
-    // get ticks when it is being shutdown
+    /*
+        Get number of milliseconds since the SDL library initialization
+        when it is being shutdown.
+    */
     m_gameEndTicks = SDL_GetTicks();
 
     IMG_Quit();
@@ -114,10 +122,11 @@ void SDLSystem::Shutdown() {
 }
 
 /**
-    @brief Gets the singleton instance of the game.
+    @brief Get the singleton instance of the game.
     @return The singleton instance of the game
 */
 SDLSystem *SDLSystem::GetInstance() {
+    // Create if there is no instance.
     if (!m_instance) {
         m_instance = new SDLSystem();
     }
@@ -125,15 +134,17 @@ SDLSystem *SDLSystem::GetInstance() {
 }
 
 /**
-    @brief Initializes the SDL library and starts its subsystems used in the game.
+    @brief Initialize the SDL library and starts its subsystems used in the game.
     @return False if the system initialization fails and true if it's succeed.
 */
 bool SDLSystem::InitSDL() {
     INFO("Initializing SDL");
 
+    // Receives 0 if the chosen flags are initialized.
     int init = SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO |
                SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS);
 
+    // Check initialization fail.
     if (init != 0) {
         SDL_ERROR("SDLSystem::InitSDL() failed.");
         return false;
@@ -144,15 +155,17 @@ bool SDLSystem::InitSDL() {
 }
 
 /**
-    @brief Initializes image support.
+    @brief Initialize image support.
     @return False if the initialization fails and true if it's succeed.
 */
 bool SDLSystem::InitIMG() {
     INFO("Initializing IMG");
 
+    // Receives 0 if the chosen flags are initialized
     int flags = IMG_INIT_PNG | IMG_INIT_JPG;
     int init = IMG_Init(flags);
 
+    // Check image initialization fail
     if ((init & flags) != flags) {
         SDL_IMG_ERROR("SDLSystem::InitIMG() failed.");
         return false;
@@ -163,14 +176,16 @@ bool SDLSystem::InitIMG() {
 }
 
 /**
-    @brief Initializes the SDL's sound mixing library.
+    @brief Initialize the SDL's sound mixing library.
     @return False if the initialization fails and true if it's succeed.
 */
 bool SDLSystem::InitMixer() {
     INFO("Initializing Mixer");
 
+    // Choose frequency, Uint16 format, channels and chunksize
     int init = Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
+    // Check mixer initialization fail.
     if (init != 0) {
         SDL_MIX_ERROR("SDLSystem::InitMixer() failed.");
         return false;
@@ -181,7 +196,7 @@ bool SDLSystem::InitMixer() {
 }
 
 /**
-    @brief Initializes the SDL's TrueType font rendering library.
+    @brief Initialize the SDL's TrueType font rendering library.
     @return False if the initialization fails and true if it's succeed.
 */
 bool SDLSystem::InitTTF() {
@@ -189,6 +204,7 @@ bool SDLSystem::InitTTF() {
 
     int init = TTF_Init();
 
+    // Check TTF initialization fail.
     if (init != 0) {
         SDL_TTF_ERROR("SDLSystem::InitTTF() failed.");
         return false;
@@ -210,6 +226,7 @@ bool SDLSystem::CreateWindow() {
                                 EngineGlobals::screen_width,
                                 EngineGlobals::screen_height, SDL_WINDOW_SHOWN);
 
+    // Check window creation fail.
     if (!m_window) {
         SDL_ERROR("SDLSystem::CreateWindow() failed.");
         return false;
@@ -226,8 +243,10 @@ bool SDLSystem::CreateWindow() {
 bool SDLSystem::CreateRenderer() {
     INFO("Creating renderer.");
 
+    // Use hardware acceleration with first rendering driver that support it.
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 
+    // Check renderer creation fail.
     if (!m_renderer) {
         SDL_ERROR("SDLSystem::CreateRenderer() failed.");
         return false;
@@ -248,7 +267,6 @@ void SDLSystem::CalculateFramerate() {
         m_framerate = m_frameCounter;
         m_frameCounter = 0;
         m_lastFrameTicks = m_currentTicks;
-   // INFO("Framerate per second: " << m_framerate);
     }
     m_frameCounter++;
 }
@@ -265,11 +283,16 @@ void SDLSystem::LoadCommons() {
     auto endScene1 = new EndScene1();
     auto endScene2 = new EndScene2();
 
-    SceneManager::GetInstance()->AddScene(std::make_pair("EndScene1", endScene1));
-    SceneManager::GetInstance()->AddScene(std::make_pair("EndScene2", endScene2));
-    SceneManager::GetInstance()->AddScene(std::make_pair("Pre Menu", preMenuScene));
-    SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
-    SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay", gameplayScene));
+    SceneManager::GetInstance()->AddScene(std::make_pair("EndScene1",
+                                                         endScene1));
+    SceneManager::GetInstance()->AddScene(std::make_pair("EndScene2",
+                                                         endScene2));
+    SceneManager::GetInstance()->AddScene(std::make_pair("Pre Menu",
+                                                         preMenuScene));
+    SceneManager::GetInstance()->AddScene(std::make_pair("Main",
+                                                         mainScene));
+    SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay",
+                                                         gameplayScene));
     SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene",
                                                          firstBossScene));
 
