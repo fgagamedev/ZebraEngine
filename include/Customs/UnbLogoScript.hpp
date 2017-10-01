@@ -1,7 +1,7 @@
 /**
-@file UnbLogoScript.hpp
-@brief Creates the UnB's symbol that shows up during the game opening.
-@copyright MIT License.
+    @file UnbLogoScript.hpp
+    @brief Creates the UnB's symbol that shows up during the game opening.
+    @copyright MIT License.
 */
 #ifndef __UNB_LOGO_SCRIPT__
 #define __UNB_LOGO_SCRIPT__
@@ -23,7 +23,9 @@ class UnbLogoScript : public Script {
 
 public:
     UnbLogoScript(GameObject *owner);
-    std::string GetComponentName() override { return "UnbLogoScript"; };
+    std::string GetComponentName() override {
+        return "UnbLogoScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
 
@@ -31,13 +33,18 @@ protected:
     void ComponentUpdate() override;
 
 private:
+    // Store the time.
     Timer time;
     void CreateAnimations();
+    // Object for inputs in the snow activator script.
     InputSystem *input = nullptr;
+    // Object for the inputs from the game controller.
     GameController* gamecontroller = nullptr;
+    // Animator for the UNB logo.
     Animator *animator = nullptr;
+    // Object that store positions in the game.
     Vector *position = nullptr;
-    int play=0;
-
+    // Attribute not used in the UnbLogoScript.
+    int play = 0;
 };
 #endif

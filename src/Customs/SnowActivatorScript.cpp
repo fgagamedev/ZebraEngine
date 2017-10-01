@@ -44,7 +44,7 @@ void SnowActivatorScript::Start() {
 /**
     @brief Builds the snow animations.
 */
-void SnowActivatorScript::CreateAnimations(){
+void SnowActivatorScript::CreateAnimations() {
     // Create the animation for the snow activator.
     auto snowActivatorSprite = new Image("assets/snowactivator.png",
                                          0, 0,832, 64);
@@ -78,8 +78,8 @@ void SnowActivatorScript::ComponentUpdate() {
                              && runned == false) {
         // Play the animation.
         animator->PlayAnimation("SNOW ACTIVATOR ANIMATION");
-        activate=1;
-        runned=true;
+        activate = 1;
+        runned = true;
     }
 
     if (runned && !animator->IsPlaying("SNOW ACTIVATOR ANIMATION")) {
@@ -93,16 +93,16 @@ void SnowActivatorScript::ComponentUpdate() {
         // Get the MapScript of the current scene.
         auto map = (MapScript*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->GetComponent("MapScript");
         // Set the dimensions of the right walls of the map.
-        map->rightWalls[49].m_x=0;
-        map->rightWalls[49].m_y=0;
-        map->rightWalls[49].m_w=0;
-        map->rightWalls[49].m_h=0;
+        map->rightWalls[49].m_x = 0;
+        map->rightWalls[49].m_y = 0;
+        map->rightWalls[49].m_w = 0;
+        map->rightWalls[49].m_h = 0;
 
         // Set the dimensions of the original's right walls of the map.
-        map->rightWallsOriginal[49].m_x=0;
-        map->rightWallsOriginal[49].m_y=0;
-        map->rightWallsOriginal[49].m_w=0;
-        map->rightWallsOriginal[49].m_h=0;
+        map->rightWallsOriginal[49].m_x = 0;
+        map->rightWallsOriginal[49].m_y = 0;
+        map->rightWallsOriginal[49].m_w = 0;
+        map->rightWallsOriginal[49].m_h = 0;
     }
 
 }

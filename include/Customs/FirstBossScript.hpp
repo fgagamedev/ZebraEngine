@@ -1,3 +1,8 @@
+/**
+    @file FirstBossScript.cpp
+    @brief Creates and handles with the first boss behavior.
+    @copyright MIT License.
+*/
 #ifndef __FIRST_BOSS_SCRIPT__
 #define __FIRST_BOSS_SCRIPT__
 
@@ -19,45 +24,62 @@
 class FirstBossScript : public Script {
 
 public:
-  FirstBossScript(GameObject *owner);
-  std::string GetComponentName() override { return "FirstBossScript"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
-  void Attack();
+    FirstBossScript(GameObject *owner);
+    std::string GetComponentName() override {
+        return "FirstBossScript";
+    };
+    void FixedComponentUpdate() override;
+    void Start() override;
+    void Attack();
 
 protected:
-  void ComponentUpdate() override;
+    void ComponentUpdate() override;
 
 private:
-  void CreateAnimations();
+    void CreateAnimations();
 
-  RectangleCollider *firstBossCollider = nullptr;
-  InputSystem *input = nullptr;
-  Animator *animator = nullptr;
-  Vector *position = nullptr;
-  GameObject *player = nullptr;
-  Vector playerPosition = Vector(0,0);
+    // Collider for the first boss.
+    RectangleCollider *firstBossCollider = nullptr;
+    // Object for inputs in the first boss script.
+    InputSystem *input = nullptr;
+    // Animator for the first boss.
+    Animator *animator = nullptr;
+    // Object that store positions in the game.
+    Vector *position = nullptr;
+    // Object of the player of the game.
+    GameObject *player = nullptr;
+    // Object for the positions of the player.
+    Vector playerPosition = Vector(0,0);
 
-  Timer timerFirstAttackCooldown;
-  Timer timerFirstAttackGone;
-  Timer timerAttackCooldown;
-  Timer timerSecondAttack;
-  Timer timerSecondAttackFall;
+    // Timer for the first attack cooldown.
+    Timer timerFirstAttackCooldown;
+    // Timer for when the first attack has gone.
+    Timer timerFirstAttackGone;
+    // Timer for a attack cooldown.
+    Timer timerAttackCooldown;
+    // Timer for the second attack cooldown.
+    Timer timerSecondAttack;
+    // Timer for the second attack fall.
+    Timer timerSecondAttackFall;
 
+    // Stores if is the first attack of the first boss.
+    bool FirstAttack = false;
+    // Stores if the first attack of the first boss has gone.
+    bool goneFirstAttack = false;
+    // Stores if is the second attack of the first boss.
+    bool SecondAttack = false;
+    // Stores if is the jump in the second attack of the first boss.
+    bool SecondAttackJump = false;
+    // Stores if is the second attack of the first boss has fallen.
+    bool SecondAttackFall = false;
 
-  bool FirstAttack = false;
-  bool goneFirstAttack = false;
-  bool SecondAttack = false;
-  bool SecondAttackJump = false;
-  bool SecondAttackFall = false;
+    // Stores if the camera is shaking.
+    bool shake = false;
 
-  bool shake = false;
-
-
-  int firstAttackCounter = 0;
-  int randNum = -1;
-
-
+    // Stores the number of first attacks.
+    int firstAttackCounter = 0;
+    // Stores a random integer number.
+    int randNum = -1;
 };
 
 #endif

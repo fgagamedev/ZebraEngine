@@ -1,9 +1,9 @@
-#include "Customs/FirstBossScript.hpp"
 /**
     @file FirstBossScript.cpp
     @brief Creates and handles with the first boss behavior.
     @copyright MIT License.
 */
+#include "Customs/FirstBossScript.hpp"
 
 /**
     @brief Constructor for the class FirstBossScript.
