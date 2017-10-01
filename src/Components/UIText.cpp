@@ -20,7 +20,7 @@
     @param[in] mode - The surface mode.
 */
 UIText::UIText(GameObject *owner, string message, string fontPath, int size,
-               Uint8 r, Uint8 g, Uint8 b, Uint8 a, Uint8 mode)
+               Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha, Uint8 mode)
     : Component(owner, C_DRAW) {
     m_message = message;
 
@@ -39,12 +39,12 @@ UIText::UIText(GameObject *owner, string message, string fontPath, int size,
     // Check if there is something diferent of the font and if is diferent print a error message.
     if (!m_font)
         SDL_TTF_ERROR("Font could not be loaded");
-    m_color = {r, g, b, a};
+    m_color = {red, green, blue, alpha};
 
     m_background = {0, 0, 0, 0};
 
     m_mode = mode;
-  
+
     OnPropertyChange();
 }
 
@@ -124,13 +124,13 @@ void UIText::SetText(string text) {
 
 /**
     @brief Sets the color of the text.
-    @param[in] r - The red component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] g - The green component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] b - The blue component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] a - The alpha component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] red - The red component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] green- The green component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] blue - The blue component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] alpha - The alpha component of the pixel in the range 0-255, type unsigned 8-bit integer.
 
 */
-void UIText::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
-    m_color = {r, g, b, a};
+void UIText::SetColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
+    m_color = {red, green, blue, alpha};
     OnPropertyChange();
 }

@@ -21,14 +21,14 @@ using namespace std;
 
 class UIText : public Component {
 public:
-    UIText(GameObject *owner, string message, string fontPath, int size, Uint8 r,
-         Uint8 g, Uint8 b, Uint8 a, Uint8 mode);
+    UIText(GameObject *owner, string message, string fontPath, int size, Uint8 red,
+         Uint8 green, Uint8 blue, Uint8 alpha, Uint8 mode);
     string GetComponentName() override { return "UIText"; };
     void Start() override;
     void FixedComponentUpdate() override;
     void ComponentUpdate() override;
     void SetText(string text);
-    void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+    void SetColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
     void SetOffset(Vector &offset);
 
 private:
