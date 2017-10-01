@@ -34,8 +34,11 @@ void NakedManScript::Start() {
     CameraSystem::GetInstance()->SetCameraSpeed(walkSpeed);
     game_controller = input->GetGameController(0);
 
+    // Get the map of the game.
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")
                ->GetGameObject("Map");
+
+    // Set proportion between player and map.
     if (map) {
 		GetOwner()->SetZoomProportion(Vector(map->originalWidth
                                              / GetOwner()->originalWidth,
@@ -321,6 +324,7 @@ void NakedManScript::KeyBoardUpdate() {
             }
         }
 
+        // Camera lock control.
         if (input->GetKeyDown(INPUT_L) && cameraLock == false) {
             cameraLock = true;
             deadzoneX = EngineGlobals::screen_width / 2;
@@ -344,6 +348,7 @@ void NakedManScript::GameControllerUpdate() {
     gameControllerAngle = atan2 (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)
                                  * -1, game_controller
                                  ->GetAxis(GC_INPUT_AXIS_RIGHTX)) * 180 / 3.14;
+
     if (abs(game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)) < 1000
             && abs(game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX)) < 1000) {
         gameControllerAngle = 0;
@@ -488,15 +493,19 @@ void NakedManScript::GameControllerUpdate() {
     dashController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT);
 
     // Shoot gun
-    if (game_controller->GetAxis( GC_INPUT_AXIS_TRIGGERRIGHT)
+    if (game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT)
         && bulletController == 0 && gameControllerAngle != 0) {
         cout << "ammo: " << bulletNumber << endl;
-        auto gameObjectBullet = (GameObject*)SceneManager::GetInstance()
+
+        // Get and activate the updated bullet object.
+        auto gameObjectBullet = (GameObject *)SceneManager::GetInstance()
                                              ->GetCurrentScene()
                                              ->GetGameObject("Bullet"
                                              + std::to_string(bulletNumber));
         gameObjectBullet->active = true;
-        auto script = (PlayerAttackScript*)SceneManager::GetInstance()
+
+        // Prepare player attack to shoot.
+        auto script = (PlayerAttackScript *)SceneManager::GetInstance()
                                            ->GetCurrentScene()
                                            ->GetGameObject("Bullet"
                                            + std::to_string(bulletNumber))
@@ -512,7 +521,7 @@ void NakedManScript::GameControllerUpdate() {
         }
     }
 
-    bulletController = game_controller->GetAxis( GC_INPUT_AXIS_TRIGGERRIGHT);
+    bulletController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT);
 
     // Back to menu.
     if (game_controller->GetButtonDown(GC_INPUT_BACK)) {
@@ -529,69 +538,61 @@ void NakedManScript::GameControllerUpdate() {
     @brief Create the animations related with the player.
 */
 void NakedManScript::CreateAnimations() {
-    // Animator
+    // Prepare animations with pictures of the player in motion.
     auto nakedManAnimator = new Animator(GetOwner());
-
     auto dashrightSprite = new Image("assets/dashright.png", 0, 0, 210, 27);
-
     auto dashrightAnimation = new Animation(GetOwner(), dashrightSprite);
-
     for (int i = 0; i < 5; i++) {
         dashrightAnimation->AddFrame(new Frame(i * 42, 27, 128, 128));
     }
 
+    // Add animation to player's animator.
     nakedManAnimator->AddAnimation("Right Dash", dashrightAnimation);
-
     dashrightAnimation->SetFramesPerSecond(10);
 
+    // Prepare animations with player images in various directions.
     auto nakedManSprite = new Image("assets/player.png", 0, 0, 1664, 512);
-
     auto StopDownAnimation = new Animation(GetOwner(), nakedManSprite);
     StopDownAnimation->AddFrame(new Frame(0, 256, 128, 128));
-
     auto StopRightAnimation = new Animation(GetOwner(), nakedManSprite);
     StopRightAnimation->AddFrame(new Frame(0, 0, 128, 128));
-
     auto StopLeftAnimation = new Animation(GetOwner(), nakedManSprite);
     StopLeftAnimation->AddFrame(new Frame(0, 128, 128, 128));
-
     auto StopUpAnimation = new Animation(GetOwner(), nakedManSprite);
     StopUpAnimation->AddFrame(new Frame(0, 384, 128, 128));
-
     auto walkSideAnimation = new Animation(GetOwner(), nakedManSprite);
     for (int i = 1; i < 13; i++) {
         walkSideAnimation->AddFrame(new Frame(i * 128, 0, 128, 128));
     }
-
     auto walkUpAnimation = new Animation(GetOwner(), nakedManSprite);
     for (int i = 1; i < 13; i++) {
         walkUpAnimation->AddFrame(new Frame(i * 128, 384, 128, 128));
     }
-
     auto walkDownAnimation = new Animation(GetOwner(), nakedManSprite);
     for (int i = 1; i < 13; i++) {
         walkDownAnimation->AddFrame(new Frame(i * 128, 256, 128, 128));
     }
 
+    // Add animations to player's animator.
     nakedManAnimator->AddAnimation("Walk Side", walkSideAnimation);
     nakedManAnimator->AddAnimation("Walk Up", walkUpAnimation);
     nakedManAnimator->AddAnimation("Walk Down", walkDownAnimation);
 
+    // Prepare animations with player images in various directions.
     auto backwalkSideAnimation = new Animation(GetOwner(), nakedManSprite);
     for (int i = 12; i > 0; i--) {
         backwalkSideAnimation->AddFrame(new Frame(i * 128, 0, 128, 128));
     }
-
     auto backwalkUpAnimation = new Animation(GetOwner(), nakedManSprite);
     for (int i = 12; i > 0; i--) {
         backwalkUpAnimation->AddFrame(new Frame(i * 128, 384, 128, 128));
     }
-
     auto backwalkDownAnimation = new Animation(GetOwner(), nakedManSprite);
     for (int i = 12; i > 0; i--) {
         backwalkDownAnimation->AddFrame(new Frame(i * 128, 256, 128, 128));
     }
 
+    // Add animations to player's animator.
     nakedManAnimator->AddAnimation("Back Walk Side", backwalkSideAnimation);
     nakedManAnimator->AddAnimation("Back Walk Up", backwalkUpAnimation);
     nakedManAnimator->AddAnimation("Back Walk Down", backwalkDownAnimation);
@@ -605,6 +606,7 @@ void NakedManScript::CreateAnimations() {
     @brief Update the components of the player.
 */
 void NakedManScript::ComponentUpdate() {
+    // Initialize rain and snow scripts.
     auto script2 = (RainScript *)SceneManager::GetInstance()
                                 ->GetCurrentScene()
                                 ->GetGameObject("Rain")
@@ -649,6 +651,7 @@ void NakedManScript::ComponentUpdate() {
         Shoot();
     }
 
+    // Camera lock control.
     if (input->GetKeyDown(INPUT_L) && cameraLock == false) {
         cameraLock = true;
         deadzoneX = EngineGlobals::screen_width / 2;
@@ -663,6 +666,7 @@ void NakedManScript::ComponentUpdate() {
     walkSpeed = fixedWalkSpeed;
     movements = 0;
 
+    // Update game controller or key board.
     game_controller = input->GetGameController(0);
     if (!game_controller) {
         KeyBoardUpdate();
@@ -695,6 +699,7 @@ void NakedManScript::FixedComponentUpdate() {
     GameCollisionCheck();
     WallCollisionResolution();
     StartFirstBoss();
+
     if (!lockplayerMovements) {
         Movements();
     }
@@ -705,13 +710,14 @@ void NakedManScript::FixedComponentUpdate() {
     if (endBossFight) {
         FirstBossController::GetInstance()->EndBossFight();
 
-        // Posit player on spawn
+        // Posit player on spawn.
         int xPos, yPos;
         xPos = EngineGlobals::screen_width / 2 - 96 / 2;
         yPos = EngineGlobals::screen_height / 2 - 96 / 2;
 
         FirstBossController::GetInstance()->PositPlayer(Vector(xPos, yPos ));
-        CameraSystem::GetInstance()->MoveRight(200,SceneManager::GetInstance()->GetCurrentScene());
+        CameraSystem::GetInstance()->MoveRight(200,SceneManager::GetInstance()
+                                   ->GetCurrentScene());
         endBossFight =  false;
     }
 }
@@ -730,7 +736,7 @@ void NakedManScript::PlayerLife() {
             lifeRecover.Restart();
         }
     }
-    
+
     // Detect when player dies.
     if(life <= 0) {
         endBossFight = true;
@@ -747,18 +753,21 @@ void NakedManScript::PlayerLife() {
 */
 void NakedManScript::Shoot() {
     if (bulletNumber > 0) {
+        // Get and activate the updated bullet object.
         auto gameObjectBullet = (GameObject *)SceneManager::GetInstance()
                                               ->GetCurrentScene()
                                               ->GetGameObject("Bullet"
                                               + std::to_string(bulletNumber));
         gameObjectBullet->active = true;
 
+        // Prepare player attack to shoot.
         auto script = (PlayerAttackScript *)SceneManager::GetInstance()
                                             ->GetCurrentScene()
                                             ->GetGameObject("Bullet"
                                             + std::to_string(bulletNumber))
                                             ->GetComponent("PlayerAttackScript");
         script->SetShoot(true);
+
         bulletNumber--;
     }
 }
@@ -833,7 +842,7 @@ void NakedManScript::Movements() {
 
     if (cameraLock) {
         // Mount deadzode on x++
-        if (position->m_x + GetOwner()->GetWidth() >= deadzoneX) { 
+        if (position->m_x + GetOwner()->GetWidth() >= deadzoneX) {
             if (isZooming) {
                 CameraSystem::GetInstance()->MoveRight(2,
                                                        SceneManager::GetInstance()
@@ -846,7 +855,7 @@ void NakedManScript::Movements() {
         }
 
         // Mount deadzode on x-
-        if (position->m_x <= deadzoneX) { 
+        if (position->m_x <= deadzoneX) {
             if (isZooming) {
                 CameraSystem::GetInstance()->MoveLeft(2,
                                                       SceneManager::GetInstance()
@@ -859,7 +868,7 @@ void NakedManScript::Movements() {
         }
 
         // Mount deadzode on y++
-        if (position->m_y + GetOwner()->GetWidth() >= deadzoneY) { 
+        if (position->m_y + GetOwner()->GetWidth() >= deadzoneY) {
             if (isZooming) {
                 CameraSystem::GetInstance()->MoveDown(2,
                                                       SceneManager::GetInstance()
@@ -872,7 +881,7 @@ void NakedManScript::Movements() {
         }
 
         // Mount deadzode on y--
-        if (position->m_y <= deadzoneY) { 
+        if (position->m_y <= deadzoneY) {
             if (isZooming) {
                 CameraSystem::GetInstance()->MoveUp(2,
                                                     SceneManager::GetInstance()
@@ -1012,6 +1021,7 @@ void NakedManScript::StartFirstBoss() {
     @brief Detect collisions between the player and the wall.
 */
 void NakedManScript::WallCollisionResolution() {
+    // Get map script object.
     auto mapscript = (MapScript *)SceneManager::GetInstance()
                                   ->GetScene("Gameplay")
                                   ->GetGameObject("Map")

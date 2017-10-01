@@ -34,6 +34,7 @@ public:
 
     NakedManScript(GameObject *owner);
 
+    // Replace the component name and return it.
     std::string GetComponentName() override {
         return "NakedManScript";
     };
@@ -54,6 +55,8 @@ private:
     bool zoom = true;
 
     bool bossFight = false;
+
+    // Player's walk
     bool walking = false;
 
     int bulletController = 0;
@@ -65,6 +68,7 @@ private:
     Animator *animator = nullptr;
     Vector *position = nullptr;
 
+    // Player's speeds
     float walkSpeed = 15;
     float fixedWalkSpeed = 15;
 
@@ -74,7 +78,7 @@ private:
     */
     int movements = 0;
 
-    //
+    // X and Y positions of dead zone
     int deadzoneX = EngineGlobals::screen_width / 2;
     int deadzoneY = EngineGlobals::screen_height / 2;
 
@@ -88,7 +92,10 @@ private:
     bool isMovingLooking = true;
 
     bool endBossFight = false;
+
+    // Map's zoom requests.
     static bool isZooming;
+
     std::pair<int, int> mousePosition;
 
     Timer timerReload;
