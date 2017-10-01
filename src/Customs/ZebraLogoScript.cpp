@@ -1,11 +1,11 @@
-#include "Customs/ZebraLogoScript.hpp"
-#include "Globals/EngineGlobals.hpp"
-
 /**
     @file ZebraLogoScript.cpp
     @brief Manage the animations of the Zebra logo, at the start of the game.
     @copyright MIT License.
 */
+
+#include "Customs/ZebraLogoScript.hpp"
+#include "Globals/EngineGlobals.hpp"
 
 /**
     @brief Constructor of the class ZebraLogoScript.
@@ -30,9 +30,12 @@ void ZebraLogoScript::Start() {
     @brief Creates the animations for Zebra logo.
 */
 void ZebraLogoScript::CreateAnimations(){
-
+    // Keeps the path, positions x and y, width and height of the Zebra image
     auto zebra_LogoSprite = new Image("assets/introzebra.png", 0, 0, 5115, 512);
+
     auto zebraAnimation = new Animation(GetOwner(), zebra_LogoSprite);
+
+    // Regulate frames per second of ZebraLogo.
     for (int i = 0; i < 15; i++) {
         zebraAnimation->AddFrame(new Frame(i * 341, 0, 341, 256));
     }
@@ -40,8 +43,9 @@ void ZebraLogoScript::CreateAnimations(){
         zebraAnimation->AddFrame(new Frame(i * 341, 256, 341, 256));
     }
     zebraAnimation->SetFramesPerSecond(9);
-    auto zebraAnimator = new Animator(GetOwner());
 
+    // Insert the ZebraLogo in the map.
+    auto zebraAnimator = new Animator(GetOwner());
     zebraAnimator->AddAnimation("ZEBRA ANIMATION", zebraAnimation);
 
 }
@@ -49,7 +53,9 @@ void ZebraLogoScript::CreateAnimations(){
 /**
     @brief Do nothing.
 */
-void ZebraLogoScript::ComponentUpdate() {}
+void ZebraLogoScript::ComponentUpdate() {
+
+}
 
 /**
     @brief Controls the duration of the Zebra logo's animation.
@@ -58,11 +64,11 @@ void ZebraLogoScript::FixedComponentUpdate() {
 
     time.Update(1);
 
+    // Regulate the time that ZebraLogo will be displayed in the screen.
     if (time.GetTime()>=260) {
         animator->PlayAnimation("ZEBRA ANIMATION");
     }
     if (time.GetTime()>=360) {
         animator->StopAllAnimations();
     }
-
 }

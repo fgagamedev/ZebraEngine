@@ -1,3 +1,9 @@
+/**
+    @file CreditsScript.hpp
+    @brief Manages the credits script of the game.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __CREDITS_SCRIPT__
 #define __CREDITS_SCRIPT__
 
@@ -20,7 +26,11 @@ class CreditsScript : public Script {
 
 public:
     CreditsScript(GameObject *owner);
-    std::string GetComponentName() override { return "CreditsScript"; };
+
+    // Replace the component name and return it.
+    std::string GetComponentName() override {
+        return "CreditsScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
 
@@ -28,6 +38,7 @@ protected:
     void ComponentUpdate() override;
 
 private:
+    // Sets the CreditsScript position as a vector
     Vector *position = nullptr;
 
 };

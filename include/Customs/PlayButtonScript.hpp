@@ -1,3 +1,9 @@
+/**
+    @file PlayButtonScript.hpp
+    @brief Manages the Play button functions.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __PLAY_BUTTON_SCRIPT__
 #define __PLAY_BUTTON_SCRIPT__
 
@@ -12,12 +18,18 @@ using namespace std;
 
 class PlayButtonScript : public Script {
 public:
-  PlayButtonScript(GameObject *owner);
-  string GetComponentName() override { return "PlayButtonScript"; };
-  void ComponentUpdate() override;
-  void Start() override;
+    PlayButtonScript(GameObject *owner);
+
+    // Replace the component name and return it.
+    string GetComponentName() override {
+        return "PlayButtonScript";
+    };
+    void ComponentUpdate() override;
+    void Start() override;
 
 private:
-  UIButton *m_uiButton = nullptr;
+    // Set the Play button as a UIButton
+    UIButton *m_uiButton = nullptr;
 };
+
 #endif
