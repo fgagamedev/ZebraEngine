@@ -39,7 +39,7 @@ private:
     // Object for inputs in the snow activator script.
     InputSystem *input = nullptr;
     // Object for the inputs from the game controller.
-    GameController* gamecontroller = nullptr;
+    GameController* gameController = nullptr;
     // Animator for the UNB logo.
     Animator *animator = nullptr;
     // Object that store positions in the game.
