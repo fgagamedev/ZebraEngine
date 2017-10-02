@@ -38,12 +38,16 @@ void ThunderScript::CreateAnimations() {
 
     // Animation thunder blue.
     auto thunderBlueAnimation = new Animation(GetOwner(), thunderImage);
+
+    // Sets the frames for the blue thunder animation.
     for (int i = 0; i < 6; i++) {
         thunderBlueAnimation->AddFrame(new Frame(i * 100, 135, 100, 267));
     }
 
     // Animation thunder wellow.
     auto thunderYellowAnimation = new Animation(GetOwner(),thunderImage);
+    
+    // Sets the frames for the yellow thunder animation.
     for (int i = 0; i < 5; i++) {
         thunderYellowAnimation->AddFrame(new Frame(555 + (i * 59), 135, 59,
                                                    267));
@@ -61,16 +65,17 @@ void ThunderScript::CreateAnimations() {
     @brief Change the thunder animation based on the pressed button.
 */
 void ThunderScript::ComponentUpdate() {
+    // Checks the input status to set the blue animation.
     if (m_input->GetKeyDown(INPUT_1)) {
         m_animator->PlayAnimation("thunderBlueAnimation");
     }
 
+    // Checks the input status to set the yellow animation.
     if (m_input->GetKeyDown(INPUT_2)) {
         m_animator->PlayAnimation("thunderYellowAnimation");
     } else {
         //nothing to do.
     }
-
 }
 
 /**
