@@ -30,7 +30,7 @@ GraphicsSystem::~GraphicsSystem() {
     @brief Get a instance of the GraphicsSystem class.
 */
 GraphicsSystem *GraphicsSystem::GetInstance() {
-    // Create a new instance if does't exist.
+    // Create a new instance if it does't exist.
     if (!m_instance) {
         m_instance = new GraphicsSystem();
     }
@@ -54,8 +54,9 @@ void GraphicsSystem::Draw(Image *img, Vector *position,
                               img->GetTexture(), img->GetRect(), &dest,
                               img->GetRotationAngle(), img->GetSDLPivot(),
                               img->GetSDLFlip());
-
+    // Check if the SDL_RenderCopyEx returned a error.
     if (result < 0) {
+        // Show a error message.
         ERROR(SDL_GetError());
     }
 }
@@ -79,8 +80,9 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,
     img->GetRotationAngle(), img->GetSDLPivot(),
     img->GetSDLFlip());
 
-    // Check for errors.
+    // Check if the SDL_RenderCopyEx returned a error.
     if (result < 0) {
+        // Show a error message.
         ERROR(SDL_GetError());
     }
 }
@@ -102,8 +104,9 @@ void GraphicsSystem::DrawPoint(Vector point) {
     int result = SDL_RenderDrawPoint(SDLSystem::GetInstance()->GetRenderer(),
     point.m_x, point.m_y);
 
-    // Check for errors.
+    // Check if the SDL_RenderDrawPoint returned a error.
     if (result) {
+        // Show a error message.
         SDL_ERROR("Drawing point error");
     }
 }
@@ -116,7 +119,7 @@ void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 r, Uint8 g,
     // Set the color used for drawing operations.
     SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), r, g, b, a);
     Vector point;
-
+    // Calculates a circle's perimeter.
     for (int angle = 0; angle < 360; angle++) {
         point.m_x = center.m_x + cos(angle) * radius;
         point.m_y = center.m_y - sin(angle) * radius;
@@ -124,7 +127,9 @@ void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 r, Uint8 g,
         // Draw a point on the current rendering target.
         int result = SDL_RenderDrawPoint(SDLSystem::GetInstance()->GetRenderer(),
         point.m_x, point.m_y);
+        // Check if the SDL_RenderDrawPoint returned a error.
         if (result < 0) {
+            // Show a error message.
             ERROR(SDL_GetError());
         }
     }
@@ -139,6 +144,7 @@ void GraphicsSystem::DrawFillCircle(Vector &center, float radius, Uint8 r,
     SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), r, g, b, a);
     Vector point;
 
+    // Calculates a circle's perimeter.
     for (float angle = 0; angle < 360; angle += 0.01) {
         point.m_x = center.m_x + cos(angle) * radius;
         point.m_y = center.m_y - sin(angle) * radius;
@@ -148,8 +154,9 @@ void GraphicsSystem::DrawFillCircle(Vector &center, float radius, Uint8 r,
         center.m_x, center.m_y, point.m_x,
         point.m_y);
 
-        // Check for errors.
+        // Check if the SDL_RenderDrawLine returned a error.
         if (result < 0) {
+            // Show a error message.
             ERROR(SDL_GetError());
         }
     }
@@ -174,8 +181,9 @@ void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
     int result = SDL_RenderFillRect(SDLSystem::GetInstance()->GetRenderer(),
     &rect);
 
-    // Check for errors.
+    // Check if the SDL_RenderFillRect returned a error.
     if (result < 0) {
+        // Show a error message.
         ERROR(SDL_GetError());
     }
 }
@@ -198,8 +206,9 @@ void GraphicsSystem::DrawFillRectangle(SDL_Rect* source, int width, int height,
     // Fill a rectangle on the current rendering target with the drawing color.
     int result = SDL_RenderFillRect(SDLSystem::GetInstance()->GetRenderer(),
                                     &rect);
-
+    // Check if the SDL_RenderFillRect returned a error.
     if (result < 0) {
+        // Show a error message.
         ERROR(SDL_GetError());
     }
 }
