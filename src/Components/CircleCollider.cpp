@@ -14,15 +14,14 @@
     @param[in] layer is passed as a parameter but not used yet.
 */
 CircleCollider::CircleCollider(GameObject *owner, Vector &offset, float radius,
-                               int layer)
-    : Collider(owner, layer) {
-        // Set the offset of the circle.
-        m_offset = offset;
-        // Set the radius of the circle.
-        m_shape.radius = radius;
-        // Set the position of the circle.
-        m_shape.x = owner->GetPosition()->m_x + offset.m_x;
-        m_shape.y = owner->GetPosition()->m_y + offset.m_y;
+                               int layer) : Collider(owner, layer) {
+    // Set the offset of the circle.
+    m_offset = offset;
+    // Set the radius of the circle.
+    m_shape.radius = radius;
+    // Set the position of the circle.
+    m_shape.x = owner->GetPosition()->m_x + offset.m_x;
+    m_shape.y = owner->GetPosition()->m_y + offset.m_y;
 }
 
 void CircleCollider::FixedComponentUpdate() {

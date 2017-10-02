@@ -22,7 +22,8 @@ using namespace std;
 
 class UISound : public Component {
 public:
-    UISound(GameObject *owner, string message, string audio_path, bool is_music, bool play_on_start);
+    UISound(GameObject *owner, string message, string audio_path, bool is_music,
+            bool play_on_start);
 
     string GetComponentName() override {
         return "UISound";
@@ -52,9 +53,9 @@ private:
     // Store if the sound should play in the start.
     bool m_play_on_start;
 
-    // Do nothing.
+    // Store the music object.
     Mix_Music *m_music = nullptr;
-    // Do nothing.
+    // Store the sound effect object.
     Mix_Chunk *m_sound = nullptr;
 
     void OnPropertyChange();

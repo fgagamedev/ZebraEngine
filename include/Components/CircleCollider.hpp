@@ -19,7 +19,8 @@ using namespace std;
 
 class CircleCollider : public Collider {
     public:
-        CircleCollider(GameObject *owner, Vector &offset, float radius, int layer);
+        CircleCollider(GameObject *owner, Vector &offset, float radius,
+                       int layer);
         Vector GetCenter() {
             return Vector(m_shape.x, m_shape.y);
         };
