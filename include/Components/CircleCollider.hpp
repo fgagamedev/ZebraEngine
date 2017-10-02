@@ -22,11 +22,11 @@ class CircleCollider : public Collider {
         CircleCollider(GameObject *owner, Vector &offset, float radius,
                        int layer);
         Vector GetCenter() {
-            return Vector(m_shape.x, m_shape.y);
+            return Vector(m_circleShape.x, m_circleShape.y);
         };
 
         float GetRadius() {
-            return m_shape.radius;
+            return m_circleShape.radius;
         };
 
         void FixedComponentUpdate() override;
@@ -37,9 +37,9 @@ class CircleCollider : public Collider {
 
     private:
         // Store the size and position of a circle envolved in a collision.
-        Circle m_shape;
+        Circle m_circleShape;
         // Store the offset of the circle after the collision.
-        Vector m_offset;
+        Vector m_circleOffset;
 };
 
 #endif

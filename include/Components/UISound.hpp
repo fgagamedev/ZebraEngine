@@ -45,13 +45,13 @@ public:
 
 private:
     // Store if the music is playing.
-    bool m_is_music;
+    bool m_isMusic;
     // Store a message.
     string m_message;
     // Store the path to the audio file
-    string m_audio_path;
+    string m_audioPath;
     // Store if the sound should play in the start.
-    bool m_play_on_start;
+    bool m_playOnStart;
 
     // Store the music object.
     Mix_Music *m_music = nullptr;
