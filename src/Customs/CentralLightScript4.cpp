@@ -31,6 +31,8 @@ void CentralLightScript4::Start() {
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
                GetGameObject("Map");
+
+    // verify if the map variable is instanced and set zoom.
     if(map) {
       GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,
                                            map->originalHeight/GetOwner()->originalHeight));
@@ -65,9 +67,10 @@ void CentralLightScript4::CreateAnimations() {
 */
 void CentralLightScript4::ComponentUpdate() {
 
-    if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active)
-    animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
-
+    // Starting the animator of game.
+    if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active) {
+        animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
+    }
 }
 
 void CentralLightScript4::FixedComponentUpdate() {
