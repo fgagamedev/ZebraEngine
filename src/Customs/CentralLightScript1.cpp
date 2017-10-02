@@ -46,21 +46,16 @@ void CentralLightScript1::CreateAnimations(){
     centrallightAnimation->SetFramesPerSecond(9);
     centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION",
                                        centrallightAnimation);
-
 }
 
 /**
     @brief Handles with changes on the component.
 */
 void CentralLightScript1::ComponentUpdate() {
-
     if (!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active) {
         // Play the animation CENTRAL LIGHT ANIMATION
         animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
-
 }
 
-void CentralLightScript1::FixedComponentUpdate() {
-
-}
+void CentralLightScript1::FixedComponentUpdate() {}

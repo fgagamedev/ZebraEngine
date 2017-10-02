@@ -23,7 +23,6 @@ void RainScript::Start() {
     input = InputSystem::GetInstance();
     // Set the zoom proportion.
     GetOwner()->SetZoomProportion(Vector(0,0));
-
 }
 
 /**
@@ -32,7 +31,7 @@ void RainScript::Start() {
 void RainScript::CreateAnimations() {
     // Creates the animations for the rain script.
     auto rainImage = new Image("assets/chuva.png",0,0,3410, 256);
-    auto rainAnimation= new Animation(GetOwner(),rainImage );
+    auto rainAnimation= new Animation(GetOwner(),rainImage);
     for (int i = 0; i < 10; i++) {
         rainAnimation->AddFrame(new Frame(i * 341,0, 341, 256));
     }
@@ -40,7 +39,6 @@ void RainScript::CreateAnimations() {
     // Creates the animator for the rain script.
     auto weatherAnimator = new Animator(GetOwner());
     weatherAnimator->AddAnimation("rainAnimation", rainAnimation);
-
 }
 
 /**
@@ -58,13 +56,13 @@ void RainScript::ComponentUpdate() {
         play = 0;
         animator->StopAllAnimations();
     }
-
 }
 
 /**
     @brief Sets the position of the owner as 0 on x and 0 on y.
 */
 void RainScript::FixedComponentUpdate() {
+    // Set the positions X and Y of the component.
     position->m_x = 0;
     position->m_y = 0;
 }

@@ -26,6 +26,7 @@ public:
     };
     void FixedComponentUpdate() override;
     void Start() override;
+    // Store if the animation must be played.
     int play = 0;
 
 protected:
@@ -33,11 +34,12 @@ protected:
 
 private:
     void CreateAnimations();
+    // Object for inputs in the rain script.
     InputSystem *input = nullptr;
+    // Animator for the rain script.
     Animator *animator = nullptr;
+    // Object that store positions in the game.
     Vector *position = nullptr;
-
-
 };
 
 #endif

@@ -35,13 +35,20 @@ protected:
     void ComponentUpdate() override;
 
 private:
+    // Store if the script is active.
     bool active = false;
+    // Store the time.
     Timer time;
     void CreateAnimations();
+    // Object for inputs in the central light script 1.
     InputSystem *input = nullptr;
+    // Object for the inputs from the game controller.
     GameController* gamecontroller = nullptr;
+    // Animator for the central light script 1.
     Animator *animator = nullptr;
+    // Object that store positions in the game.
     Vector *position = nullptr;
+    // Not used attribute.
     int play = 0;
 };
 #endif
