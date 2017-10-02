@@ -202,7 +202,7 @@ void GamePlayScene::CreateNakedMan() {
     effect he will have when he is found.
 */
 void GamePlayScene::CreateFirstBoss() {
-    /** Boss Inside FX **/
+    // Boss Inside FX
     auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect",
                                                  new Vector(0,0),211.86,211.86, 1);
     auto firstBossCentralEffectScript = new FirstBossCentralEffectScript(FirstBossCentralEffect);
@@ -210,7 +210,7 @@ void GamePlayScene::CreateFirstBoss() {
     FirstBossController::GetInstance()->AddInsideBossFx(FirstBossCentralEffect);
     FirstBossController::GetInstance()->DeactivateInsideBossFx();
 
-    /** Boss **/
+    // Boss.
     auto firstBoss = new GameObject("FirstBoss", new Vector(-3350,-1600),690,930, 2);
 
     // Tag.
@@ -231,6 +231,7 @@ void GamePlayScene::CreateFirstBoss() {
 */
 void GamePlayScene::CreateFirstBossAttack() {
 
+    // Create the tentacle of boss attack and the effects.
     for (int i = 1; i < 5; i++) {
         std::string tentacleName = "FirstBossAttack" + std::to_string(i);
         auto firstBossAttack = new GameObject(tentacleName,
@@ -270,7 +271,7 @@ void GamePlayScene::CreateFirstBossAttack() {
 
         //bullet->active = false;
 
-    }
+    } // for -- Create the tentacle of boss attack and the effects.
 }
 /**
     @brief Responsible for creating the first boss life by setting the
@@ -306,7 +307,7 @@ void GamePlayScene::CreateFirstBossLife() {
 */
 void GamePlayScene::CreatePlayerAttack() {
 
-    /** Creating Bullets **/
+    // Creating Bullets
     for (int i = 1; i < 11; i++) {
         std::string bulletName = "Bullet" + std::to_string(i);
         auto bullet = new GameObject(bulletName, new Vector(100 * i, 0), 15, 15, 2);
@@ -320,11 +321,9 @@ void GamePlayScene::CreatePlayerAttack() {
         AudioController::GetInstance()->AddAudio(bulletSound);
 
         bullet->active = false;
-
-        //MissileController::GetInstance()->AddPlayer(bullet);
-        //bullet->active = false;
     }
-    /** Bullet Counter **/
+    
+    // Bullet Counter
     auto bulletCounter = new GameObject("Score", new Vector(0, 0), 75 , 75, 2);
     bulletCounter->SetTag("BulletCounter");
     auto bulletText = new UIText(bulletCounter, "10",

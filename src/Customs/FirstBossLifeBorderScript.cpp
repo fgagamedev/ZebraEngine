@@ -45,6 +45,7 @@ void FirstBossLifeBorderScript::CreateAnimations() {
     // Creates the animation
     auto firstBossLifeBorderAnimation = new Animation(GetOwner(),
                                         firstBossLifeBorderImage );
+    // Creates the boss's life bar
     for (int column = 0; column < 19; column++) {
         for (int row = 0 ; row < 3 ; row++) {
             firstBossLifeBorderAnimation->AddFrame(new Frame(row * 332,

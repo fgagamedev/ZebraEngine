@@ -38,6 +38,8 @@ void ForestActivatorScript3::Start() {
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
                                             GetGameObject("Map");
+
+    // verify if the map variable is instanced and set zoom.
     if (map) {
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()
                                              ->originalWidth,
@@ -58,6 +60,7 @@ void ForestActivatorScript3::CreateAnimations() {
     // Creates and get the animation.
     auto forestactivatorAnimation = new Animation(GetOwner(),
                                                   forestactivatorSprite);
+
     for (int i = 0; i < 13; i++) {
         forestactivatorAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
     }
@@ -80,6 +83,7 @@ void ForestActivatorScript3::CreateAnimations() {
 */
 void ForestActivatorScript3::ComponentUpdate() {
 
+    // Checks if the game animation has not started and starts the animator actives and runned.
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate == 0
         && runned == false) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
@@ -87,10 +91,12 @@ void ForestActivatorScript3::ComponentUpdate() {
         runned = true;
     }
 
+    // Checks if the game is runned and the animator has not started.
     if (runned && !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");
     }
 
+    // Checks if the game is runned and initialize the script 4
     if (runned) {
         auto script = (CentralLightScript4*)SceneManager::GetInstance()
                        ->GetCurrentScene()->GetGameObject("CENTRAL LIGHT 4")
@@ -104,7 +110,6 @@ void ForestActivatorScript3::ComponentUpdate() {
         map->downWalls[48].m_y = 0;
         map->downWalls[48].m_w = 0;
         map->downWalls[48].m_h = 0;
-        // map->downWallsAmmount-=1;
         map->downWallsOriginal[48].m_x = 0;
         map->downWallsOriginal[48].m_y = 0;
         map->downWallsOriginal[48].m_w = 0;
