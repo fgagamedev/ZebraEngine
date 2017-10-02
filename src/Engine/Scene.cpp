@@ -22,8 +22,8 @@ Scene::~Scene() {
 */
 void Scene::Start() {
     // Run through the vector of game objects, starting them.
-    for (auto obj : m_gameObjects) {
-        obj->Start();
+    for (auto object : m_gameObjects) {
+        object->Start();
     }
 }
 

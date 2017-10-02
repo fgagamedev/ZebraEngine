@@ -34,10 +34,10 @@ void GameOverScript::CreateAnimations() {
     auto snowImage = new Image("assets/Ending_PARTE_FINAL.png",0,0,4096, 2048);
 
     auto gameOverAnimation= new Animation(GetOwner(),snowImage );
-    for (int i = 0; i < 22; i++) {
-        for (int j = 0 ; j < 12 ; j++) {
-            gameOverAnimation->AddFrame(new Frame(j * 341,i* 256, 341, 256));
-            gameOverAnimation->AddFrame(new Frame(j * 341,i* 256, 341, 256));
+    for (int  line = 0; line < 22; line++) {
+        for (int column = 0 ; column < 12 ; column++) {
+            gameOverAnimation->AddFrame(new Frame(column * 341,line* 256, 341, 256));
+            gameOverAnimation->AddFrame(new Frame(column * 341,line* 256, 341, 256));
         }
     }
 
