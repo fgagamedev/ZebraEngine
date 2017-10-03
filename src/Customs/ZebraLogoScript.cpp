@@ -11,7 +11,9 @@
     @brief Constructor of the class ZebraLogoScript.
     @param[in] GameObject *owner - Owns the component.
 */
-ZebraLogoScript::ZebraLogoScript(GameObject *owner) : Script(owner) {}
+ZebraLogoScript::ZebraLogoScript(GameObject *owner) : Script(owner) {
+
+}
 
 /**
     @brief Starts the animation of the Zebra logo.
@@ -22,7 +24,7 @@ void ZebraLogoScript::Start() {
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
-    GetOwner()->SetZoomProportion(Vector(0,0));
+    GetOwner()->SetZoomProportion(Vector(0, 0));
 
 }
 
@@ -35,10 +37,12 @@ void ZebraLogoScript::CreateAnimations(){
 
     auto zebraAnimation = new Animation(GetOwner(), zebra_LogoSprite);
 
-    // Regulate frames per second of ZebraLogo.
+    // Run through 0 to 14 adding frames in different x positions
     for (int i = 0; i < 15; i++) {
         zebraAnimation->AddFrame(new Frame(i * 341, 0, 341, 256));
     }
+
+    // Run through 0 to 14 adding frames in different x positions
     for (int i = 0; i < 15; i++) {
         zebraAnimation->AddFrame(new Frame(i * 341, 256, 341, 256));
     }
@@ -64,11 +68,13 @@ void ZebraLogoScript::FixedComponentUpdate() {
 
     time.Update(1);
 
-    // Regulate the time that ZebraLogo will be displayed in the screen.
-    if (time.GetTime()>=260) {
+    // Set the time when ZebraLogo will start to be displayed in the screen
+    if (time.GetTime() >= 260) {
         animator->PlayAnimation("ZEBRA ANIMATION");
     }
-    if (time.GetTime()>=360) {
+
+    // Set the time when ZebraLogo will stop to be displayed in the screen
+    if (time.GetTime() >= 360) {
         animator->StopAllAnimations();
     }
 }

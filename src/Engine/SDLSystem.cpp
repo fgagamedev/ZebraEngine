@@ -39,12 +39,16 @@ SDLSystem::~SDLSystem() {
 void SDLSystem::Init() {
     INFO("SDLSystem::Init() initialized");
 
-    // Check initialization fails.
+    // Check initialization fails
     if (!(InitSDL() && InitIMG() && InitMixer() && InitTTF())) {
+        // Display error message
         ERROR("SDLSystem::Init() failed.");
             return;
     }
+
+    // Check creation fails
     if (!(CreateWindow() && CreateRenderer())) {
+        // Display error message
         ERROR("SDLSystem::Init() failed.");
             return;
     }
@@ -65,6 +69,7 @@ void SDLSystem::Run() {
 
     SceneManager::GetInstance()->Start();
 
+    // Update utilities while SDL System is running
     while (m_isRunning) {
         if (!FixFramerate()) {
             continue;
@@ -96,7 +101,7 @@ void SDLSystem::Run() {
 
         // Getting back buffer and sending to front buffer.
         SDL_RenderPresent(m_renderer);
-  }
+    } // while -- Update utilities while SDL System is nunning
 
     INFO("Ending Run().");
 }
@@ -126,10 +131,11 @@ void SDLSystem::Shutdown() {
     @return The singleton instance of the game
 */
 SDLSystem *SDLSystem::GetInstance() {
-    // Create if there is no instance.
+    // Create if there is no instance
     if (!m_instance) {
         m_instance = new SDLSystem();
     }
+
     return m_instance;
 }
 
@@ -144,8 +150,9 @@ bool SDLSystem::InitSDL() {
     int init = SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO |
                SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS);
 
-    // Check initialization fail.
+    // Check initialization fail
     if (init != 0) {
+        // Display error message
         SDL_ERROR("SDLSystem::InitSDL() failed.");
         return false;
     }
@@ -167,6 +174,7 @@ bool SDLSystem::InitIMG() {
 
     // Check image initialization fail
     if ((init & flags) != flags) {
+        // Display error message
         SDL_IMG_ERROR("SDLSystem::InitIMG() failed.");
         return false;
     }
@@ -185,8 +193,9 @@ bool SDLSystem::InitMixer() {
     // Choose frequency, Uint16 format, channels and chunksize
     int init = Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
-    // Check mixer initialization fail.
+    // Check mixer initialization fail
     if (init != 0) {
+        // Display error message
         SDL_MIX_ERROR("SDLSystem::InitMixer() failed.");
         return false;
     }
@@ -204,8 +213,9 @@ bool SDLSystem::InitTTF() {
 
     int init = TTF_Init();
 
-    // Check TTF initialization fail.
+    // Check TTF initialization fail
     if (init != 0) {
+        // Display error message
         SDL_TTF_ERROR("SDLSystem::InitTTF() failed.");
         return false;
     }
@@ -226,8 +236,9 @@ bool SDLSystem::CreateWindow() {
                                 EngineGlobals::screen_width,
                                 EngineGlobals::screen_height, SDL_WINDOW_SHOWN);
 
-    // Check window creation fail.
+    // Check window creation fail
     if (!m_window) {
+        // Display error message
         SDL_ERROR("SDLSystem::CreateWindow() failed.");
         return false;
     }
@@ -246,8 +257,9 @@ bool SDLSystem::CreateRenderer() {
     // Use hardware acceleration with first rendering driver that support it.
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 
-    // Check renderer creation fail.
+    // Check renderer creation fail
     if (!m_renderer) {
+        // Display error message
         SDL_ERROR("SDLSystem::CreateRenderer() failed.");
         return false;
     }
@@ -307,6 +319,7 @@ bool SDLSystem::FixFramerate() {
     m_currentFix = SDL_GetTicks();
     float interval = m_currentFix - m_lastFix;
 
+    // Compare intervals to check the need to fix frame rate
     if (interval < update_rate_interval){
         return false;
     }
