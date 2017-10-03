@@ -11,7 +11,9 @@
     @brief Constructor of the class PlayButtonScript.
     @param[in] GameObject *owner - Owns the component.
 */
-PlayButtonScript::PlayButtonScript(GameObject *owner) : Script(owner) {}
+PlayButtonScript::PlayButtonScript(GameObject *owner) : Script(owner) {
+
+}
 
 /**
     @brief Start the Play button.
@@ -35,7 +37,7 @@ void PlayButtonScript::ComponentUpdate() {
     auto menuSound = (UISound *)SceneManager::GetInstance()->GetCurrentScene()
                                 ->GetGameObject("Music")->GetComponent("UISound");
 
-    // Change sound and scene when mouse is clicked.
+    // Change sound and scene when mouse is clicked
     if (m_uiButton->IsClicked()) {
         soundButton->Play(0, -1);
         menuSound->Stop();
@@ -43,10 +45,10 @@ void PlayButtonScript::ComponentUpdate() {
         SceneManager::GetInstance()->SetCurrentScene("Gameplay");
     }
 
-    // Change collor when mouse is over.
+    // Set PlayButton color depending if mouse is over the button or not
     if (m_uiButton->IsOver()) {
-        textButton->SetColor(160,160,160, 255);
+        textButton->SetColor(160, 160, 160, 255);
     } else {
-        textButton->SetColor(255,255,255, 255);
+        textButton->SetColor(255, 255, 255, 255);
     }
 }
