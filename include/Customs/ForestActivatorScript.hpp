@@ -1,3 +1,9 @@
+/**
+    @file ForestActivator.hpp
+    @brief Class that defines methods and attributes for activating the forest script.
+    @copyright LGPL. MIT License.
+*/
+
 #ifndef __FOREST_ACTIVATOR_SCRIPT__
 #define __FOREST_ACTIVATOR_SCRIPT__
 
@@ -13,11 +19,7 @@
 
 #include <string>
 
-/**
-    @file ForestActivator.hpp
-    @brief Class that defines methods and attributes for activating the forest script.
-    @copyright LGPL. MIT License.
-*/
+
 
 class ForestActivatorScript : public Script {
 
