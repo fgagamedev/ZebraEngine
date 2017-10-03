@@ -11,7 +11,7 @@
     @param[in] GameObject *owner - Owns the component.
 */
 CatchAllButtonScript::CatchAllButtonScript(GameObject *owner) : Script(owner) {
-    
+
 }
 
 /**
@@ -27,12 +27,12 @@ void CatchAllButtonScript::Start() {
     @brief Update the Quit button informations.
 */
 void CatchAllButtonScript::ComponentUpdate() {
-    // Select game mode when mouse is clicked.
+    // Select game mode when mouse is clicked
     if (m_uiButton->IsClicked()) {
         MenuController::GetInstance()->SelectGamemode(0x02);
     }
 
-    // Change activate checkbox.
+    // Change checkbox value comparing the selected game mode
     if (MenuController::GetInstance()->GetGamemode() & 0x02) {
         m_checkbox->active = true;
     } else {

@@ -33,8 +33,9 @@ Renderer::Renderer(GameObject *owner, Image *img) : Component(owner, C_DRAW) {
 
     m_position = GetOwner()->GetPosition();
 
-    // Detect empty image.
+    // Detect null image
     if (!m_image) {
+        // Return error
         ERROR("Null image on renderer");
     }
 }
@@ -62,10 +63,12 @@ void Renderer::RotateTowards(Vector *point) {
     double angles = 0;
     angles = atan2(point->m_y - m_position->m_y, point->m_x - m_position->m_x);
     angles = angles * 180 / 3.1415;
+
+    // Keep angles in 0 to 360 range
     if (angles < 0) {
         angles = 360 - (-angles);
     }
-    
+
     Rotate(angles);
 }
 
