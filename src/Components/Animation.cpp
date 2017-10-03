@@ -1,6 +1,6 @@
 /**
     @file Animation.cpp
-    @brief Class that manages animated game behavior, 
+    @brief Class that manages animated game behavior,
     such as game behavior and picture frames.
     @copyright LGPL. MIT License.
 */
@@ -27,7 +27,7 @@ Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
 
 
 /**
-    @brief Responsible for starting the animation. If the game is 
+    @brief Responsible for starting the animation. If the game is
     already running it sends to the SetPlaying method the release to start.
 */
 void Animation::Start() {
@@ -62,7 +62,7 @@ void Animation::SetPlaying(bool condition) {
 
     if (condition) {
         if (auto comp = GetOwner()->GetComponent("Renderer")) {
-            comp->active = false;
+            comp->m_active = false;
         } else {
             //nothing to do.
         }
@@ -71,7 +71,7 @@ void Animation::SetPlaying(bool condition) {
             return;
         } else {
             if (auto comp = GetOwner()->GetComponent("Renderer")) {
-                comp->active = true;
+                comp->m_active = true;
             } else {
                 //nothing to do.
             }
