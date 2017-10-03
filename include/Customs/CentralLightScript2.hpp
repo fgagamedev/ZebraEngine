@@ -23,20 +23,27 @@ class CentralLightScript2 : public Script {
 
 public:
     CentralLightScript2(GameObject *owner);
-    std::string GetComponentName() override { 
-        return "CentralLightScript2"; 
+    std::string GetComponentName() override {
+        return "CentralLightScript2";
     };
     void FixedComponentUpdate() override;
     void Start() override;
-    void Activate(){active = true;}
+    void Activate(){
+        active = true;
+    }
 
 protected:
     void ComponentUpdate() override;
-    
+
 private:
     void CreateAnimations();
-    bool active=false;
-    int play=0;
+    /*
+    the player has to find the central light and pass through it to activate 
+    it, this variable was created in order to control whether the player has
+    passed through it or not
+    */
+    bool active = false;
+    int play = 0;
     Timer time;
     InputSystem *input = nullptr;
     GameController* gamecontroller = nullptr;

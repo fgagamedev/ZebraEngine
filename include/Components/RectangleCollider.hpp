@@ -22,10 +22,22 @@ public:
                      int layer);
 
     void FixedComponentUpdate() override;
-    Vector GetRectanglePoint() { return Vector(m_shape.x, m_shape.y); };
-    float GetWidth() { return m_shape.width; };
-    float GetHeight() { return m_shape.height; };
-    virtual string GetComponentName() override { return "RectangleCollider"; };
+
+    Vector GetRectanglePoint() {
+        return Vector(m_shape.x, m_shape.y);
+    };
+
+    float GetWidth() {
+        return m_shape.width;
+    };
+
+    float GetHeight() {
+        return m_shape.height;
+    };
+    
+    virtual string GetComponentName() override {
+        return "RectangleCollider";
+    };
     GameObject *m_owner;
 
 private:

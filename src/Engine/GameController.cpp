@@ -30,7 +30,9 @@ GameController::GameController(SDL_GameController *gc) {
     @param[in] m_gameController - the game controller.
 
 */
-GameController::~GameController() { m_gameController = nullptr; }
+GameController::~GameController() {
+    m_gameController = nullptr;
+}
 
 /**
     @brief Updates the state of a button in a game controller.

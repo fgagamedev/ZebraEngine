@@ -1,19 +1,21 @@
-#include "Customs/CatchAllButtonScript.hpp"
-
 /**
     @file CatchAllButtonScript.cpp
     @brief Manages the Catch All button functions.
     @copyright LGPL. MIT License.
 */
 
+#include "Customs/CatchAllButtonScript.hpp"
+
 /**
     @brief Constructor of the class CatchAllButtonScript.
     @param[in] GameObject *owner - Owns the component.
 */
-CatchAllButtonScript::CatchAllButtonScript(GameObject *owner) : Script(owner) {}
+CatchAllButtonScript::CatchAllButtonScript(GameObject *owner) : Script(owner) {
+    
+}
 
 /**
-    @brief Starts the Catch All button.
+    @brief Start the Catch All button.
 */
 void CatchAllButtonScript::Start() {
     m_uiButton = (UIButton *)GetOwner()->GetComponent("UIButton");
@@ -22,12 +24,15 @@ void CatchAllButtonScript::Start() {
 }
 
 /**
-    @brief Updates the Quit button informations.
+    @brief Update the Quit button informations.
 */
 void CatchAllButtonScript::ComponentUpdate() {
+    // Select game mode when mouse is clicked.
     if (m_uiButton->IsClicked()) {
         MenuController::GetInstance()->SelectGamemode(0x02);
     }
+
+    // Change activate checkbox.
     if (MenuController::GetInstance()->GetGamemode() & 0x02) {
         m_checkbox->active = true;
     } else {
