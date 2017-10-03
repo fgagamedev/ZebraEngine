@@ -1,3 +1,9 @@
+/**
+    @file PreMenuScene.hpp
+    @brief Reunites the animations that are shown before the main menu appears.
+    @copyright MIT License.
+*/
+
 #ifndef __PRE_MENU_SCENE__
 #define __PRE_MENU_SCENE__
 
@@ -11,17 +17,15 @@
 
 class PreMenuScene : public Scene {
 public:
-  void OnActivation() override;
-  void OnDeactivation() override;
-  void OnShown() override;
-  void OnHidden() override;
+    void OnActivation() override;
+    void OnDeactivation() override;
+    void OnShown() override;
+    void OnHidden() override;
 
 private:
-void CreateLogoSdl();
-void CreateLogoUnb();
-void CreateLogoControle();
-void CreateLogoZebra();
-
+    void CreateLogoSdl();
+    void CreateLogoUnb();
+    void CreateLogoControle();
+    void CreateLogoZebra();
 };
-
 #endif
