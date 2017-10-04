@@ -263,7 +263,8 @@ void CameraSystem::CameraShake(int intensity, float duration, Scene *scene) {
         return;
     }
 
-    static int last = 0;
+
+    static int lastShake = 0;
     m_timer.Update(EngineGlobals::fixed_update_interval);
     isShaking = true;
 
@@ -275,14 +276,14 @@ void CameraSystem::CameraShake(int intensity, float duration, Scene *scene) {
     }
 
     // Start or stop the shake.
-    if (last == 0) {
+    if (lastShake == 0) {
         MoveRight(intensity, scene);
         MoveUp(intensity, scene);
-        last = 1;
-    } else if(last == 1) {
+        lastShake = 1;
+    } else if(lastShake == 1) {
         MoveLeft(intensity, scene);
         MoveDown(intensity, scene);
-        last = 0;
+        lastShake = 0;
     }
 }
 
@@ -323,16 +324,16 @@ void CameraSystem::SetCameraSpeed(int speed) {
     @brief Set a starting position in axis x on image.
     @param[in] x Axis X of image.
 */
-void CameraSystem::SetAndMovePos_x(float x) {
-    worldCameraX = x;
+void CameraSystem::SetAndMovePos_x(float axisX) {
+    worldCameraX = axisX;
 }
 
 /*
     @brief Set a starting position in axis x on image.
     @param[in] y Axis Y of image.
 */
-void CameraSystem::SetAndMovePos_y(float y) {
-    worldCameraY = y;
+void CameraSystem::SetAndMovePos_y(float axisY) {
+    worldCameraY = axisY;
 }
 
 /*
