@@ -269,8 +269,6 @@ void GamePlayScene::CreateFirstBossAttack() {
         AddGameObject(firstBossAttack);
         FirstBossController::GetInstance()->AddTentacle(firstBossAttack);
 
-        //bullet->active = false;
-
     } // for -- Create the tentacle of boss attack and the effects.
 }
 /**
@@ -322,7 +320,7 @@ void GamePlayScene::CreatePlayerAttack() {
 
         bullet->active = false;
     }
-    
+
     // Bullet Counter
     auto bulletCounter = new GameObject("Score", new Vector(0, 0), 75 , 75, 2);
     bulletCounter->SetTag("BulletCounter");
