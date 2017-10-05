@@ -18,7 +18,7 @@ CatchAllButtonScript::CatchAllButtonScript(GameObject *owner) : Script(owner) {
     @brief Start the Catch All button.
 */
 void CatchAllButtonScript::Start() {
-    m_uiButton = (UIButton *)GetOwner()->GetComponent("UIButton");
+    m_interactive_button = (UIButton *)GetOwner()->GetComponent("UIButton");
     m_checkbox = SceneManager::GetInstance()->GetScene("Main")->GetGameObject(
                  "CatchAll_CB");
 }
@@ -28,7 +28,7 @@ void CatchAllButtonScript::Start() {
 */
 void CatchAllButtonScript::ComponentUpdate() {
     // Select game mode when mouse is clicked
-    if (m_uiButton->IsClicked()) {
+    if (m_interactive_button->IsClicked()) {
         MenuController::GetInstance()->SelectGamemode(0x02);
     }
 

@@ -11,12 +11,12 @@
 
 class Frame {
 public:
-    Frame(int x, int y, int width, int height);
+    Frame(int positionX, int positionY, int width, int height);
     SDL_Rect *GetRect();
 
 private:
     // Rectangular area of the frame
-    SDL_Rect srcRect;
+    SDL_Rect sourceRectangle;
 };
 
 #endif // __FRAME__
