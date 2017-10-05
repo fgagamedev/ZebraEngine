@@ -21,11 +21,10 @@ ZebraLogoScript::ZebraLogoScript(GameObject *owner) : Script(owner) {
 void ZebraLogoScript::Start() {
 
     CreateAnimations();
-    position = GetOwner()->GetPosition();
+    zebra_position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
     GetOwner()->SetZoomProportion(Vector(0, 0));
-
 }
 
 /**
@@ -33,9 +32,9 @@ void ZebraLogoScript::Start() {
 */
 void ZebraLogoScript::CreateAnimations(){
     // Keeps the path, positions x and y, width and height of the Zebra image
-    auto zebra_LogoSprite = new Image("assets/introzebra.png", 0, 0, 5115, 512);
+    auto zebraSprite = new Image("assets/introzebra.png", 0, 0, 5115, 512);
 
-    auto zebraAnimation = new Animation(GetOwner(), zebra_LogoSprite);
+    auto zebraAnimation = new Animation(GetOwner(), zebraSprite);
 
     // Run through 0 to 14 adding frames in different x positions
     for (int i = 0; i < 15; i++) {

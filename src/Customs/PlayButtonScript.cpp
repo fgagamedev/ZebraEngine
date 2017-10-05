@@ -19,7 +19,7 @@ PlayButtonScript::PlayButtonScript(GameObject *owner) : Script(owner) {
     @brief Start the Play button.
 */
 void PlayButtonScript::Start() {
-    m_uiButton = (UIButton *)GetOwner()->GetComponent("UIButton");
+    m_interactive_button = (UIButton *)GetOwner()->GetComponent("UIButton");
 }
 
 /**
@@ -38,7 +38,7 @@ void PlayButtonScript::ComponentUpdate() {
                                 ->GetGameObject("Music")->GetComponent("UISound");
 
     // Change sound and scene when mouse is clicked
-    if (m_uiButton->IsClicked()) {
+    if (m_interactive_button->IsClicked()) {
         soundButton->Play(0, -1);
         menuSound->Stop();
         AudioController::GetInstance()->PlayAudio("mainSound", -1);
@@ -46,7 +46,7 @@ void PlayButtonScript::ComponentUpdate() {
     }
 
     // Set PlayButton color depending if mouse is over the button or not
-    if (m_uiButton->IsOver()) {
+    if (m_interactive_button->IsOver()) {
         textButton->SetColor(160, 160, 160, 255);
     } else {
         textButton->SetColor(255, 255, 255, 255);
