@@ -17,9 +17,9 @@ GameController::GameController(SDL_GameController *gc) {
     if (gc) {
         INFO("    " << SDL_GameControllerName(gc) << " opened");
         m_gameController = gc;
-  } else {
-    ERROR("    Could not open game controller " << SDL_GameControllerName(gc));
-  }
+    } else {
+        ERROR("    Could not open game controller " << SDL_GameControllerName(gc));
+    }
 
     m_oldButtonsStates.resize(GC_INPUT_MAX, 0);
     m_currentButtonsStates.resize(GC_INPUT_MAX, 0);

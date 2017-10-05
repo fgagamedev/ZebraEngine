@@ -112,6 +112,7 @@ bool InputSystem::GetKeyPressed(KeyboardInputGlobal key) {
     @return bool.
 */
 bool InputSystem::GetMouseButtonDown(MouseInputGlobal button) {
+    // Defines if the mouse is being pressed right at the moment
     bool isPressed = m_mouseStates & SDL_BUTTON(button);
     bool wasPressed = m_oldMouseStates & SDL_BUTTON(button);
     if (isPressed && !wasPressed) {
@@ -127,6 +128,7 @@ bool InputSystem::GetMouseButtonDown(MouseInputGlobal button) {
     @return bool.
 */
 bool InputSystem::GetMouseButtonUp(MouseInputGlobal button) {
+    // Defines if the mouse was pressed, but is not being pressed anymore
     bool isPressed = m_mouseStates & SDL_BUTTON(button);
     bool wasPressed = m_oldMouseStates & SDL_BUTTON(button);
     if (!isPressed && wasPressed) {

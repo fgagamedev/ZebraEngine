@@ -31,6 +31,7 @@ RectangleCollider::RectangleCollider(GameObject *owner, Vector offset,
     @brief Updates the position x, y, height and width of a component.
 */
 void RectangleCollider::FixedComponentUpdate() {
+    // sets the position and the shape of the rectangle
     m_shape.x = GetOwner()->GetPosition()->m_x + m_offset.m_x;
     m_shape.y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
     m_shape.width = GetOwner()->GetWidth();

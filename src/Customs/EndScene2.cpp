@@ -41,7 +41,9 @@ void EndScene2::OnHidden() {}
     @brief Method that creates the game over's end scene and its background animation.
 */
 void EndScene2::CreateAnimation(){
-    auto BackgroundAnimation = new GameObject("ToBeAnimation", new Vector(0 ,0),1024,800,0);
+    // Sets the BackgroundAnimation
+    auto BackgroundAnimation = new GameObject("ToBeAnimation", new Vector(0 ,0),
+                                                                    1024,800,0);
     auto gameOverScript = new GameOverScript(BackgroundAnimation);
     AddGameObject(BackgroundAnimation);
 }
@@ -55,6 +57,8 @@ void EndScene2::CreateQuitButton() {
     auto quit = new GameObject("Quit", new Vector(xMiddle, 500), 200, 100,0);
     auto quitText = new UIText(quit, "Quit", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                              200, 255, 255, 255, 150, 1);
+
+    // Defines the "quit" command configs
     auto quitButton = new UIButton(quit);
     auto quitSound = new UISound(quit, "playSound", "assets/Audio/Button/MusicButton1.wav", false, false);
     auto script = new QuitButtonScript(quit);
