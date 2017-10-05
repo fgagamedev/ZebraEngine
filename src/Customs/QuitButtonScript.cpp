@@ -11,14 +11,14 @@
     @param[in] GameObject *owner - Owns the component.
 */
 QuitButtonScript::QuitButtonScript(GameObject *owner) : Script(owner) {
-    
+
 }
 
 /**
     @brief Starts the Quit button.
 */
 void QuitButtonScript::Start() {
-    m_uiButton = (UIButton *)GetOwner()->GetComponent("UIButton");
+    m_interactive_button = (UIButton *)GetOwner()->GetComponent("UIButton");
 }
 
 /**
@@ -32,15 +32,15 @@ void QuitButtonScript::ComponentUpdate() {
     auto soundButton = (UISound *)GetOwner()->GetComponent("UISound");
 
     // Change sound and running status when mouse is clicked
-    if (m_uiButton->IsClicked()) {
+    if (m_interactive_button->IsClicked()) {
         soundButton->Play(0, -1);
         SDLSystem::GetInstance()->SetRunning(false);
     }
 
     // Set QuitButton color depending if mouse is over the button or not
-    if (m_uiButton->IsOver()) {
-        textButton->SetColor(160,160,160, 255);
+    if (m_interactive_button->IsOver()) {
+        textButton->SetColor(160, 160, 160, 255);
     } else {
-        textButton->SetColor(255,255,255, 255);
+        textButton->SetColor(255, 255, 255, 255);
     }
 }
