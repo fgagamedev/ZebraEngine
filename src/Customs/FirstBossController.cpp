@@ -58,7 +58,7 @@ void FirstBossController::PositMap(Vector newPosition) {
     m_map->SetPosition(newPosition);
 }
 void FirstBossController::PositBoss() {
-    m_boss->SetPosition(Vector(m_wPos, m_hPos));
+    m_boss->SetPosition(Vector(m_widthPosition, m_heightPosition));
 }
 
 void FirstBossController::PositAllTentacles() {
@@ -165,23 +165,24 @@ std::pair <int, int> FirstBossController::GetRandomPosition() {
 void FirstBossController::FirstAttackSurge() {
     cout << "FirstAttack" << endl;
     // Compares the number of the current tentacle.
-    if (m_actualTentacle == 4) {
-        m_actualTentacle = 1;
+    if (m_currentTentacle == 4) {
+        m_currentTentacle = 1;
     }
 
-    m_tentacles[m_actualTentacle]->ClearCollisions();
-    ActivateTentacle(m_actualTentacle);
-    PositTentacle(m_actualTentacle);
+    m_tentacles[m_currentTentacle]->ClearCollisions();
+    ActivateTentacle(m_currentTentacle);
+    PositTentacle(m_currentTentacle);
 
     auto firstBossAttackScript = (FirstBossAttackScript*)
-                                m_tentacles[m_actualTentacle]->
+                                m_tentacles[m_currentTentacle]->
                                 GetComponent("FirstBossAttackScript");
     //Perform attack.
     firstBossAttackScript->attack = true;
 
     //Shake camera.
-    firstBossAttackScript->cameraShake = true;
-    m_actualTentacle++;
+
+    firstBossAttackScript->shake = true;
+    m_currentTentacle++;
 }
 
 void FirstBossController::FirstAttackGone() {
