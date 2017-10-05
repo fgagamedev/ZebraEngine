@@ -115,7 +115,7 @@ void FirstBossAttackScript::FixedComponentUpdate() {
     timerAnimation.Update(EngineGlobals::fixed_update_interval);
 
     // Checks the status of the deasactivateobject.
-    if (desactivateObj){
+    if (deactivateObj){
         timerGone.Update(EngineGlobals::fixed_update_interval);
     }
 
@@ -156,14 +156,14 @@ void FirstBossAttackScript::Attack() {
         m_idleAnimation = false;
         attack = false;
         m_surgeAnimation = true;
-        desactivateObj = true;
+        deactivateObj = true;
         GetOwner()->active = false;
     }
 
     // Compares the timer gone animation to update the desactivateobj.
     if(timerGone.GetTime() >= 1 * 1000) {
         timerGone.Restart();
-        desactivateObj = false;
+        deactivateObj = false;
     }
 }
 
