@@ -23,6 +23,7 @@ void ForestActivatorScript::Start() {
     gamecontroller = input->GetGameController(0);
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    // If map is showing, sets the map's vision configs.
     if (map) {
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,
                                              map->originalHeight/GetOwner()->originalHeight));
@@ -56,17 +57,25 @@ void ForestActivatorScript::CreateAnimations() {
     @brief Updates the animations components.
 */
 void ForestActivatorScript::ComponentUpdate() {
-    // Starts animator
+    /*
+    The animation is not playing, activate equals 0, and it has not runned,
+    runs the animation.
+    */
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate == 0 && runned == false) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate = 1;
         runned = true;
     }
 
+    /*
+    If the forest animation has already ran and the first animation hasn't
+    played, runs the second animation.
+    */
     if (runned && !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");
     }
 
+    // If the animations have already ran activates the CentralLightScript3.
     if (runned) {
         auto script = (CentralLightScript3*)SceneManager::GetInstance()
                                         ->GetCurrentScene()

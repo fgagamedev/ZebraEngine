@@ -26,16 +26,17 @@ void MapScript::Start() {
 }
 
 void MapScript::ComponentUpdate() {
-
+    // If the player presses "P", the camera shakes.
     if (input->GetKeyPressed(INPUT_P)) {
         shake = true;
     }
 
+    // If the player presses "Z", the camera is locked.
     if (input->GetKeyPressed(INPUT_Z)) {
         CameraSystem::GetInstance()->Lock();
     }
 
-
+    // Zooms the camera out when the corresponding keys are pressed.
     if (InputSystem::GetInstance()->GetKeyUp(INPUT_DOWN) && CameraSystem::GetInstance()->currentZoom > -50) {
         CameraSystem::GetInstance()->ZoomOut(GetOwner()->originalWidth/4 + 1,nakedMan,SceneManager::GetInstance()
                                                                                                 ->GetCurrentScene());
@@ -43,6 +44,7 @@ void MapScript::ComponentUpdate() {
         CameraSystem::GetInstance()->currentZoom -=25;
     }
 
+    // Zooms the camera in when the corresponding keys are pressed.
     if (InputSystem::GetInstance()->GetKeyUp(INPUT_UP) && CameraSystem::GetInstance()->currentZoom < 0) {
         CameraSystem::GetInstance()->ZoomIn(GetOwner()->originalWidth/4 +1,nakedMan,SceneManager::GetInstance()
                                                                                             ->GetCurrentScene());
@@ -58,6 +60,10 @@ void MapScript::FixedComponentUpdate() {
                                                 ->GetGameObject("NakedMan")
                                                 ->GetComponent("NakedManScript");
 
+    /*
+    If the character's life is lower or equal to 0, the game ends with
+    EndScene1.
+    */
     if (script->life <= 0) {
         SceneManager::GetInstance()->SetCurrentScene("EndScene1");
     }
@@ -73,12 +79,17 @@ void MapScript::FixedComponentUpdate() {
                                                                 ->GetComponent("RectangleRenderer");
 
     int actualLife = firstBossLifeRenderer->GetWidth();
+    // If boss's actual life is lower or equal to 0, ends game with EndScene2.
     if (actualLife<=0) {
         SceneManager::GetInstance()->SetCurrentScene("EndScene2");
     }
 
+    /*
+    If the camera is shaking, sets the shaking options and then stops
+    camera's shaking.
+    */
     if (shake) {
-        //CameraShake(intensity,duration in seconds)
+        // CameraShake (intensity, duration in seconds)
         CameraSystem::GetInstance()->CameraShake(8,1,SceneManager::GetInstance()
                                                                 ->GetCurrentScene());
         if (!CameraSystem::GetInstance()->IsShaking()) {
