@@ -52,8 +52,10 @@ void EndScene1::CreateGameOver() {
     @brief Creates 'quit' button on the middle of the screen.
 */
 void EndScene1::CreateQuitButton() {
-    // defines the current center position
+    // Defines the current center position
     int xMiddle = EngineGlobals::screen_width / 2 - 100;
+
+    // Defines the "quit" command configs
     auto quit = new GameObject("Quit", new Vector(xMiddle, 500), 200, 100,1);
     auto quitText = new UIText(quit, "Quit", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                              200, 255, 255, 255, 150, 1);

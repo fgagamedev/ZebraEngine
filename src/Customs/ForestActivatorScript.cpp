@@ -33,6 +33,7 @@ void ForestActivatorScript::Start() {
     @brief Creates animations.
 */
 void ForestActivatorScript::CreateAnimations() {
+    // Sets the animations' image and its frames.
     auto forestactivatorSprite = new Image("assets/forestactivator.png",
                                             0, 0, 832, 64);
     auto forestactivatorAnimation = new Animation(GetOwner(),
@@ -44,6 +45,7 @@ void ForestActivatorScript::CreateAnimations() {
     auto forestactivatorAnimation2 = new Animation(GetOwner(), forestactivatorSprite);
     forestactivatorAnimation2->AddFrame(new Frame(12 * 64, 0, 64, 64));
 
+    // Sets forest animations conditions.
     auto forestactivatorAnimator = new Animator(GetOwner());
     forestactivatorAnimation->SetFramesPerSecond(9);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION", forestactivatorAnimation);
