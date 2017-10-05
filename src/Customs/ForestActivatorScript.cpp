@@ -33,9 +33,10 @@ void ForestActivatorScript::Start() {
     @brief Creates animations.
 */
 void ForestActivatorScript::CreateAnimations() {
-
-    auto forestactivatorSprite = new Image("assets/forestactivator.png", 0, 0, 832, 64);
-    auto forestactivatorAnimation = new Animation(GetOwner(), forestactivatorSprite);
+    auto forestactivatorSprite = new Image("assets/forestactivator.png",
+                                            0, 0, 832, 64);
+    auto forestactivatorAnimation = new Animation(GetOwner(),
+                                                    forestactivatorSprite);
     for (int i = 0; i < 13; i++) {
         forestactivatorAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
     }
