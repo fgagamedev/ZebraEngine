@@ -33,12 +33,16 @@ void FirstBossLifeScript::ComponentUpdate() {
     auto firstBossLifeRenderer = (RectangleRenderer*)GetOwner()->
                                   GetComponent("RectangleRenderer");
     int actualLife = firstBossLifeRenderer->GetWidth();
+
+    // Compares the hit status with the actual life. 
     if (hit && actualLife > 0) {
         cout << "hit" << endl;
         cout << actualLife << endl;
         firstBossLifeRenderer->SetWidth(actualLife - 10);
         hit = false;
     }
+
+    // Compares the actual life. 
     if (actualLife <= 0) {
         FirstBossController::GetInstance()->ActivateCreditsAnimation();
         FirstBossController::GetInstance()->DeactivateLifeBars();
