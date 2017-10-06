@@ -170,7 +170,7 @@ void GamePlayScene::CreateCentralLights(){
 
     auto centralLight4= new GameObject("CENTRAL LIGHT 4",
                                        new Vector(424,197),192,192,1);
-    auto  centralLight4Script = new CentralLightScript4(centralLight4);
+    auto  centralLight4Script = new TopCenterLightScript(centralLight4);
     AddGameObject(centralLight4);
 
 }

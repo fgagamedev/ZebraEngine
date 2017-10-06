@@ -7,7 +7,7 @@
 #include "Globals/EngineGlobals.hpp"
 
 #include "Customs/ForestActivatorScript3.hpp"
-#include "Customs/CentralLightScript4.hpp"
+#include "Customs/TopCenterLightScript.hpp"
 #include "Customs/MapScript.hpp"
 
 // Constructor
@@ -61,8 +61,8 @@ void ForestActivatorScript3::CreateAnimations() {
     auto forestactivatorAnimation = new Animation(GetOwner(),
                                                   forestactivatorSprite);
 
-    for (int i = 0; i < 13; i++) {
-        forestactivatorAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
+    for (int counter = 0; counter < 13; counter++) {
+        forestactivatorAnimation->AddFrame(new Frame(counter * 64, 0, 64, 64));
     }
 
     auto forestactivatorAnimation2 = new Animation(GetOwner(),
@@ -98,9 +98,9 @@ void ForestActivatorScript3::ComponentUpdate() {
 
     // Checks if the game is runned and initialize the script 4
     if (runned) {
-        auto script = (CentralLightScript4*)SceneManager::GetInstance()
+        auto script = (TopCenterLightScript*)SceneManager::GetInstance()
                        ->GetCurrentScene()->GetGameObject("CENTRAL LIGHT 4")
-                       ->GetComponent("CentralLightScript4");
+                       ->GetComponent("TopCenterLightScript");
 
         script->Activate();
 

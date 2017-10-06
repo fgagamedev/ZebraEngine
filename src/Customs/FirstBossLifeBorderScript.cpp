@@ -39,7 +39,7 @@ void FirstBossLifeBorderScript::Start() {
 void FirstBossLifeBorderScript::CreateAnimations() {
 
     // Creates the image.
-    auto firstBossLifeBorderImage = new Image("assets/Barra_Life_Boss.png",0,0,
+    auto firstBossLifeBorderImage = new Image("assets/boss_life_bar.png",0,0,
                                                                     996, 171);
 
     // Creates the animation
