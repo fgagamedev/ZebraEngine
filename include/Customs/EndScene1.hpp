@@ -32,8 +32,8 @@ public:
 private:
     void CreateGameOver();
     void CreateQuitButton();
-    int m_width_middle;
-    int m_height_middle;
+    int m_widthMiddle;
+    int m_heightMiddle;
 
 };
 

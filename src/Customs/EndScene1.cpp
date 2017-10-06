@@ -14,8 +14,8 @@ EndScene1::EndScene1() {}
     @brief On activation of the game over scene, creates 'quit' button.
 */
 void EndScene1::OnActivation() {
-    m_width_middle = EngineGlobals::screen_width / 2;
-    m_height_middle = EngineGlobals::screen_height / 2;
+    m_widthMiddle = EngineGlobals::screen_width / 2;
+    m_heightMiddle = EngineGlobals::screen_height / 2;
     CreateGameOver();
     CreateQuitButton();
 }

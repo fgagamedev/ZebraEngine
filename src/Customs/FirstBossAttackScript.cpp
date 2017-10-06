@@ -11,7 +11,7 @@
     @brief Constructor for the FirstBossAttackScript class.
 */
 FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) : Script(owner) {
-  
+
 }
 
 /**
@@ -50,7 +50,7 @@ void FirstBossAttackScript::CreateAnimations() {
     auto firstBossAttackSurgeAnimation = new Animation(GetOwner(),
                                                        firstBossAttackImage);
 
-    // Sets the frames for the first boss animation.                                                 
+    // Sets the frames for the first boss animation.
     for (int counter = 0; counter < 15; counter++) {
         firstBossAttackSurgeAnimation->AddFrame(new Frame(counter * 40, 0,
                                                             40, 151));
@@ -65,7 +65,7 @@ void FirstBossAttackScript::CreateAnimations() {
     auto firstBossAttackGoneAnimation = new Animation(GetOwner(),
                                                     firstBossAttackImage );
 
-    // Sets the frames for the gone boss attack animation.                                                    
+    // Sets the frames for the gone boss attack animation.
     for (int counter = 14; counter != 0; counter--) {
         firstBossAttackGoneAnimation->AddFrame(new Frame(counter * 40, 0,
                                                                    40, 151));
@@ -171,11 +171,11 @@ void FirstBossAttackScript::CameraShakeAttack(){
     // Creates the effect that makes the camera shake.
 
     // Checks shake status to update its properties.
-    if (shake) {
+    if (cameraShake) {
         CameraSystem::GetInstance() -> CameraShake(8, 1, SceneManager::GetInstance()
                                                    -> GetCurrentScene());
         if (!CameraSystem::GetInstance() -> IsShaking()){
-            shake = false;
+            cameraShake = false;
         }
   }
 }

@@ -24,19 +24,19 @@
 
             Vector leftWalls[100];
             Vector leftWallsOriginal[100];
-            int leftWallsAmmount=0;
+            int leftWallsAmount=0;
 
             Vector rightWalls[100];
-            int rightWallsAmmount=0;
+            int rightWallsAmount=0;
             Vector rightWallsOriginal[100];
 
             Vector upWalls[100];
-            int upWallsAmmount=0;
+            int upWallsAmount=0;
             Vector upWallsOriginal[100];
 
             Vector downWalls[100];
             Vector downWallsOriginal[100];
-            int downWallsAmmount = 0;
+            int downWallsAmount = 0;
             bool activated = true;
 
         protected:
@@ -52,13 +52,13 @@
             // player inputs
             InputSystem *input = nullptr;
             char nakedManMovements;
-            int mapSize_x;
-            int mapSize_y;
+            int mapSizeHorizontal;
+            int mapSizeVertical;
             int mapSpeed;
-            float proportion_x;
-            float proportion_y;
+            float proportionHorizontal;
+            float proportionVertical;
             // camera shaking
-            bool shake = false;
+            bool cameraShake = false;
             void CreateWalls();
     };
 

@@ -42,8 +42,8 @@ public:
   // Boolean variable that stores false or true for boss attack.
   bool attack = false;
 
-  // Bollean variable that stores false or true for shake image.
-  bool shake =  false;
+  // Boolean variable that stores false or true for shake image.
+  bool cameraShake =  false;
 
   // Bollean variable that store false or true for desactivate object.
   bool desactivateObj = false;

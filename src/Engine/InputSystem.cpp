@@ -24,7 +24,7 @@ InputSystem::InputSystem() {
 
     m_states = SDL_GetKeyboardState(&m_statesSize);
     m_oldStates = new Uint8[m_statesSize];
-    m_mouseStates = SDL_GetMouseState(&m_mouseX, &m_mouseY);
+    m_mouseStates = SDL_GetMouseState(&m_mouseHorizontal, &m_mouseVertical);
 }
 
 // Destructor
@@ -61,7 +61,7 @@ void InputSystem::UpdateStates() {
 
     UpdateGameControllers();
 
-    m_mouseStates = SDL_GetMouseState(&m_mouseX, &m_mouseY);
+    m_mouseStates = SDL_GetMouseState(&m_mouseHorizontal, &m_mouseVertical);
 }
 
 /**
@@ -155,7 +155,7 @@ bool InputSystem::GetMouseButtonPressed(MouseInputGlobal button) {
 */
 std::pair<int, int> InputSystem::GetMousePosition() {
     std::pair<int, int> position;
-    position = std::make_pair(m_mouseX, m_mouseY);
+    position = std::make_pair(m_mouseHorizontal, m_mouseVertical);
     return position;
 }
 
