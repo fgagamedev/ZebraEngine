@@ -41,9 +41,9 @@ void ForestActivatorScript3::Start() {
 
     // verify if the map variable is instanced and set zoom.
     if (map) {
-        GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()
+        GetOwner()->SetZoomProportion(Vector(map->originalWidth / GetOwner()
                                              ->originalWidth,
-                                             map->originalHeight/GetOwner()
+                                             map->originalHeight / GetOwner()
                                              ->originalHeight));
     }
 }

@@ -153,25 +153,26 @@ void GamePlayScene::CreateSnowActivator(){
 */
 void GamePlayScene::CreateCentralLights(){
 
-    auto centralLight1= new GameObject("CENTRAL LIGHT 1",
+    auto bottomCenterLight = new GameObject("CENTRAL LIGHT 1",
                                        new Vector(424,422),192,192,1);
-    auto  centralLight1Script = new CentralLightScript1(centralLight1);
-    AddGameObject(centralLight1);
+    auto  bottomCenterLightScript = new CentralLightScript1(bottomCenterLight);
+    AddGameObject(bottomCenterLight);
 
-    auto centralLight2= new GameObject("CENTRAL LIGHT 2",
+    auto leftCenterLight = new GameObject("CENTRAL LIGHT 2",
                                        new Vector(309,308),192,192,1);
-    auto  centralLight2Script = new CentralLightScript2(centralLight2);
-    AddGameObject(centralLight2);
+    auto  leftCenterLightScript = new CentralLightScript2(leftCenterLight);
+    AddGameObject(leftCenterLight);
 
-    auto centralLight3= new GameObject("CENTRAL LIGHT 3",
+    auto rightCenterLight = new GameObject("CENTRAL LIGHT 2",
                                        new Vector(542,308),192,192,1);
-    auto  centralLight3Script = new CentralLightScript3(centralLight3);
-    AddGameObject(centralLight3);
+    auto  rightCenterLightScript = new CentralLightScript3(rightCenterLight);
+    AddGameObject(rightCenterLight);
 
-    auto centralLight4= new GameObject("CENTRAL LIGHT 4",
+    auto topCenterLight = new GameObject("CENTER LIGHT 4",
                                        new Vector(424,197),192,192,1);
-    auto  centralLight4Script = new TopCenterLightScript(centralLight4);
-    AddGameObject(centralLight4);
+    auto  topCenterLightScript = new TopCenterLightScript(topCenterLight);
+    AddGameObject(topCenterLight);
+
 
 }
 
