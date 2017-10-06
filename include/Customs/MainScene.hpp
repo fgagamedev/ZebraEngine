@@ -40,10 +40,10 @@ class MainScene : public Scene {
         //void CreateGamemodes();
 
         //Middle position of width.
-        int m_width_middle;
+        int m_widthMiddle;
 
         //Middle position of height.
-        int m_height_middle;
+        int m_heightMiddle;
 };
 
 #endif

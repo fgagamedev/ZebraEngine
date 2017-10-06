@@ -15,8 +15,8 @@ EndScene2::EndScene2() {}
 */
 void EndScene2::OnActivation() {
     // defines the current center position (vertical and horizontal)
-    m_width_middle = EngineGlobals::screen_width / 2;
-    m_height_middle = EngineGlobals::screen_height / 2;
+    m_widthMiddle = EngineGlobals::screen_width / 2;
+    m_heightMiddle = EngineGlobals::screen_height / 2;
 
     CreateQuitButton();
     CreateAnimation();

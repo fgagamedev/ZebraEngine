@@ -17,8 +17,8 @@ MainScene::MainScene() {
 */
 void MainScene::OnActivation() {
     // On activation, gets the screen width and height to middle position the basic components of the game.
-    m_width_middle = EngineGlobals::screen_width / 2;
-    m_height_middle = EngineGlobals::screen_height / 2;
+    m_widthMiddle = EngineGlobals::screen_width / 2;
+    m_heightMiddle = EngineGlobals::screen_height / 2;
     CreateLogo();
     CreatePlayButton();
     CreateQuitButton();
