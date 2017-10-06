@@ -12,7 +12,9 @@
     @param[in] GameObject *owner - owns the component.
 */
 FirstBossLifeBorderScript::FirstBossLifeBorderScript(GameObject *owner) :
-    Script(owner) {}
+    Script(owner) {
+
+    }
 
 
 /**

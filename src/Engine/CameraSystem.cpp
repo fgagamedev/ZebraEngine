@@ -42,9 +42,9 @@ void CameraSystem::MoveUp(int speed, Scene *scene) {
     } // Move scene.
 
     auto mapscript = (MapScript*)SceneManager::GetInstance()
-       ->GetScene("Gameplay")
-       ->GetGameObject("Map")
-       ->GetComponent("MapScript");
+                       ->GetScene("Gameplay")
+                       ->GetGameObject("Map")
+                       ->GetComponent("MapScript");
 
     // Checks if the mapscript variable was instantiated.
     if (mapscript) {

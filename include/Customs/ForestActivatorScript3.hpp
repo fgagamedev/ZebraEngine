@@ -30,9 +30,10 @@ class ForestActivatorScript3 : public Script {
         void Start() override;
 
         // Represents if this is script is activeted or not.
-        void Activate(){activate=0;}
-    protected:
-        void ComponentUpdate() override;
+        void Activate() {
+            activate = 0;
+        }
+
     private:
         // Represents if this is script is activeted or not.
         int activate = -1;
@@ -59,6 +60,9 @@ class ForestActivatorScript3 : public Script {
 
         // State of the script.
         int play = 0;
+
+    protected:
+        void ComponentUpdate() override;
 
 };
 #endif

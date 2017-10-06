@@ -3,8 +3,8 @@
     @brief This class contains all attributes and methods that manages the central light in the game.
     @copyright LGPL. MIT License.
 */
-#ifndef __CENTRAL_LIGHT_SCRIPT4__
-#define __CENTRAL_LIGHT_SCRIPT4__
+#ifndef __TOP_CENTER_LIGHT_SCRIPT__
+#define __TOP_CENTER_LIGHT_SCRIPT__
 
 #include "Engine/Timer.hpp"
 #include "Engine/GameController.hpp"
@@ -31,7 +31,9 @@ class TopCenterLightScript : public Script {
 		void Start() override;
 
         // Represents if this is script is activeted or not.
-		void Activate(){active = true;}
+		void Activate() {
+			active = true;
+		}
 
 	protected:
 		void ComponentUpdate() override;
