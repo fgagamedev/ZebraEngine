@@ -160,7 +160,7 @@ void GamePlayScene::CreateCentralLights(){
 
     auto leftCenterLight = new GameObject("CENTRAL LIGHT 2",
                                        new Vector(309,308),192,192,1);
-    auto  leftCenterLightScript = new CentralLightScript2(leftCenterLight);
+    auto  leftCenterLightScript = new LeftCenterLightScript(leftCenterLight);
     AddGameObject(leftCenterLight);
 
     auto rightCenterLight = new GameObject("CENTRAL LIGHT 2",
