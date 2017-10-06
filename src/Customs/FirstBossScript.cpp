@@ -118,12 +118,12 @@ void FirstBossScript::FixedComponentUpdate() {
 
     Attack();
 
-    if (shake) {
+    if (cameraShake) {
         // CameraShake(intensity, duration in seconds)
         CameraSystem::GetInstance()->CameraShake(8,1,
                                 SceneManager::GetInstance()->GetCurrentScene());
         if (!CameraSystem::GetInstance()->IsShaking()) {
-            shake = false;
+            cameraShake = false;
         }
     }
 }
@@ -199,11 +199,11 @@ void FirstBossScript::Attack() {
             GetOwner()->m_position->m_x = playerPosition.m_x;
             if (GetOwner()->m_position->m_y < playerPosition.m_y) {
                 GetOwner()->m_position->m_y += 90;
-                shake = true;
+                cameraShake = true;
                 animator->PlayAnimation("firstBossFallAnimation");
             } else {
                 SecondAttackFall = false;
-                shake = false;
+                cameraShake = false;
                 randNum = -1;
             }
         }
