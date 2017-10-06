@@ -181,7 +181,7 @@ void FirstBossController::FirstAttackSurge() {
 
     //Shake camera.
 
-    firstBossAttackScript->shake = true;
+    firstBossAttackScript->cameraShake = true;
     m_currentTentacle++;
 }
 
