@@ -1,8 +1,8 @@
-#include "Customs/CentralLightScript2.hpp"
+#include "Customs/LeftCenterLightScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
 /**
-    @file CentralLightScript.cpp
+    @file LeftCenterLightScript.cpp
     @brief Methods that manages the central light during the game.
     @copyright LGPL. MIT License.
 */
@@ -12,13 +12,13 @@
     @brief Initializes CentralLightScript instance.
     @param[in] GameObject *owner - owns the component.
 */
-CentralLightScript2::CentralLightScript2(GameObject *owner) : Script(owner) {}
+LeftCenterLightScript::LeftCenterLightScript(GameObject *owner) : Script(owner) {}
 
 
 /**
     @brief Creates the animations in-game, with some of the gameobject properties.
 */
-void CentralLightScript2::Start() {
+void LeftCenterLightScript::Start() {
     CreateAnimations();
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -36,7 +36,7 @@ void CentralLightScript2::Start() {
 /**
     @brief Positions the animations in-game, through the settings of frames, and image's position.
 */
-void CentralLightScript2::CreateAnimations(){
+void LeftCenterLightScript::CreateAnimations(){
     // Sets the image of the little square placed on the map, where the player has to go to
     auto centrallightSprite = new Image("assets/centro1.png", 0, 0,832, 64);
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
@@ -51,7 +51,7 @@ void CentralLightScript2::CreateAnimations(){
 /**
     @brief Updates the animator component by looking for a previous light animation.
 */
-void CentralLightScript2::ComponentUpdate() {
+void LeftCenterLightScript::ComponentUpdate() {
     if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active){
         animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
@@ -60,6 +60,6 @@ void CentralLightScript2::ComponentUpdate() {
 /**
     @brief Updates the animator component.
 */
-void CentralLightScript2::FixedComponentUpdate() {
+void LeftCenterLightScript::FixedComponentUpdate() {
 
 }
