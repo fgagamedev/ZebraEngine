@@ -1,5 +1,5 @@
 /**
-    @file CentralLightScript4.hpp
+    @file TopCenterLightScript.hpp
     @brief This class contains all attributes and methods that manages the central light in the game.
     @copyright LGPL. MIT License.
 */
@@ -19,12 +19,12 @@
 
 #include <string>
 
-class CentralLightScript4 : public Script {
+class TopCenterLightScript : public Script {
 
 	public:
-		CentralLightScript4(GameObject *owner);
+		TopCenterLightScript(GameObject *owner);
 		std::string GetComponentName() override {
-			return "CentralLightScript4";
+			return "TopCenterLightScript";
 		};
 
 		void FixedComponentUpdate() override;

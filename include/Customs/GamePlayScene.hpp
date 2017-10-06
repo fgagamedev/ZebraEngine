@@ -41,7 +41,7 @@
 #include "Customs/CentralLightScript1.hpp"
 #include "Customs/CentralLightScript2.hpp"
 #include "Customs/CentralLightScript3.hpp"
-#include "Customs/CentralLightScript4.hpp"
+#include "Customs/TopCenterLightScript.hpp"
 
 
 class GamePlayScene : public Scene {
