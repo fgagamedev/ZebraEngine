@@ -1,6 +1,6 @@
 /**
     @file PlayerAttackScript.hpp
-    @brief Class that represents the Script of the player attack 
+    @brief Class that represents the Script of the player attack
     @copyright LGPL. MIT License.
 */
 
@@ -39,7 +39,7 @@ protected:
 private:
     void CreateAnimations();
 
-    // Instantiating input system of the keyboard. 
+    // Instantiating input system of the keyboard.
     InputSystem *input = nullptr;
 
     // Instantiating animations.
@@ -62,10 +62,10 @@ private:
     bool shoot = false;
 
     //State of the script.
-    int play=0;
+    int play = 0;
 
     // Angle of a shot bullet.
-    float angle=0;
+    float angle = 0;
 
     // Vector of bullets position.
     Vector bulletVelocity = Vector(0, 0);

@@ -46,7 +46,7 @@ private:
     GameObject *player = nullptr;
 
     //State of the script.
-    int play=1;
+    int play = 1;
 
 };
 

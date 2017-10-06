@@ -12,7 +12,7 @@
     @param[in] GameObject *owner - owns the component.
 */
 SnowScript::SnowScript(GameObject *owner) : Script(owner) {
-    
+
 }
 
 /**
@@ -42,9 +42,12 @@ void SnowScript::CreateAnimations() {
 
     // Creates the snow animation.
     auto snowAnimation= new Animation(GetOwner(),snowImage );
+
+    // Create the animations by adding the snowflakes in the frames.
     for (int i = 0; i < 20; i++) {
         snowAnimation->AddFrame(new Frame(i * 341,0, 341, 256));
-    }
+    } // for -- Create the animations snow.
+
     // Creates the animator.
     auto weatherAnimator = new Animator(GetOwner());
     weatherAnimator->AddAnimation("snowAnimation", snowAnimation);
@@ -54,12 +57,14 @@ void SnowScript::CreateAnimations() {
     @brief Update the components of snow.
 */
 void SnowScript::ComponentUpdate() {
+
+    // Start the snow animation.
     if (play == 1) {
         animator->PlayAnimation("snowAnimation");
     }
 
+    // Update the play variable and the sound effect.
     if (input->GetKeyDown(INPUT_T) && play == 0) {
-   // animator->StopAllAnimations();
         AudioController::GetInstance()->PlayAudio("snowSound", -1);
         play = 1;
     } else if (input->GetKeyDown(INPUT_T) && play == 1) {

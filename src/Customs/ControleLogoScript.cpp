@@ -40,9 +40,13 @@ void ControleLogoScript::CreateAnimations() {
                                          512);
     // Aniamtion logo sprite.
     auto controleAnimation = new Animation(GetOwner(), controle_LogoSprite);
+
+    // Sets the frames for the controle animation.
     for (int i = 0; i < 15; i++) {
         controleAnimation -> AddFrame(new Frame(i * 341, 0, 341, 256));
     }
+
+    // Sets the frames for the controle animation.
     for (int i = 0; i < 15; i++) {
         controleAnimation -> AddFrame(new Frame(i * 341, 256, 341, 256));
     }
@@ -64,13 +68,18 @@ void ControleLogoScript::FixedComponentUpdate() {
 
     // Update time and set play animator.
     time.Update(1);
+
+    // Compares time to play the animation.
     if (time.GetTime() >= 390) {
         m_animator->PlayAnimation("CONTROLE ANIMATION");
     }
+
+    // Compares time to stop the animation.
     if (time.GetTime() >= 490) {
         m_animator->StopAllAnimations();
     }
 
+    // Compares time to update the animation.
     if (time.GetTime() >= 530) {
         SceneManager::GetInstance()->SetCurrentScene("Main");
     }

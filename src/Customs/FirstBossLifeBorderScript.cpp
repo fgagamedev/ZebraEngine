@@ -39,12 +39,13 @@ void FirstBossLifeBorderScript::Start() {
 void FirstBossLifeBorderScript::CreateAnimations() {
 
     // Creates the image.
-    auto firstBossLifeBorderImage = new Image("assets/Barra_Life_Boss.png",0,0,
+    auto firstBossLifeBorderImage = new Image("assets/boss_life_bar.png",0,0,
                                                                     996, 171);
 
     // Creates the animation
     auto firstBossLifeBorderAnimation = new Animation(GetOwner(),
                                         firstBossLifeBorderImage );
+    // Creates the boss's life bar
     for (int column = 0; column < 19; column++) {
         for (int row = 0 ; row < 3 ; row++) {
             firstBossLifeBorderAnimation->AddFrame(new Frame(row * 332,

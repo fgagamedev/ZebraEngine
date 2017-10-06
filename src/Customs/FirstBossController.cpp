@@ -8,6 +8,7 @@
 FirstBossController *FirstBossController::m_instance = nullptr;
 
 FirstBossController *FirstBossController::GetInstance() {
+    // Checks if the first boss controller was instantiated, if not, instantiates it.
     if (!m_instance){
         m_instance = new FirstBossController();
     }
@@ -59,7 +60,9 @@ void FirstBossController::PositMap(Vector newPosition) {
 void FirstBossController::PositBoss() {
     m_boss->SetPosition(Vector(m_wPos, m_hPos));
 }
+
 void FirstBossController::PositAllTentacles() {
+    // Runs through the game objects vector, and sets each tentacle position.
     for (auto tentacle : m_tentacles) {
         Vector *position = m_player->GetPosition();
         tentacle->SetPosition(Vector(-500, -500));
@@ -89,7 +92,8 @@ void FirstBossController::ActivateInsideBossFx() {
 }
 
 void FirstBossController::ActivateTentacles() {
-   for (auto tentacle : m_tentacles) {
+    // Runs through the game objects vector, and clears each tentacle collision.
+    for (auto tentacle : m_tentacles) {
       tentacle->ClearCollisions();
       tentacle->active = true;
    }
@@ -130,12 +134,14 @@ void FirstBossController::DeactivateCreditsAnimation() {
 }
 
 void FirstBossController::DeactivateTentacles() {
+    // Deactivates each tentacle collision.
     for (auto tentacle : m_tentacles) {
         tentacle->active = false;
     }
 }
 
 void FirstBossController::DeactivateLifeBars() {
+    // Deactivates each lifebar position.
     for (auto lifeBar : m_lifeBars) {
         lifeBar->active = false;
     }
@@ -158,8 +164,9 @@ std::pair <int, int> FirstBossController::GetRandomPosition() {
 
 void FirstBossController::FirstAttackSurge() {
     cout << "FirstAttack" << endl;
+    // Compares the number of the current tentacle.
     if (m_actualTentacle == 4) {
-      m_actualTentacle = 1;
+        m_actualTentacle = 1;
     }
 
     m_tentacles[m_actualTentacle]->ClearCollisions();
@@ -173,11 +180,12 @@ void FirstBossController::FirstAttackSurge() {
     firstBossAttackScript->attack = true;
 
     //Shake camera.
-    firstBossAttackScript->shake = true;
+    firstBossAttackScript->cameraShake = true;
     m_actualTentacle++;
 }
 
 void FirstBossController::FirstAttackGone() {
+    // Sets each animation of the script.
     for (auto tentacle : m_tentacles) {
         auto firstBossAttackScript = (FirstBossAttackScript*)tentacle->
                                   GetComponent("FirstBossAttackScript");

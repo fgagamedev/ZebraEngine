@@ -6,7 +6,9 @@
 
 #include "Customs/FirstBossScene.hpp"
 
-FirstBossScene::FirstBossScene() {}
+FirstBossScene::FirstBossScene() {
+
+}
 
 /**
     @brief that function is for when tha state is activated. Then is created the
@@ -26,53 +28,35 @@ void FirstBossScene::OnActivation() {
     CreatePlayerAttack();
     CreatePlayerHit();
     //FirstBossController::GetInstance()->StartBossFight();
-
-    /*
-        CameraSystem::GetInstance()->ZoomOut( 100,
-                                        SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan"),
-                                        SceneManager::GetInstance()->GetCurrentScene());
-        CameraSystem::GetInstance()->ZoomIn(  1,
-                                      SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan"),
-                                      SceneManager::GetInstance()->GetCurrentScene());
-        CameraSystem::GetInstance()->currentZoom -=25;
-    */
 }
 
 /**
     @brief that function is for when the state is deactivated, so nothing are
     created.
 */
-void FirstBossScene::OnDeactivation() {}
+void FirstBossScene::OnDeactivation() {
+
+}
 
 /**
     @brief that function is for when the state is shown. Nothing are create here.
 */
 void FirstBossScene::OnShown() {
-  //CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
-  //CameraSystem::GetInstance()->MoveUp(2,SceneManager::GetInstance()->GetCurrentScene());
+
 }
 
 /**
     @brief that function is for the state is hidden.
 */
-void FirstBossScene::OnHidden() {}
+void FirstBossScene::OnHidden() {
+
+}
 
 
 /**
     @brief that function is for to create the map of the game.
 */
 void FirstBossScene::CreateMap() {
-  //Original resolution is 2048/2048
-  //6144,6144 = 3x
-  /*auto map = new GameObject("Map", new Vector(-5250 ,-5000),10500,10500);
-  // Renderer
-  auto mapImage = new Image("assets/world.png", 0, 0, 3500, 3500);
-  auto mapRenderer = new Renderer(map, mapImage);
-  */
-  //auto map =  SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
-  // Script
-  //auto mapScript = new MapScript(map);
-  //AddGameObject(map);
 
 }
 
@@ -141,12 +125,12 @@ void FirstBossScene::CreateFirstBossAttack() {
     they add the "PlayerAttack" as a game object and add the player attack.
 */
 void FirstBossScene::CreatePlayerAttack() {
-    // The loop adds a bullet on a instantiated gameobject with its name and positions, on every iteration
+    // The loop adds a bullet on an instantiated gameobject with its name and positions, on every iteration.
     for (int counter = 1; counter < 10; counter++) {
         std::string bulletName = "Bullet" + std::to_string(counter);
         auto bullet = new GameObject(bulletName, new Vector(100 * counter, 0),15, 15, 2);
         bullet->SetTag("Bullet");
-        
+
         // On every iteration, adds a bullet into the instantiaded player attack script.
         auto bulletScript = new PlayerAttackScript(bullet);
         //MissileController::GetInstance()->AddPlayer(bullet);
@@ -179,7 +163,7 @@ void FirstBossScene::CreatePlayerHit() {
     auto hit = new GameObject("Hit", new Vector(0,0),1024,800,1);
     auto hitScript = new HitScript(hit);
 
-    // Insert the gameobject hit into the gameobjects vector.    
+    // Insert the gameobject hit into the gameobjects vector.
     AddGameObject(hit);
 }
 
@@ -193,7 +177,7 @@ void FirstBossScene::CreateThunder() {
     auto thunder = new GameObject("Rain", new Vector(200,0),113,267,1);
     auto thunderScript = new ThunderScript(thunder);
 
-    // Insert the gameobject thunder into the gameobjects vector.    
+    // Insert the gameobject thunder into the gameobjects vector.
     AddGameObject(thunder);
 }
 
@@ -206,7 +190,7 @@ void FirstBossScene::CreateSnow(){
     auto snow = new GameObject("Snow", new Vector(0,0),1024,800,1);
     auto snowScript = new SnowScript(snow);
 
-    // Insert the gameobject snow into the gameobjects vector.    
+    // Insert the gameobject snow into the gameobjects vector.
     AddGameObject(snow);
 }
 
@@ -222,17 +206,6 @@ void FirstBossScene::CreateLight() {
     //auto mapRenderer = new Renderer(light, lightImage);
     auto lightScript = new LightScript(light);
 
-    // Insert the gameobject snow into the gameobjects vector.    
+    // Insert the gameobject snow into the gameobjects vector.
     AddGameObject(light);
 }
-/*
-void GamePlayScene::CreateAmmoCounter() {
-
-  auto ammo = new GameObject("Ammo", new Vector(2,2),200,200,3);
-  auto messengerText = new UIText(ammo, "15", "assets/UIpack/Font/kenvector_future_thin.ttf",
-                 100, 255, 255, 255, 255, 1);
-  //auto lightScript = new LightScript(light);
-  AddGameObject(ammo);
-
-}
-*/

@@ -14,17 +14,17 @@
 #include <string>
 
 /**
-    @file CentralLightScript2.hpp
+    @file LeftCenterLightScript.hpp
     @brief This class contains all attributes and methods that manages the central light in the game.
     @copyright LGPL. MIT License.
 */
 
-class CentralLightScript2 : public Script {
+class LeftCenterLightScript : public Script {
 
 public:
-    CentralLightScript2(GameObject *owner);
+    LeftCenterLightScript(GameObject *owner);
     std::string GetComponentName() override {
-        return "CentralLightScript2";
+        return "LeftCenterLightScript";
     };
     void FixedComponentUpdate() override;
     void Start() override;
@@ -38,7 +38,7 @@ protected:
 private:
     void CreateAnimations();
     /*
-    the player has to find the central light and pass through it to activate 
+    the player has to find the central light and pass through it to activate
     it, this variable was created in order to control whether the player has
     passed through it or not
     */

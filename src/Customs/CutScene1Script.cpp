@@ -22,6 +22,7 @@ void CutScene1Script::Start() {
     m_gamecontroller = m_input -> GetGameController(0);
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    // Checks for the map, and sets its properties.
     if(map) {
         GetOwner()->SetZoomProportion(Vector(map -> originalWidth / GetOwner()
                                              ->originalWidth, map
@@ -53,10 +54,12 @@ void CutScene1Script::CreateAnimations() {
     @brief Update the animation of the cut scene 1.
 */
 void CutScene1Script::ComponentUpdate() {
+    // Compares the animator state.
     if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active) {
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
 
+    // Checks the animator state.
     if(m_animator->IsPlaying("CENTRAL LIGHT ANIMATION")) {
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }

@@ -74,7 +74,7 @@ private:
     bool SecondAttackFall = false;
 
     // Stores if the camera is shaking.
-    bool shake = false;
+    bool cameraShake = false;
 
     // Stores the number of first attacks.
     int firstAttackCounter = 0;
