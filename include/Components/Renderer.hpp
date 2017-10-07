@@ -17,7 +17,7 @@
 class Renderer : public Component {
 public:
     // Constructor and destructor
-    Renderer(GameObject *owner, Image *img);
+    Renderer(GameObject *owner, Image *image);
     ~Renderer();
 
     // Replace the component name and return it.
@@ -37,10 +37,10 @@ public:
     // Override for start
     void Start() override;
     void SetActivationTrue() {
-        activation = true;
+        m_activation = true;
     };
     void SetActivationFalse() {
-        activation = false;
+        m_activation = false;
     };
 
 protected:
@@ -49,7 +49,7 @@ protected:
 
 private:
     // Boolean attribute to track the activation of the renderer
-    bool activation = true;
+    bool m_activation = true;
 
     // Rectangle's image pointer to be renderer on the screen
     Image *m_image = nullptr;

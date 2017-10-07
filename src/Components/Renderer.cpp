@@ -28,8 +28,8 @@ void Renderer::ComponentUpdate() {
     @param[in] owner - Owns the component.
     @param[in] img
 */
-Renderer::Renderer(GameObject *owner, Image *img) : Component(owner, C_DRAW) {
-    m_image = img;
+Renderer::Renderer(GameObject *owner, Image *image) : Component(owner, C_DRAW) {
+    m_image = image;
 
     m_position = GetOwner()->GetPosition();
 
