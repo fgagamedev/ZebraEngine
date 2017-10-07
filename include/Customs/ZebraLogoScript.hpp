@@ -45,7 +45,7 @@ private:
     Animator *animator = nullptr;
 
     // Position vector of the ZebraLogo
-    Vector *position = nullptr;
+    Vector *zebra_position = nullptr;
 
     int play = 0;
 };

@@ -30,6 +30,6 @@ public:
 
 private:
     // Sets the QuitButton as a UIButton
-    UIButton *m_uiButton = nullptr;
+    UIButton *m_interactive_button = nullptr;
 };
 #endif

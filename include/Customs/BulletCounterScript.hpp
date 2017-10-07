@@ -38,11 +38,10 @@ protected:
 
 private:
     // Position vector of the BulletCounter
-    Vector *position = nullptr;
+    Vector *counter_position = nullptr;
 
     // Integer number of player's bullets
     int m_numberBullet;
 };
 
 #endif
-
