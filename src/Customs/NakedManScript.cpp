@@ -21,7 +21,9 @@ bool NakedManScript::isZooming = false;
     @brief Constructor of the class NakedManScript.
     @param[in] GameObject *owner - Owns the component.
 */
-NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {}
+NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {
+
+}
 
 /**
     @brief Start the first definitions of the player.
@@ -146,76 +148,96 @@ void NakedManScript::SetDirection() {
         // Looking to right, set if is also moving to right
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
             && movements == 4) {
+            // Moving to right
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) > 800
             && movements == 3) {
+            // Moving to left
             isMovingLooking = false;
         }
 
         // Looking to left, set if is also moving to left
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <=-800
             && movements == 3) {
+            // Moving to left
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) < -800
                    && movements == 4) {
+            // Moving to right
             isMovingLooking = false;
         }
 
-        // Y-axis
+        // Looking to up, set if is also moving to up
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)
             <= -800 && movements == 1) {
+            // Moving to up
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) < -800
                    && movements == 2) {
+            // Moving to down
             isMovingLooking = false;
         }
 
+        // Looking to down, set if is also moving to down
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
             && movements == 2) {
+            // Moving to down
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) > 800
                    && movements == 1) {
+            // Moving to up
             isMovingLooking = false;
         }
 
-        // Diagonal 1
+        // Looking to up right, set if is also moving to up right
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) > 800
             && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <=-800
             && movements == 6) {
+            // Moving to up right
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
                    && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800
                    && movements == 7) {
+            // Moving to down left
             isMovingLooking = false;
         }
 
+        // Looking to down left, set if is also moving to down left
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
             && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
             && movements == 7) {
+            // Moving to down left
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
                    && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
                    && movements == 6) {
+            // Moving to up right
             isMovingLooking = false;
         }
 
-        // Diagonal 2
+        // Looking to down right, set if is also moving to down right
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
             && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
             && movements == 8) {
+            // Moving to down right
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
                    && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
                    && movements == 5) {
+            // Moving to up left
             isMovingLooking = false;
         }
+
+        // Looking to up left, set if is also moving to up left
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
             && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800
             && movements == 5) {
+            // Moving to up left
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
                    && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
                    && movements == 8) {
+            // Moving to down right
             isMovingLooking = false;
         }
     } // if -- Compare direction the player is looking and moving
@@ -400,14 +422,21 @@ void NakedManScript::GameControllerUpdate() {
                                  * -1, game_controller
                                  ->GetAxis(GC_INPUT_AXIS_RIGHTX)) * 180 / 3.14;
 
+    // Set game controller angle depending on axis states
     if (abs(game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)) < 1000
             && abs(game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX)) < 1000) {
         gameControllerAngle = 0;
     }
+
+
+    // Keep angle positive and in 0 to 360 range
     if (gameControllerAngle < 0) {
         gameControllerAngle *= -1;
         gameControllerAngle = 180 + (180 - gameControllerAngle);
     }
+
+
+    // Get absolute value of the angle
     if (gameControllerAngle != 0) {
         gameControllerAngle = abs(360 - gameControllerAngle);
     }
@@ -564,7 +593,7 @@ void NakedManScript::GameControllerUpdate() {
         printf("Attack\n");
     }
 
-    // Dash
+    // Play or stop animations based on dash actions
     if (game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT)
         && dashController == 0) {
         animator->StopAllAnimations();
@@ -572,7 +601,7 @@ void NakedManScript::GameControllerUpdate() {
     }
     dashController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT);
 
-    // Shoot gun
+    // Shoot depending of game controller angle and number of bullets
     if (game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT)
         && bulletController == 0 && gameControllerAngle != 0) {
         cout << "ammo: " << bulletNumber << endl;
@@ -585,12 +614,12 @@ void NakedManScript::GameControllerUpdate() {
         gameObjectBullet->active = true;
 
         // Prepare player attack to shoot.
-        auto script = (PlayerAttackScript *)SceneManager::GetInstance()
+        auto attackScript = (PlayerAttackScript *)SceneManager::GetInstance()
                                            ->GetCurrentScene()
                                            ->GetGameObject("Bullet"
                                            + std::to_string(bulletNumber))
                                            ->GetComponent("PlayerAttackScript");
-        script->SetShoot(true);
+        attackScript->SetShoot(true);
 
         bulletNumber--;
 
@@ -598,8 +627,8 @@ void NakedManScript::GameControllerUpdate() {
         if (bulletNumber == 0) {
             bulletNumber = 10;
            // Wait delay reload time
-        }
-    }
+        } // if -- Reload gun
+    } // if -- Shoot
 
     bulletController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT);
 
@@ -706,39 +735,39 @@ void NakedManScript::CreateAnimations() {
 */
 void NakedManScript::ComponentUpdate() {
     // Initialize rain and snow scripts.
-    auto script2 = (RainScript *)SceneManager::GetInstance()
+    auto rainScript = (RainScript *)SceneManager::GetInstance()
                                 ->GetCurrentScene()
                                 ->GetGameObject("Rain")
                                 ->GetComponent("RainScript");
-    auto script3 = (SnowScript *)SceneManager::GetInstance()
+    auto snowScript = (SnowScript *)SceneManager::GetInstance()
                                 ->GetCurrentScene()
                                 ->GetGameObject("Snow")
                                 ->GetComponent("SnowScript");
 
-    // Activate script2 based in position of camera
+    // Activate rainScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraY < 3435)
          && (CameraSystem::GetInstance()->worldCameraX > 3410)
          && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
-        script2->play = 1;
+        rainScript->play = 1;
     }
 
-    // Deactivate script2 based in position of camera
+    // Deactivate rainScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraY > 3435)
          && (CameraSystem::GetInstance()->worldCameraX > 3410)
          && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
-        script2->play = 0;
+        rainScript->play = 0;
     }
 
-   // Activate script3 based in position of camera
+   // Activate snowScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraX < 3315)
          && (CameraSystem::GetInstance()->worldCameraY > 3860)) {
-        script3->play = 1;
+        snowScript->play = 1;
     }
 
-    // Deactivate script3 based in position of camera
+    // Deactivate snowScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraX > 3315)
          && (CameraSystem::GetInstance()->worldCameraY > 3860)) {
-        script3->play = 0;
+        snowScript->play = 0;
     }
 
     SetDirection();
@@ -826,11 +855,12 @@ void NakedManScript::FixedComponentUpdate() {
         FirstBossController::GetInstance()->EndBossFight();
 
         // Posit player on spawn.
-        int xPos, yPos;
-        xPos = EngineGlobals::screen_width / 2 - 96 / 2;
-        yPos = EngineGlobals::screen_height / 2 - 96 / 2;
+        int positionX, positionY;
+        positionX = EngineGlobals::screen_width / 2 - 96 / 2;
+        positionY = EngineGlobals::screen_height / 2 - 96 / 2;
 
-        FirstBossController::GetInstance()->PositPlayer(Vector(xPos, yPos ));
+        FirstBossController::GetInstance()->PositPlayer(Vector(positionX,
+                                                               positionY));
         CameraSystem::GetInstance()->MoveRight(200,SceneManager::GetInstance()
                                    ->GetCurrentScene());
         endBossFight =  false;
@@ -878,12 +908,12 @@ void NakedManScript::Shoot() {
         gameObjectBullet->active = true;
 
         // Prepare player attack to shoot.
-        auto script = (PlayerAttackScript *)SceneManager::GetInstance()
+        auto attackScript = (PlayerAttackScript *)SceneManager::GetInstance()
                                             ->GetCurrentScene()
                                             ->GetGameObject("Bullet"
                                             + std::to_string(bulletNumber))
                                             ->GetComponent("PlayerAttackScript");
-        script->SetShoot(true);
+        attackScript->SetShoot(true);
 
         bulletNumber--;
     }
@@ -912,18 +942,22 @@ void NakedManScript::ReloadGun() {
     @brief Constantly update the animations based on collisions and time.
 */
 void NakedManScript::Animations() {
+    // Mange m_hitFrames value when m_hit is true
     if (m_hit) {
         m_hitFrames++;
         timerHit.Update(EngineGlobals::fixed_update_interval);
 
+        // Stop animations when m_hitFrames gets bigger than 7
         if (m_hitFrames >= 7) {
             animator->StopAllAnimations();
+            // Reset m_hitFrames value when it gets bigger than 12
             if (m_hitFrames >= 12) {
                 m_hitFrames = 0;
-            }
-        }
-    }
+            } // if -- Reset m_hitFrames
+        } // if -- Stop animations
+    } // if -- Mange m_hitFrames value when m_hit is true
 
+    // Restart timerHit and set m_hit as false
     if (timerHit.GetTime() >= 1 * 1000) {
         m_hit =  false;
         timerHit.Restart();
@@ -935,6 +969,10 @@ void NakedManScript::Animations() {
     on the pressed keys or the game controller buttons actions.
 */
 void NakedManScript::Movements() {
+    /*
+        Define x, y positions and  walk speed of the player based
+        on the movements values.
+    */
     if (movements == 5) {
         walkSpeed = walkSpeed * 0.70710;
         position->m_y -= walkSpeed;
@@ -1069,25 +1107,37 @@ void NakedManScript::Movements() {
     @brief Check the collisions that occur during the game.
 */
 void NakedManScript::GameCollisionCheck() {
-    for (auto obj : GetOwner()->GetCollisions()) {
-        if (obj->GetTag() == "Bullet") {
+    // Run through objects to get the collisions
+    for (auto object : GetOwner()->GetCollisions()) {
+
+        // Manage collistions according to the object's tag
+        if (object->GetTag() == "Bullet") {
+            // Clear bullet collistions
             GetOwner()->ClearCollisions();
-        } else if (obj->GetTag() == "FirstBoss") {
+        } else if (object->GetTag() == "FirstBoss") {
             cout << "Boss Colider" << endl;
-            if (obj->active) {
+
+            // Manage collistions consequences for the player
+            if (object->active) {
                 m_hit = true;
                 life --;
             }
+
+            // Clear first boss collistions
             GetOwner()->ClearCollisions();
-        } else if (obj->GetTag() == "FirstBossAtack") {
+        } else if (object->GetTag() == "FirstBossAtack") {
             cout << "Boss Atack Colider" << endl;
-            if (obj->active) {
+
+            // Manage collistions consequences for the player
+            if (object->active) {
                 m_hit = true;
                 life --;
             }
+
+            // Clear first boss attack collistions
             GetOwner()->ClearCollisions();
-        }
-    }
+        } // if -- Manage collistions according to the object's tag
+    } // for -- Run through objects
 }
 
 /**
@@ -1095,6 +1145,7 @@ void NakedManScript::GameCollisionCheck() {
     of the game.
 */
 void NakedManScript::StartFirstBoss() {
+    // Print the x,y positions of worldCamera when X key is pressed
     if (input->GetKeyDown(INPUT_X)) {
         cout << "X: " << CameraSystem::GetInstance()->worldCameraX << endl;
         cout << "Y: " << CameraSystem::GetInstance()->worldCameraY << endl;
