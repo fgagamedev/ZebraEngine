@@ -39,47 +39,46 @@ private:
     void CreateAnimations();
 
     // Collider for the first boss.
-    RectangleCollider *firstBossCollider = nullptr;
+    RectangleCollider *m_firstBossCollider = nullptr;
     // Object for inputs in the first boss script.
-    InputSystem *input = nullptr;
+    InputSystem *m_input = nullptr;
     // Animator for the first boss.
-    Animator *animator = nullptr;
+    Animator *m_animator = nullptr;
     // Object that store positions in the game.
-    Vector *position = nullptr;
+    Vector *m_position = nullptr;
     // Object of the player of the game.
-    GameObject *player = nullptr;
+    GameObject *m_player = nullptr;
     // Object for the positions of the player.
-    Vector playerPosition = Vector(0,0);
+    Vector m_playerPosition = Vector(0,0);
 
     // Timer for the first attack cooldown.
-    Timer timerFirstAttackCooldown;
+    Timer m_timerFirstAttackCooldown;
     // Timer for when the first attack has gone.
-    Timer timerFirstAttackGone;
+    Timer m_timerFirstAttackGone;
     // Timer for a attack cooldown.
-    Timer timerAttackCooldown;
+    Timer m_timerAttackCooldown;
     // Timer for the second attack cooldown.
-    Timer timerSecondAttack;
+    Timer m_timerSecondAttack;
     // Timer for the second attack fall.
-    Timer timerSecondAttackFall;
+    Timer m_timerSecondAttackFall;
 
     // Stores if is the first attack of the first boss.
-    bool FirstAttack = false;
+    bool m_firstAttack = false;
     // Stores if the first attack of the first boss has gone.
-    bool goneFirstAttack = false;
+    bool m_goneFirstAttack = false;
     // Stores if is the second attack of the first boss.
-    bool SecondAttack = false;
+    bool m_secondAttack = false;
     // Stores if is the jump in the second attack of the first boss.
-    bool SecondAttackJump = false;
+    bool m_secondAttackJump = false;
     // Stores if is the second attack of the first boss has fallen.
-    bool SecondAttackFall = false;
+    bool m_secondAttackFall = false;
 
     // Stores if the camera is shaking.
-    bool shake = false;
+    bool m_shakeCamera = false;
 
     // Stores the number of first attacks.
-    int firstAttackCounter = 0;
+    int m_firstAttackCounter = 0;
     // Stores a random integer number.
-    int randNum = -1;
+    int m_randomNumber = -1;
 };
-
 #endif

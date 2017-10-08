@@ -18,11 +18,11 @@ void UnbLogoScript::Start() {
     // Creates the logo animations.
     CreateAnimations();
     // Get the position and the animator of the logo
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
     // Get the inputs.
-    input = InputSystem::GetInstance();
-    gameController = input->GetGameController(0);
+    m_input = InputSystem::GetInstance();
+    m_gameController = m_input->GetGameController(0);
     // Set the zoom of the logo.
     GetOwner()->SetZoomProportion(Vector(0,0));
 
@@ -54,13 +54,13 @@ void UnbLogoScript::CreateAnimations() {
     @brief Handles with changes on the component.
 */
 void UnbLogoScript::ComponentUpdate() {
-    if (gameController) {
-        if (gameController->GetButtonDown(GC_INPUT_X)) {
+    if (m_gameController) {
+        if (m_gameController->GetButtonDown(GC_INPUT_X)) {
             // Change the scene during the logo presentation.
             SceneManager::GetInstance()->SetCurrentScene("Main");
         }
     }
-    if (input->GetKeyPressed(INPUT_RETURN)) {
+    if (m_input->GetKeyPressed(INPUT_RETURN)) {
         // Change the scene during the logo presentation.
         SceneManager::GetInstance()->SetCurrentScene("Main");
     }
@@ -72,11 +72,11 @@ void UnbLogoScript::ComponentUpdate() {
     after 100 seconds.
 */
 void UnbLogoScript::FixedComponentUpdate() {
-    time.Update(1);
+    m_time.Update(1);
 
-    animator->PlayAnimation("UNB ANIMATION");
+    m_animator->PlayAnimation("UNB ANIMATION");
 
-    if (time.GetTime()>=100) {
-        animator->StopAllAnimations();
+    if (m_time.GetTime()>=100) {
+        m_animator->StopAllAnimations();
     }
 }
