@@ -14,6 +14,10 @@
     @param[in] gc - game controller inputs.
 */
 GameController::GameController(SDL_GameController *gc) {
+    /*
+    If the game controller was detected, shows it is working, else, shows an
+    error.
+    */
     if (gc) {
         INFO("    " << SDL_GameControllerName(gc) << " opened");
         m_gameController = gc;
@@ -52,6 +56,10 @@ void GameController::Update() {
     @return bool.
 */
 bool GameController::GetButtonDown(GameControllerButton button) {
+    /*
+    If respective button has changed its state from false to true, returns
+    true.
+    */
     if (m_currentButtonsStates[button] && !m_oldButtonsStates[button]){
         return true;
     }
@@ -64,6 +72,10 @@ bool GameController::GetButtonDown(GameControllerButton button) {
     @return bool.
 */
 bool GameController::GetButtonUp(GameControllerButton button) {
+    /*
+    If respective button has changed its state from true to false, returns
+    true.
+    */
     if (!m_currentButtonsStates[button] && m_oldButtonsStates[button]){
         return true;
     }

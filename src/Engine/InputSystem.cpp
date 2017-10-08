@@ -39,7 +39,7 @@ InputSystem::~InputSystem() {
     @return m_instance.
 */
 InputSystem *InputSystem::GetInstance() {
-    // Checks if singleton exists.
+    // If the m_instance is not initialized, intializes it.
     if (!m_instance) {
         m_instance = new InputSystem();
     }
@@ -65,17 +65,16 @@ void InputSystem::UpdateStates() {
 }
 
 /**
-    @brief Get the current state of a button down on a keyboard.
+    @brief Get the current state of a down button on a keyboard.
     @param[in] key - state of a button from the keyboard.
     @return bool.
 */
 bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
+    /*
+    If respective button is being pressed but was not pressed previously,
+    returns true.
+    */
     if (m_states[key] && !m_oldStates[key]) {
-        /**
-        char message[] = "Key down: ";
-        strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
-        INFO(message);
-        */
         return true;
     }
     return false;
@@ -87,6 +86,10 @@ bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
     @return bool.
 */
 bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
+    /*
+    If respective button is being pressed but was not pressed previously,
+    returns true.
+    */
     if (!m_states[key] && m_oldStates[key]) {
         return true;
     }
@@ -99,6 +102,7 @@ bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
     @return bool.
 */
 bool InputSystem::GetKeyPressed(KeyboardInputGlobal key) {
+    // If the respective key is being pressed, returns true.
     if (m_states[key]) {
         return true;
     }
@@ -115,6 +119,10 @@ bool InputSystem::GetMouseButtonDown(MouseInputGlobal button) {
     // Defines if the mouse is being pressed right at the moment
     bool isPressed = m_mouseStates & SDL_BUTTON(button);
     bool wasPressed = m_oldMouseStates & SDL_BUTTON(button);
+    /*
+    If respective button is being pressed but was not pressed previously,
+    returns true.
+    */
     if (isPressed && !wasPressed) {
         return true;
     }
@@ -131,6 +139,10 @@ bool InputSystem::GetMouseButtonUp(MouseInputGlobal button) {
     // Defines if the mouse was pressed, but is not being pressed anymore
     bool isPressed = m_mouseStates & SDL_BUTTON(button);
     bool wasPressed = m_oldMouseStates & SDL_BUTTON(button);
+    /*
+    If respective button is being pressed but was not pressed previously,
+    returns true.
+    */
     if (!isPressed && wasPressed) {
         return true;
     }
@@ -143,6 +155,10 @@ bool InputSystem::GetMouseButtonUp(MouseInputGlobal button) {
     @return bool.
 */
 bool InputSystem::GetMouseButtonPressed(MouseInputGlobal button) {
+    /*
+    If respective button is being pressed but was not pressed previously,
+    returns true.
+    */
     if (m_mouseStates & SDL_BUTTON(button)) {
         return true;
     }
@@ -200,10 +216,10 @@ void InputSystem::CheckGameControllersConnections() {}
     @return GameController.
 */
 GameController *InputSystem::GetGameController(int index) {
+    // Returns NULL if an error occurred.
     if (m_gameControllers.size() < (unsigned)index + 1) {
-        // Return NULL if an error occurred.
         return nullptr;
     }
-    // Return a controller identifier.
+    // Returns a controller identifier.
     return m_gameControllers.at(index);
 }
