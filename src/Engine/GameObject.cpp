@@ -22,7 +22,7 @@ GameObject::GameObject(std::string name, Vector *position,
     m_position = position;
     m_width = width;
     m_height = height;
-    m_layer = layer;
+    m_componentLayer = layer;
     m_velocity = new Vector(0, 0);
     originalWidth = width;
     originalHeight = height;
@@ -184,7 +184,7 @@ void GameObject::SetSize(int width, int height) {
 }
 
 bool GameObject::operator<(const GameObject &go) const {
-    return m_layer < go.m_layer;
+    return m_componentLayer < go.m_componentLayer;
 }
 
 /**
