@@ -145,12 +145,12 @@ void FirstBossScript::FixedComponentUpdate() {
     Attack();
 
     // If shake is true, shake the camera of the game.
-    if (m_shakeCamera) {
+    if (m_cameraShake) {
         // CameraShake(intensity, duration in seconds)
         CameraSystem::GetInstance()->CameraShake(8,1,
                                 SceneManager::GetInstance()->GetCurrentScene());
         if (!CameraSystem::GetInstance()->IsShaking()) {
-            m_shakeCamera = false;
+            m_cameraShake = false;
         }
     }
 }
@@ -244,12 +244,12 @@ void FirstBossScript::Attack() {
             */
             if (GetOwner()->m_position->m_y < m_playerPosition.m_y) {
                 GetOwner()->m_position->m_y += 90;
-                m_shakeCamera = true;
+                m_cameraShake = true;
                 m_animator->PlayAnimation("firstBossFallAnimation");
             // Don't fall and don't shake the camera.
             } else {
                 m_secondAttackFall = false;
-                m_shakeCamera = false;
+                m_cameraShake = false;
                 m_randomNumber = -1;
             }
         }

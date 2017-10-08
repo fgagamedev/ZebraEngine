@@ -16,10 +16,11 @@ MenuController::MenuController() {}
     @return m_instance of MenuController
 */
 MenuController *MenuController::GetInstance() {
-  if (!m_instance){
-    m_instance = new MenuController();
-  }
-  return m_instance;
+    // If the m_instance is not initialized, intializes it.
+    if (!m_instance){
+        m_instance = new MenuController();
+    }
+    return m_instance;
 }
 
 /**

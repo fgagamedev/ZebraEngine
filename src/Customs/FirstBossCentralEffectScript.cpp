@@ -25,6 +25,8 @@ void FirstBossCentralEffectScript::Start() {
     m_animator = (Animator *)GetOwner() -> GetComponent("Animator");
     m_input = InputSystem::GetInstance();
     auto map = SceneManager::GetInstance() -> GetScene("Gameplay") -> GetGameObject("Map");
+    
+    // Checks for the map, and sets its properties.
     if (map) {
         GetOwner()->SetZoomProportion(Vector(map -> originalWidth / GetOwner()
                                              -> originalWidth, map
@@ -59,6 +61,8 @@ void FirstBossCentralEffectScript::CreateAnimations() {
 void FirstBossCentralEffectScript::ComponentUpdate() {
     m_boss = SceneManager::GetInstance()->GetCurrentScene()->
     GetGameObject("FirstBoss");
+
+    // Checks the boss state.
     if (m_boss) {
         m_animator->PlayAnimation("firstBossCentralAnimation1");
     }
@@ -73,6 +77,8 @@ void FirstBossCentralEffectScript::FixedComponentUpdate() {
         If the boss is initialized arrow to a new position for it
         according to the player's position.
     */
+
+    // Checks the boss state.
     if (m_boss) {
         m_position->m_x = m_boss->GetPosition()->m_x + m_boss->GetWidth() / 2
                                              - GetOwner()->GetWidth() / 2

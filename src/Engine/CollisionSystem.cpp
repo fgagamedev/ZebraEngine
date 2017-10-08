@@ -22,6 +22,7 @@ CollisionSystem::CollisionSystem() {
     @return The existing or new object of CollisionSystem.
 */
 CollisionSystem *CollisionSystem::GetInstance() {
+    // Checks if the collision system was instantiated, if not, instantiates it.
     if (!m_instance) {
         m_instance = new CollisionSystem();
     }
@@ -37,18 +38,22 @@ void CollisionSystem::Update() {
     @brief Determine if collisions between elements have happened.
 */
 void CollisionSystem::DetectCollisions() {
-
     // Defines the boundaries as trees and walls.
+
+    // Runs through the vector of collisions
     for (int i = 0; i < m_colliders.size(); i++) {
         for (int k = i + 1; k < m_colliders.size(); k++) {
+            // Checks the components names, if its circle collider, sets both colliders as circle colliders.
             if (m_colliders[i]->GetComponentName() == m_colliders[k]->GetComponentName()
                 && m_colliders[i]->GetComponentName() == "CircleCollider") {
                     CircleCircle((CircleCollider *)m_colliders[i],
                                 (CircleCollider *)m_colliders[k]);
+            // Checks the components names, if its rectangle collider, sets both colliders as rectangle colliders.
             } else if (m_colliders[i]->GetComponentName() == m_colliders[k]->GetComponentName()
                        && m_colliders[i]->GetComponentName() == "RectangleCollider") {
                     RectRect((RectangleCollider *)m_colliders[i],
                              (RectangleCollider *)m_colliders[k]);
+            // Checks the components names, if its circle and rectangle colliders, sets both colliders.
             } else if (m_colliders[i]->GetComponentName() != m_colliders[k]->GetComponentName()
                        && m_colliders[i]->GetComponentName() == "CircleCollider") {
                     CircleRect((CircleCollider *)m_colliders[i],
@@ -69,12 +74,16 @@ void CollisionSystem::PushColliders() {
 
     auto gameobjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
 
+    // Runs through all gameobjects.
     for (auto gameobject : gameobjects) {
+        // Gets all gameobjects.
         for (auto key : gameobject->GetAllComponents()) {
+            // Checks if the first key is not of physics.
             if (key.first != C_PHYSICS) {
                 break;
             }
             for (auto element : key.second) {
+                // Checks the component name, if its circle or rectangle colliders, sets the colliders at the end of the vector.
                 if (element->GetComponentName() == "CircleCollider"
                 || element->GetComponentName() == "RectangleCollider") {
                     m_colliders.push_back((Collider *)element);
@@ -96,10 +105,12 @@ void CollisionSystem::CircleCircle(CircleCollider *circle1, CircleCollider *circ
 
     auto circle2Center = circle2 -> GetCenter();
 
+    // Compares the distance of the center of the circle.
     if (circle1->GetCenter().GetDistance(circle2Center) <= circle1->GetRadius() + circle2->GetRadius()){
         collision = true;
     }
 
+    // Checks the collision status, and updates it.
     if (collision) {
         circle1->GetOwner()->AddCollision(circle2->GetOwner());
         circle2->GetOwner()->AddCollision(circle1->GetOwner());
@@ -120,6 +131,7 @@ void CollisionSystem::RectRect(RectangleCollider *rectangle1, RectangleCollider 
 
     auto posR2 = rectangle2->GetRectanglePoint();
 
+    // Compares the rectangles 1 and 2 positions.
     if (((posR1.m_x <= (posR2.m_x + rectangle2->GetWidth()))
         && ((posR1.m_x + rectangle1->GetWidth()) >= posR2.m_x))
         && ((posR1.m_y <= (posR2.m_y + rectangle2->GetHeight()))
@@ -128,6 +140,7 @@ void CollisionSystem::RectRect(RectangleCollider *rectangle1, RectangleCollider 
             collision = true;
     }
 
+    // Checks the collision status, and updates it.
     if (collision) {
         rectangle1->GetOwner()->AddCollision(rectangle2->GetOwner());
         rectangle2->GetOwner()->AddCollision(rectangle1->GetOwner());
@@ -163,6 +176,8 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
         TextWidth divided by 2 in addition to Circle Radius, in that case
         there is in Collision. The same logic is used on y-axis.
     */
+    
+    // Compares the rectangles distances.
     if (!((distanceX > (rectangle->GetWidth() / 2 + circle->GetRadius()))
         || (distanceY > (rectangle->GetHeight() / 2 + circle->GetRadius())))){
         //nothing to do.
@@ -174,12 +189,15 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
         crosses the rect vertice) is lesser than circle radius^2, in that case,
         collision occurs.
     */
+
+    // Compares the rectangle distances.
     if (((distanceX <= (rectangle->GetWidth() / 2)) || (distanceY <= (rectangle -> GetHeight() / 2)))
         || (((distancex * distancex) + (distancey *distancey))
         <= (circle->GetRadius() *circle->GetRadius()))) {
         collision = true;
     }
 
+    // Checks the collision status, and updates it.
     if (collision) {
         circle->GetOwner()->AddCollision(rectangle->GetOwner());
         rectangle->GetOwner()->AddCollision(circle->GetOwner());

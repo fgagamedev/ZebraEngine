@@ -57,7 +57,7 @@ private:
 
     // Game attributes
     bool m_isRunning;
-    int m_framerate;
+    int m_frameRate;
     int m_frameCounter;
 
     // Integer types with a width of exactly 32 bits

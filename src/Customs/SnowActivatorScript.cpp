@@ -5,7 +5,7 @@
 */
 #include "Customs/SnowActivatorScript.hpp"
 #include "Globals/EngineGlobals.hpp"
-#include "Customs/CentralLightScript2.hpp"
+#include "Customs/LeftCenterLightScript.hpp"
 #include "Customs/MapScript.hpp"
 
 /**
@@ -96,8 +96,8 @@ void SnowActivatorScript::ComponentUpdate() {
     }
     // Check if the snow animation has run.
     if (m_runnedAnimation) {
-        // Get the CentralLightScript2 of the current scene.
-        auto script = (CentralLightScript2*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("CENTRAL LIGHT 2")->GetComponent("CentralLightScript2");
+        // Get the LeftCenterLightScript of the current scene.
+        auto script = (LeftCenterLightScript*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("CENTRAL LIGHT 2")->GetComponent("LeftCenterLightScript");
         script->Activate();
         // Get the MapScript of the current scene.
         auto map = (MapScript*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->GetComponent("MapScript");

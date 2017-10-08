@@ -56,7 +56,7 @@ private:
     // Mouse states
     Uint32 m_mouseStates = 0;
     Uint32 m_oldMouseStates = 0;
-    int m_mouseX, m_mouseY;
+    int m_mouseHorizontal, m_mouseVertical;
 
     // Game controllers
     std::vector<GameController *> m_gameControllers;

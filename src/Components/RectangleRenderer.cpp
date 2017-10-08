@@ -26,12 +26,12 @@ RectangleRenderer::RectangleRenderer(GameObject *owner, Vector offset,
 */
 void RectangleRenderer::ComponentUpdate() {
     // Draw and fill the rectangle's color.
-    int x = GetOwner()->GetPosition()->m_x + m_offset.m_x;
+    int positionX = GetOwner()->GetPosition()->m_x + m_offset.m_x;
     // sets the vertical position
-    int y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
+    int positionY = GetOwner()->GetPosition()->m_y + m_offset.m_y;
     // sets the position using x and y values
-    auto pos = Vector(x, y);
-    GraphicsSystem::GetInstance()->DrawFillRectangle(pos, m_width, m_height,
+    auto position = Vector(positionX, positionY);
+    GraphicsSystem::GetInstance()->DrawFillRectangle(position, m_width, m_height,
                                                      m_red, m_green, m_blue,
                                                      m_alpha);
 }

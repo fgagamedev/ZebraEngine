@@ -41,6 +41,7 @@ void Image::LoadImage(std::string path, int _x, int _y, int _width, int _height)
     // Responsible for loading the image and checking for errors.
     SDL_Surface *surface = IMG_Load(path.c_str());
 
+    // Checks if the surface exists, if not, return an error message. 
     if (!surface) {
         ERROR(IMG_GetError());
     }
@@ -49,6 +50,7 @@ void Image::LoadImage(std::string path, int _x, int _y, int _width, int _height)
                                              -> GetRenderer(),
                                              surface);
 
+    // Checks if the texture exists, if not, return an error message.                                          
     if (!m_texture) {
         ERROR(SDL_GetError());
     }
@@ -79,12 +81,14 @@ SDL_Rect *Image::GetRect() {
 }
 
 void Image::SetPivot(int _x, int _y) {
+    // Checks for the pointer of the image, if not, set it.
     if (!m_sdlPivotPtr) {
         m_sdlPivotPtr = &m_sdlPivot;
     }
     m_sdlPivot.x = _x;
     m_sdlPivot.y = _y;
 
+    // Checks for the pivot pointer of the image, if not, set it.
     if (!m_pivot) {
         m_pivot = new Vector(0, 0);
     }
@@ -102,9 +106,13 @@ void Image::Flip(bool horizontal, bool vertical) {
     m_verticalFlip = vertical;
 
     SDL_RendererFlip flag = SDL_FLIP_NONE;
+
+    // Checks the image orientation, if horizontal, sets a flag. 
     if (horizontal) {
         flag = SDL_FLIP_HORIZONTAL;
     }
+    
+    // Checks the image orientation, if vertical, sets a flag. 
     if (vertical) {
         flag = (SDL_RendererFlip)(flag | SDL_FLIP_VERTICAL);
     }

@@ -153,25 +153,26 @@ void GamePlayScene::CreateSnowActivator(){
 */
 void GamePlayScene::CreateCentralLights(){
 
-    auto centralLight1= new GameObject("CENTRAL LIGHT 1",
+    auto bottomCenterLight = new GameObject("CENTRAL LIGHT 1",
                                        new Vector(424,422),192,192,1);
-    auto  centralLight1Script = new CentralLightScript1(centralLight1);
-    AddGameObject(centralLight1);
+    auto  bottomCenterLightScript = new CentralLightScript1(bottomCenterLight);
+    AddGameObject(bottomCenterLight);
 
-    auto centralLight2= new GameObject("CENTRAL LIGHT 2",
+    auto leftCenterLight = new GameObject("CENTRAL LIGHT 2",
                                        new Vector(309,308),192,192,1);
-    auto  centralLight2Script = new CentralLightScript2(centralLight2);
-    AddGameObject(centralLight2);
+    auto  leftCenterLightScript = new LeftCenterLightScript(leftCenterLight);
+    AddGameObject(leftCenterLight);
 
-    auto centralLight3= new GameObject("CENTRAL LIGHT 3",
+    auto rightCenterLight = new GameObject("CENTRAL LIGHT 2",
                                        new Vector(542,308),192,192,1);
-    auto  centralLight3Script = new CentralLightScript3(centralLight3);
-    AddGameObject(centralLight3);
+    auto  rightCenterLightScript = new CentralLightScript3(rightCenterLight);
+    AddGameObject(rightCenterLight);
 
-    auto centralLight4= new GameObject("CENTRAL LIGHT 4",
+    auto topCenterLight = new GameObject("CENTER LIGHT 4",
                                        new Vector(424,197),192,192,1);
-    auto  centralLight4Script = new CentralLightScript4(centralLight4);
-    AddGameObject(centralLight4);
+    auto  topCenterLightScript = new TopCenterLightScript(topCenterLight);
+    AddGameObject(topCenterLight);
+
 
 }
 
@@ -202,7 +203,7 @@ void GamePlayScene::CreateNakedMan() {
     effect he will have when he is found.
 */
 void GamePlayScene::CreateFirstBoss() {
-    /** Boss Inside FX **/
+    // Boss Inside FX
     auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect",
                                                  new Vector(0,0),211.86,211.86, 1);
     auto firstBossCentralEffectScript = new FirstBossCentralEffectScript(FirstBossCentralEffect);
@@ -210,7 +211,7 @@ void GamePlayScene::CreateFirstBoss() {
     FirstBossController::GetInstance()->AddInsideBossFx(FirstBossCentralEffect);
     FirstBossController::GetInstance()->DeactivateInsideBossFx();
 
-    /** Boss **/
+    // Boss.
     auto firstBoss = new GameObject("FirstBoss", new Vector(-3350,-1600),690,930, 2);
 
     // Tag.
@@ -231,6 +232,7 @@ void GamePlayScene::CreateFirstBoss() {
 */
 void GamePlayScene::CreateFirstBossAttack() {
 
+    // Create the tentacle of boss attack and the effects.
     for (int i = 1; i < 5; i++) {
         std::string tentacleName = "FirstBossAttack" + std::to_string(i);
         auto firstBossAttack = new GameObject(tentacleName,
@@ -268,9 +270,7 @@ void GamePlayScene::CreateFirstBossAttack() {
         AddGameObject(firstBossAttack);
         FirstBossController::GetInstance()->AddTentacle(firstBossAttack);
 
-        //bullet->active = false;
-
-    }
+    } // for -- Create the tentacle of boss attack and the effects.
 }
 /**
     @brief Responsible for creating the first boss life by setting the
@@ -306,7 +306,7 @@ void GamePlayScene::CreateFirstBossLife() {
 */
 void GamePlayScene::CreatePlayerAttack() {
 
-    /** Creating Bullets **/
+    // Creating Bullets
     for (int i = 1; i < 11; i++) {
         std::string bulletName = "Bullet" + std::to_string(i);
         auto bullet = new GameObject(bulletName, new Vector(100 * i, 0), 15, 15, 2);
@@ -320,11 +320,9 @@ void GamePlayScene::CreatePlayerAttack() {
         AudioController::GetInstance()->AddAudio(bulletSound);
 
         bullet->active = false;
-
-        //MissileController::GetInstance()->AddPlayer(bullet);
-        //bullet->active = false;
     }
-    /** Bullet Counter **/
+
+    // Bullet Counter
     auto bulletCounter = new GameObject("Score", new Vector(0, 0), 75 , 75, 2);
     bulletCounter->SetTag("BulletCounter");
     auto bulletText = new UIText(bulletCounter, "10",

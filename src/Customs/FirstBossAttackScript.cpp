@@ -11,7 +11,7 @@
     @brief Constructor for the FirstBossAttackScript class.
 */
 FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) : Script(owner) {
-  
+
 }
 
 /**
@@ -28,6 +28,8 @@ void FirstBossAttackScript::Start() {
     m_input = InputSystem::GetInstance();
     auto map = SceneManager::GetInstance()->
                              GetScene("Gameplay")->GetGameObject("Map");
+
+    // Checks map status to set its properties.
     if (map) GetOwner()->SetZoomProportion(
                        Vector(map->originalWidth/GetOwner()->originalWidth,
                               map->originalHeight/GetOwner()->originalHeight));
@@ -47,6 +49,8 @@ void FirstBossAttackScript::CreateAnimations() {
     //Surge Animation.
     auto firstBossAttackSurgeAnimation = new Animation(GetOwner(),
                                                        firstBossAttackImage);
+
+    // Sets the frames for the first boss animation.
     for (int counter = 0; counter < 15; counter++) {
         firstBossAttackSurgeAnimation->AddFrame(new Frame(counter * 40, 0,
                                                             40, 151));
@@ -60,6 +64,8 @@ void FirstBossAttackScript::CreateAnimations() {
     //Gone Animation.
     auto firstBossAttackGoneAnimation = new Animation(GetOwner(),
                                                     firstBossAttackImage );
+
+    // Sets the frames for the gone boss attack animation.
     for (int counter = 14; counter != 0; counter--) {
         firstBossAttackGoneAnimation->AddFrame(new Frame(counter * 40, 0,
                                                                    40, 151));
@@ -89,10 +95,13 @@ void FirstBossAttackScript::ComponentUpdate() {
         Checks if the attack variable is true,
         if it starts the attack function.
     */
+
+    // Checks the attack status.
     if(attack) {
        Attack();
     }
 
+    // Checks the input system status set the attack status.
     if(InputSystem::GetInstance()->GetKeyUp(INPUT_M) && attack == false){
         attack = true;
     }
@@ -105,6 +114,7 @@ void FirstBossAttackScript::ComponentUpdate() {
 void FirstBossAttackScript::FixedComponentUpdate() {
     timerAnimation.Update(EngineGlobals::fixed_update_interval);
 
+    // Checks the status of the deasactivateobject.
     if (desactivateObj){
         timerGone.Update(EngineGlobals::fixed_update_interval);
     }
@@ -121,6 +131,7 @@ void FirstBossAttackScript::Attack() {
         and sets the sound effect.
     */
 
+    // Checks surge animation status to set its properties.
     if (m_surgeAnimation) {
         CameraSystem::GetInstance()->CameraShake(8,3, SceneManager::GetInstance()
                                                  -> GetCurrentScene());
@@ -132,9 +143,12 @@ void FirstBossAttackScript::Attack() {
 
     }
 
+    // Compares the idle animation, to activate the animator.
     if (m_idleAnimation && timerAnimation.GetTime() >= 1 * 1000) {
         m_animator -> PlayAnimation("firstBossAttackIdleAnimation");
     }
+
+    // Checks gone animation status to set its properties.
     if (goneAnimation) {
         m_animator->PlayAnimation("firstBossAttackGoneAnimation");
         AudioController::GetInstance() -> PlayAudio("fourthAttackSound", 0);
@@ -145,6 +159,8 @@ void FirstBossAttackScript::Attack() {
         desactivateObj = true;
         GetOwner()->active = false;
     }
+
+    // Compares the timer gone animation to update the desactivateobj.
     if(timerGone.GetTime() >= 1 * 1000) {
         timerGone.Restart();
         desactivateObj = false;
@@ -153,11 +169,13 @@ void FirstBossAttackScript::Attack() {
 
 void FirstBossAttackScript::CameraShakeAttack(){
     // Creates the effect that makes the camera shake.
-    if (shake) {
+
+    // Checks shake status to update its properties.
+    if (cameraShake) {
         CameraSystem::GetInstance() -> CameraShake(8, 1, SceneManager::GetInstance()
                                                    -> GetCurrentScene());
         if (!CameraSystem::GetInstance() -> IsShaking()){
-            shake = false;
+            cameraShake = false;
         }
   }
 }

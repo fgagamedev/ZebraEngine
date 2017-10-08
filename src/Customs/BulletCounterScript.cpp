@@ -19,8 +19,8 @@ BulletCounterScript::BulletCounterScript(GameObject *owner) : Script(owner) {
     @brief Starts the Bullet Counter position.
 */
 void BulletCounterScript::Start() {
-    position = GetOwner()->GetPosition();
-    GetOwner()->SetZoomProportion(Vector(0,0));
+    counter_position = GetOwner()->GetPosition();
+    GetOwner()->SetZoomProportion(Vector(0, 0));
 }
 
 /**
@@ -35,14 +35,14 @@ void BulletCounterScript::ComponentUpdate() {
     m_numberBullet = nakedManScript->bulletNumber;
 
     // Update the text of the left number of bullets.
-    auto var = (UIText *)GetOwner()->GetComponent("UIText");
-    var->SetText(std::to_string(m_numberBullet));
+    auto counterText = (UIText *)GetOwner()->GetComponent("UIText");
+    counterText->SetText(std::to_string(m_numberBullet));
 }
 
 /**
     @brief Set the Bullet Counter's x and y positions.
 */
 void BulletCounterScript::FixedComponentUpdate() {
-    position->m_x = 900;
-    position->m_y = 700;
+    counter_position->m_x = 900;
+    counter_position->m_y = 700;
 }

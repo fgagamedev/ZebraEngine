@@ -28,7 +28,7 @@ GameObject::GameObject(std::string name, Vector *position,
     originalHeight = height;
 }
 
-// Destructor
+// Destructor.
 GameObject::~GameObject() {
     delete m_position;
     delete m_position;
@@ -177,7 +177,7 @@ void GameObject::FixedUpdate() {
     @brief that function is for set the size based on width and height.
     @param[in] width and height in centimeters.
 */
-void GameObject::SetSize(int width, int height){
+void GameObject::SetSize(int width, int height) {
     // Sets the gameobject width and height with the given values.
     m_width = width;
     m_height = height;

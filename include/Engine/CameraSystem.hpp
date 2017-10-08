@@ -49,8 +49,8 @@ class CameraSystem{
         }
 
         void SetCameraSpeed(int speed);
-        void SetAndMovePos_x(float x);
-        void SetAndMovePos_y(float y);
+        void SetAndMovePos_x(float axisX);
+        void SetAndMovePos_y(float axisY);
 
         // Camera shake.
         bool IsShaking() {
