@@ -748,14 +748,14 @@ void NakedManScript::ComponentUpdate() {
     if ((CameraSystem::GetInstance()->worldCameraY < 3435)
          && (CameraSystem::GetInstance()->worldCameraX > 3410)
          && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
-        rainScript->play = 1;
+        rainScript->m_play = 1;
     }
 
     // Deactivate rainScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraY > 3435)
          && (CameraSystem::GetInstance()->worldCameraX > 3410)
          && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
-        rainScript->play = 0;
+        rainScript->m_play = 0;
     }
 
    // Activate snowScript based in position of camera
