@@ -160,8 +160,9 @@ void FirstBossScript::FixedComponentUpdate() {
     happen, etc.
 */
 void FirstBossScript::Attack() {
+    // Check if the game object is active to start the attack.
     if (GetOwner()->active) {
-        // Rand first attack or second attack
+        // If the cooldown has end, do a new attack.
         if (m_timerAttackCooldown.GetTime() >= 9 * 1000) {
             // Choose a new number
             m_randomNumber = rand() % 2;
@@ -169,30 +170,41 @@ void FirstBossScript::Attack() {
             cout << m_randomNumber << endl;
         }
 
+        /*
+        Play the first boss's jump animation if is the second attack and it
+        doesn't has fall.
+        */
         if (m_randomNumber == 0 && m_secondAttackFall == false) {
             m_secondAttack = true;
             m_animator->PlayAnimation("firstBossJumpAnimation");
         }
 
+        // Check if the current attack is the first.
         if (m_randomNumber == 1) {
             m_firstAttack = true;
-            // First Attack
+            /*
+            Check if the first attack isn't in the cooldown and hasn't been
+            used more than 3 times.
+            */
             if (m_timerFirstAttackCooldown.GetTime() >= 2 * 1000
                     && m_firstAttackCounter < 3) {
                 FirstBossController::GetInstance()->FirstAttackSurge();
+                // Restart the timer for the first attack and add to the counter.
                 m_timerFirstAttackCooldown.Restart();
                 m_firstAttackCounter++;
                 // Delay for next sord
             }
+            // If is the fourth first attack, set the first attack as gone.
             if (m_firstAttackCounter == 3) {
                 // Activate timer to gone tentacle
                 m_goneFirstAttack = true;
             }
 
-            // Wait 6 seconds to make attack gone
+            // Wait 2 seconds to make attack gone
             if (m_timerFirstAttackGone.GetTime() >= 2 * 1000) {
                 FirstBossController::GetInstance()->FirstAttackGone();
 
+                // Reset the first attack attributes.
                 m_firstAttackCounter = 0;
                 m_goneFirstAttack = false;
                 m_timerFirstAttackGone.Restart();
@@ -201,7 +213,7 @@ void FirstBossScript::Attack() {
             }
         }
 
-        if ((m_timerSecondAttack.GetTime() >= 0.5*1000) && m_secondAttack) {
+        if ((m_timerSecondAttack.GetTime() >= 0.5 * 1000) && m_secondAttack) {
             if (GetOwner()->GetPosition()->m_y > -1900) {
                 Vector *newPosition = GetOwner()->GetPosition();
 
@@ -214,7 +226,8 @@ void FirstBossScript::Attack() {
             }
         }
 
-        if (m_timerSecondAttackFall.GetTime() >= 2*1000 && m_secondAttackFall) {
+        // Check if it is time to end the fall of the second attack.
+        if (m_timerSecondAttackFall.GetTime() >= 2 * 1000 && m_secondAttackFall) {
             // Get player Position
             m_player = SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
             m_playerPosition.m_x = m_player->GetPosition()->m_x - 160;
@@ -223,11 +236,17 @@ void FirstBossScript::Attack() {
 
             std::cout << m_playerPosition.m_x << "  " << m_playerPosition.m_y << std::endl;
 
+            // Set the horizontal position of the boss's fall.
             GetOwner()->m_position->m_x = m_playerPosition.m_x;
+            /*
+            Check the vertical position of the boss's fall and change it
+            depending of the player's position besides play the fall animation.
+            */
             if (GetOwner()->m_position->m_y < m_playerPosition.m_y) {
                 GetOwner()->m_position->m_y += 90;
                 m_shakeCamera = true;
                 m_animator->PlayAnimation("firstBossFallAnimation");
+            // Don't fall and don't shake the camera.
             } else {
                 m_secondAttackFall = false;
                 m_shakeCamera = false;
