@@ -27,10 +27,13 @@ void LeftCenterLightScript::Start() {
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
 
-    if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()
+    // If map variable is initialized, sets its configs.
+    if (map) {
+        GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()
                                                     ->originalWidth,map
                                                     ->originalHeight/GetOwner()
                                                     ->originalHeight));
+    }
 }
 
 /**

@@ -12,8 +12,10 @@ AudioController *AudioController::m_instance = nullptr;
     @brief Checking the current game's audio state.
     @return m_instance.
 */
-AudioController *AudioController::GetInstance() { 
-    //Singleton class
+AudioController *AudioController::GetInstance() {
+    // Singleton class
+
+    // If the m_instance is not initialized, intializes it.
     if (!m_instance){
         m_instance = new AudioController();
     }
@@ -22,7 +24,7 @@ return m_instance;
 
 //Constructor void
 AudioController::AudioController() {
-} 
+}
 
 /**
     @brief Initializes a sound object.
@@ -41,6 +43,10 @@ void AudioController::AddAudio(UISound *sound) {
 void AudioController::PlayAudio(string name, int loops){
     // Play
     for (auto sound : m_sounds) {
+        /*
+        If the message is correspondent to the sound component name, plays
+        the sound.
+        */
         if(sound->GetMessage() == name) {
             sound->Play(loops, -1);
         }
@@ -54,6 +60,10 @@ void AudioController::PlayAudio(string name, int loops){
 void AudioController::StopAudio(string name){
     // Stop
     for (auto sound : m_sounds) {
+        /*
+        If the message is correspondent to the sound component name, stops
+        the sound.
+        */
         if(sound->GetMessage() == name) {
             sound->Stop(-1);
         }
@@ -68,6 +78,10 @@ void AudioController::StopAudio(string name){
 void AudioController::PauseAudio(string name){
     // Pause
     for (auto sound : m_sounds) {
+        /*
+        If the message is correspondent to the sound component name, stops
+        the sound.
+        */
         if(sound->GetMessage() == name){
             sound->Stop(-1);
         }
