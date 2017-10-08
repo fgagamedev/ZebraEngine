@@ -17,10 +17,10 @@ RainScript::RainScript(GameObject *owner) : Script(owner) {}
 void RainScript::Start() {
     // Create the animations and the animator for the rain script.
     CreateAnimations();
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
     // Get the input.
-    input = InputSystem::GetInstance();
+    m_input = InputSystem::GetInstance();
     // Set the zoom proportion.
     GetOwner()->SetZoomProportion(Vector(0,0));
 }
@@ -46,15 +46,15 @@ void RainScript::CreateAnimations() {
 */
 void RainScript::ComponentUpdate() {
     if (play == 1) {
-        animator->PlayAnimation("rainAnimation");
+        m_animator->PlayAnimation("rainAnimation");
     }
 
-    if (input->GetKeyDown(INPUT_R) && play == 0) {
+    if (m_input->GetKeyDown(INPUT_R) && play == 0) {
         AudioController::GetInstance()->PlayAudio("rainSound", -1);
         play = 1;
-    } else if (input->GetKeyDown(INPUT_R) && play == 1) {
+    } else if (m_input->GetKeyDown(INPUT_R) && play == 1) {
         play = 0;
-        animator->StopAllAnimations();
+        m_animator->StopAllAnimations();
     }
 }
 
@@ -63,6 +63,6 @@ void RainScript::ComponentUpdate() {
 */
 void RainScript::FixedComponentUpdate() {
     // Set the positions X and Y of the component.
-    position->m_x = 0;
-    position->m_y = 0;
+    m_position->m_x = 0;
+    m_position->m_y = 0;
 }

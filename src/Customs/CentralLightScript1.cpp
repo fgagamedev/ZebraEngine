@@ -17,11 +17,11 @@ CentralLightScript1::CentralLightScript1(GameObject *owner) : Script(owner) {}
 void CentralLightScript1::Start() {
     // Creates the animations and the animator for the script.
     CreateAnimations();
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
     // Get the inputs.
-    input = InputSystem::GetInstance();
-    gamecontroller = input->GetGameController(0);
+    m_input = InputSystem::GetInstance();
+    m_gameController = m_input->GetGameController(0);
     // Set the zoom and get the map of the scene.
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
@@ -52,9 +52,9 @@ void CentralLightScript1::CreateAnimations(){
     @brief Handles with changes on the component.
 */
 void CentralLightScript1::ComponentUpdate() {
-    if (!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active) {
+    if (!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active) {
         // Play the animation CENTRAL LIGHT ANIMATION
-        animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
+        m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
 }
 

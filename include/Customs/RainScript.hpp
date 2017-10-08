@@ -35,11 +35,11 @@ protected:
 private:
     void CreateAnimations();
     // Object for inputs in the rain script.
-    InputSystem *input = nullptr;
+    InputSystem *m_input = nullptr;
     // Animator for the rain script.
-    Animator *animator = nullptr;
+    Animator *m_animator = nullptr;
     // Object that store positions in the game.
-    Vector *position = nullptr;
+    Vector *m_position = nullptr;
 };
 
 #endif
