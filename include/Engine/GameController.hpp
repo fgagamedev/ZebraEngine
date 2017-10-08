@@ -33,8 +33,8 @@ private:
     int m_buttonsQnt = 0;
     int m_axesQnt = 0;
 
-    std::vector<int> m_oldButtonsStates;
-    std::vector<int> m_currentButtonsStates;
+    std::vector<int> m_oldButtonsStates = {};
+    std::vector<int> m_currentButtonsStates = {};
 };
 
 #endif // __GAME_CONTROLLER__
