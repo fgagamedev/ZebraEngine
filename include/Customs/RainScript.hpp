@@ -27,7 +27,7 @@ public:
     void FixedComponentUpdate() override;
     void Start() override;
     // Store if the animation must be played.
-    int play = 0;
+    int m_play = 0;
 
 protected:
     void ComponentUpdate() override;

@@ -25,19 +25,20 @@ void CentralLightScript1::Start() {
     // Set the zoom and get the map of the scene.
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    // Check if the map from the scene exists.
     if (map) {
         // Set the zoom for the map.
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->
-        originalWidth,map->originalHeight/GetOwner()->originalHeight));
+               originalWidth,map->originalHeight / GetOwner()->originalHeight));
     }
 }
 
 /**
     @brief Generates the animations on the screen.
 */
-void CentralLightScript1::CreateAnimations(){
+void CentralLightScript1::CreateAnimations() {
     // Create the animation.
-    auto centrallightSprite = new Image("assets/centro4.png", 0, 0,832, 64);
+    auto centrallightSprite = new Image("assets/centro4.png", 0, 0, 832, 64);
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
     centrallightAnimation->AddFrame(new Frame(0, 0, 64, 64));
 
@@ -52,6 +53,7 @@ void CentralLightScript1::CreateAnimations(){
     @brief Handles with changes on the component.
 */
 void CentralLightScript1::ComponentUpdate() {
+    // Play the CENTRAL LIGHT ANIMATION if isn't being played and is active.
     if (!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active) {
         // Play the animation CENTRAL LIGHT ANIMATION
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
