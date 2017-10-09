@@ -42,6 +42,8 @@ class GraphicsSystem {
         // constructor and destructor
         GraphicsSystem();
         ~GraphicsSystem();
+
+        const int noErrorReturnValue = 0;
 };
 
 #endif // __GRAPHICS_SYSTEM__

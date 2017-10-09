@@ -55,7 +55,7 @@ void GraphicsSystem::Draw(Image *img, Vector *position,
                               img->GetRotationAngle(), img->GetSDLPivot(),
                               img->GetSDLFlip());
     // Check if the SDL_RenderCopyEx returned a error.
-    if (result < 0) {
+    if (result < noErrorReturnValue) {
         // Show a error message.
         ERROR(SDL_GetError());
     }
@@ -81,7 +81,7 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,
                               img->GetSDLFlip());
 
     // Check if the SDL_RenderCopyEx returned a error.
-    if (result < 0) {
+    if (result < noErrorReturnValue) {
         // Show a error message.
         ERROR(SDL_GetError());
     }
@@ -130,7 +130,7 @@ void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 redValue,
         int result = SDL_RenderDrawPoint(SDLSystem::GetInstance()->GetRenderer(),
         point.m_x, point.m_y);
         // Check if the SDL_RenderDrawPoint returned a error.
-        if (result < 0) {
+        if (result < noErrorReturnValue) {
             // Show a error message.
             ERROR(SDL_GetError());
         }
@@ -159,7 +159,7 @@ void GraphicsSystem::DrawFillCircle(Vector &center, float radius,
         point.m_y);
 
         // Check if the SDL_RenderDrawLine returned a error.
-        if (result < 0) {
+        if (result < noErrorReturnValue) {
             // Show a error message.
             ERROR(SDL_GetError());
         }
@@ -188,7 +188,7 @@ void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
     &rect);
 
     // Check if the SDL_RenderFillRect returned a error.
-    if (result < 0) {
+    if (result < noErrorReturnValue) {
         // Show a error message.
         ERROR(SDL_GetError());
     }
@@ -215,7 +215,7 @@ void GraphicsSystem::DrawFillRectangle(SDL_Rect* source, int width, int height,
     int result = SDL_RenderFillRect(SDLSystem::GetInstance()->GetRenderer(),
                                     &rect);
     // Check if the SDL_RenderFillRect returned a error.
-    if (result < 0) {
+    if (result < noErrorReturnValue) {
         // Show a error message.
         ERROR(SDL_GetError());
     }
