@@ -86,8 +86,8 @@ private:
   std::vector<GameObject *> m_lifeBars;
 
   //Positions
-  int m_widthPosition;
-  int m_heightPosition;
+  int m_widthPosition = 0;
+  int m_heightPosition = 0;
 
   // Variable count of tentacles released by boss attack.
   int m_currentTentacle = 1;

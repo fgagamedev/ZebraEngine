@@ -34,7 +34,7 @@ public:
     void Start() override;
 
     // Boolean variable that is responsible for saying whether or not.
-    bool hit =  false;
+    bool hit = false;
 
 private:
 
