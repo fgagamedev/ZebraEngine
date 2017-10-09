@@ -98,7 +98,7 @@ public:
     std::vector<GameObject *> GetCollisions();
 
     // Sets the position of a gameobject, type vector.
-    Vector *m_position = new Vector(0,0);
+    Vector *m_position = new Vector(0, 0);
 
 private:
     // Map of components.
@@ -113,7 +113,7 @@ private:
     // Sets the height of a gameobject.
     int m_height = 0;
 
-    Vector *zoomProportion = new Vector(1,1);
+    Vector *zoomProportion = new Vector(1, 1);
 
     //An unsigned 8-bit integer type sets the gameobject's layer.
     Uint8 m_componentLayer;

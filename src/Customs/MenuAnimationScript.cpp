@@ -2,6 +2,9 @@
 
 #include <stdio.h>
 
+const int quantityFrame = 16;
+const int framePerSecond = 10;
+
 // Constructor
 MenuAnimationScript::MenuAnimationScript(GameObject *owner) : Script(owner) {
 
@@ -36,17 +39,17 @@ void MenuAnimationScript::CreateAnimations() {
         A for loop defines the frames in the main animation and in the second main animation.
     */
     auto mainAnimation = new Animation(GetOwner(), mainSprite);
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < quantityFrame; i++) {
         mainAnimation->AddFrame(new Frame(i * 341, 0, 341, 256));
     }
 
     auto mainAnimation2 = new Animation(GetOwner(), mainSprite);
-    for (int i = 0; i <16; i++) {
+    for (int i = 0; i < quantityFrame; i++) {
         mainAnimation2->AddFrame(new Frame(i * 341, 256, 341, 256));
     }
 
-    mainAnimation->SetFramesPerSecond(10);
-    mainAnimation2->SetFramesPerSecond(10);
+    mainAnimation->SetFramesPerSecond(framePerSecond);
+    mainAnimation2->SetFramesPerSecond(framePerSecond);
 
     MenuAnimationScriptAnimator->AddAnimation("mainAnimation", mainAnimation);
     MenuAnimationScriptAnimator->AddAnimation("mainAnimation2", mainAnimation2);

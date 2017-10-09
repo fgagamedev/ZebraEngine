@@ -7,6 +7,8 @@
 #include "Customs/MainScene.hpp"
 #include "Customs/MenuAnimationScript.hpp"
 
+const int middlePosition = 2;
+
 MainScene::MainScene() {
 
 }
@@ -17,15 +19,14 @@ MainScene::MainScene() {
 */
 void MainScene::OnActivation() {
     // On activation, gets the screen width and height to middle position the basic components of the game.
-    m_widthMiddle = EngineGlobals::screen_width / 2;
-    m_heightMiddle = EngineGlobals::screen_height / 2;
+    m_widthMiddle = EngineGlobals::screen_width / middlePosition;
+    m_heightMiddle = EngineGlobals::screen_height / middlePosition;
     CreateLogo();
     CreatePlayButton();
     CreateQuitButton();
     CreateMusic();
     CreateAnimation();
-    //CreateBackground();
-    //CreateGamemodes();
+
 }
 
 /**
@@ -62,7 +63,7 @@ void MainScene::CreateLogo() {
         Setting and render the game logo image in the middle of the screen,
         in a gameobject.
     */
-    int xMiddle = EngineGlobals::screen_width / 2 - 240;
+    int xMiddle = EngineGlobals::screen_width / middlePosition - 240;
 
     auto logo = new GameObject("Logo", new Vector(-30,0), 1024, 800,1);
 
@@ -81,7 +82,7 @@ void MainScene::CreatePlayButton() {
         Position the play button and its text, by setting the new gameobject in the
         middle position of the screen, and instantiates the sound of the button.
     */
-    int xMiddle = EngineGlobals::screen_width / 2 - 100;
+    int xMiddle = EngineGlobals::screen_width / middlePosition - 100;
     auto play = new GameObject("Play", new Vector(xMiddle, 400), 200, 100,1);
     auto playText = new UIText(play, "Play", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                                200, 255, 255, 255, 150, 1);
@@ -97,11 +98,12 @@ void MainScene::CreatePlayButton() {
 */
 void MainScene::CreateQuitButton() {
     /*
-        Position the quit button and its text, by setting the new gameobject in the
+        Position the quit button and its text, by setting the new gameobject in the    //CreateBackground();
+    //CreateGamemodes();
         middle position of the screen, and instantiates the sound of the button.
     */
-    int xMiddle = EngineGlobals::screen_width / 2 - 100;
-    auto quit = new GameObject("Quit", new Vector(xMiddle, 500), 200, 100,1);
+    int xMiddle = EngineGlobals::screen_width / middlePosition - 100;
+    auto quit = new GameObject("Quit", new Vector(xMiddle, 500), 200, 100, 1);
     auto quitText = new UIText(quit, "Quit", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                                200, 255, 255, 255, 150, 1);
     auto quitButton = new UIButton(quit);
@@ -117,7 +119,7 @@ void MainScene::CreateQuitButton() {
 */
 void MainScene::CreateAnimation() {
     // Create a gameobject for the background animation and its script, and a vector with its positions.
-    auto BackgroundAnimation = new GameObject("BackgroundAnimation", new Vector(0 ,0),1024,800,0);
+    auto BackgroundAnimation = new GameObject("BackgroundAnimation", new Vector(0 ,0), 1024, 800, 0);
     auto backgroundAnimationScript = new MenuAnimationScript(BackgroundAnimation);
     AddGameObject(BackgroundAnimation);
 }
