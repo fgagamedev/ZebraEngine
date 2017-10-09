@@ -27,8 +27,9 @@ void UIButton::Start() {
     @return Boolean.
 */
 bool UIButton::IsClicked() {
-    if (IsOver() && InputSystem::GetInstance()->GetMouseButtonDown(M_INPUT_LEFT))
+    if (IsOver() && InputSystem::GetInstance()->GetMouseButtonDown(M_INPUT_LEFT)) {
         return true;
+    }
     return false;
   }
 
