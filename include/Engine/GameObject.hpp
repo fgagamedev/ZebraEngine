@@ -60,7 +60,7 @@ public:
     inline void SetTag(std::string tag) { m_tag = tag; };
     inline std::string GetTag() { return m_tag; };
   
-    inline Uint8 GetLayer() { return m_layer; };
+    inline Uint8 GetLayer() { return m_componentLayer; };
     Vector GetVelocity();
 
     // Operator overload
@@ -97,7 +97,7 @@ private:
     Vector *zoomProportion = new Vector(1,1);
 
     //An unsigned 8-bit integer type sets the gameobject's layer.
-    Uint8 m_layer;
+    Uint8 m_componentLayer;
     std::string m_tag = "";
 
     //Sets the velocity of the gameobject, type vector.

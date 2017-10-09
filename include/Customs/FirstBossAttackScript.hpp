@@ -46,7 +46,7 @@ public:
   bool cameraShake =  false;
 
   // Bollean variable that store false or true for desactivate object.
-  bool desactivateObj = false;
+  bool deactivateObj = false;
 
 
 private:
