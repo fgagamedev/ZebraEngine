@@ -1,7 +1,7 @@
 #include "Customs/LightScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
-const int middlePosition = 2middlePosition
+const int middlePosition = 2;
 
 LightScript::LightScript(GameObject *owner) : Script(owner) {}
 
