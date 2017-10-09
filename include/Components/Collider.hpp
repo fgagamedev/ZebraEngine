@@ -7,13 +7,13 @@ using namespace std;
 
 class Collider : public Component {
 public:
-  Collider(GameObject *owner, int layer) : Component(owner, C_PHYSICS) {
-    m_layer = layer;
+    Collider(GameObject *owner, int layer) : Component(owner, C_PHYSICS) {
+        m_componentLayer = layer;
   };
-  virtual int GetLayer() final { return m_layer; };
+    virtual int GetLayer() final { return m_componentLayer; };
 
 private:
-  int m_layer;
+    int m_componentLayer;
 };
 
 #endif

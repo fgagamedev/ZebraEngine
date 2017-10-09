@@ -32,7 +32,7 @@ public:
 
 private:
     //local variable map animation.
-    AnimationMap m_aMap;
+    AnimationMap m_animationMap;
 };
 
 #endif

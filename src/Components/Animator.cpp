@@ -18,7 +18,7 @@ Animator::Animator(GameObject *owner) : Component(owner, C_DRAW) {}
     @param[in] animation Value of the element.
 */
 void Animator::AddAnimation(std::string name, Animation *animation) {
-    m_aMap.emplace(name, animation);
+    m_animationMap.emplace(name, animation);
 }
 
 /**
@@ -26,7 +26,7 @@ void Animator::AddAnimation(std::string name, Animation *animation) {
     @param[in] name Key of the targeted animation.
 */
 void Animator::PlayAnimation(std::string name) {
-    for (auto result : m_aMap) {
+    for (auto result : m_animationMap) {
         // Checks if the first result of the variable has the same name of a given animation.
         if (result.first == name) {
             // sets the state of the animation
@@ -43,9 +43,9 @@ void Animator::PlayAnimation(std::string name) {
     @param[in] name Key of the targeted animation.
 */
 void Animator::StopAnimation(std::string name) {
-    auto result = m_aMap.find(name);
+    auto result = m_animationMap.find(name);
     // If the current animations name wasnt found, show error message.
-    if (result == m_aMap.end()) {
+    if (result == m_animationMap.end()) {
         ERROR("Couldn't find animation: " << name);
     }
     result->second->SetPlaying(false);
@@ -56,7 +56,7 @@ void Animator::StopAnimation(std::string name) {
 */
 void Animator::StopAllAnimations() {
     // Sets the animations playing state as false
-    for (auto result : m_aMap) {
+    for (auto result : m_animationMap) {
         result.second->SetPlaying(false);
     }
 }
@@ -67,10 +67,10 @@ void Animator::StopAllAnimations() {
     @return The playing status of the animation.
 */
 bool Animator::IsPlaying(std::string name){
-    auto result = m_aMap.find(name);
+    auto result = m_animationMap.find(name);
 
     // Searches the name of the current animation, if doesnt exist, display error message.
-    if (result == m_aMap.end()) {
+    if (result == m_animationMap.end()) {
         ERROR("Couldn't find animation: " << name);
     }
     // If the name matches, set the playing state.
@@ -86,7 +86,7 @@ bool Animator::IsPlaying(std::string name){
     @return pointer to an Animation.
 */
 Animation *Animator::GetAnimation(std::string name) {
-    for (auto result : m_aMap) {
+    for (auto result : m_animationMap) {
         // If the first name of the animation was found, return the second name.
         if (result.first == name) {
             return result.second;
