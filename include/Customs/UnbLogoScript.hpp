@@ -34,17 +34,17 @@ protected:
 
 private:
     // Store the time.
-    Timer time;
+    Timer m_time;
     void CreateAnimations();
     // Object for inputs in the snow activator script.
-    InputSystem *input = nullptr;
+    InputSystem *m_input = nullptr;
     // Object for the inputs from the game controller.
-    GameController* gameController = nullptr;
+    GameController* m_gameController = nullptr;
     // Animator for the UNB logo.
-    Animator *animator = nullptr;
+    Animator *m_animator = nullptr;
     // Object that store positions in the game.
-    Vector *position = nullptr;
+    Vector *m_position = nullptr;
     // Attribute not used in the UnbLogoScript.
-    int play = 0;
+    int m_play = 0;
 };
 #endif

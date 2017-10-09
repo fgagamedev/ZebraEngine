@@ -17,10 +17,10 @@ RainScript::RainScript(GameObject *owner) : Script(owner) {}
 void RainScript::Start() {
     // Create the animations and the animator for the rain script.
     CreateAnimations();
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
     // Get the input.
-    input = InputSystem::GetInstance();
+    m_input = InputSystem::GetInstance();
     // Set the zoom proportion.
     GetOwner()->SetZoomProportion(Vector(0,0));
 }
@@ -32,6 +32,7 @@ void RainScript::CreateAnimations() {
     // Creates the animations for the rain script.
     auto rainImage = new Image("assets/chuva.png",0,0,3410, 256);
     auto rainAnimation= new Animation(GetOwner(),rainImage);
+    // Add 10 frames in the rain animation.
     for (int i = 0; i < 10; i++) {
         rainAnimation->AddFrame(new Frame(i * 341,0, 341, 256));
     }
@@ -45,16 +46,22 @@ void RainScript::CreateAnimations() {
     @brief Updates the component's status/ changes during the game.
 */
 void RainScript::ComponentUpdate() {
-    if (play == 1) {
-        animator->PlayAnimation("rainAnimation");
+    // Check if the animation must be played.
+    if (m_play == 1) {
+        // Play the rain animation.
+        m_animator->PlayAnimation("rainAnimation");
     }
 
-    if (input->GetKeyDown(INPUT_R) && play == 0) {
+    // Check if the INPUT_R key is pressed and m_play is set to 0.
+    if (m_input->GetKeyDown(INPUT_R) && m_play == 0) {
+        // Play the rain sound and set m_play to 1.
         AudioController::GetInstance()->PlayAudio("rainSound", -1);
-        play = 1;
-    } else if (input->GetKeyDown(INPUT_R) && play == 1) {
-        play = 0;
-        animator->StopAllAnimations();
+        m_play = 1;
+    // Check if the INPUT_R key is pressed and m_play is set to 1.
+    } else if (m_input->GetKeyDown(INPUT_R) && m_play == 1) {
+        // Set m_play to 0 and stop all animations playing.
+        m_play = 0;
+        m_animator->StopAllAnimations();
     }
 }
 
@@ -63,6 +70,6 @@ void RainScript::ComponentUpdate() {
 */
 void RainScript::FixedComponentUpdate() {
     // Set the positions X and Y of the component.
-    position->m_x = 0;
-    position->m_y = 0;
+    m_position->m_x = 0;
+    m_position->m_y = 0;
 }

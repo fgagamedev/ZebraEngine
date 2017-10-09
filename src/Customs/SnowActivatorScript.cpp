@@ -21,18 +21,19 @@ void SnowActivatorScript::Start() {
     CreateAnimations();
 
     // Get the position and the animator of the snow.
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
 
     // Get the inputs.
-    input = InputSystem::GetInstance();
-    gameController = input->GetGameController(0);
+    m_input = InputSystem::GetInstance();
+    m_gameController = m_input->GetGameController(0);
 
     // Set the default zoom for the snow.
     GetOwner()->SetZoomProportion(Vector(0,0));
 
     // Get the map.
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    // Check if the map was retrieved sucessfully.
     if (map) {
         // Set the zoom for the snow.
         GetOwner()->SetZoomProportion(Vector(
@@ -50,6 +51,7 @@ void SnowActivatorScript::CreateAnimations() {
                                          0, 0,832, 64);
     auto snowActivatorAnimation = new Animation(GetOwner(),
                                                 snowActivatorSprite);
+    // Add 13 new frames to the snow activator animation.
     for (int i = 0; i < 13; i++) {
         snowActivatorAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
     }
@@ -74,19 +76,26 @@ void SnowActivatorScript::CreateAnimations() {
     @brief Updates the component's status/ changes during the game.
 */
 void SnowActivatorScript::ComponentUpdate() {
-    if (!animator->IsPlaying("SNOW ACTIVATOR ANIMATION") && activate == 0
-                             && runned == false) {
+    // Play the SNOW ACTIVATOR ANIMATION if isn't playing and has been activated.
+    if (!m_animator->IsPlaying("SNOW ACTIVATOR ANIMATION")
+                    && m_activateAnimation == 0 && m_runnedAnimation == false) {
         // Play the animation.
-        animator->PlayAnimation("SNOW ACTIVATOR ANIMATION");
-        activate = 1;
-        runned = true;
+        m_animator->PlayAnimation("SNOW ACTIVATOR ANIMATION");
+        m_activateAnimation = 1;
+        m_runnedAnimation = true;
     }
 
-    if (runned && !animator->IsPlaying("SNOW ACTIVATOR ANIMATION")) {
+    /*
+    Play the SNOW ACTIVATOR ANIMATION2 if the SNOW ACTIVATOR ANIMATION has
+    ended playing.
+    */
+    if (m_runnedAnimation
+                    && !m_animator->IsPlaying("SNOW ACTIVATOR ANIMATION")) {
         // Play the animation.
-        animator->PlayAnimation("SNOW ACTIVATOR ANIMATION2");
+        m_animator->PlayAnimation("SNOW ACTIVATOR ANIMATION2");
     }
-    if (runned) {
+    // Check if the snow animation has run.
+    if (m_runnedAnimation) {
         // Get the LeftCenterLightScript of the current scene.
         auto script = (LeftCenterLightScript*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("CENTRAL LIGHT 2")->GetComponent("LeftCenterLightScript");
         script->Activate();

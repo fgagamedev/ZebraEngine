@@ -27,28 +27,28 @@ public:
     void FixedComponentUpdate() override;
     void Start() override;
     void Activate() {
-        activate = 0;
+        m_activateAnimation = 0;
     }
 protected:
     void ComponentUpdate() override;
 
 private:
     // Store if the animation has been activated.
-    int activate = -1;
+    int m_activateAnimation = -1;
     // Store if the animation has runned.
-    bool runned = false;
-    // Store the time.
-    Timer time;
+    bool m_runnedAnimation = false;
+    // Store the m_time.
+    Timer m_time;
     void CreateAnimations();
     // Object for inputs in the snow activator script.
-    InputSystem *input = nullptr;
+    InputSystem *m_input = nullptr;
     // Object for the inputs from the game controller.
-    GameController* gameController = nullptr;
+    GameController* m_gameController = nullptr;
     // Animator for the snow script activator.
-    Animator *animator = nullptr;
+    Animator *m_animator = nullptr;
     // Object that store positions in the game.
-    Vector *position = nullptr;
+    Vector *m_position = nullptr;
     // Attribute not used in the SnowActivatorScript.
-    int play = 0;
+    int m_play = 0;
 };
 #endif

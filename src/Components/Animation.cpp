@@ -68,7 +68,7 @@ void Animation::SetPlaying(bool condition) {
     // Checks if condition variable is true.
     if (condition) {
         if (auto comp = GetOwner()->GetComponent("Renderer")) {
-            comp->active = false;
+            comp->m_active = false;
         } else {
             //nothing to do.
         }
@@ -77,7 +77,7 @@ void Animation::SetPlaying(bool condition) {
             return;
         } else {
             if (auto comp = GetOwner()->GetComponent("Renderer")) {
-                comp->active = true;
+                comp->m_active = true;
             } else {
                 //nothing to do.
             }

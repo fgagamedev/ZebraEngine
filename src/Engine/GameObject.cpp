@@ -63,7 +63,7 @@ void GameObject::DrawUpdate() {
     // If the component type wasn't found on the vector, updates the component.
     if (it != m_components.end()) {
         for (auto component : it->second) {
-            if (component->active) {
+            if (component->m_active) {
                 component->Update();
             }
         }
@@ -81,7 +81,7 @@ void GameObject::PhysicsUpdate() {
     // If the component type wasn't found on the vector, updates the component.
     if (it != m_components.end()) {
         for (auto component : it->second) {
-            if (component->active) {
+            if (component->m_active) {
                 component->Update();
             }
         }
@@ -99,7 +99,7 @@ void GameObject::ComponentsUpdate() {
         // If the component type wasn't found on the vector, updates the component.
         if (it != m_components.end()) {
             for (auto component : it->second) {
-                if (component->active) {
+                if (component->m_active) {
                     component->Update();
             }
           }
