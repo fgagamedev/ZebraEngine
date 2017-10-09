@@ -41,11 +41,11 @@ class Component {
         virtual void ComponentUpdate(){};
 
         // Component type.
-        ComponentType m_type;
+        ComponentType m_type = C_PHYSICS;
 
     private:
         // GameObject that owns the component.
-        GameObject *m_owner;
+        GameObject *m_owner = nullptr;
 };
 
 #endif // __COMPONENT__
