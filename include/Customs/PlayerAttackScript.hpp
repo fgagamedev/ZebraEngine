@@ -28,7 +28,8 @@ class PlayerAttackScript : public Script {
 
 public:
     PlayerAttackScript(GameObject *owner);
-    std::string GetComponentName() override { return "PlayerAttackScript"; };
+    std::string GetComponentName() override {
+        return "PlayerAttackScript"; };
     void FixedComponentUpdate() override;
     void Start() override;
     void SetShoot(bool shoot);
@@ -65,13 +66,13 @@ private:
     int play = 0;
 
     // Angle of a shot bullet.
-    float angle = 0;
+    float angle = 0.0;
 
     // Vector of bullets position.
     Vector bulletVelocity = Vector(0, 0);
 
     // Speed of a shot bullet.
-    float bulletSpeed = 30;
+    float bulletSpeed = 30.0;
 };
 
 #endif

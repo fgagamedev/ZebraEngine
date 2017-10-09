@@ -36,14 +36,13 @@ class MainScene : public Scene {
         void CreatePlayButton();
         void CreateQuitButton();
         void CreateMusic();
-        //void CreateBackground();
-        //void CreateGamemodes();
+        
 
         //Middle position of width.
-        int m_widthMiddle;
+        int m_widthMiddle = 0;
 
         //Middle position of height.
-        int m_heightMiddle;
+        int m_heightMiddle = 0;
 };
 
 #endif
