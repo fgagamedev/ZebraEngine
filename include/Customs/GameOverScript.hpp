@@ -23,7 +23,9 @@ class GameOverScript : public Script {
 
 public:
     GameOverScript(GameObject *owner);
-    std::string GetComponentName() override { return "SnowScript"; };
+    std::string GetComponentName() override {
+        return "SnowScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
 

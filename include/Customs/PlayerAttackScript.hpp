@@ -29,7 +29,8 @@ class PlayerAttackScript : public Script {
 public:
     PlayerAttackScript(GameObject *owner);
     std::string GetComponentName() override {
-        return "PlayerAttackScript"; };
+        return "PlayerAttackScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
     void SetShoot(bool shoot);
