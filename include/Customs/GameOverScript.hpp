@@ -26,10 +26,6 @@ public:
     std::string GetComponentName() override { return "SnowScript"; };
     void FixedComponentUpdate() override;
     void Start() override;
-    // char GetMovement() { return movements; };
-
-protected:
-    void ComponentUpdate() override;
 
 private:
     void CreateAnimations();
@@ -45,6 +41,9 @@ private:
 
     //State of the script.
     int play = 0;
+
+protected:
+    void ComponentUpdate() override;
 };
 
 #endif

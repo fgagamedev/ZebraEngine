@@ -23,12 +23,11 @@ class LightScript : public Script {
 
 public:
     LightScript(GameObject *owner);
-    std::string GetComponentName() override { return "RainScript"; };
+    std::string GetComponentName() override {
+        return "RainScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
-
-protected:
-    void ComponentUpdate() override;
 
 private:
     void CreateAnimations();
@@ -47,6 +46,9 @@ private:
 
     //State of the script.
     int play = 1;
+
+protected:
+    void ComponentUpdate() override;
 
 };
 

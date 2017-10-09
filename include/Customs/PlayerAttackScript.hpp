@@ -35,8 +35,6 @@ public:
     void SetShoot(bool shoot);
     void GameCollisionCheck();
 
-protected:
-    void ComponentUpdate() override;
 private:
     void CreateAnimations();
 
@@ -50,7 +48,7 @@ private:
     Vector *position = nullptr;
 
     // Instantiating player's collisions.
-    RectangleCollider* playerCollider =  nullptr;
+    RectangleCollider* playerCollider = nullptr;
 
     // Instantiating mouse and player positions.
     Vector mousePosition = Vector(0,0);
@@ -69,10 +67,13 @@ private:
     float angle = 0.0;
 
     // Vector of bullets position.
-    Vector bulletVelocity = Vector(0, 0);
+    Vector bulletVelocity = Vector(0,0);
 
     // Speed of a shot bullet.
     float bulletSpeed = 30.0;
+
+protected:
+    void ComponentUpdate() override;
 };
 
 #endif

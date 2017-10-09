@@ -16,7 +16,9 @@
 class MenuAnimationScript : public Script {
 public:
     MenuAnimationScript (GameObject *owner);
-    std::string GetComponentName() override { return "MenuAnimationScript"; };
+    std::string GetComponentName() override {
+        return "MenuAnimationScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
 
