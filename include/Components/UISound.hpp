@@ -33,11 +33,9 @@ public:
     void FixedComponentUpdate() override;
     void ComponentUpdate() override;
 
-    //-1 in loops means play forever
-    //-1 in channel means chose empty channel and put sound
-    void Play(int loops = -1, int channel = -1);
-    void Stop(int channel = -1);
-    void Pause(int channel = -1);
+    void Play(int loops = playForever, int channel = emptyChannel);
+    void Stop(int channel = emptyChannel);
+    void Pause(int channel = emptyChannel);
 
     inline string GetMessage(){
         return m_message;
@@ -59,6 +57,10 @@ private:
     Mix_Chunk *m_sound = nullptr;
 
     void OnPropertyChange();
+    // Means that the play loop has no end.
+    static const int playForever = -1;
+    // Means chose empty channel.
+    static const int emptyChannel = -1;
 };
 
 #endif
