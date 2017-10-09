@@ -1,6 +1,8 @@
 #include "Customs/LightScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+const int middlePosition = 2middlePosition
+
 LightScript::LightScript(GameObject *owner) : Script(owner) {}
 
 /**
@@ -14,7 +16,7 @@ void LightScript::Start() {
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
     // Not affected by zoom.
-    GetOwner()->SetZoomProportion(Vector(0,0));
+    GetOwner()->SetZoomProportion(Vector(0, 0));
 }
 
 /**
@@ -67,7 +69,7 @@ void LightScript::ComponentUpdate() {
 void LightScript::FixedComponentUpdate() {
     // Check for the player's state, and if is true, sets its x and y positions.
     if (player) {
-        position->m_x = player->GetPosition()->m_x - GetOwner()->GetWidth() / 2 + 40;
-        position->m_y = player->GetPosition()->m_y - GetOwner()->GetHeight() / 2 + 40;
+        position->m_x = player->GetPosition()->m_x - GetOwner()->GetWidth() / middlePosition + 40;
+        position->m_y = player->GetPosition()->m_y - GetOwner()->GetHeight() / middlePosition + 40;
     }
 }

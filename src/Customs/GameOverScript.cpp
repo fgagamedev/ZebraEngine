@@ -6,6 +6,9 @@
 
 #include "Customs/GameOverScript.hpp"
 
+const int quantityFrameLine = 22;
+const int quantityFrameColumn = 12;
+
 GameOverScript::GameOverScript(GameObject *owner) : Script(owner) {
 
 }
@@ -19,7 +22,7 @@ void GameOverScript::Start() {
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
-    GetOwner()->SetZoomProportion(Vector(0,0));
+    GetOwner()->SetZoomProportion(Vector(0, 0));
 }
 
 /**
@@ -34,8 +37,8 @@ void GameOverScript::CreateAnimations() {
     auto snowImage = new Image("assets/Ending_PARTE_FINAL.png",0,0,4096, 2048);
 
     auto gameOverAnimation= new Animation(GetOwner(),snowImage );
-    for (int  line = 0; line < 22; line++) {
-        for (int column = 0 ; column < 12 ; column++) {
+    for (int  line = 0; line < quantityFrameLine; line++) {
+        for (int column = 0 ; column < quantityFrameColumn ; column++) {
             gameOverAnimation->AddFrame(new Frame(column * 341,line* 256, 341, 256));
             gameOverAnimation->AddFrame(new Frame(column * 341,line* 256, 341, 256));
         }
