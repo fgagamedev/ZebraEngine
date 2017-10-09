@@ -7,6 +7,8 @@
     @copyright LGPL. MIT License.
 */
 
+const int framesPerSecond = 9;
+const int imagePlacing = 64;
 
 /**
     @brief Initializes CentralLightScript instance.
@@ -41,13 +43,13 @@ void LeftCenterLightScript::Start() {
 */
 void LeftCenterLightScript::CreateAnimations(){
     // Sets the image of the little square placed on the map, where the player has to go to
-    auto centrallightSprite = new Image("assets/left_center.png", 0, 0,832, 64);
+    auto centrallightSprite = new Image("assets/left_center.png", 0, 0, imagePlacing * 13, imagePlacing);
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
-    centrallightAnimation->AddFrame(new Frame(0, 0, 64, 64));
+    centrallightAnimation->AddFrame(new Frame(0, 0, imagePlacing, imagePlacing));
 
     // Sets the animations' conditions.
     auto centrallightAnimator = new Animator(GetOwner());
-    centrallightAnimation->SetFramesPerSecond(9);
+    centrallightAnimation->SetFramesPerSecond(framesPerSecond);
     centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION", centrallightAnimation);
 }
 
