@@ -27,14 +27,14 @@ public:
     void FixedComponentUpdate() override;
     void Start() override;
     void Activate() {
-        m_activateAnimation = 0;
+        m_activateAnimation = animationActivated;
     }
 protected:
     void ComponentUpdate() override;
 
 private:
     // Store if the animation has been activated.
-    int m_activateAnimation = -1;
+    int m_activateAnimation = animationNotActivated;
     // Store if the animation has runned.
     bool m_runnedAnimation = false;
     // Store the m_time.
@@ -50,5 +50,10 @@ private:
     Vector *m_position = nullptr;
     // Attribute not used in the SnowActivatorScript.
     int m_play = 0;
+
+    // Animation possible status.
+    const int animationNotActivated = -1;
+    const int animationActivated = 0;
+    const int animationEnded = 1;
 };
 #endif

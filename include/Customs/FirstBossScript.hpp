@@ -79,6 +79,9 @@ private:
     // Stores the number of first attacks.
     int m_firstAttackCounter = 0;
     // Stores a random integer number.
-    int m_randomNumber = -1;
+    int m_randomNumber = defaultRandomNumber;
+
+    // Default value to the random number;
+    const int defaultRandomNumber = -1;
 };
 #endif

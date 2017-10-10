@@ -26,7 +26,7 @@ void UISound::ComponentUpdate() {
     // Check if the sound should play in the start.
     if (m_playOnStart) {
         // Play the sound and disable the play on the start.
-        Play(-1, -1);
+        Play(playForever, emptyChannel);
         m_playOnStart = false;
     }
 }
