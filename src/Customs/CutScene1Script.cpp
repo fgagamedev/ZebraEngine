@@ -1,6 +1,13 @@
 #include "Customs/CutScene1Script.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+const int imageWidth = 1705;
+const int imageHeight = 255;
+const int frameWidth = 341;
+const int frameHeight = 255;
+const int framesPerSecond = 9;
+
+
 /**
     @brief Constructor for the ThunderScript class.
     @param[in] owner
@@ -37,15 +44,15 @@ void CutScene1Script::Start() {
 void CutScene1Script::CreateAnimations() {
 
     // Image light sprite.
-    auto centrallightSprite = new Image("assets/cut1.png", 0, 0, 1705, 255);
+    auto centrallightSprite = new Image("assets/cut1.png", 0, 0, imageWidth, imageHeight);
 
     // Animation light.
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
-    centrallightAnimation->AddFrame(new Frame(0, 0, 341, 255));
+    centrallightAnimation->AddFrame(new Frame(0, 0, frameWidth, frameHeight));
 
     // Animation.
     auto centrallightAnimator = new Animator(GetOwner());
-    centrallightAnimation->SetFramesPerSecond(9);
+    centrallightAnimation->SetFramesPerSecond(framesPerSecond);
     centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION",
                                        centrallightAnimation);
 }
