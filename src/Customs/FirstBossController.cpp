@@ -5,6 +5,12 @@
 #include "Components/UIText.hpp"
 #include "Customs/PlayerScript.hpp"
 
+const int vectorposition = 120;
+const int vectorXposition = -500;
+const int vectorYposition = -500;
+const int currentTentacleNumber = 4;
+
+
 FirstBossController *FirstBossController::m_instance = nullptr;
 
 FirstBossController *FirstBossController::GetInstance() {
@@ -54,9 +60,11 @@ void FirstBossController::AddMap(GameObject *map) {
 void FirstBossController::PositPlayer(Vector newPosition) {
     m_player->SetPosition(newPosition);
 }
+
 void FirstBossController::PositMap(Vector newPosition) {
     m_map->SetPosition(newPosition);
 }
+
 void FirstBossController::PositBoss() {
     m_boss->SetPosition(Vector(m_widthPosition, m_heightPosition));
 }
@@ -65,13 +73,13 @@ void FirstBossController::PositAllTentacles() {
     // Runs through the game objects vector, and sets each tentacle position.
     for (auto tentacle : m_tentacles) {
         Vector *position = m_player->GetPosition();
-        tentacle->SetPosition(Vector(-500, -500));
+        tentacle->SetPosition(Vector(vectorXposition, vectorYposition));
   }
 }
 
 void FirstBossController::PositTentacle(int index) {
     Vector *position = m_player->GetPosition();
-    m_tentacles[index]->SetPosition(Vector(position->m_x ,position->m_y -120));
+    m_tentacles[index]->SetPosition(Vector(position->m_x ,position->m_y - vectorposition));
 }
 
 // Methods of active.
@@ -165,7 +173,7 @@ std::pair <int, int> FirstBossController::GetRandomPosition() {
 void FirstBossController::FirstAttackSurge() {
     cout << "FirstAttack" << endl;
     // Compares the number of the current tentacle.
-    if (m_currentTentacle == 4) {
+    if (m_currentTentacle == currentTentacleNumber) {
         m_currentTentacle = 1;
     }
 

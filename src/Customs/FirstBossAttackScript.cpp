@@ -7,6 +7,14 @@
 #include "Customs/FirstBossAttackScript.hpp"
 #include "Customs/AudioController.hpp"
 
+const int imageHeight = 151;
+const int imageWidth = 600;
+const int cameraShakeIntensity = 8;
+const int framesSurge = 15;
+const int framesGone = 14;
+const int framesNumber = 40;
+
+
 /**
     @brief Constructor for the FirstBossAttackScript class.
 */
@@ -44,31 +52,27 @@ void FirstBossAttackScript::Start() {
 void FirstBossAttackScript::CreateAnimations() {
 
     //Image Attacks.
-    auto firstBossAttackImage = new Image("assets/firstBossAttack.png",0,0,600,
-                                          151);
+    auto firstBossAttackImage = new Image("assets/firstBossAttack.png",0, 0, imageWidth, imageHeight);
+
     //Surge Animation.
-    auto firstBossAttackSurgeAnimation = new Animation(GetOwner(),
-                                                       firstBossAttackImage);
+    auto firstBossAttackSurgeAnimation = new Animation(GetOwner(),firstBossAttackImage);
 
     // Sets the frames for the first boss animation.
-    for (int counter = 0; counter < 15; counter++) {
-        firstBossAttackSurgeAnimation->AddFrame(new Frame(counter * 40, 0,
-                                                            40, 151));
+    for (int counter = 0; counter < framesSurge; counter++) {
+        firstBossAttackSurgeAnimation->AddFrame(new Frame(counter * framesNumber, 0, framesNumber, imageHeight));
     }
 
     //Idle Animation.
-    auto firstBossAttackIdleAnimation = new Animation(GetOwner(),
-                                                      firstBossAttackImage);
-    firstBossAttackIdleAnimation->AddFrame(new Frame(14 * 40, 0, 40, 151));
+    auto firstBossAttackIdleAnimation = new Animation(GetOwner(), firstBossAttackImage);
+    firstBossAttackIdleAnimation->AddFrame(new Frame(14 * framesNumber, 0, framesNumber, imageHeight));
 
     //Gone Animation.
     auto firstBossAttackGoneAnimation = new Animation(GetOwner(),
                                                     firstBossAttackImage );
 
     // Sets the frames for the gone boss attack animation.
-    for (int counter = 14; counter != 0; counter--) {
-        firstBossAttackGoneAnimation->AddFrame(new Frame(counter * 40, 0,
-                                                                   40, 151));
+    for (int counter = framesGone; counter != 0; counter--) {
+        firstBossAttackGoneAnimation->AddFrame(new Frame(counter * framesNumber, 0, framesNumber, imageHeight));
     }
 
 
@@ -133,7 +137,7 @@ void FirstBossAttackScript::Attack() {
 
     // Checks surge animation status to set its properties.
     if (m_surgeAnimation) {
-        CameraSystem::GetInstance()->CameraShake(8,3, SceneManager::GetInstance()
+        CameraSystem::GetInstance()->CameraShake(cameraShakeIntensity, 3, SceneManager::GetInstance()
                                                  -> GetCurrentScene());
         m_animator -> PlayAnimation("firstBossAttackSurgeAnimation");
         m_surgeAnimation = false;
@@ -172,8 +176,8 @@ void FirstBossAttackScript::CameraShakeAttack(){
 
     // Checks shake status to update its properties.
     if (cameraShake) {
-        CameraSystem::GetInstance() -> CameraShake(8, 1, SceneManager::GetInstance()
-                                                   -> GetCurrentScene());
+        CameraSystem::GetInstance() -> CameraShake(cameraShakeIntensity, 1, SceneManager::GetInstance()
+                                                     -> GetCurrentScene());
         if (!CameraSystem::GetInstance() -> IsShaking()){
             cameraShake = false;
         }
