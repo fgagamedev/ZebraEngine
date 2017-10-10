@@ -105,7 +105,7 @@ void GraphicsSystem::DrawPoint(Vector point) {
     point.m_x, point.m_y);
 
     // Check if the SDL_RenderDrawPoint returned a error.
-    if (result) {
+    if (result < noErrorReturnValue) {
         // Show a error message.
         SDL_ERROR("Drawing point error");
     }
