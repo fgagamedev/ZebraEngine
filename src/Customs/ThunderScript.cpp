@@ -8,6 +8,15 @@
 
 #include "Globals/EngineGlobals.hpp"
 
+const int thunderWidth = 2952;
+const int thunderHeight = 815;
+const int blueFrameWidth = 100;
+const int yellowFrameWidth = 59;
+const int framePositionY = 135;
+const int frameHeight = 267;
+const int yellowCounter = 5;
+const int blueCounter = 6;
+
 /**
     @brief Constructor for the ThunderScript class.
     @param[in] owner
@@ -34,23 +43,23 @@ void ThunderScript::Start() {
 */
 void ThunderScript::CreateAnimations() {
     //Image Thunder.
-    auto thunderImage = new Image("assets/Sprites/dashes.png", 0, 0, 2952, 815);
+    auto thunderImage = new Image("assets/Sprites/dashes.png", 0, 0, thunderWidth, thunderHeight);
 
     // Animation thunder blue.
     auto thunderBlueAnimation = new Animation(GetOwner(), thunderImage);
 
     // Sets the frames for the blue thunder animation.
-    for (int i = 0; i < 6; i++) {
-        thunderBlueAnimation->AddFrame(new Frame(i * 100, 135, 100, 267));
+    for (int i = 0; i < blueCounter; i++) {
+        thunderBlueAnimation->AddFrame(new Frame(i * 100, framePositionY, blueFrameWidth, frameHeight));
     }
 
     // Animation thunder wellow.
     auto thunderYellowAnimation = new Animation(GetOwner(),thunderImage);
     
     // Sets the frames for the yellow thunder animation.
-    for (int i = 0; i < 5; i++) {
-        thunderYellowAnimation->AddFrame(new Frame(555 + (i * 59), 135, 59,
-                                                   267));
+    for (int i = 0; i < yellowCounter; i++) {
+        thunderYellowAnimation->AddFrame(new Frame(555 + (i * yellowFrameWidth), framePositionY, 
+                                                    yellowFrameWidth, frameHeight));
     }
 
     // Animator thunder.

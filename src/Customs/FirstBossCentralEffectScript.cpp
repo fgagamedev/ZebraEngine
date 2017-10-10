@@ -6,6 +6,13 @@
 
 #include "Customs/FirstBossCentralEffectScript.hpp"
 
+const int centralImageheight = 70;
+const int centralImageWidth = 700;
+const int animationPosition = 70;
+const int frameCounter = 10;
+const int bossXPosition = 5.575263158;
+const int bossYPosition = 7.566428571;
+
 /**
     @brief Constructor for the FirstBossCentralEffectScript class.
 */
@@ -40,14 +47,15 @@ void FirstBossCentralEffectScript::Start() {
 void FirstBossCentralEffectScript::CreateAnimations() {
 
     // Image Attacks.
-    auto firstBossCentralImage1 = new Image("assets/centroboss11.png", 0, 0,
-                                            700, 70);
+    auto firstBossCentralImage1 = new Image("assets/centroboss11.png", 0, 0, 
+                                            centralImageWidth, centralImageheight);
+
     // Surge Animation.
-    auto firstBossCentralAnimation1 = new Animation(GetOwner(),
-                                                    firstBossCentralImage1);
-    for (int counter = 0; counter < 10; counter++) {
-        firstBossCentralAnimation1->AddFrame(new Frame(counter * 70,0,
-                                                       70, 70));
+    auto firstBossCentralAnimation1 = new Animation(GetOwner(), firstBossCentralImage1);
+
+    for (int counter = 0; counter < frameCounter; counter++) {
+        firstBossCentralAnimation1->AddFrame(new Frame(counter * animationPosition, 0, 
+                                                       animationPosition, centralImageheight));
         // Animator.
         auto firstBossAnimator = new Animator(GetOwner());
         firstBossAnimator->AddAnimation("firstBossCentralAnimation1",
@@ -83,10 +91,10 @@ void FirstBossCentralEffectScript::FixedComponentUpdate() {
         m_position->m_x = m_boss->GetPosition()->m_x + m_boss->GetWidth() / 2
                                              - GetOwner()->GetWidth() / 2
                                              + GetOwner()->GetWidth()
-                                             / 5.575263158;
+                                             / bossXPosition;
         m_position->m_y = m_boss->GetPosition()->m_y + m_boss->GetHeight() / 2
                                                 - GetOwner()->GetHeight() / 2
                                                 + GetOwner()->GetHeight()
-                                                / 7.566428571;
+                                                / bossYPosition;
     }
 }
