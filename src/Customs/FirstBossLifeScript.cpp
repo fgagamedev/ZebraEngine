@@ -8,6 +8,11 @@
 
 #include "Globals/EngineGlobals.hpp"
 
+const int lifePosition = 10;
+const int lifeComparer = 0;
+const int bossLifeX = 650;
+const int bossLifeY = 10;
+
 /**
     @brief Constructor of the FirstBossLifeScript class.
 */
@@ -35,15 +40,15 @@ void FirstBossLifeScript::ComponentUpdate() {
     int actualLife = firstBossLifeRenderer->GetWidth();
 
     // Compares the hit status with the actual life. 
-    if (hit && actualLife > 0) {
+    if (hit && actualLife > lifeComparer) {
         cout << "hit" << endl;
         cout << actualLife << endl;
-        firstBossLifeRenderer->SetWidth(actualLife - 10);
+        firstBossLifeRenderer->SetWidth(actualLife - lifePosition);
         hit = false;
     }
 
     // Compares the actual life. 
-    if (actualLife <= 0) {
+    if (actualLife <= lifeComparer) {
         FirstBossController::GetInstance()->ActivateCreditsAnimation();
         FirstBossController::GetInstance()->DeactivateLifeBars();
     }
@@ -53,6 +58,6 @@ void FirstBossLifeScript::ComponentUpdate() {
     @brief Set the position of the first boss's lifebar.
 */
 void FirstBossLifeScript::FixedComponentUpdate() {
-    position->m_x = 650;
-    position->m_y = 10;
+    position->m_x = bossLifeX;
+    position->m_y = bossLifeY;
 }

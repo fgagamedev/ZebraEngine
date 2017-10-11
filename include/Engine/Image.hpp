@@ -16,12 +16,12 @@
 class Image {
 public:
     // Save image height and width.
-    int width;
-    int height;
+    int width = 0;
+    int height = 0;
 
     // They represent the X and Y axes for the image vector.
-    int x;
-    int y;
+    int x =0;
+    int y = 0;
 
     // Constructors
     Image();

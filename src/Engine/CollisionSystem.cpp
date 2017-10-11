@@ -7,6 +7,8 @@
 
 #include <math.h>
 
+const int divisor = 2;
+
 //Initializes the instance pointer of type Collision System as nullptr.
 CollisionSystem *CollisionSystem::m_instance = nullptr;
 
@@ -159,17 +161,17 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
 
     // Distance between centers in x-axis.
     double distanceX = abs(circle->GetCenter().m_x - rectangle->GetRectanglePoint().m_x
-                           - rectangle->GetWidth() / 2);
+                           - rectangle->GetWidth() / divisor);
 
     // Distance between centers in y-axis.
     double distanceY = abs(circle->GetCenter().m_y - rectangle->GetRectanglePoint().m_y
-                           - rectangle->GetHeight() / 2);
+                           - rectangle->GetHeight() / divisor);
 
     // Distance between centers  in x-axis.
-    double distancex = distanceX - rectangle -> GetWidth() / 2;
+    double distancex = distanceX - rectangle -> GetWidth() / divisor;
 
     // Distance between centers  in y-axis.
-    double distancey = distanceY - rectangle -> GetHeight() / 2;
+    double distancey = distanceY - rectangle -> GetHeight() / divisor;
 
     /*
         Checks if the distance on x-axis between centers are greater than
@@ -178,8 +180,8 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
     */
     
     // Compares the rectangles distances.
-    if (!((distanceX > (rectangle->GetWidth() / 2 + circle->GetRadius()))
-        || (distanceY > (rectangle->GetHeight() / 2 + circle->GetRadius())))){
+    if (!((distanceX > (rectangle->GetWidth() / divisor + circle->GetRadius()))
+        || (distanceY > (rectangle->GetHeight() / divisor + circle->GetRadius())))){
         //nothing to do.
     }
 
@@ -191,7 +193,7 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
     */
 
     // Compares the rectangle distances.
-    if (((distanceX <= (rectangle->GetWidth() / 2)) || (distanceY <= (rectangle -> GetHeight() / 2)))
+    if (((distanceX <= (rectangle->GetWidth() / divisor)) || (distanceY <= (rectangle -> GetHeight() / divisor)))
         || (((distancex * distancex) + (distancey *distancey))
         <= (circle->GetRadius() *circle->GetRadius()))) {
         collision = true;
