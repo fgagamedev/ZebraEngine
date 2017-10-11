@@ -33,11 +33,9 @@ public:
     void FixedComponentUpdate() override;
     void ComponentUpdate() override;
 
-    //-1 in loops means play forever
-    //-1 in channel means chose empty channel and put sound
-    void Play(int loops = -1, int channel = -1);
-    void Stop(int channel = -1);
-    void Pause(int channel = -1);
+    void Play(int loops = playForever, int channel = emptyChannel);
+    void Stop(int channel = emptyChannel);
+    void Pause(int channel = emptyChannel);
 
     inline string GetMessage(){
         return m_message;
@@ -45,13 +43,13 @@ public:
 
 private:
     // Store if the music is playing.
-    bool m_isMusic;
+    bool m_isMusic = false;
     // Store a message.
-    string m_message;
+    string m_message = "";
     // Store the path to the audio file
-    string m_audioPath;
+    string m_audioPath = "";
     // Store if the sound should play in the start.
-    bool m_playOnStart;
+    bool m_playOnStart = false;
 
     // Store the music object.
     Mix_Music *m_music = nullptr;
@@ -59,6 +57,10 @@ private:
     Mix_Chunk *m_sound = nullptr;
 
     void OnPropertyChange();
+    // Means that the play loop has no end.
+    static const int playForever = -1;
+    // Means chose empty channel.
+    static const int emptyChannel = -1;
 };
 
 #endif
