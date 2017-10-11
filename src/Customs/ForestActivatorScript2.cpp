@@ -2,6 +2,11 @@
 #include "Customs/ForestActivatorScript2.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+const int quantityFrame = 13;
+const int activedTrue = 1;
+const int framePerSecond = 9;
+
+
 ForestActivatorScript2::ForestActivatorScript2(GameObject *owner) : Script(owner) {
 
 }
@@ -21,7 +26,7 @@ void ForestActivatorScript2::Start() {
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
     gamecontroller = input->GetGameController(0);
-    GetOwner()->SetZoomProportion(Vector(0,0));
+    GetOwner()->SetZoomProportion(Vector(0, 0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     // Check for map, and if exists, sets its map on a vector.
     if (map) {
@@ -39,7 +44,7 @@ void ForestActivatorScript2::CreateAnimations(){
 
     // Instantiating forest activator animation by gameobject components, and setting its image and frame.
     auto forestactivatorAnimation = new Animation(GetOwner(), forestactivatorSprite);
-    for (int counter = 0; counter < 13; counter++) {
+    for (int counter = 0; counter < quantityFrame; counter++) {
         forestactivatorAnimation->AddFrame(new Frame(counter * 64, 0, 64, 64));
     }
 
@@ -49,7 +54,7 @@ void ForestActivatorScript2::CreateAnimations(){
 
     // Instantiating animator, setting its animation and frames per second.
     auto forestactivatorAnimator = new Animator(GetOwner());
-    forestactivatorAnimation->SetFramesPerSecond(9);
+    forestactivatorAnimation->SetFramesPerSecond(framePerSecond);
     //forestactivatorAnimation2->SetFramesPerSecond(1);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION", forestactivatorAnimation);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2", forestactivatorAnimation2);
@@ -62,8 +67,8 @@ void ForestActivatorScript2::ComponentUpdate() {
     // Check the animator's state, and ifs true, play animation and activate it.
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate==0 && runned==false) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
-        activate=1;
-        runned=true;
+        activate = activedTrue;
+        runned = true;
     }
 
     // Check if runned and something diferent of animator is playing and active the animattion of the forest.

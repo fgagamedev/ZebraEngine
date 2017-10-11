@@ -15,9 +15,12 @@
 class Rigidbody : public Component {
 public:
     Rigidbody(GameObject *owner);
-    std::string GetComponentName() override { return "Rigidbody"; };
+    std::string GetComponentName() override {
+        return "Rigidbody"; };
     void FixedComponentUpdate() override;
-    inline void SetGravityForce(int force) { m_gravityForce = force; };
+    inline void SetGravityForce( int force ) {
+        m_gravityForce = force;
+    };
 
 private:
     // Sets a bool to represent gravity's state.

@@ -23,38 +23,42 @@ class ForestActivatorScript2 : public Script {
 
 public:
     ForestActivatorScript2(GameObject *owner);
-    std::string GetComponentName() override { return "ForestActivatorScript2"; };
+    std::string GetComponentName() override {
+        return "ForestActivatorScript2";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
-    void Activate(){activate=0;}
-
-protected:
-    void ComponentUpdate() override;
+    void Activate() {
+        activate = 0;
+    }
 
 private:
     void CreateAnimations();
 
     //Activation of script.
-    int activate =-1;
+    int activate = -1;
     bool runned = false;
 
-    // Instantiating time system. 
+    // Instantiating time system.
     Timer time;
-  
-    // Instantiating input system of the keyboard. 
+
+    // Instantiating input system of the keyboard.
     InputSystem *input = nullptr;
 
     // Instantiating joystick.
     GameController* gamecontroller = nullptr;
-    
+
     // Instantiating animations.
     Animator *animator = nullptr;
-  
+
     // Instantiating vector.
     Vector *position = nullptr;
-  
+
     //State of the script.
-    int play=0;
+    int play = 0;
+
+protected:
+    void ComponentUpdate() override;
 
 };
 #endif
