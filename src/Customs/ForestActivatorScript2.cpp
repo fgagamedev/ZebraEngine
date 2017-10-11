@@ -3,7 +3,6 @@
 #include "Globals/EngineGlobals.hpp"
 
 const int quantityFrame = 13;
-const int activedTrue = 1;
 const int framePerSecond = 9;
 
 
@@ -67,7 +66,7 @@ void ForestActivatorScript2::ComponentUpdate() {
     // Check the animator's state, and ifs true, play animation and activate it.
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate==0 && runned==false) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
-        activate = activedTrue;
+        activate=1;
         runned = true;
     }
 
