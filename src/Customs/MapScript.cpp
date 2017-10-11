@@ -1,6 +1,18 @@
 #include "Customs/MapScript.hpp"
 
 #include <stdio.h>
+
+/**
+    @file MapScript.cpp
+    @brief Methods that manages the map's behavior during the game.
+    @copyright LGPL. MIT License.
+*/
+
+const int snowActivatorIndex = 45;
+const int forestActivator2Index = 46;
+const int forestActivator3Index = 47;
+const int forestActivatorIndex = 48;
+
 MapScript::MapScript(GameObject *owner) : Script(owner) {}
 
 void MapScript::Start() {
@@ -80,7 +92,7 @@ void MapScript::FixedComponentUpdate() {
 
     int actualLife = firstBossLifeRenderer->GetWidth();
     // If boss's actual life is lower or equal to 0, ends game with EndScene2.
-    if (actualLife<=0) {
+    if (actualLife <= 0) {
         SceneManager::GetInstance()->SetCurrentScene("EndScene2");
     }
 
@@ -943,7 +955,7 @@ int MapScript::DetectWallCollision(GameObject* object){
             ((rightWalls[j].m_y <=(object->GetPosition()->m_y + object->GetHeight())) &&
             ((rightWalls[j].m_y + rightWalls[j].m_h) >= object->GetPosition()->m_y))) {
 
-            if (j == 45) {
+            if (j == snowActivatorIndex) {
                 auto script = (SnowActivatorScript*)SceneManager::GetInstance()
                                                                 ->GetCurrentScene()
                                                                 ->GetGameObject("SNOW ACTIVATOR")
@@ -953,7 +965,7 @@ int MapScript::DetectWallCollision(GameObject* object){
             }
 
             // central
-            if (j == 46) {
+            if (j == forestActivator2Index) {
                 auto script = (ForestActivatorScript2*)SceneManager::GetInstance()
                                                                     ->GetCurrentScene()
                                                                     ->GetGameObject("FOREST ACTIVATOR2")
@@ -963,7 +975,7 @@ int MapScript::DetectWallCollision(GameObject* object){
             }
 
             // left
-            if (j == 47) {
+            if (j == forestActivator3Index) {
                 auto script = (ForestActivatorScript3*)SceneManager::GetInstance()
                                                                     ->GetCurrentScene()
                                                                     ->GetGameObject("FOREST ACTIVATOR3")
@@ -973,7 +985,7 @@ int MapScript::DetectWallCollision(GameObject* object){
             }
 
             // blue
-            if (j == 48) {
+            if (j == forestActivatorIndex) {
                 auto script = (ForestActivatorScript*)SceneManager::GetInstance()
                                                                     ->GetCurrentScene()
                                                                     ->GetGameObject("FOREST ACTIVATOR")
