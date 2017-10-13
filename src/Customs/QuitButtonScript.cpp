@@ -25,9 +25,6 @@ void QuitButtonScript::Start() {
     @brief Updates the text and sound of the Quit button.
 */
 void QuitButtonScript::ComponentUpdate() {
-    // Text component to set the colors of the Quit Button
-    auto textButton = (UIText *)GetOwner()->GetComponent("UIText");
-
     // Sound component to play the sound of the Play Button
     auto soundButton = (UISound *)GetOwner()->GetComponent("UISound");
 
@@ -36,6 +33,9 @@ void QuitButtonScript::ComponentUpdate() {
         soundButton->Play(0, -1);
         SDLSystem::GetInstance()->SetRunning(false);
     }
+
+    // Text component to set the colors of the Quit Button
+    auto textButton = (UIText *)GetOwner()->GetComponent("UIText");
 
     // Set QuitButton color depending if mouse is over the button or not
     if (m_interactive_button->IsOver()) {

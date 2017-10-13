@@ -60,7 +60,7 @@ void Renderer::Start() {
 */
 void Renderer::RotateTowards(Vector *point) {
     // Calculate arc tangent in degrees.
-    double angles = 0;
+    double angles = 0.0;
     angles = atan2(point->m_y - m_position->m_y, point->m_x - m_position->m_x);
     angles = angles * 180 / 3.1415;
 
