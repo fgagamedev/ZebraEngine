@@ -41,7 +41,7 @@ private:
     Vector *counter_position = nullptr;
 
     // Integer number of player's bullets
-    int m_numberBullet;
+    int m_numberBullet = 0;
 };
 
 #endif
