@@ -634,11 +634,11 @@ void NakedManScript::GameControllerUpdate() {
 
     // Back to menu based in game controller input
     if (game_controller->GetButtonDown(GC_INPUT_BACK)) {
-        auto var = (UIText *)SceneManager::GetInstance()
+        auto textContinue = (UIText *)SceneManager::GetInstance()
                                            ->GetScene("Main")
                                            ->GetGameObject("Play")
                                            ->GetComponent("UIText");
-        var->SetText("Continue");
+        textContinue->SetText("Continue");
         SceneManager::GetInstance()->SetCurrentScene("Main");
     }
 }
@@ -648,7 +648,6 @@ void NakedManScript::GameControllerUpdate() {
 */
 void NakedManScript::CreateAnimations() {
     // Prepare animations with pictures of the player in motion.
-    auto nakedManAnimator = new Animator(GetOwner());
     auto dashrightSprite = new Image("assets/dashright.png", 0, 0, 210, 27);
     auto dashrightAnimation = new Animation(GetOwner(), dashrightSprite);
 
@@ -658,6 +657,7 @@ void NakedManScript::CreateAnimations() {
     }
 
     // Add animation to player's animator.
+    auto nakedManAnimator = new Animator(GetOwner());
     nakedManAnimator->AddAnimation("Right Dash", dashrightAnimation);
     dashrightAnimation->SetFramesPerSecond(10);
 
@@ -734,15 +734,11 @@ void NakedManScript::CreateAnimations() {
     @brief Update the components of the player.
 */
 void NakedManScript::ComponentUpdate() {
-    // Initialize rain and snow scripts.
+    // Initialize rain script
     auto rainScript = (RainScript *)SceneManager::GetInstance()
                                 ->GetCurrentScene()
                                 ->GetGameObject("Rain")
                                 ->GetComponent("RainScript");
-    auto snowScript = (SnowScript *)SceneManager::GetInstance()
-                                ->GetCurrentScene()
-                                ->GetGameObject("Snow")
-                                ->GetComponent("SnowScript");
 
     // Activate rainScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraY < 3435)
@@ -757,6 +753,12 @@ void NakedManScript::ComponentUpdate() {
          && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
         rainScript->m_play = 0;
     }
+
+    // Initialize snow script
+    auto snowScript = (SnowScript *)SceneManager::GetInstance()
+                                ->GetCurrentScene()
+                                ->GetGameObject("Snow")
+                                ->GetComponent("SnowScript");
 
    // Activate snowScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraX < 3315)
@@ -855,13 +857,12 @@ void NakedManScript::FixedComponentUpdate() {
         FirstBossController::GetInstance()->EndBossFight();
 
         // Posit player on spawn.
-        int positionX, positionY;
-        positionX = EngineGlobals::screen_width / 2 - 96 / 2;
-        positionY = EngineGlobals::screen_height / 2 - 96 / 2;
+        int positionX = EngineGlobals::screen_width / 2 - 96 / 2;
+        int positionY = EngineGlobals::screen_height / 2 - 96 / 2;
 
         FirstBossController::GetInstance()->PositPlayer(Vector(positionX,
                                                                positionY));
-        CameraSystem::GetInstance()->MoveRight(200,SceneManager::GetInstance()
+        CameraSystem::GetInstance()->MoveRight(200, SceneManager::GetInstance()
                                    ->GetCurrentScene());
         endBossFight =  false;
     }
@@ -993,9 +994,9 @@ void NakedManScript::Movements() {
         position->m_y -= walkSpeed;
     } else if (movements == 2) {
         position->m_y += walkSpeed;
-    } else if (movements == 3){
+    } else if (movements == 3) {
         position->m_x -= walkSpeed;
-    } else if (movements == 4){
+    } else if (movements == 4) {
         position->m_x += walkSpeed;
     }
 
@@ -1151,6 +1152,7 @@ void NakedManScript::StartFirstBoss() {
         cout << "Y: " << CameraSystem::GetInstance()->worldCameraY << endl;
     }
 
+    // Prepare camera, audio controller and boss controller for boss fight.
     if (!bossFight) {
         if ((CameraSystem::GetInstance()->worldCameraX < 500)) {
             CameraSystem::GetInstance()->ZoomOut(SceneManager::GetInstance()
