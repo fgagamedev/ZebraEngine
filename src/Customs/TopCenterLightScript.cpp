@@ -7,6 +7,18 @@
 #include "Customs/TopCenterLightScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+const int imagePositionX = 0;
+const int imagePositionY = 0;
+const int imageWidth = 832;
+const int imageHeight = 64;
+
+const int framePositionX = 0;
+const int framePositionY = 0;
+const int frameWidth = 64;
+const int frameHeight = 64;
+
+const int framesPerSecond = 9;
+
 /**
     @brief Initializes CentralLightScript instance.
     @param[in] GameObject *owner - owns the component.
@@ -24,10 +36,10 @@ void TopCenterLightScript::Start() {
     CreateAnimations();
 
     // Gets the position.
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
-    input = InputSystem::GetInstance();
-    gamecontroller = input->GetGameController(0);
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_input = InputSystem::GetInstance();
+    m_gameController = m_input->GetGameController(0);
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
                GetGameObject("Map");
@@ -47,16 +59,16 @@ void TopCenterLightScript::Start() {
 void TopCenterLightScript::CreateAnimations() {
 
     // Creates the image.
-    auto topCenterLightSprite = new Image("assets/topcenter.png", 0, 0,832, 64);
+    auto topCenterLightSprite = new Image("assets/topcenter.png", imagePositionX, imagePositionY, imageWidth, imageHeight);
 
     // Creates the animation of central light.
     auto topCenterLightAnimation = new Animation(GetOwner(), topCenterLightSprite);
-    topCenterLightAnimation->AddFrame(new Frame(0, 0, 64, 64));
+    topCenterLightAnimation->AddFrame(new Frame(framePositionX, framePositionY, frameWidth, frameHeight));
 
     auto topCenterLightAnimator = new Animator(GetOwner());
-    topCenterLightAnimation->SetFramesPerSecond(9);
+    topCenterLightAnimation->SetFramesPerSecond(framesPerSecond);
     topCenterLightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION",
-                                        topCenterLightAnimation);
+                                         topCenterLightAnimation);
 
 
 }
@@ -68,8 +80,8 @@ void TopCenterLightScript::CreateAnimations() {
 void TopCenterLightScript::ComponentUpdate() {
 
     // Starting the animator of game.
-    if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active) {
-        animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
+    if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active) {
+        m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
 }
 
