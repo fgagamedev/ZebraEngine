@@ -9,13 +9,15 @@
 
 #include "Customs/MapScript.hpp"
 
+const int initialCameraSpeed = 32;
+
 CameraSystem *CameraSystem::m_instance = nullptr;
 
 /*
     @brief Sets the camera's default speed.
 */
 CameraSystem::CameraSystem() {
-    this->m_cameraSpeed = 32;
+    this->m_cameraSpeed = initialCameraSpeed;
 }
 
 /*
