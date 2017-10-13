@@ -287,27 +287,25 @@ void SDLSystem::CalculateFramerate() {
     @brief Loads necessary game scenes.
 */
 void SDLSystem::LoadCommons() {
-    auto mainScene = new MainScene();
-    auto gameplayScene = new GamePlayScene();
-    auto firstBossScene = new FirstBossScene();
-    auto preMenuScene = new PreMenuScene();
-
+    // Instantiate and add multiple scenes to scene manager.
     auto endScene1 = new EndScene1();
-    auto endScene2 = new EndScene2();
-
     SceneManager::GetInstance()->AddScene(std::make_pair("EndScene1",
                                                          endScene1));
+    auto endScene2 = new EndScene2();
     SceneManager::GetInstance()->AddScene(std::make_pair("EndScene2",
                                                          endScene2));
+    auto preMenuScene = new PreMenuScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("Pre Menu",
                                                          preMenuScene));
+    auto mainScene = new MainScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("Main",
                                                          mainScene));
+    auto gameplayScene = new GamePlayScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay",
                                                          gameplayScene));
+    auto firstBossScene = new FirstBossScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene",
                                                          firstBossScene));
-
 }
 
 /**
