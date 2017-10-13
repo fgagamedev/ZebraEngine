@@ -32,8 +32,10 @@ void  PreMenuScene::OnHidden() {}
 void PreMenuScene::CreateLogoSdl() {
     // Creates the SDL LOGO gameobject.
     auto sdl_Logo = new GameObject("SDL LOGO", new Vector(0,0),1024,800,1);
+    
     // Renderer.
-    auto sdl_logoscript = new SdlLogoScript(sdl_Logo);
+    new SdlLogoScript(sdl_Logo);
+    
     //Appends the SDL LOGO gameobject to the end of the vector of gameobjects.
     AddGameObject(sdl_Logo);
 }
@@ -45,7 +47,7 @@ void PreMenuScene::CreateLogoUnb(){
     // Creates the UNB LOGO gameobject.
     auto unb_Logo = new GameObject("UNB LOGO", new Vector(0,0),1024,800,1);
     // Renderer.
-    auto unb_logoscript = new UnbLogoScript(unb_Logo);
+    new UnbLogoScript(unb_Logo);
 
     //Appends the UNB LOGO gameobject to the end of the vector of gameobjects.
     AddGameObject(unb_Logo);
@@ -59,7 +61,7 @@ void PreMenuScene::CreateLogoControle(){
     auto controle_Logo = new GameObject("CONTROLE     LOGO",
                                         new Vector(0,0),1024,800,1);
     // Renderer.
-    auto controle_logoscript = new ControleLogoScript(controle_Logo);
+    new ControleLogoScript(controle_Logo);
 
     /*
     Appends the CONTROLE LOGO gameobject to the end of the vector of
@@ -75,7 +77,7 @@ void PreMenuScene::CreateLogoZebra(){
     // Creates the ZEBRA LOGO gameobject.
     auto zebra_Logo = new GameObject("ZEBRA LOGO", new Vector(0,0),1024,800,1);
     // Renderer.
-    auto zebra_logoscript = new ZebraLogoScript(zebra_Logo);
+    new ZebraLogoScript(zebra_Logo);
 
     //Appends the ZEBRA LOGO gameobject to the end of the vector of gameobjects.
     AddGameObject(zebra_Logo);
