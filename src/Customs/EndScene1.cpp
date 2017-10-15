@@ -43,7 +43,7 @@ void EndScene1::CreateGameOver() {
     // defines the current center position
     int xMiddle = EngineGlobals::screen_width / 2 - 240;
     auto gameOver = new GameObject("Logo", new Vector(xMiddle,0), 500, 500,1);
-    auto playText = new UIText(gameOver, "GAME OVER", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
+    new UIText(gameOver, "GAME OVER", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                                200, 255, 255, 255, 150, 1);
   AddGameObject(gameOver);
 }
@@ -57,11 +57,11 @@ void EndScene1::CreateQuitButton() {
 
     // Defines the "quit" command configs
     auto quit = new GameObject("Quit", new Vector(xMiddle, 500), 200, 100,1);
-    auto quitText = new UIText(quit, "Quit", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
+    new UIText(quit, "Quit", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                              200, 255, 255, 255, 150, 1);
-    auto quitButton = new UIButton(quit);
-    auto quitSound = new UISound(quit, "playSound", "assets/Audio/Button/MusicButton1.wav", false, false);
-    auto script = new QuitButtonScript(quit);
+    new UIButton(quit);
+    new UISound(quit, "playSound", "assets/Audio/Button/MusicButton1.wav", false, false);
+    new QuitButtonScript(quit);
 
     AddGameObject(quit);
 }

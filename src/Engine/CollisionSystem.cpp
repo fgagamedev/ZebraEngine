@@ -43,8 +43,8 @@ void CollisionSystem::DetectCollisions() {
     // Defines the boundaries as trees and walls.
 
     // Runs through the vector of collisions
-    for (int i = 0; i < m_colliders.size(); i++) {
-        for (int k = i + 1; k < m_colliders.size(); k++) {
+    for (unsigned int i = 0; i < m_colliders.size(); i++) {
+        for (unsigned int k = i + 1; k < m_colliders.size(); k++) {
             // Checks the components names, if its circle collider, sets both colliders as circle colliders.
             if (m_colliders[i]->GetComponentName() == m_colliders[k]->GetComponentName()
                 && m_colliders[i]->GetComponentName() == "CircleCollider") {
