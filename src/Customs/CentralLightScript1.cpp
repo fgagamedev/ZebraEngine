@@ -21,7 +21,9 @@ void CentralLightScript1::Start() {
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
     // Get the inputs.
     m_input = InputSystem::GetInstance();
-    m_gameController = m_input->GetGameController(0);
+    // Index of the controller.
+    const int gameControllerIndex = 0;
+    m_gameController = m_input->GetGameController(gameControllerIndex);
     // Set the zoom and get the map of the scene.
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
@@ -44,7 +46,9 @@ void CentralLightScript1::CreateAnimations() {
 
     // Create the animator.
     auto centrallightAnimator = new Animator(GetOwner());
-    centrallightAnimation->SetFramesPerSecond(9);
+    // Number of frames to add per second.
+    const int numberFramesPerSecond = 9;
+    centrallightAnimation->SetFramesPerSecond(numberFramesPerSecond);
     centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION",
                                        centrallightAnimation);
 }
