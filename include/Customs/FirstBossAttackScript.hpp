@@ -37,7 +37,7 @@ public:
   void Attack();
 
   // Previous Animation Control Variable.
-  bool goneAnimation = false;
+  bool m_goneAnimation = false;
 
   // Boolean variable that stores false or true for boss attack.
   bool attack = false;
@@ -71,12 +71,12 @@ private:
   bool m_idleAnimation = false;
 
   // Variable of type Timer that defines the gone time.
-  Timer timerGone;
+  Timer m_timerGone;
 
   // Variable of type Time that defines the animation time.
-  Timer timerAnimation;
+  Timer m_timerAnimation;
 
-  Timer timerIdleAnimation;
+  Timer m_timerIdleAnimation;
 
   inline void SetSurgeAnimation(bool surgeAnimation) {
       m_surgeAnimation = surgeAnimation;
@@ -85,8 +85,8 @@ private:
   inline void SetIdleAnimation(bool idleAnimation) {
       m_idleAnimation = idleAnimation;
   };
-  inline void SetGoneAnimation(bool goneAnimation) {
-      goneAnimation = goneAnimation;
+  inline void SetGoneAnimation(bool statusGoneAnimation) {
+      m_goneAnimation = statusGoneAnimation;
   };
 
 protected:

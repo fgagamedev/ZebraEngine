@@ -116,11 +116,11 @@ void FirstBossAttackScript::ComponentUpdate() {
     @brief Determine the time of attack os boss.
 */
 void FirstBossAttackScript::FixedComponentUpdate() {
-    timerAnimation.Update(EngineGlobals::fixed_update_interval);
+    m_timerAnimation.Update(EngineGlobals::fixed_update_interval);
 
     // Checks the status of the deasactivateobject.
     if (deactivateObj){
-        timerGone.Update(EngineGlobals::fixed_update_interval);
+        m_timerGone.Update(EngineGlobals::fixed_update_interval);
     }
 
     CameraShakeAttack();
@@ -142,21 +142,21 @@ void FirstBossAttackScript::Attack() {
         m_animator -> PlayAnimation("firstBossAttackSurgeAnimation");
         m_surgeAnimation = false;
         m_idleAnimation = true;
-        timerAnimation.Restart();
+        m_timerAnimation.Restart();
         AudioController::GetInstance()->PlayAudio("secondAttackSound", 0);
 
     }
 
     // Compares the idle animation, to activate the animator.
-    if (m_idleAnimation && timerAnimation.GetTime() >= 1 * 1000) {
+    if (m_idleAnimation && m_timerAnimation.GetTime() >= 1 * 1000) {
         m_animator -> PlayAnimation("firstBossAttackIdleAnimation");
     }
 
     // Checks gone animation status to set its properties.
-    if (goneAnimation) {
+    if (m_goneAnimation) {
         m_animator->PlayAnimation("firstBossAttackGoneAnimation");
         AudioController::GetInstance() -> PlayAudio("fourthAttackSound", 0);
-        goneAnimation = false;
+        m_goneAnimation = false;
         m_idleAnimation = false;
         attack = false;
         m_surgeAnimation = true;
@@ -165,8 +165,8 @@ void FirstBossAttackScript::Attack() {
     }
 
     // Compares the timer gone animation to update the desactivateobj.
-    if(timerGone.GetTime() >= 1 * 1000) {
-        timerGone.Restart();
+    if(m_timerGone.GetTime() >= 1 * 1000) {
+        m_timerGone.Restart();
         deactivateObj = false;
     }
 }
