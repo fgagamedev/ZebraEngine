@@ -153,10 +153,10 @@ void FirstBossAttackScript::Attack() {
     }
 
     // Checks gone animation status to set its properties.
-    if (goneAnimation) {
+    if (m_goneAnimation) {
         m_animator->PlayAnimation("firstBossAttackGoneAnimation");
         AudioController::GetInstance() -> PlayAudio("fourthAttackSound", 0);
-        goneAnimation = false;
+        m_goneAnimation = false;
         m_idleAnimation = false;
         attack = false;
         m_surgeAnimation = true;
