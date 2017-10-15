@@ -10,6 +10,21 @@
 #include "Customs/TopCenterLightScript.hpp"
 #include "Customs/MapScript.hpp"
 
+const int imageActivatorPositionX = 0;
+const int imageActivatorPositionY = 0;
+const int imageActivatorWidth = 832;
+const int imageActivatorHeight = 64;
+
+const int frameActivatorPositionX = 64;
+const int frameActivatorPositionY = 0;
+const int frameActivatorWidth = 64;
+const int frameActivatorHeight = 64;
+
+const int maxCounter = 13;
+
+const int framesPerSecond = 9;
+
+
 // Constructor
 ForestActivatorScript3::ForestActivatorScript3(GameObject *owner) : Script(owner) {
 
@@ -54,23 +69,31 @@ void ForestActivatorScript3::Start() {
 void ForestActivatorScript3::CreateAnimations() {
 
     // Creates the image.
-    auto forestactivatorSprite = new Image("assets/forestactivator.png", 0, 0,
-                                           832, 64);
+    auto forestactivatorSprite = new Image("assets/forestactivator.png", 
+                                           imageActivatorPositionX, imageActivatorPositionY,
+                                           imageActivatorWidth, imageActivatorHeight);
 
     // Creates and get the animation.
     auto forestactivatorAnimation = new Animation(GetOwner(),
                                                   forestactivatorSprite);
 
-    for (int counter = 0; counter < 13; counter++) {
-        forestactivatorAnimation->AddFrame(new Frame(counter * 64, 0, 64, 64));
+
+    for (int counter = 0; counter < maxCounter; counter++) {
+        forestactivatorAnimation->AddFrame(new Frame(counter * frameActivatorPositionX, 
+                                                     frameActivatorPositionY, 
+                                                     frameActivatorWidth, 
+                                                     frameActivatorHeight));
     }
 
     auto forestactivatorAnimation2 = new Animation(GetOwner(),
                                                    forestactivatorSprite);
-    forestactivatorAnimation2->AddFrame(new Frame(12 * 64, 0, 64, 64));
+    forestactivatorAnimation2->AddFrame(new Frame(12 * frameActivatorPositionX, 
+                                                     frameActivatorPositionY, 
+                                                     frameActivatorWidth, 
+                                                     frameActivatorHeight));
 
     auto forestactivatorAnimator = new Animator(GetOwner());
-    forestactivatorAnimation->SetFramesPerSecond(9);
+    forestactivatorAnimation->SetFramesPerSecond(framesPerSecond);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION",
                                           forestactivatorAnimation);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2",
@@ -86,6 +109,7 @@ void ForestActivatorScript3::ComponentUpdate() {
     // Checks if the game animation has not started and starts the animator actives and runned.
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate == 0
         && runned == false) {
+
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate = 1;
         runned = true;

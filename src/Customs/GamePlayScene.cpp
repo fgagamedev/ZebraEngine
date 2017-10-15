@@ -11,6 +11,38 @@
 #include "Customs/CutScene1Script.hpp"
 #include "Customs/AudioController.hpp"
 
+const float vectorMapTreeAxisX = -3500;
+const float vectorMapTreeAxisY = -3800;
+
+const int gameObjectCreateMapWigth = 8034;
+const int gameObjectCreateMapHeight = 8034;
+
+const Uint8 gameObjectCreateMapMapLayer = 0;
+
+const Uint8 gameObjectCreateMapTreeLayer = 1;
+
+const int imageScenePositionX = 0;
+const int imageScenePositionY = 0;
+const int imageSceneWidth = 2678;
+const int imageSceneHeight = 2678;
+
+const int soundLoops = -1;
+
+const float vectorForestActivatorAxisX = 1720;
+const float vectorForestActivatorAxisY = -3463;
+
+const float vectorForestActivator2AxisX = 701;
+const float vectorForestActivator2AxisY = -578;
+
+const float vectorForestActivator3AxisX = -579;
+const float vectorForestActivator3AxisY = -1546;
+
+const int gameObjectForestActivatorWigth = 192;
+const int gameObjectForestActivatorHeight = 192;
+const Uint8 gameObjectForestActivatorLayer = 1;
+
+
+
 /**
     @brief Responsible for creating the inputs
     needed to run the game scene that are defined further down.
@@ -28,8 +60,7 @@ void GamePlayScene::OnActivation() {
     CreateRain();
     CreateSnow();
     CreateThunder();
-    CreatePlayerAttack();
-    CreatePlayerHit();
+    CreatePlayerAttack();Scene  CreatePlayerHit();
     CreateForestActivator();
     CreateSnowActivator();
     CreateCentralLights();
@@ -59,18 +90,22 @@ void GamePlayScene::CreateMap() {
 
     //Original resolution is 2048/2048.
     //6144,6144 = 3x.
-    auto map = new GameObject("Map", new Vector(-3500 ,-3800),8034,8034,0);
+    auto map = new GameObject("Map", new Vector(vectorMapTreeAxisX,vectorMapTreeAxisY),
+                              gameObjectCreateMapWigth,gameObjectCreateMapHeight,gameObjectCreateMapMapLayer);
 
     // Renderer the map image.
-    auto mapImage = new Image("assets/mapa2.png", 0, 0, 2678, 2678);
+    auto mapImage = new Image("assets/mapa2.png", imageScenePositionX, 
+                              imageScenePositionY, imageSceneWidth, imageSceneHeight);
     //auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
     auto mapRenderer = new Renderer(map, mapImage);
 
 
-    auto trees = new GameObject("Tree", new Vector(-3500 ,-3800),8034,8034,1);
+    auto trees = new GameObject("Tree", new Vector(vectorMapTreeAxisX ,vectorMapTreeAxisY),
+                                gameObjectCreateMapWigth,gameObjectCreateMapHeight,gameObjectCreateMapTreeLayer);
 
     // Renderer the trees image.
-    auto treesImage = new Image("assets/trees.png", 0, 0, 2678, 2678);
+    auto treesImage = new Image("assets/trees.png", imageScenePositionX, 
+                                imageScenePositionY, imageSceneWidth, imageSceneHeight);
     auto treesRenderer = new Renderer(trees, treesImage);
 
     // Script.
@@ -92,7 +127,7 @@ void GamePlayScene::CreateMap() {
     AudioController::GetInstance()->AddAudio(mainSound);
 
     // Play the audio that was added before.
-    AudioController::GetInstance()->PlayAudio("mainSound", -1);
+    AudioController::GetInstance()->PlayAudio("mainSound", soundLoops);
 
     // Add the map.
     AddGameObject(map);
@@ -104,13 +139,18 @@ void GamePlayScene::CreateMap() {
 
 }
 
+const float vectorScene1AxisX = 0;
+const float vectorScene1AxisY = 0;
+
+
 void GamePlayScene::CreateCutScenes() {
 
-    auto scene1 = new GameObject("SCENE1", new Vector(0,0),1024,800,0);
+    auto scene1 = new GameObject("SCENE1", new Vector(vectorScene1AxisX,vectorScene1AxisY),1024,800,0);
     auto  scene1Script = new CutScene1Script(scene1);
     scene1Script->Activate();
     AddGameObject(scene1);
 }
+
 
 /**
     @brief Responsible for creating three forest-activating objects.
@@ -118,17 +158,23 @@ void GamePlayScene::CreateCutScenes() {
 void  GamePlayScene::CreateForestActivator() {
     //left
     auto forestActivator = new GameObject("FOREST ACTIVATOR",
-                                          new Vector(1720, -3463), 192, 192, 1);
+                                          new Vector(vectorForestActivatorAxisX, vectorForestActivatorAxisY), 
+                                          gameObjectForestActivatorWigth, gameObjectForestActivatorHeight,
+                                          gameObjectForestActivatorLayer);
     auto  forestactivatorScript = new ForestActivatorScript(forestActivator);
     AddGameObject(forestActivator);
     //blue
     auto forestActivator2 = new GameObject("FOREST ACTIVATOR2",
-                                           new Vector(701,-578),192,192,1);
+                                           new Vector(vectorForestActivator2AxisX,vectorForestActivator2AxisY),
+                                           gameObjectForestActivatorWigth, gameObjectForestActivatorHeight,
+                                           gameObjectForestActivatorLayer);
     auto  forestactivatorScript2 = new ForestActivatorScript2(forestActivator2);
     AddGameObject(forestActivator2);
     //central
     auto forestActivator3 = new GameObject("FOREST ACTIVATOR3",
-                                           new Vector(-579,-1546),192,192,1);
+                                           new Vector(vectorForestActivator3AxisX, vectorForestActivator3AxisY),
+                                           gameObjectForestActivatorWigth, gameObjectForestActivatorHeight,
+                                           gameObjectForestActivatorLayer);
     auto  forestactivatorScript3 = new ForestActivatorScript3(forestActivator3);
     AddGameObject(forestActivator3);
 
