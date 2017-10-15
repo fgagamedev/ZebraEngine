@@ -7,6 +7,9 @@
 #include "Customs/PlayButtonScript.hpp"
 #include "Customs/AudioController.hpp"
 
+const int grayTone = 160;
+const int whiteTone = 255;
+
 /**
     @brief Constructor of the class PlayButtonScript.
     @param[in] GameObject *owner - Owns the component.
@@ -46,8 +49,8 @@ void PlayButtonScript::ComponentUpdate() {
 
     // Set PlayButton color depending if mouse is over the button or not
     if (m_interactive_button->IsOver()) {
-        textButton->SetColor(160, 160, 160, 255);
+        textButton->SetColor(grayTone, grayTone, grayTone, whiteTone);
     } else {
-        textButton->SetColor(255, 255, 255, 255);
+        textButton->SetColor(whiteTone, whiteTone, whiteTone, whiteTone);
     }
 }
