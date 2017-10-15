@@ -91,7 +91,7 @@ class CameraSystem{
 
         Timer m_timer;
 
-        std::vector<GameObject*> m_gameObjects;
+        std::vector<GameObject*> m_gameObjectsCameraSystem;
 
         static CameraSystem *m_instance;
 };
