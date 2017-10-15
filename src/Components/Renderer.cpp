@@ -13,6 +13,10 @@
 
 #include <math.h>
 
+const double pi = 3.1415;
+const int fullAngle = 360;
+const int straightAngle = 180;
+
 /**
     @brief Update the images informations on the screen.
 */
@@ -62,11 +66,11 @@ void Renderer::RotateTowards(Vector *point) {
     // Calculate arc tangent in degrees.
     double angles = 0.0;
     angles = atan2(point->m_y - m_position->m_y, point->m_x - m_position->m_x);
-    angles = angles * 180 / 3.1415;
+    angles = angles * straightAngle / pi;
 
     // Keep angles in 0 to 360 range
     if (angles < 0) {
-        angles = 360 - (-angles);
+        angles = fullAngle - (-angles);
     }
 
     Rotate(angles);

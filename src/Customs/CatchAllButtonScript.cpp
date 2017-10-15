@@ -6,6 +6,8 @@
 
 #include "Customs/CatchAllButtonScript.hpp"
 
+const int gameMode = 0x02;
+
 /**
     @brief Constructor of the class CatchAllButtonScript.
     @param[in] GameObject *owner - Owns the component.
@@ -29,11 +31,11 @@ void CatchAllButtonScript::Start() {
 void CatchAllButtonScript::ComponentUpdate() {
     // Select game mode when mouse is clicked
     if (m_interactive_button->IsClicked()) {
-        MenuController::GetInstance()->SelectGamemode(0x02);
+        MenuController::GetInstance()->SelectGamemode(gameMode);
     }
 
     // Change checkbox value comparing the selected game mode
-    if (MenuController::GetInstance()->GetGamemode() & 0x02) {
+    if (MenuController::GetInstance()->GetGamemode() & gameMode) {
         m_checkbox->active = true;
     } else {
         m_checkbox->active = false;
