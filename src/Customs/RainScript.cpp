@@ -33,7 +33,9 @@ void RainScript::CreateAnimations() {
     auto rainImage = new Image("assets/chuva.png",0,0,3410, 256);
     auto rainAnimation= new Animation(GetOwner(),rainImage);
     // Add 10 frames in the rain animation.
-    for (int i = 0; i < 10; i++) {
+    // Number of frames to add in the animation.
+    const int numberNewFrames = 10;
+    for (int i = 0; i < numberNewFrames; i++) {
         rainAnimation->AddFrame(new Frame(i * 341,0, 341, 256));
     }
 
@@ -47,20 +49,20 @@ void RainScript::CreateAnimations() {
 */
 void RainScript::ComponentUpdate() {
     // Check if the animation must be played.
-    if (m_play == 1) {
+    if (m_play == startPlay) {
         // Play the rain animation.
         m_animator->PlayAnimation("rainAnimation");
     }
 
     // Check if the INPUT_R key is pressed and m_play is set to 0.
-    if (m_input->GetKeyDown(INPUT_R) && m_play == 0) {
+    if (m_input->GetKeyDown(INPUT_R) && m_play == stopPlay) {
         // Play the rain sound and set m_play to 1.
         AudioController::GetInstance()->PlayAudio("rainSound", -1);
-        m_play = 1;
+        m_play = startPlay;
     // Check if the INPUT_R key is pressed and m_play is set to 1.
-    } else if (m_input->GetKeyDown(INPUT_R) && m_play == 1) {
+    } else if (m_input->GetKeyDown(INPUT_R) && m_play == startPlay) {
         // Set m_play to 0 and stop all animations playing.
-        m_play = 0;
+        m_play = stopPlay;
         m_animator->StopAllAnimations();
     }
 }
@@ -70,6 +72,8 @@ void RainScript::ComponentUpdate() {
 */
 void RainScript::FixedComponentUpdate() {
     // Set the positions X and Y of the component.
-    m_position->m_x = 0;
-    m_position->m_y = 0;
+    // Coordinate for the position.
+    const int valuePosition = 0;
+    m_position->m_x = valuePosition;
+    m_position->m_y = valuePosition;
 }

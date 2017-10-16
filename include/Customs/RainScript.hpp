@@ -27,7 +27,7 @@ public:
     void FixedComponentUpdate() override;
     void Start() override;
     // Store if the animation must be played.
-    int m_play = 0;
+    int m_play = stopPlay;
 
 protected:
     void ComponentUpdate() override;
@@ -40,6 +40,10 @@ private:
     Animator *m_animator = nullptr;
     // Object that store positions in the game.
     Vector *m_position = nullptr;
+
+    // Set if the play must start or stop.
+    const int startPlay = 1;
+    const int stopPlay = 0;
 };
 
 #endif
