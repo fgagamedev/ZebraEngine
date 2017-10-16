@@ -197,7 +197,7 @@ void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
 /**
     @brief Draw and fill a rectangle in the game.
 */
-void GraphicsSystem::DrawFillRectangle(SDL_Rect* source, int width, int height,
+void GraphicsSystem::DrawFillRectangle(SDL_Rect* source, int /*width*/, int /*height*/,
                                        Uint8 redValue, Uint8 greenValue,
                                        Uint8 blueValue, Uint8 alphaValue) {
     // Set the color used for drawing operations.
