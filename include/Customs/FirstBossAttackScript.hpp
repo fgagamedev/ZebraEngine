@@ -37,7 +37,7 @@ public:
   void Attack();
 
   // Previous Animation Control Variable.
-  bool goneAnimation = false;
+  bool m_goneAnimation = false;
 
   // Boolean variable that stores false or true for boss attack.
   bool attack = false;
@@ -86,7 +86,7 @@ private:
       m_idleAnimation = idleAnimation;
   };
   inline void SetGoneAnimation(bool goneAnimation) {
-      goneAnimation = goneAnimation;
+      m_goneAnimation = goneAnimation;
   };
 
 protected:

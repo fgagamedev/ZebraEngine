@@ -45,7 +45,7 @@ void PlayerAttackScript::CreateAnimations() {
 
     // Renderer the bullet image.
     auto bulletImage = new Image("assets/Sprites/green_bullet.png",0,0,124, 124);
-    auto bulletRenderer = new Renderer(GetOwner(), bulletImage);
+    new Renderer(GetOwner(), bulletImage);
 
 }
 
