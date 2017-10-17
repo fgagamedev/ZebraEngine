@@ -16,9 +16,7 @@ const float vectorMapTreeAxisY = -3800;
 
 const int gameObjectCreateMapWigth = 8034;
 const int gameObjectCreateMapHeight = 8034;
-
 const Uint8 gameObjectCreateMapMapLayer = 0;
-
 const Uint8 gameObjectCreateMapTreeLayer = 1;
 
 const int imageScenePositionX = 0;
@@ -27,6 +25,12 @@ const int imageSceneWidth = 2678;
 const int imageSceneHeight = 2678;
 
 const int soundLoops = -1;
+
+const float vectorScene1AxisX = 0;
+const float vectorScene1AxisY = 0;
+const int gameObjectScene1Wigth = 1024;
+const int gameObjectScene1Height = 800;
+const Uint8 gameObjectScene1Layer = 0;
 
 const float vectorForestActivatorAxisX = 1720;
 const float vectorForestActivatorAxisY = -3463;
@@ -40,6 +44,106 @@ const float vectorForestActivator3AxisY = -1546;
 const int gameObjectForestActivatorWigth = 192;
 const int gameObjectForestActivatorHeight = 192;
 const Uint8 gameObjectForestActivatorLayer = 1;
+
+const float vectorSnowActivatorAxisX = -1044;
+const float vectorSnowActivatorAxisY = 2446;
+const int gameObjectSnowActivatorWigth = 192;
+const int gameObjectSnowActivatorHeight = 192;
+const Uint8 gameObjectSnowActivatorLayer = 1;
+
+// CreateCentralLights
+const float vectorBottomCenterLightAxisX = 424;
+const float vectorBottomCentralLightAxisY = 422;
+
+const float vectorLeftCenterLightAxisX = 309;
+const float vectorLeftCentralLightAxisY = 308;
+
+const float vectorRightCenterLightAxisX = 542;
+const float vectorRightCentralLightAxisY = 308;
+
+const float vectorTopCenterLightAxisX = 424;
+const float vectorTopCentralLightAxisY = 197;
+
+const int gameObjectCenterLightWigth = 192;
+const int gameObjectCenterLightHeight = 192;
+const Uint8 gameObjectCenterLightLayer = 1;
+
+// Create Naked Man
+const int gameObjectNackedManWigth = 96;
+const int gameObjectNackedManHeight = 96;
+const Uint8 gameObjectNackedManLayer = 2;
+
+// First Boss Center Effect
+const float vectorFirstBossEffectAxisX = 0;
+const float vectorFirstBossEffectAxisY = 0;
+const int gameObjectFirstBossEffectWigth = 211.86;
+const int gameObjectFirstBossEffectHeight = 211.86;
+const Uint8 gameObjectFirstBossEffectLayer = 1;
+
+// First Boss
+const float vectorFirstBossAxisX = -3350;
+const float vectorFirstBossAxisY = -1600;
+const int gameObjectFirstBossWigth = 690;
+const int gameObjectFirstBossHeight = 930;
+const Uint8 gameObjectFirstBossLayer = 2;
+
+// First Boss Attack
+const int maxTentacle = 5;
+const float vectorFirstBossAttackAxisX = -4750;
+const float vectorFirstBossAttackAxisY = -1700;
+const int gameObjectFirstBossAttackWigth = 100;
+const int gameObjectFirstBossAttackHeight = 377;
+const Uint8 gameObjectFirstBossAttackLayer = 2;
+
+// First Boss Life Border
+const float vectorFirstBossLifeBorderAxisX = 0;
+const float vectorFirstBossLifeBorderAxisY = 0;
+const int gameObjectFirstBossLifeBorderWigth = 344;
+const int gameObjectFirstBossLifeBorderHeight = 25;
+const Uint8 gameObjectFirstBossLifeBorderLayer = 3;
+
+// First Boss Life
+const float vectorFirstBossLifeAxisX = 0;
+const float vectorFirstBossLifeAxisY = 0;
+const int gameObjectFirstBossLifeWigth = 337;
+const int gameObjectFirstBossLifeHeight = 25;
+const Uint8 gameObjectFirstBossLifeLayer = 2;
+
+// Rectangle Render
+const float vectorFisrtBossRectangleRenderAxisX = 0;
+const float vectorFisrtBossRectangleRenderAxisY = 0;
+const int fisrtBossRectangleRenderWidth = 337;
+const int fisrtBossRectangleRenderHeight = 25;
+
+// Set color rectangle
+const int rectangleRenderRed = 255;
+const int rectangleRenderGreen = 48;
+const int rectangleRenderBlue = 48;
+const int rectangleRenderAlpha = 255;
+
+// Create play attack, bullet name
+const int maxBullet = 11;
+const float vectorBulletNameAxisX = 100;
+const float vectorBulletNameAxisY = 0;
+const int gameObjectBulletNameWigth = 15;
+const int gameObjectBulletNameHeight = 15;
+const Uint8 gameObjectBulletNameLayer = 2;
+
+// Create play attack, bullet counter
+const float vectorBulletCounterAxisX = 0;
+const float vectorBulletCounterAxisY = 0;
+const int gameObjectBulletCounterWigth = 75;
+const int gameObjectBulletCounterHeight = 75;
+const Uint8 gameObjectBulletCounterLayer = 2;
+
+// Create play attack, bullet counter text
+const string bulletCounterMessage = "10";
+const int bulletCounterSize = 150;
+const Uint8 bulletCounterRed = 0;
+const Uint8 bulletCounterGreen = 0;
+const Uint8 bulletCounterBlue = 0;
+const Uint8 bulletCounterAlpha = 0;
+const Uint8 bulletCountermode = 1;
 
 
 
@@ -106,6 +210,7 @@ void GamePlayScene::CreateMap() {
     // Renderer the trees image.
     auto treesImage = new Image("assets/trees.png", imageScenePositionX, 
                                 imageScenePositionY, imageSceneWidth, imageSceneHeight);
+
     auto treesRenderer = new Renderer(trees, treesImage);
 
     // Script.
@@ -139,14 +244,15 @@ void GamePlayScene::CreateMap() {
 
 }
 
-const float vectorScene1AxisX = 0;
-const float vectorScene1AxisY = 0;
-
 
 void GamePlayScene::CreateCutScenes() {
 
-    auto scene1 = new GameObject("SCENE1", new Vector(vectorScene1AxisX,vectorScene1AxisY),1024,800,0);
+    auto scene1 = new GameObject("SCENE1", new Vector(vectorScene1AxisX,vectorScene1AxisY),
+                                 gameObjectScene1Wigth,gameObjectScene1Height,
+                                 gameObjectScene1Layer);
+
     auto  scene1Script = new CutScene1Script(scene1);
+
     scene1Script->Activate();
     AddGameObject(scene1);
 }
@@ -187,7 +293,10 @@ void  GamePlayScene::CreateForestActivator() {
 void GamePlayScene::CreateSnowActivator(){
 
     auto snowActivator = new GameObject("SNOW ACTIVATOR",
-                                        new Vector(-1044,2446),192,192,1);
+                                        new Vector(vectorSnowActivatorAxisX,vectorSnowActivatorAxisY),
+                                        gameObjectSnowActivatorWigth,gameObjectSnowActivatorHeight,
+                                        gameObjectSnowActivatorLayer);
+
     auto  snowactivatorScript = new SnowActivatorScript(snowActivator);
     AddGameObject(snowActivator);
 
@@ -200,35 +309,47 @@ void GamePlayScene::CreateSnowActivator(){
 void GamePlayScene::CreateCentralLights(){
 
     auto bottomCenterLight = new GameObject("CENTRAL LIGHT 1",
-                                       new Vector(424,422),192,192,1);
+                                           new Vector(vectorBottomCenterLightAxisX,vectorBottomCentralLightAxisY),
+                                           gameObjectCenterLightWigth,gameObjectCenterLightHeight,
+                                           gameObjectCenterLightLayer);
+
     auto  bottomCenterLightScript = new CentralLightScript1(bottomCenterLight);
     AddGameObject(bottomCenterLight);
 
     auto leftCenterLight = new GameObject("CENTRAL LIGHT 2",
-                                       new Vector(309,308),192,192,1);
+                                           new Vector(vectorLeftCenterLightAxisX,vectorLeftCentralLightAxisY),
+                                           gameObjectCenterLightWigth, gameObjectCenterLightHeight,
+                                           gameObjectCenterLightLayer);
+
     auto  leftCenterLightScript = new LeftCenterLightScript(leftCenterLight);
     AddGameObject(leftCenterLight);
 
     auto rightCenterLight = new GameObject("CENTRAL LIGHT 2",
-                                       new Vector(542,308),192,192,1);
+                                           new Vector(vectorRightCenterLightAxisX,vectorRightCentralLightAxisY),
+                                           gameObjectCenterLightWigth, gameObjectCenterLightHeight,
+                                           gameObjectCenterLightLayer);
+
     auto  rightCenterLightScript = new CentralLightScript3(rightCenterLight);
     AddGameObject(rightCenterLight);
 
     auto topCenterLight = new GameObject("CENTER LIGHT 4",
-                                       new Vector(424,197),192,192,1);
+                                       new Vector(vectorTopCenterLightAxisX,vectorTopCentralLightAxisY),
+                                       gameObjectCenterLightWigth, gameObjectCenterLightHeight,
+                                       gameObjectCenterLightLayer);
+
     auto  topCenterLightScript = new TopCenterLightScript(topCenterLight);
     AddGameObject(topCenterLight);
-
-
 }
-
 
 void GamePlayScene::CreateNakedMan() {
 
-    int xPos, yPos;
-    xPos = EngineGlobals::screen_width / 2 - 96 / 2;
-    yPos = EngineGlobals::screen_height / 2 - 96 / 2;
-    auto nakedMan = new GameObject("NakedMan", new Vector(xPos,yPos),96 , 96, 2);
+    int xPos = 0;
+    int yPos = 0;
+    xPos = EngineGlobals::screen_width / 2 - gameObjectNackedManWigth / 2;
+    yPos = EngineGlobals::screen_height / 2 - gameObjectNackedManHeight / 2;
+    auto nakedMan = new GameObject("NakedMan", new Vector(xPos,yPos),
+                                    gameObjectNackedManWigth , gameObjectNackedManHeight, 
+                                    gameObjectNackedManLayer);
 
     // Script.
     auto nakedManScript = new NakedManScript(nakedMan);
@@ -251,14 +372,18 @@ void GamePlayScene::CreateNakedMan() {
 void GamePlayScene::CreateFirstBoss() {
     // Boss Inside FX
     auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect",
-                                                 new Vector(0,0),211.86,211.86, 1);
+                                                 new Vector(vectorFirstBossEffectAxisX, vectorFirstBossEffectAxisY),
+                                                 gameObjectFirstBossEffectWigth, gameObjectFirstBossEffectHeight, 
+                                                 gameObjectFirstBossEffectLayer);
+
     auto firstBossCentralEffectScript = new FirstBossCentralEffectScript(FirstBossCentralEffect);
     AddGameObject(FirstBossCentralEffect);
     FirstBossController::GetInstance()->AddInsideBossFx(FirstBossCentralEffect);
     FirstBossController::GetInstance()->DeactivateInsideBossFx();
 
     // Boss.
-    auto firstBoss = new GameObject("FirstBoss", new Vector(-3350,-1600),690,930, 2);
+    auto firstBoss = new GameObject("FirstBoss", new Vector(vectorFirstBossAxisX, vectorFirstBossAxisY),
+                                    gameObjectFirstBossWigth, gameObjectFirstBossHeight, gameObjectFirstBossLayer);
 
     // Tag.
     firstBoss->SetTag("FirstBoss");
@@ -279,11 +404,12 @@ void GamePlayScene::CreateFirstBoss() {
 void GamePlayScene::CreateFirstBossAttack() {
 
     // Create the tentacle of boss attack and the effects.
-    for (int i = 1; i < 5; i++) {
+    for (int i = 1; i < maxTentacle; i++) {
         std::string tentacleName = "FirstBossAttack" + std::to_string(i);
         auto firstBossAttack = new GameObject(tentacleName,
-                                              new Vector(-4750, -1700), 100, 377,
-                                                          2);
+                                              new Vector(vectorFirstBossAttackAxisX, vectorFirstBossAttackAxisY),
+                                               gameObjectFirstBossAttackWigth, gameObjectFirstBossAttackHeight,
+                                               gameObjectFirstBossAttackLayer);
         // Tag.
         firstBossAttack->SetTag("FirstBossAtack");
 
@@ -318,6 +444,7 @@ void GamePlayScene::CreateFirstBossAttack() {
 
     } // for -- Create the tentacle of boss attack and the effects.
 }
+
 /**
     @brief Responsible for creating the first boss life by setting the
     life bar and sending it to the class that creates the game objects.
@@ -326,16 +453,28 @@ void GamePlayScene::CreateFirstBossLife() {
 
     // Life Border.
     auto firstBossLifeBorderSprite = new GameObject("FirstBossBorderLife",
-                                                    new Vector(0, 0),344, 25, 3);
+                                                    new Vector(vectorFirstBossLifeBorderAxisX, 
+                                                    vectorFirstBossLifeBorderAxisY),
+                                                    gameObjectFirstBossLifeBorderWigth, 
+                                                    gameObjectFirstBossLifeBorderHeight,
+                                                    gameObjectFirstBossLifeBorderLayer);
+
     auto firstBossLifeBorderScript = new  FirstBossLifeBorderScript(firstBossLifeBorderSprite);
     AddGameObject(firstBossLifeBorderSprite);
     FirstBossController::GetInstance()->AddLifeBar(firstBossLifeBorderSprite);
 
     // Life.
     auto firstBossLife = new GameObject("FirstBossLife",
-                                        new Vector(0, 0),337, 25, 2);
-    auto lifeRectangle = new RectangleRenderer(firstBossLife, Vector(0, 0), 337, 25);
-    lifeRectangle->SetColor(255, 48, 48, 255);
+                                        new Vector(vectorFirstBossLifeAxisX, vectorFirstBossLifeAxisY),
+                                        gameObjectFirstBossLifeWigth, gameObjectFirstBossLifeHeight,
+                                        gameObjectFirstBossLifeLayer);
+    
+    auto lifeRectangle = new RectangleRenderer(firstBossLife, Vector(vectorFisrtBossRectangleRenderAxisX, 
+                                                vectorFisrtBossRectangleRenderAxisY),
+                                                fisrtBossRectangleRenderWidth, fisrtBossRectangleRenderHeight);
+
+    lifeRectangle->SetColor(rectangleRenderRed, rectangleRenderGreen, rectangleRenderBlue, rectangleRenderAlpha);
+
     auto firstBossLifeScript = new  FirstBossLifeScript(firstBossLife);
     AddGameObject(firstBossLife);
 
@@ -353,9 +492,11 @@ void GamePlayScene::CreateFirstBossLife() {
 void GamePlayScene::CreatePlayerAttack() {
 
     // Creating Bullets
-    for (int i = 1; i < 11; i++) {
+    for (int i = 1; i < maxBullet; i++) {
         std::string bulletName = "Bullet" + std::to_string(i);
-        auto bullet = new GameObject(bulletName, new Vector(100 * i, 0), 15, 15, 2);
+        auto bullet = new GameObject(bulletName, new Vector(vectorBulletNameAxisX * i, vectorBulletNameAxisY),
+                                     gameObjectBulletNameWigth, gameObjectBulletNameHeight, gameObjectBulletNameLayer);
+
         bullet->SetTag("Bullet");
         auto bulletScript = new  PlayerAttackScript(bullet);
         AddGameObject(bullet);
@@ -363,17 +504,21 @@ void GamePlayScene::CreatePlayerAttack() {
         auto bulletSound = new UISound(bullet, "bulletSound",
                                        "assets/Audio/Player/fireball.ogg",
                                         false, false);
+
         AudioController::GetInstance()->AddAudio(bulletSound);
 
         bullet->active = false;
     }
 
     // Bullet Counter
-    auto bulletCounter = new GameObject("Score", new Vector(0, 0), 75 , 75, 2);
+    auto bulletCounter = new GameObject("Score", new Vector(vectorBulletCounterAxisX, vectorBulletCounterAxisY),
+                                        gameObjectBulletCounterWigth , gameObjectBulletCounterHeight, gameObjectBulletCounterLayer);
     bulletCounter->SetTag("BulletCounter");
-    auto bulletText = new UIText(bulletCounter, "10",
+    auto bulletText = new UIText(bulletCounter, bulletCounterMessage,
                                  "assets/Fonts/advanced-pixel-7/advanced_pixel-7.ttf",
-                                  150, 0 , 0, 0, 0, 1);
+                                  bulletCounterSize, bulletCounterRed , bulletCounterGreen, bulletCounterBlue,
+                                  bulletCounterAlpha, bulletCountermode);
+
     auto bulletCounterScript = new BulletCounterScript(bulletCounter);
     AddGameObject(bulletCounter);
 }
