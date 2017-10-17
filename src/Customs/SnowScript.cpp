@@ -7,6 +7,28 @@
 
 #include "Customs/SnowScript.hpp"
 
+// Start snow script, zoom proportion
+const float vectorZoomProportionAxisX = 0;
+const float vectorZoomProportionAxisY = 0;
+
+// Image snow script
+const std::string snowImagePath = "assets/neve.png";
+const int snowImagePositionX = 0;
+const int snowImagePositionY = 0;
+const int snowImageWidth = 6820;
+const int snowImageHeight = 256;
+
+// Create animations
+const int maxSnowFlakes = 20;
+
+// Create animation snow
+const int snowAnimationPositionAxisX = 341;
+const int snowAnimationPositionAxisY = 0;
+const int snowAnimationWigth = 341;
+const int snowAnimationHeight = 256;
+
+const int soundLoops = -1;
+
 /**
     @brief Initializes the script of snow instance.
     @param[in] GameObject *owner - owns the component.
@@ -29,7 +51,7 @@ void SnowScript::Start() {
     // Get the animator.
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
-    GetOwner()->SetZoomProportion(Vector(0,0));
+    GetOwner()->SetZoomProportion(Vector(vectorZoomProportionAxisX, vectorZoomProportionAxisY));
 }
 
 /**
@@ -38,14 +60,16 @@ void SnowScript::Start() {
 void SnowScript::CreateAnimations() {
 
     // Creates the show image.
-    auto snowImage = new Image("assets/neve.png",0,0,6820, 256);
+    auto snowImage = new Image(snowImagePath, snowImagePositionX, snowImagePositionY,
+                               snowImageWidth, snowImageHeight);
 
     // Creates the snow animation.
-    auto snowAnimation= new Animation(GetOwner(),snowImage );
+    auto snowAnimation= new Animation(GetOwner(), snowImage);
 
     // Create the animations by adding the snowflakes in the frames.
-    for (int i = 0; i < 20; i++) {
-        snowAnimation->AddFrame(new Frame(i * 341,0, 341, 256));
+    for (int i = 0; i < maxSnowFlakes; i++) {
+        snowAnimation->AddFrame(new Frame(i * snowAnimationPositionAxisX, snowAnimationPositionAxisY,
+                                 snowAnimationWigth, snowAnimationHeight));
     } // for -- Create the animations snow.
 
     // Creates the animator.
@@ -65,7 +89,7 @@ void SnowScript::ComponentUpdate() {
 
     // Update the play variable and the sound effect.
     if (input->GetKeyDown(INPUT_T) && play == 0) {
-        AudioController::GetInstance()->PlayAudio("snowSound", -1);
+        AudioController::GetInstance()->PlayAudio("snowSound", soundLoops);
         play = 1;
     } else if (input->GetKeyDown(INPUT_T) && play == 1) {
         play = 0;
