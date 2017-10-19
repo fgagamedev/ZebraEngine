@@ -67,7 +67,7 @@ void MapScript::ComponentUpdate() {
 
 void MapScript::FixedComponentUpdate() {
 
-    auto script = (NakedManScript*) SceneManager::GetInstance()
+    auto nakedManScript = (NakedManScript*) SceneManager::GetInstance()
                                                 ->GetCurrentScene()
                                                 ->GetGameObject("NakedMan")
                                                 ->GetComponent("NakedManScript");
@@ -76,14 +76,9 @@ void MapScript::FixedComponentUpdate() {
     If the character's life is lower or equal to 0, the game ends with
     EndScene1.
     */
-    if (script->life <= 0) {
+    if (nakedManScript->life <= 0) {
         SceneManager::GetInstance()->SetCurrentScene("EndScene1");
     }
-
-    auto scriptBossLife = (FirstBossLifeScript*) SceneManager::GetInstance()
-                                                            ->GetCurrentScene()
-                                                            ->GetGameObject("FirstBossLife")
-                                                            ->GetComponent("FirstBossLifeScript");
 
     auto firstBossLifeRenderer = (RectangleRenderer*)SceneManager::GetInstance()
                                                                 ->GetCurrentScene()
@@ -115,40 +110,40 @@ void MapScript::RenderWallsRects() {
 
     for (int i = 0; i < leftWallsAmount; i++) {
         SDL_Rect x = {
-            leftWalls[i].m_x,
-            leftWalls[i].m_y,
-            leftWalls[i].m_w,
-            leftWalls[i].m_h
+            static_cast<int>(leftWalls[i].m_x),
+            static_cast<int>(leftWalls[i].m_y),
+            static_cast<int>(leftWalls[i].m_w),
+            static_cast<int>(leftWalls[i].m_h)
         };
         GraphicsSystem::GetInstance()->DrawFillRectangle(&x, x.w,x.h, 255,0,0,100);
     }
 
     for (int j = 0; j < rightWallsAmount; j++) {
         SDL_Rect x = {
-            rightWalls[j].m_x,
-            rightWalls[j].m_y,
-            rightWalls[j].m_w,
-            rightWalls[j].m_h
+            static_cast<int>(rightWalls[j].m_x),
+            static_cast<int>(rightWalls[j].m_y),
+            static_cast<int>(rightWalls[j].m_w),
+            static_cast<int>(rightWalls[j].m_h)
         };
         GraphicsSystem::GetInstance()->DrawFillRectangle(&x, x.w,x.h, 255,0,0,100);
     }
 
     for (int k = 0; k < upWallsAmount; k++) {
         SDL_Rect x = {
-            upWalls[k].m_x,
-            upWalls[k].m_y,
-            upWalls[k].m_w,
-            upWalls[k].m_h
+            static_cast<int>(upWalls[k].m_x),
+            static_cast<int>(upWalls[k].m_y),
+            static_cast<int>(upWalls[k].m_w),
+            static_cast<int>(upWalls[k].m_h)
         };
         GraphicsSystem::GetInstance()->DrawFillRectangle(&x, x.w,x.h, 255,0,0,100);
     }
 
     for(int l = 0; l < downWallsAmount; l++) {
         SDL_Rect x = {
-            downWalls[l].m_x,
-            downWalls[l].m_y,
-            downWalls[l].m_w,
-            downWalls[l].m_h
+            static_cast<int>(downWalls[l].m_x),
+            static_cast<int>(downWalls[l].m_y),
+            static_cast<int>(downWalls[l].m_w),
+            static_cast<int>(downWalls[l].m_h)
         };
         GraphicsSystem::GetInstance()->DrawFillRectangle(&x, x.w,x.h, 255,0,0,100);
     }
@@ -956,41 +951,41 @@ int MapScript::DetectWallCollision(GameObject* object){
             ((rightWalls[j].m_y + rightWalls[j].m_h) >= object->GetPosition()->m_y))) {
 
             if (j == snowActivatorIndex) {
-                auto script = (SnowActivatorScript*)SceneManager::GetInstance()
+                auto snowActivatorScript = (SnowActivatorScript*)SceneManager::GetInstance()
                                                                 ->GetCurrentScene()
                                                                 ->GetGameObject("SNOW ACTIVATOR")
                                                                 ->GetComponent("SnowActivatorScript");
-                script->Activate();
+                snowActivatorScript->Activate();
                 return 0;
             }
 
             // central
             if (j == forestActivator2Index) {
-                auto script = (ForestActivatorScript2*)SceneManager::GetInstance()
+                auto forestActivatorScript2 = (ForestActivatorScript2*)SceneManager::GetInstance()
                                                                     ->GetCurrentScene()
                                                                     ->GetGameObject("FOREST ACTIVATOR2")
                                                                     ->GetComponent("ForestActivatorScript2");
-                script->Activate();
+                forestActivatorScript2->Activate();
                 return 0;
             }
 
             // left
             if (j == forestActivator3Index) {
-                auto script = (ForestActivatorScript3*)SceneManager::GetInstance()
+                auto forestActivatorScript3 = (ForestActivatorScript3*)SceneManager::GetInstance()
                                                                     ->GetCurrentScene()
                                                                     ->GetGameObject("FOREST ACTIVATOR3")
                                                                     ->GetComponent("ForestActivatorScript3");
-                script->Activate();
+                forestActivatorScript3->Activate();
                 return 0;
             }
 
             // blue
             if (j == forestActivatorIndex) {
-                auto script = (ForestActivatorScript*)SceneManager::GetInstance()
+                auto forestActivatorScript = (ForestActivatorScript*)SceneManager::GetInstance()
                                                                     ->GetCurrentScene()
                                                                     ->GetGameObject("FOREST ACTIVATOR")
                                                                     ->GetComponent("ForestActivatorScript");
-                script->Activate();
+                forestActivatorScript->Activate();
                 return 0;
             }
 
