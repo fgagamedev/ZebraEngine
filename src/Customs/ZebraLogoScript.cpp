@@ -7,6 +7,9 @@
 #include "Customs/ZebraLogoScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+const int width = 341;
+const int height = 256;
+
 /**
     @brief Constructor of the class ZebraLogoScript.
     @param[in] GameObject *owner - Owns the component.
@@ -32,18 +35,20 @@ void ZebraLogoScript::Start() {
 */
 void ZebraLogoScript::CreateAnimations(){
     // Keeps the path, positions x and y, width and height of the Zebra image
-    auto zebraSprite = new Image("assets/introzebra.png", 0, 0, 5115, 512);
+    auto zebraSprite = new Image("assets/introzebra.png", 0, 0,
+                                 width * 15, height * 2);
 
     auto zebraAnimation = new Animation(GetOwner(), zebraSprite);
 
     // Run through 0 to 14 adding frames in different x positions
     for (int i = 0; i < 15; i++) {
-        zebraAnimation->AddFrame(new Frame(i * 341, 0, 341, 256));
+        zebraAnimation->AddFrame(new Frame(i * width, height - height,
+                                           width, height));
     }
 
     // Run through 0 to 14 adding frames in different x positions
     for (int i = 0; i < 15; i++) {
-        zebraAnimation->AddFrame(new Frame(i * 341, 256, 341, 256));
+        zebraAnimation->AddFrame(new Frame(i * width, height, width, height));
     }
     zebraAnimation->SetFramesPerSecond(9);
 
