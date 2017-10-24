@@ -7,6 +7,22 @@
 #include "Customs/CentralLightScript3.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+// Central light script start
+const int gameControllerIndex = 0;
+const float vectorZoomProportionAxisX = 0;
+const float vectorZoomProportionAxisY = 0;
+
+// Create animations
+const int imageLightSpritePositionX = 0;
+const int imageLightSpritePositionY = 0;
+const int imageLightSpriteWidth = 832;
+const int imageLightSpriteHeight = 64;
+
+const int frameLightAnimationPositionX = 0;
+const int frameLightAnimationPositionY = 0;
+const int frameLightAnimationWidth = 64;
+const int frameLightAnimationHeight = 64;
+
 /**
     @brief Constructor for the classe CentralLightScript3.
 */
@@ -29,9 +45,9 @@ void CentralLightScript3::Start() {
     // Get the inputs.
     m_input = InputSystem::GetInstance();
 
-    m_gamecontroller = m_input->GetGameController(0);
+    m_gamecontroller = m_input->GetGameController(gameControllerIndex);
 
-    GetOwner()->SetZoomProportion(Vector(0,0));
+    GetOwner()->SetZoomProportion(Vector(vectorZoomProportionAxisX, vectorZoomProportionAxisY));
 
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
 
@@ -48,9 +64,14 @@ void CentralLightScript3::Start() {
 void CentralLightScript3::CreateAnimations(){
 
     // Create the animation.
-    auto centrallightSprite = new Image("assets/centro3.png", 0, 0,832, 64);
+    auto centrallightSprite = new Image("assets/centro3.png", imageLightSpritePositionX, 
+                                        imageLightSpritePositionY, imageLightSpriteWidth, imageLightSpriteHeight);
+
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
-    centrallightAnimation->AddFrame(new Frame(0, 0, 64, 64));
+
+    centrallightAnimation->AddFrame(new Frame( frameLightAnimationPositionX, 
+                                               frameLightAnimationPositionY, frameLightAnimationWidth, 
+                                               frameLightAnimationHeight));
 
     // Create the animator.
     auto centrallightAnimator = new Animator(GetOwner());
