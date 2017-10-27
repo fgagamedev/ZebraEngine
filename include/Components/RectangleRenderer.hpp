@@ -42,7 +42,7 @@ private:
     int m_red = 0, m_green = 0, m_blue = 255, m_alpha = 255;
 
     // Vector position of the rectangle
-    Vector m_offset;
+    Vector m_offset = Vector(0, 0);
 };
 
 #endif

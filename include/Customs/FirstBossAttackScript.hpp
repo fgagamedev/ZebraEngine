@@ -85,6 +85,7 @@ private:
   inline void SetIdleAnimation(bool idleAnimation) {
       m_idleAnimation = idleAnimation;
   };
+  
   inline void SetGoneAnimation(bool statusGoneAnimation) {
       m_goneAnimation = statusGoneAnimation;
   };

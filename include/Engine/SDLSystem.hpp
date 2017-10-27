@@ -56,17 +56,17 @@ private:
     static SDLSystem *m_instance;
 
     // Game attributes
-    bool m_isRunning;
-    int m_frameRate;
-    int m_frameCounter;
+    bool m_isRunning = false;
+    int m_frameRate = 0;
+    int m_frameCounter = 0;
 
     // Integer types with a width of exactly 32 bits
-    Uint32 m_currentTicks;
-    Uint32 m_lastFrameTicks;
-    Uint32 m_gameEndTicks;
-    Uint32 m_lastFixedUpdate;
-    Uint32 m_currentFix;
-    Uint32 m_lastFix;
+    Uint32 m_currentTicks = 0;
+    Uint32 m_lastFrameTicks = 0;
+    Uint32 m_gameEndTicks = 0;
+    Uint32 m_lastFixedUpdate = 0;
+    Uint32 m_currentFix = 0;
+    Uint32 m_lastFix = 0;
 
     // Constructor and destructor
     SDLSystem();

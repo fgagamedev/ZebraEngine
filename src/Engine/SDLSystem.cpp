@@ -13,6 +13,15 @@
 #include "Customs/EndScene1.hpp"
 #include "Customs/EndScene2.hpp"
 
+const int red = 0;
+const int green = 0;
+const int blue = 0;
+const int alpha = 255;
+const int frequency = 44100;
+const int channels = 2;
+const int chunksize = 2048;
+const int ticksLimit = 1000;
+
 // Static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
 
@@ -76,7 +85,7 @@ void SDLSystem::Run() {
         }
 
         // Clear front buffer.
-        SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(m_renderer, red, green, blue, alpha);
         SDL_RenderClear(m_renderer);
 
         // Draw update changing the back buffer.
@@ -191,7 +200,7 @@ bool SDLSystem::InitMixer() {
     INFO("Initializing Mixer");
 
     // Choose frequency, Uint16 format, channels and chunksize
-    int initialize = Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+    int initialize = Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channels, chunksize);
 
     // Check mixer initialization fail
     if (initialize != 0) {
@@ -275,7 +284,8 @@ bool SDLSystem::CreateRenderer() {
 void SDLSystem::CalculateFramerate() {
     m_currentTicks = SDL_GetTicks();
 
-    if (m_currentTicks - m_lastFrameTicks >= 1000) {
+    // Adjust frame rate based on limit of ticks
+    if (m_currentTicks - m_lastFrameTicks >= ticksLimit) {
         m_frameRate = m_frameCounter;
         m_frameCounter = 0;
         m_lastFrameTicks = m_currentTicks;
@@ -287,27 +297,25 @@ void SDLSystem::CalculateFramerate() {
     @brief Loads necessary game scenes.
 */
 void SDLSystem::LoadCommons() {
-    auto mainScene = new MainScene();
-    auto gameplayScene = new GamePlayScene();
-    auto firstBossScene = new FirstBossScene();
-    auto preMenuScene = new PreMenuScene();
-
+    // Instantiate and add multiple scenes to scene manager.
     auto endScene1 = new EndScene1();
-    auto endScene2 = new EndScene2();
-
     SceneManager::GetInstance()->AddScene(std::make_pair("EndScene1",
                                                          endScene1));
+    auto endScene2 = new EndScene2();
     SceneManager::GetInstance()->AddScene(std::make_pair("EndScene2",
                                                          endScene2));
+    auto preMenuScene = new PreMenuScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("Pre Menu",
                                                          preMenuScene));
+    auto mainScene = new MainScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("Main",
                                                          mainScene));
+    auto gameplayScene = new GamePlayScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay",
                                                          gameplayScene));
+    auto firstBossScene = new FirstBossScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene",
                                                          firstBossScene));
-
 }
 
 /**

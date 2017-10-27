@@ -9,14 +9,17 @@
 
 #include "Customs/MapScript.hpp"
 
+const int initialCameraSpeed = 32;
+
 CameraSystem *CameraSystem::m_instance = nullptr;
 
 /*
     @brief Sets the camera's default speed.
 */
 CameraSystem::CameraSystem() {
-    this->m_cameraSpeed = 32;
+    this->m_cameraSpeed = initialCameraSpeed;
 }
+
 
 /*
     @brief Guides the camera to accompany the character when moving up.
@@ -31,20 +34,20 @@ void CameraSystem::MoveUp(int speed, Scene *scene) {
     } // Check if is diferent of scene.
 
     // Get all scene game objects.
-    m_gameObjects = scene->GetAllGameObjects();
-    if (m_gameObjects.empty()) {
+    m_gameObjectsCameraSystem = scene->GetAllGameObjects();
+    if (m_gameObjectsCameraSystem.empty()) {
         return;
     }
 
     // Move all scene objects.
-    for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++) {
+    for (auto it = m_gameObjectsCameraSystem.begin(); it != m_gameObjectsCameraSystem.end(); it++) {
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x, (*it)->GetPosition()->m_y + speed));
     } // Move scene.
 
     auto mapscript = (MapScript*)SceneManager::GetInstance()
-       ->GetScene("Gameplay")
-       ->GetGameObject("Map")
-       ->GetComponent("MapScript");
+                       ->GetScene("Gameplay")
+                       ->GetGameObject("Map")
+                       ->GetComponent("MapScript");
 
     // Checks if the mapscript variable was instantiated.
     if (mapscript) {
@@ -88,14 +91,14 @@ void CameraSystem::MoveDown(int speed, Scene *scene) {
     }
 
     // Get the scene game objects.
-    m_gameObjects = scene->GetAllGameObjects();
+    m_gameObjectsCameraSystem = scene->GetAllGameObjects();
 
-    if (m_gameObjects.empty()) {
+    if (m_gameObjectsCameraSystem.empty()) {
         return;
     }
 
     // Move all scene objects.
-    for (auto it = m_gameObjects.begin();it!=m_gameObjects.end();it++) {
+    for (auto it = m_gameObjectsCameraSystem.begin();it!=m_gameObjectsCameraSystem.end();it++) {
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x ,(*it)->GetPosition()->m_y - speed));
     }
 
@@ -146,14 +149,14 @@ void CameraSystem::MoveLeft(int speed,Scene *scene) {
     }
 
     // Get the scene game objects.
-    m_gameObjects = scene->GetAllGameObjects();
+    m_gameObjectsCameraSystem = scene->GetAllGameObjects();
 
-    if (m_gameObjects.empty()) {
+    if (m_gameObjectsCameraSystem.empty()) {
         return;
     }
 
     // Move all scene objects.
-    for (auto it = m_gameObjects.begin();it != m_gameObjects.end(); it++) {
+    for (auto it = m_gameObjectsCameraSystem.begin();it != m_gameObjectsCameraSystem.end(); it++) {
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x + speed ,(*it)->GetPosition()->m_y ));
     }
 
@@ -205,14 +208,14 @@ void CameraSystem::MoveRight(int speed, Scene *scene) {
     }
 
     // Get the scene game objects.
-    m_gameObjects = scene->GetAllGameObjects();
+    m_gameObjectsCameraSystem = scene->GetAllGameObjects();
 
-    if (m_gameObjects.empty()) {
+    if (m_gameObjectsCameraSystem.empty()) {
         return;
     }
 
     // Move all scene objects.
-    for (auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++) {
+    for (auto it = m_gameObjectsCameraSystem.begin(); it!=m_gameObjectsCameraSystem.end(); it++) {
         (*it)->SetPosition(Vector((*it)->GetPosition()->m_x - speed ,(*it)->GetPosition()->m_y));
     }
 
@@ -363,10 +366,10 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
     m_beforePositionY = objectToFollow->GetPosition()->m_y;
     this->m_cameraSpeed = zoomSpeed;
 
-    auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->
+    m_gameObjectsCameraSystem = SceneManager::GetInstance()->GetCurrentScene()->
                                                       GetAllGameObjects();
     // Runs from start to finish of the game.
-    for (auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++) {
+    for (auto it = m_gameObjectsCameraSystem.begin(); it!=m_gameObjectsCameraSystem.end(); it++) {
 
         // Checks and updates the zoom ratio.
         if ((*it)->GetName()!="Map") {
@@ -374,8 +377,9 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
                                                             (map->GetWidth()));
             m_proportionY = 100*(((*it)->GetPosition()->m_y + worldCameraY) /
                                                             (map->GetHeight()));
+
             // Updates the zoom ratio in the x (width) and y (height) axes.
-            if ((*it)->GetZoomProportion()->m_x != 0, (*it)->GetZoomProportion()->m_y != 0) {
+            if ((*it)->GetZoomProportion()->m_x != 0 && (*it)->GetZoomProportion()->m_y != 0) {
                 (*it)->SetSize(map->GetWidth() / (*it)->GetZoomProportion()->m_x,
                                                   map->GetHeight()
                                                   / (*it)->GetZoomProportion()->m_y);
@@ -506,10 +510,10 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
 
     this->m_cameraSpeed = zoomSpeed;
 
-    auto m_gameObjects = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
+    m_gameObjectsCameraSystem = SceneManager::GetInstance()->GetCurrentScene()->GetAllGameObjects();
 
     // Runs from start to finish of the game.
-    for (auto it = m_gameObjects.begin(); it!=m_gameObjects.end(); it++) {
+    for (auto it = m_gameObjectsCameraSystem.begin(); it!=m_gameObjectsCameraSystem.end(); it++) {
 
         // Checks and updates the zoom ratio.
         if ((*it)->GetName()!="Map") {

@@ -16,7 +16,7 @@ public:
 
 private:
     // Rectangular area of the frame
-    SDL_Rect sourceRectangle;
+    SDL_Rect sourceRectangle = {0, 0, 0, 0};
 };
 
 #endif // __FRAME__

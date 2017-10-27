@@ -13,8 +13,8 @@
             void Restart();
             float GetTime();
 
-        private:
-            float time;
+    	private:
+    	 	float time = 0.0;
     };
 
 #endif
