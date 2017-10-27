@@ -71,12 +71,12 @@ private:
   bool m_idleAnimation = false;
 
   // Variable of type Timer that defines the gone time.
-  Timer timerGone;
+  Timer m_timerGone;
 
   // Variable of type Time that defines the animation time.
-  Timer timerAnimation;
+  Timer m_timerAnimation;
 
-  Timer timerIdleAnimation;
+  Timer m_timerIdleAnimation;
 
   inline void SetSurgeAnimation(bool surgeAnimation) {
       m_surgeAnimation = surgeAnimation;
@@ -85,8 +85,9 @@ private:
   inline void SetIdleAnimation(bool idleAnimation) {
       m_idleAnimation = idleAnimation;
   };
-  inline void SetGoneAnimation(bool goneAnimation) {
-      m_goneAnimation = goneAnimation;
+  
+  inline void SetGoneAnimation(bool statusGoneAnimation) {
+      m_goneAnimation = statusGoneAnimation;
   };
 
 protected:
