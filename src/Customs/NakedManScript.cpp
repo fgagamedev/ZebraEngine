@@ -27,7 +27,7 @@ const double kPi = 3.1415;
 const int kFullAngle = 360;
 const int kStraightAngle = 180;
 
-const int kSpeed = 0.70710;
+const double kSpeed = 0.70710;
 
 bool NakedManScript::isZooming = false;
 
