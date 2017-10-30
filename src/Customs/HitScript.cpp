@@ -8,6 +8,16 @@
 
 #include "Globals/EngineGlobals.hpp"
 
+const int imagePositionX = 0;
+const int imagePositionY = 0;
+const int imageWidth = 1024;
+const int imageHeight = 1024;
+
+const int framePositionX = 0;
+const int framePositionY = 0;
+const int frameWidth = 1024;
+const int frameHeight = 1024;
+
 /**
     @brief Constructor for the classe HitScript.
 */
@@ -40,11 +50,11 @@ void HitScript::Start() {
 */
 void HitScript::CreateAnimations(){
 
-    auto hitImage = new Image("assets/Sprites/Blood/blood4.png",0,0,1024, 1024);
+    auto hitImage = new Image("assets/Sprites/Blood/blood4.png",imagePositionX, imagePositionY, imageWidth, imageHeight);
 
     auto firstHitAnimation= new Animation(GetOwner(),hitImage);
 
-    firstHitAnimation->AddFrame(new Frame(0,0, 1024, 1024));
+    firstHitAnimation->AddFrame(new Frame(framePositionX, framePositionY, frameWidth, frameHeight));
 
     // animator.
     auto hitAnimator = new Animator(GetOwner());
@@ -83,7 +93,7 @@ void HitScript::ComponentUpdate() {
 
 void HitScript::FixedComponentUpdate() {
 
-  position->m_x=0;
+  position->m_x = 0;
 
-  position->m_y=0;
+  position->m_y = 0;
 }
