@@ -6,6 +6,13 @@
 
 #include "Customs/FirstBossCentralEffectScript.hpp"
 
+const int centralImageheight = 70;
+const int centralImageWidth = 700;
+const int animationPosition = 70;
+const int frameCounter = 10;
+const int bossXPosition = 5.575263158;
+const int bossYPosition = 7.566428571;
+
 /**
     @brief Constructor for the FirstBossCentralEffectScript class.
 */
@@ -25,6 +32,8 @@ void FirstBossCentralEffectScript::Start() {
     m_animator = (Animator *)GetOwner() -> GetComponent("Animator");
     m_input = InputSystem::GetInstance();
     auto map = SceneManager::GetInstance() -> GetScene("Gameplay") -> GetGameObject("Map");
+    
+    // Checks for the map, and sets its properties.
     if (map) {
         GetOwner()->SetZoomProportion(Vector(map -> originalWidth / GetOwner()
                                              -> originalWidth, map
@@ -38,14 +47,15 @@ void FirstBossCentralEffectScript::Start() {
 void FirstBossCentralEffectScript::CreateAnimations() {
 
     // Image Attacks.
-    auto firstBossCentralImage1 = new Image("assets/centroboss11.png", 0, 0,
-                                            700, 70);
+    auto firstBossCentralImage1 = new Image("assets/centroboss11.png", 0, 0, 
+                                            centralImageWidth, centralImageheight);
+
     // Surge Animation.
-    auto firstBossCentralAnimation1 = new Animation(GetOwner(),
-                                                    firstBossCentralImage1);
-    for (int counter = 0; counter < 10; counter++) {
-        firstBossCentralAnimation1->AddFrame(new Frame(counter * 70,0,
-                                                       70, 70));
+    auto firstBossCentralAnimation1 = new Animation(GetOwner(), firstBossCentralImage1);
+
+    for (int counter = 0; counter < frameCounter; counter++) {
+        firstBossCentralAnimation1->AddFrame(new Frame(counter * animationPosition, 0, 
+                                                       animationPosition, centralImageheight));
         // Animator.
         auto firstBossAnimator = new Animator(GetOwner());
         firstBossAnimator->AddAnimation("firstBossCentralAnimation1",
@@ -59,6 +69,8 @@ void FirstBossCentralEffectScript::CreateAnimations() {
 void FirstBossCentralEffectScript::ComponentUpdate() {
     m_boss = SceneManager::GetInstance()->GetCurrentScene()->
     GetGameObject("FirstBoss");
+
+    // Checks the boss state.
     if (m_boss) {
         m_animator->PlayAnimation("firstBossCentralAnimation1");
     }
@@ -73,14 +85,16 @@ void FirstBossCentralEffectScript::FixedComponentUpdate() {
         If the boss is initialized arrow to a new position for it
         according to the player's position.
     */
+
+    // Checks the boss state.
     if (m_boss) {
         m_position->m_x = m_boss->GetPosition()->m_x + m_boss->GetWidth() / 2
                                              - GetOwner()->GetWidth() / 2
                                              + GetOwner()->GetWidth()
-                                             / 5.575263158;
+                                             / bossXPosition;
         m_position->m_y = m_boss->GetPosition()->m_y + m_boss->GetHeight() / 2
                                                 - GetOwner()->GetHeight() / 2
                                                 + GetOwner()->GetHeight()
-                                                / 7.566428571;
+                                                / bossYPosition;
     }
 }

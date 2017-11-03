@@ -1,6 +1,6 @@
 /**
     @file PlayerAttackScript.hpp
-    @brief Class that represents the Script of the player attack 
+    @brief Class that represents the Script of the player attack
     @copyright LGPL. MIT License.
 */
 
@@ -28,18 +28,18 @@ class PlayerAttackScript : public Script {
 
 public:
     PlayerAttackScript(GameObject *owner);
-    std::string GetComponentName() override { return "PlayerAttackScript"; };
+    std::string GetComponentName() override {
+        return "PlayerAttackScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
     void SetShoot(bool shoot);
     void GameCollisionCheck();
 
-protected:
-    void ComponentUpdate() override;
 private:
     void CreateAnimations();
 
-    // Instantiating input system of the keyboard. 
+    // Instantiating input system of the keyboard.
     InputSystem *input = nullptr;
 
     // Instantiating animations.
@@ -49,7 +49,7 @@ private:
     Vector *position = nullptr;
 
     // Instantiating player's collisions.
-    RectangleCollider* playerCollider =  nullptr;
+    RectangleCollider* playerCollider = nullptr;
 
     // Instantiating mouse and player positions.
     Vector mousePosition = Vector(0,0);
@@ -62,16 +62,19 @@ private:
     bool shoot = false;
 
     //State of the script.
-    int play=0;
+    int play = 0;
 
     // Angle of a shot bullet.
-    float angle=0;
+    float angle = 0.0;
 
     // Vector of bullets position.
-    Vector bulletVelocity = Vector(0, 0);
+    Vector bulletVelocity = Vector(0,0);
 
     // Speed of a shot bullet.
-    float bulletSpeed = 30;
+    float bulletSpeed = 30.0;
+
+protected:
+    void ComponentUpdate() override;
 };
 
 #endif

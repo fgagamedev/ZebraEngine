@@ -23,13 +23,11 @@ class GameOverScript : public Script {
 
 public:
     GameOverScript(GameObject *owner);
-    std::string GetComponentName() override { return "SnowScript"; };
+    std::string GetComponentName() override {
+        return "SnowScript";
+    };
     void FixedComponentUpdate() override;
     void Start() override;
-    // char GetMovement() { return movements; };
-
-protected:
-    void ComponentUpdate() override;
 
 private:
     void CreateAnimations();
@@ -44,7 +42,10 @@ private:
     Vector *position = nullptr;
 
     //State of the script.
-    int play=0;
+    int play = 0;
+
+protected:
+    void ComponentUpdate() override;
 };
 
 #endif

@@ -16,7 +16,7 @@ class GameObject;
 class Component {
     public:
         // active attribute
-        bool active = true;
+        bool m_active = true;
 
         // constructor and destructor
         Component(GameObject *owner, ComponentType type);
@@ -41,11 +41,11 @@ class Component {
         virtual void ComponentUpdate(){};
 
         // Component type.
-        ComponentType m_type;
+        ComponentType m_type = C_PHYSICS;
 
     private:
         // GameObject that owns the component.
-        GameObject *m_owner;
+        GameObject *m_owner = nullptr;
 };
 
 #endif // __COMPONENT__

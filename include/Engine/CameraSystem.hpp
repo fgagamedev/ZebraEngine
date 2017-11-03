@@ -49,8 +49,8 @@ class CameraSystem{
         }
 
         void SetCameraSpeed(int speed);
-        void SetAndMovePos_x(float x);
-        void SetAndMovePos_y(float y);
+        void SetAndMovePos_x(float axisX);
+        void SetAndMovePos_y(float axisY);
 
         // Camera shake.
         bool IsShaking() {
@@ -66,22 +66,22 @@ class CameraSystem{
         // Represents the current zoom of the camera.
         float currentZoom = 0;
 
-        float  worldCameraX;
-        float  worldCameraY;
+        float  worldCameraX = 0.0;
+        float  worldCameraY = 0.0;
 
     private:
 
         CameraSystem();
         ~CameraSystem();
 
-        float m_proportionX;
-        float m_proportionY;
-        float m_beforePositionX;
-        float m_beforePositionY;
+        float m_proportionX = 0.0;
+        float m_proportionY = 0.0;
+        float m_beforePositionX = 0.0;
+        float m_beforePositionY = 0.0;
 
-        int m_cameraSpeed;
+        int m_cameraSpeed = 0;
 
-        bool isShaking;
+        bool isShaking = false;
 
         // Represents the state of the camera.
         bool isLocked = true;
@@ -91,7 +91,7 @@ class CameraSystem{
 
         Timer m_timer;
 
-        std::vector<GameObject*> m_gameObjects;
+        std::vector<GameObject*> m_gameObjectsCameraSystem;
 
         static CameraSystem *m_instance;
 };

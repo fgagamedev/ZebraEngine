@@ -13,14 +13,14 @@
     @param[in] message - A string of the message that will be displayed.
     @param[in] fontPath - The path of the font that will be used.
     @param[in] size - The size of the character's sequence of the message.
-    @param[in] r - The red component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] g - The green component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] b - The blue component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] a - The alpha component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] red - The red component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] green - The green component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] blue - The blue component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] alpha - The alpha component of the pixel in the range 0-255, type unsigned 8-bit integer.
     @param[in] mode - The surface mode.
 */
 UIText::UIText(GameObject *owner, string message, string fontPath, int size,
-               Uint8 r, Uint8 g, Uint8 b, Uint8 a, Uint8 mode)
+               Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha, Uint8 mode)
     : Component(owner, C_DRAW) {
     m_message = message;
 
@@ -29,20 +29,22 @@ UIText::UIText(GameObject *owner, string message, string fontPath, int size,
     m_rect.y = owner->GetPosition()->m_y;
     m_rect.w = owner->GetWidth();
     m_rect.h = owner->GetHeight();
-  
-    /* 
+
+    /*
         Sets the font based on a font file and create a font of the specified point size.
         Sets its color and background color.
     */
     m_font = TTF_OpenFont(fontPath.c_str(), size);
+
+    // Check if there is something diferent of the font and if is diferent print a error message.
     if (!m_font)
         SDL_TTF_ERROR("Font could not be loaded");
-    m_color = {r, g, b, a};
-  
+    m_color = {red, green, blue, alpha};
+
     m_background = {0, 0, 0, 0};
-  
+
     m_mode = mode;
-  
+
     OnPropertyChange();
 }
 
@@ -50,11 +52,11 @@ UIText::UIText(GameObject *owner, string message, string fontPath, int size,
 void UIText::Start() {}
 
 /**
-    @brief Sets the UIText offset. Offset is the mean value of a wave, 
+    @brief Sets the UIText offset. Offset is the mean value of a wave,
     that creates periodic effect.
     @param[in] offset vector reference.
 */
-void UIText::SetOffset(Vector &offset){ 
+void UIText::SetOffset(Vector &offset){
     m_offset = offset;
 }
 
@@ -64,8 +66,8 @@ void UIText::SetOffset(Vector &offset){
 */
 void UIText::ComponentUpdate() {
 
-    /* 
-        Sets the x, y, width and height positions of the rectangle component. 
+    /*
+        Sets the x, y, width and height positions of the rectangle component.
         Positions x and y are updated with the offset values.
         The new positions are used with the texture value to render the draw.
     */
@@ -73,7 +75,7 @@ void UIText::ComponentUpdate() {
     m_rect.y = GetOwner()->GetPosition()->m_y + m_offset.m_y;
     m_rect.w = GetOwner()->GetWidth();
     m_rect.h = GetOwner()->GetHeight();
-  
+
     GraphicsSystem::GetInstance()->DrawText(m_texture, &m_rect);
 }
 
@@ -89,7 +91,7 @@ void UIText::FixedComponentUpdate() {}
 */
 void UIText::OnPropertyChange() {
     m_surface = nullptr;
-  
+
     // Sets the surface type based on the mode, to render the appropriated texture.
     switch (m_mode) {
     case 0:
@@ -102,10 +104,10 @@ void UIText::OnPropertyChange() {
         m_surface =
               TTF_RenderText_Shaded(m_font, m_message.c_str(), m_color, m_background);
   }
-  
+
     m_texture = SDL_CreateTextureFromSurface(
         SDLSystem::GetInstance()->GetRenderer(), m_surface);
-  
+
     SDL_FreeSurface(m_surface);
 }
 
@@ -122,13 +124,13 @@ void UIText::SetText(string text) {
 
 /**
     @brief Sets the color of the text.
-    @param[in] r - The red component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] g - The green component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] b - The blue component of the pixel in the range 0-255, type unsigned 8-bit integer.
-    @param[in] a - The alpha component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] red - The red component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] green- The green component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] blue - The blue component of the pixel in the range 0-255, type unsigned 8-bit integer.
+    @param[in] alpha - The alpha component of the pixel in the range 0-255, type unsigned 8-bit integer.
 
 */
-void UIText::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
-    m_color = {r, g, b, a};
+void UIText::SetColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
+    m_color = {red, green, blue, alpha};
     OnPropertyChange();
 }

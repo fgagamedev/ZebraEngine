@@ -22,21 +22,21 @@
             void Start() override;
             int DetectWallCollision(GameObject* object);
 
-            Vector leftWalls[100];
-            Vector leftWallsOriginal[100];
-            int leftWallsAmmount=0;
+            Vector leftWalls[100] = {};
+            Vector leftWallsOriginal[100] = {};
+            int leftWallsAmount=0;
 
-            Vector rightWalls[100];
-            int rightWallsAmmount=0;
-            Vector rightWallsOriginal[100];
+            Vector rightWalls[100] = {};
+            int rightWallsAmount=0;
+            Vector rightWallsOriginal[100] = {};
 
-            Vector upWalls[100];
-            int upWallsAmmount=0;
-            Vector upWallsOriginal[100];
+            Vector upWalls[100] = {};
+            int upWallsAmount=0;
+            Vector upWallsOriginal[100] = {};
 
-            Vector downWalls[100];
-            Vector downWallsOriginal[100];
-            int downWallsAmmount = 0;
+            Vector downWalls[100] = {};
+            Vector downWallsOriginal[100] = {};
+            int downWallsAmount = 0;
             bool activated = true;
 
         protected:
@@ -51,14 +51,14 @@
             NakedManScript *script = nullptr;
             // player inputs
             InputSystem *input = nullptr;
-            char nakedManMovements;
-            int mapSize_x;
-            int mapSize_y;
-            int mapSpeed;
-            float proportion_x;
-            float proportion_y;
+            char nakedManMovements = ' ';
+            int mapSizeHorizontal = 0;
+            int mapSizeVertical = 0;
+            int mapSpeed = 0;
+            float proportionHorizontal = 0.0;
+            float proportionVertical = 0.0;
             // camera shaking
-            bool shake = false;
+            bool cameraShake = false;
             void CreateWalls();
     };
 

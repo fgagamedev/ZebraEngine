@@ -32,22 +32,24 @@ class FirstBossLifeBorderScript : public Script {
         void Start() override;
         void CreateAnimations();
 
-    protected:
-    void ComponentUpdate() override;
+
 
     private:
 
-    // Instantiating vector.
-    Vector *position = nullptr;
+        // Instantiating vector.
+        Vector *position = nullptr;
 
-    // Instantiating input system of the keyboard.
-    InputSystem *input = nullptr;
+        // Instantiating input system of the keyboard.
+        InputSystem *input = nullptr;
 
-    // Instantiating animations.
-    Animator *animator = nullptr;
+        // Instantiating animations.
+        Animator *animator = nullptr;
 
-    // Instantiating the collisions of the first boss.
-    RectangleCollider* firstBossAttackCollider = nullptr;
+        // Instantiating the collisions of the first boss.
+        RectangleCollider* firstBossAttackCollider = nullptr;
+
+    protected:
+        void ComponentUpdate() override;
 };
 
 #endif

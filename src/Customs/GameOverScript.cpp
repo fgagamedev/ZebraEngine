@@ -6,7 +6,12 @@
 
 #include "Customs/GameOverScript.hpp"
 
-GameOverScript::GameOverScript(GameObject *owner) : Script(owner) {}
+const int quantityFrameLine = 22;
+const int quantityFrameColumn = 12;
+
+GameOverScript::GameOverScript(GameObject *owner) : Script(owner) {
+
+}
 
 /**
     @brief that function starts the game over script. Create the animation,
@@ -17,29 +22,29 @@ void GameOverScript::Start() {
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
-    GetOwner()->SetZoomProportion(Vector(0,0));
+    GetOwner()->SetZoomProportion(Vector(0, 0));
 }
 
 /**
     @brief that function creates the animations. Create the snow image, the game
     over animation and animator.
 */
-void GameOverScript::CreateAnimations(){
+void GameOverScript::CreateAnimations() {
     /*
         Creates game-over animation by setting a image and a animation with
-        defined frames positions over it.    
+        defined frames positions over it.
     */
     auto snowImage = new Image("assets/Ending_PARTE_FINAL.png",0,0,4096, 2048);
 
     auto gameOverAnimation= new Animation(GetOwner(),snowImage );
-    for (int i = 0; i < 22; i++) {
-        for (int j = 0 ; j < 12 ; j++) {
-            gameOverAnimation->AddFrame(new Frame(j * 341,i* 256, 341, 256));
-            gameOverAnimation->AddFrame(new Frame(j * 341,i* 256, 341, 256));
+    for (int  line = 0; line < quantityFrameLine; line++) {
+        for (int column = 0 ; column < quantityFrameColumn ; column++) {
+            gameOverAnimation->AddFrame(new Frame(column * 341,line* 256, 341, 256));
+            gameOverAnimation->AddFrame(new Frame(column * 341,line* 256, 341, 256));
         }
     }
 
-    // animator
+    // animator.
     auto gameOverAnimator = new Animator(GetOwner());
     gameOverAnimator->AddAnimation("snowAnimation", gameOverAnimation);
 }
@@ -52,6 +57,7 @@ void GameOverScript::ComponentUpdate() {
         Updates the game-over component and sets the state of played audios.
     */
     animator->PlayAnimation("snowAnimation");
+    // Check for the player and its animator and input state.
     if (play==1) {
         animator->PlayAnimation("snowAnimation");
     }
@@ -74,7 +80,7 @@ void GameOverScript::ComponentUpdate() {
 */
 void GameOverScript::FixedComponentUpdate() {
     // Check the components positions, and end them by setting it to zero.
-    position->m_x=0;
-    position->m_y=0;
+    position->m_x = 0;
+    position->m_y = 0;
 
 }

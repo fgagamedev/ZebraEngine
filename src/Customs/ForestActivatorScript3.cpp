@@ -7,8 +7,23 @@
 #include "Globals/EngineGlobals.hpp"
 
 #include "Customs/ForestActivatorScript3.hpp"
-#include "Customs/CentralLightScript4.hpp"
+#include "Customs/TopCenterLightScript.hpp"
 #include "Customs/MapScript.hpp"
+
+const int imageActivatorPositionX = 0;
+const int imageActivatorPositionY = 0;
+const int imageActivatorWidth = 832;
+const int imageActivatorHeight = 64;
+
+const int frameActivatorPositionX = 64;
+const int frameActivatorPositionY = 0;
+const int frameActivatorWidth = 64;
+const int frameActivatorHeight = 64;
+
+const int maxCounter = 13;
+
+const int framesPerSecond = 9;
+
 
 // Constructor
 ForestActivatorScript3::ForestActivatorScript3(GameObject *owner) : Script(owner) {
@@ -38,10 +53,12 @@ void ForestActivatorScript3::Start() {
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
                                             GetGameObject("Map");
+
+    // verify if the map variable is instanced and set zoom.
     if (map) {
-        GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()
+        GetOwner()->SetZoomProportion(Vector(map->originalWidth / GetOwner()
                                              ->originalWidth,
-                                             map->originalHeight/GetOwner()
+                                             map->originalHeight / GetOwner()
                                              ->originalHeight));
     }
 }
@@ -52,22 +69,31 @@ void ForestActivatorScript3::Start() {
 void ForestActivatorScript3::CreateAnimations() {
 
     // Creates the image.
-    auto forestactivatorSprite = new Image("assets/forestactivator.png", 0, 0,
-                                           832, 64);
+    auto forestactivatorSprite = new Image("assets/forestactivator.png", 
+                                           imageActivatorPositionX, imageActivatorPositionY,
+                                           imageActivatorWidth, imageActivatorHeight);
 
     // Creates and get the animation.
     auto forestactivatorAnimation = new Animation(GetOwner(),
                                                   forestactivatorSprite);
-    for (int i = 0; i < 13; i++) {
-        forestactivatorAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
+
+
+    for (int counter = 0; counter < maxCounter; counter++) {
+        forestactivatorAnimation->AddFrame(new Frame(counter * frameActivatorPositionX, 
+                                                     frameActivatorPositionY, 
+                                                     frameActivatorWidth, 
+                                                     frameActivatorHeight));
     }
 
     auto forestactivatorAnimation2 = new Animation(GetOwner(),
                                                    forestactivatorSprite);
-    forestactivatorAnimation2->AddFrame(new Frame(12 * 64, 0, 64, 64));
+    forestactivatorAnimation2->AddFrame(new Frame(12 * frameActivatorPositionX, 
+                                                     frameActivatorPositionY, 
+                                                     frameActivatorWidth, 
+                                                     frameActivatorHeight));
 
     auto forestactivatorAnimator = new Animator(GetOwner());
-    forestactivatorAnimation->SetFramesPerSecond(9);
+    forestactivatorAnimation->SetFramesPerSecond(framesPerSecond);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION",
                                           forestactivatorAnimation);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2",
@@ -80,21 +106,25 @@ void ForestActivatorScript3::CreateAnimations() {
 */
 void ForestActivatorScript3::ComponentUpdate() {
 
+    // Checks if the game animation has not started and starts the animator actives and runned.
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate == 0
         && runned == false) {
+
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate = 1;
         runned = true;
     }
 
+    // Checks if the game is runned and the animator has not started.
     if (runned && !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");
     }
 
+    // Checks if the game is runned and initialize the script 4
     if (runned) {
-        auto script = (CentralLightScript4*)SceneManager::GetInstance()
+        auto script = (TopCenterLightScript*)SceneManager::GetInstance()
                        ->GetCurrentScene()->GetGameObject("CENTRAL LIGHT 4")
-                       ->GetComponent("CentralLightScript4");
+                       ->GetComponent("TopCenterLightScript");
 
         script->Activate();
 
@@ -104,7 +134,6 @@ void ForestActivatorScript3::ComponentUpdate() {
         map->downWalls[48].m_y = 0;
         map->downWalls[48].m_w = 0;
         map->downWalls[48].m_h = 0;
-        // map->downWallsAmmount-=1;
         map->downWallsOriginal[48].m_x = 0;
         map->downWallsOriginal[48].m_y = 0;
         map->downWallsOriginal[48].m_w = 0;

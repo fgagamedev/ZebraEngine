@@ -23,27 +23,26 @@
 
 
 class MainScene : public Scene {
-public:
-    MainScene();
-    virtual void OnActivation() override;
-    virtual void OnDeactivation() override;
-    virtual void OnShown() override;
-    virtual void OnHidden() override;
-  
-private:
-    void CreateAnimation();
-    void CreateLogo();
-    void CreatePlayButton();
-    void CreateQuitButton();    
-    void CreateMusic();
-    //void CreateBackground();
-    //void CreateGamemodes();
-    
-    //Middle position of width.
-    int m_width_middle;
+    public:
+        MainScene();
+        virtual void OnActivation() override;
+        virtual void OnDeactivation() override;
+        virtual void OnShown() override;
+        virtual void OnHidden() override;
 
-    //Middle position of height.
-    int m_height_middle;
+    private:
+        void CreateAnimation();
+        void CreateLogo();
+        void CreatePlayButton();
+        void CreateQuitButton();
+        void CreateMusic();
+        
+
+        //Middle position of width.
+        int m_widthMiddle = 0;
+
+        //Middle position of height.
+        int m_heightMiddle = 0;
 };
 
 #endif

@@ -25,7 +25,7 @@ public:
     void FixedComponentUpdate() override;
     void Start() override;
     void Activate() {
-        active = true;
+        m_active = true;
     }
 
 private:

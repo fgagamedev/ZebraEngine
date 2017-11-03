@@ -20,15 +20,17 @@
 using namespace std;
 
 class UIText : public Component {
+    
 public:
-    UIText(GameObject *owner, string message, string fontPath, int size, Uint8 r,
-         Uint8 g, Uint8 b, Uint8 a, Uint8 mode);
-    string GetComponentName() override { return "UIText"; };
+    UIText(GameObject *owner, string message, string fontPath, int size, Uint8 red,
+         Uint8 green, Uint8 blue, Uint8 alpha, Uint8 mode);
+    string GetComponentName() override {
+        return "UIText"; };
     void Start() override;
     void FixedComponentUpdate() override;
     void ComponentUpdate() override;
     void SetText(string text);
-    void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+    void SetColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
     void SetOffset(Vector &offset);
 
 private:
@@ -49,8 +51,8 @@ private:
     TTF_Font *m_font = nullptr;
 
     // Represents colors.
-    SDL_Color m_color;
-    SDL_Color m_background;
+    SDL_Color m_color = {0, 0, 0, 0};
+    SDL_Color m_background = {0, 0, 0, 0};
 
     // An driver-specific representation of pixel data.
     SDL_Texture *m_texture = nullptr;

@@ -8,6 +8,10 @@
     @copyright LGPL. MIT License.
 */
 
+const int animationFrames = 12;
+const int framesPerSecond = 9;
+const int imagePlacing = 64;
+
 // Constructor
 ForestActivatorScript::ForestActivatorScript(GameObject *owner) : Script(owner) {}
 
@@ -23,6 +27,7 @@ void ForestActivatorScript::Start() {
     gamecontroller = input->GetGameController(0);
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    // If map is showing, sets the map's vision configs.
     if (map) {
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,
                                              map->originalHeight/GetOwner()->originalHeight));
@@ -33,18 +38,21 @@ void ForestActivatorScript::Start() {
     @brief Creates animations.
 */
 void ForestActivatorScript::CreateAnimations() {
-
-    auto forestactivatorSprite = new Image("assets/forestactivator.png", 0, 0, 832, 64);
-    auto forestactivatorAnimation = new Animation(GetOwner(), forestactivatorSprite);
-    for (int i = 0; i < 13; i++) {
-        forestactivatorAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
+    // Sets the animations' image and its frames.
+    auto forestactivatorSprite = new Image("assets/forestactivator.png",
+                                            0, 0, 832, 64);
+    auto forestactivatorAnimation = new Animation(GetOwner(),
+                                                    forestactivatorSprite);
+    for (int i = 0; i <= animationFrames; i++) {
+        forestactivatorAnimation->AddFrame(new Frame(i * imagePlacing, 0, imagePlacing, imagePlacing));
     }
 
     auto forestactivatorAnimation2 = new Animation(GetOwner(), forestactivatorSprite);
-    forestactivatorAnimation2->AddFrame(new Frame(12 * 64, 0, 64, 64));
+    forestactivatorAnimation2->AddFrame(new Frame(animationFrames * imagePlacing, 0, imagePlacing, imagePlacing));
 
+    // Sets forest animations conditions.
     auto forestactivatorAnimator = new Animator(GetOwner());
-    forestactivatorAnimation->SetFramesPerSecond(9);
+    forestactivatorAnimation->SetFramesPerSecond(framesPerSecond);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION", forestactivatorAnimation);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2", forestactivatorAnimation2);
 }
@@ -53,17 +61,25 @@ void ForestActivatorScript::CreateAnimations() {
     @brief Updates the animations components.
 */
 void ForestActivatorScript::ComponentUpdate() {
-    // Starts animator
+    /*
+    The animation is not playing, activate equals 0, and it has not runned,
+    runs the animation.
+    */
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate == 0 && runned == false) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate = 1;
         runned = true;
     }
 
+    /*
+    If the forest animation has already ran and the first animation hasn't
+    played, runs the second animation.
+    */
     if (runned && !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");
     }
 
+    // If the animations have already ran activates the CentralLightScript3.
     if (runned) {
         auto script = (CentralLightScript3*)SceneManager::GetInstance()
                                         ->GetCurrentScene()

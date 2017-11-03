@@ -29,7 +29,7 @@ public:
 
 private:
     // Set the Play button as a UIButton
-    UIButton *m_uiButton = nullptr;
+    UIButton *m_interactive_button = nullptr;
 };
 
 #endif

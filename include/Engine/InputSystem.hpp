@@ -51,15 +51,16 @@ private:
     // Keyboard states
     const Uint8 *m_states;
     Uint8 *m_oldStates;
-    int m_statesSize;
+    int m_statesSize = 0;
 
     // Mouse states
     Uint32 m_mouseStates = 0;
     Uint32 m_oldMouseStates = 0;
-    int m_mouseX, m_mouseY;
+    int m_mouseHorizontal = 0;
+    int m_mouseVertical = 0;
 
     // Game controllers
-    std::vector<GameController *> m_gameControllers;
+    std::vector<GameController *> m_gameControllers = {};
 };
 
 #endif // __INPUT_SYSTEM__

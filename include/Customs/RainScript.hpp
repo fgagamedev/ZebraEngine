@@ -27,7 +27,7 @@ public:
     void FixedComponentUpdate() override;
     void Start() override;
     // Store if the animation must be played.
-    int play = 0;
+    int m_play = stopPlay;
 
 protected:
     void ComponentUpdate() override;
@@ -35,11 +35,15 @@ protected:
 private:
     void CreateAnimations();
     // Object for inputs in the rain script.
-    InputSystem *input = nullptr;
+    InputSystem *m_input = nullptr;
     // Animator for the rain script.
-    Animator *animator = nullptr;
+    Animator *m_animator = nullptr;
     // Object that store positions in the game.
-    Vector *position = nullptr;
+    Vector *m_position = nullptr;
+
+    // Set if the play must start or stop.
+    const int startPlay = 1;
+    const int stopPlay = 0;
 };
 
 #endif

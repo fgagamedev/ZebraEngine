@@ -39,9 +39,9 @@
 #include "Customs/ForestActivatorScript2.hpp"
 #include "Customs/ForestActivatorScript3.hpp"
 #include "Customs/CentralLightScript1.hpp"
-#include "Customs/CentralLightScript2.hpp"
+#include "Customs/LeftCenterLightScript.hpp"
 #include "Customs/CentralLightScript3.hpp"
-#include "Customs/CentralLightScript4.hpp"
+#include "Customs/TopCenterLightScript.hpp"
 
 
 class GamePlayScene : public Scene {

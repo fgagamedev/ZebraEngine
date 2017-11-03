@@ -5,7 +5,7 @@
 */
 #include "Customs/SnowActivatorScript.hpp"
 #include "Globals/EngineGlobals.hpp"
-#include "Customs/CentralLightScript2.hpp"
+#include "Customs/LeftCenterLightScript.hpp"
 #include "Customs/MapScript.hpp"
 
 /**
@@ -21,18 +21,21 @@ void SnowActivatorScript::Start() {
     CreateAnimations();
 
     // Get the position and the animator of the snow.
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
 
     // Get the inputs.
-    input = InputSystem::GetInstance();
-    gameController = input->GetGameController(0);
+    m_input = InputSystem::GetInstance();
+    // Index of the controller.
+    const int gameControllerIndex = 0;
+    m_gameController = m_input->GetGameController(gameControllerIndex);
 
     // Set the default zoom for the snow.
     GetOwner()->SetZoomProportion(Vector(0,0));
 
     // Get the map.
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    // Check if the map was retrieved sucessfully.
     if (map) {
         // Set the zoom for the snow.
         GetOwner()->SetZoomProportion(Vector(
@@ -50,7 +53,10 @@ void SnowActivatorScript::CreateAnimations() {
                                          0, 0,832, 64);
     auto snowActivatorAnimation = new Animation(GetOwner(),
                                                 snowActivatorSprite);
-    for (int i = 0; i < 13; i++) {
+    // Number of new frames added to the animation.
+    const int numberOfNewFrames = 13;
+    // Add 13 new frames to the snow activator animation.
+    for (int i = 0; i < numberOfNewFrames; i++) {
         snowActivatorAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
     }
 
@@ -61,8 +67,10 @@ void SnowActivatorScript::CreateAnimations() {
 
     // Creates a new animator for the snow activator.
     auto snowActivatorAnimator = new Animator(GetOwner());
+    // Number of frames to show in each second
+    const int numberOfFrames = 9;
     // Setup the animator.
-    snowActivatorAnimation->SetFramesPerSecond(9);
+    snowActivatorAnimation->SetFramesPerSecond(numberOfFrames);
     snowActivatorAnimator->AddAnimation("SNOW ACTIVATOR ANIMATION",
                                         snowActivatorAnimation);
     snowActivatorAnimator->AddAnimation("SNOW ACTIVATOR ANIMATION2",
@@ -74,35 +82,52 @@ void SnowActivatorScript::CreateAnimations() {
     @brief Updates the component's status/ changes during the game.
 */
 void SnowActivatorScript::ComponentUpdate() {
-    if (!animator->IsPlaying("SNOW ACTIVATOR ANIMATION") && activate == 0
-                             && runned == false) {
+    // Play the SNOW ACTIVATOR ANIMATION if isn't playing and has been activated.
+    if (!m_animator->IsPlaying("SNOW ACTIVATOR ANIMATION")
+                    && m_activateAnimation == animationActivated
+                    && m_runnedAnimation == false) {
         // Play the animation.
-        animator->PlayAnimation("SNOW ACTIVATOR ANIMATION");
-        activate = 1;
-        runned = true;
+        m_animator->PlayAnimation("SNOW ACTIVATOR ANIMATION");
+        m_activateAnimation = animationEnded;
+        m_runnedAnimation = true;
     }
 
-    if (runned && !animator->IsPlaying("SNOW ACTIVATOR ANIMATION")) {
+    /*
+    Play the SNOW ACTIVATOR ANIMATION2 if the SNOW ACTIVATOR ANIMATION has
+    ended playing.
+    */
+    if (m_runnedAnimation
+                    && !m_animator->IsPlaying("SNOW ACTIVATOR ANIMATION")) {
         // Play the animation.
-        animator->PlayAnimation("SNOW ACTIVATOR ANIMATION2");
+        m_animator->PlayAnimation("SNOW ACTIVATOR ANIMATION2");
     }
-    if (runned) {
-        // Get the CentralLightScript2 of the current scene.
-        auto script = (CentralLightScript2*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("CENTRAL LIGHT 2")->GetComponent("CentralLightScript2");
+    // Check if the snow animation has run.
+    if (m_runnedAnimation) {
+        // Get the LeftCenterLightScript of the current scene.
+        auto script = (LeftCenterLightScript*)SceneManager::GetInstance()->
+                            GetCurrentScene()->
+                            GetGameObject("CENTRAL LIGHT 2")->
+                            GetComponent("LeftCenterLightScript");
         script->Activate();
         // Get the MapScript of the current scene.
-        auto map = (MapScript*)SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Map")->GetComponent("MapScript");
+        auto map = (MapScript*)SceneManager::GetInstance()->
+                            GetCurrentScene()->GetGameObject("Map")->
+                            GetComponent("MapScript");
+        // Index of the wall changed
+        const int indexOfWall = 49;
+        // New value in the walls parameters.
+        const float defaultWallsMetricsValues = 0;
         // Set the dimensions of the right walls of the map.
-        map->rightWalls[49].m_x = 0;
-        map->rightWalls[49].m_y = 0;
-        map->rightWalls[49].m_w = 0;
-        map->rightWalls[49].m_h = 0;
+        map->rightWalls[indexOfWall].m_x = defaultWallsMetricsValues;
+        map->rightWalls[indexOfWall].m_y = defaultWallsMetricsValues;
+        map->rightWalls[indexOfWall].m_w = defaultWallsMetricsValues;
+        map->rightWalls[indexOfWall].m_h = defaultWallsMetricsValues;
 
         // Set the dimensions of the original's right walls of the map.
-        map->rightWallsOriginal[49].m_x = 0;
-        map->rightWallsOriginal[49].m_y = 0;
-        map->rightWallsOriginal[49].m_w = 0;
-        map->rightWallsOriginal[49].m_h = 0;
+        map->rightWallsOriginal[indexOfWall].m_x = defaultWallsMetricsValues;
+        map->rightWallsOriginal[indexOfWall].m_y = defaultWallsMetricsValues;
+        map->rightWallsOriginal[indexOfWall].m_w = defaultWallsMetricsValues;
+        map->rightWallsOriginal[indexOfWall].m_h = defaultWallsMetricsValues;
     }
 
 }

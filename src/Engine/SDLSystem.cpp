@@ -13,6 +13,15 @@
 #include "Customs/EndScene1.hpp"
 #include "Customs/EndScene2.hpp"
 
+const int red = 0;
+const int green = 0;
+const int blue = 0;
+const int alpha = 255;
+const int frequency = 44100;
+const int channels = 2;
+const int chunksize = 2048;
+const int ticksLimit = 1000;
+
 // Static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
 
@@ -39,12 +48,16 @@ SDLSystem::~SDLSystem() {
 void SDLSystem::Init() {
     INFO("SDLSystem::Init() initialized");
 
-    // Check initialization fails.
+    // Check initialization fails
     if (!(InitSDL() && InitIMG() && InitMixer() && InitTTF())) {
+        // Display error message
         ERROR("SDLSystem::Init() failed.");
             return;
     }
+
+    // Check creation fails
     if (!(CreateWindow() && CreateRenderer())) {
+        // Display error message
         ERROR("SDLSystem::Init() failed.");
             return;
     }
@@ -65,13 +78,14 @@ void SDLSystem::Run() {
 
     SceneManager::GetInstance()->Start();
 
+    // Update utilities while SDL System is running
     while (m_isRunning) {
         if (!FixFramerate()) {
             continue;
         }
 
         // Clear front buffer.
-        SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(m_renderer, red, green, blue, alpha);
         SDL_RenderClear(m_renderer);
 
         // Draw update changing the back buffer.
@@ -96,7 +110,7 @@ void SDLSystem::Run() {
 
         // Getting back buffer and sending to front buffer.
         SDL_RenderPresent(m_renderer);
-  }
+    } // while -- Update utilities while SDL System is nunning
 
     INFO("Ending Run().");
 }
@@ -126,10 +140,11 @@ void SDLSystem::Shutdown() {
     @return The singleton instance of the game
 */
 SDLSystem *SDLSystem::GetInstance() {
-    // Create if there is no instance.
+    // Create if there is no instance
     if (!m_instance) {
         m_instance = new SDLSystem();
     }
+
     return m_instance;
 }
 
@@ -141,11 +156,12 @@ bool SDLSystem::InitSDL() {
     INFO("Initializing SDL");
 
     // Receives 0 if the chosen flags are initialized.
-    int init = SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO |
+    int initialize = SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO |
                SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS);
 
-    // Check initialization fail.
-    if (init != 0) {
+    // Check initialization fail
+    if (initialize != 0) {
+        // Display error message
         SDL_ERROR("SDLSystem::InitSDL() failed.");
         return false;
     }
@@ -163,10 +179,11 @@ bool SDLSystem::InitIMG() {
 
     // Receives 0 if the chosen flags are initialized
     int flags = IMG_INIT_PNG | IMG_INIT_JPG;
-    int init = IMG_Init(flags);
+    int initialize = IMG_Init(flags);
 
     // Check image initialization fail
-    if ((init & flags) != flags) {
+    if ((initialize & flags) != flags) {
+        // Display error message
         SDL_IMG_ERROR("SDLSystem::InitIMG() failed.");
         return false;
     }
@@ -183,10 +200,11 @@ bool SDLSystem::InitMixer() {
     INFO("Initializing Mixer");
 
     // Choose frequency, Uint16 format, channels and chunksize
-    int init = Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+    int initialize = Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channels, chunksize);
 
-    // Check mixer initialization fail.
-    if (init != 0) {
+    // Check mixer initialization fail
+    if (initialize != 0) {
+        // Display error message
         SDL_MIX_ERROR("SDLSystem::InitMixer() failed.");
         return false;
     }
@@ -202,10 +220,11 @@ bool SDLSystem::InitMixer() {
 bool SDLSystem::InitTTF() {
     INFO("Initializing TTF");
 
-    int init = TTF_Init();
+    int initialize = TTF_Init();
 
-    // Check TTF initialization fail.
-    if (init != 0) {
+    // Check TTF initialization fail
+    if (initialize != 0) {
+        // Display error message
         SDL_TTF_ERROR("SDLSystem::InitTTF() failed.");
         return false;
     }
@@ -226,8 +245,9 @@ bool SDLSystem::CreateWindow() {
                                 EngineGlobals::screen_width,
                                 EngineGlobals::screen_height, SDL_WINDOW_SHOWN);
 
-    // Check window creation fail.
+    // Check window creation fail
     if (!m_window) {
+        // Display error message
         SDL_ERROR("SDLSystem::CreateWindow() failed.");
         return false;
     }
@@ -246,8 +266,9 @@ bool SDLSystem::CreateRenderer() {
     // Use hardware acceleration with first rendering driver that support it.
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 
-    // Check renderer creation fail.
+    // Check renderer creation fail
     if (!m_renderer) {
+        // Display error message
         SDL_ERROR("SDLSystem::CreateRenderer() failed.");
         return false;
     }
@@ -263,8 +284,9 @@ bool SDLSystem::CreateRenderer() {
 void SDLSystem::CalculateFramerate() {
     m_currentTicks = SDL_GetTicks();
 
-    if (m_currentTicks - m_lastFrameTicks >= 1000) {
-        m_framerate = m_frameCounter;
+    // Adjust frame rate based on limit of ticks
+    if (m_currentTicks - m_lastFrameTicks >= ticksLimit) {
+        m_frameRate = m_frameCounter;
         m_frameCounter = 0;
         m_lastFrameTicks = m_currentTicks;
     }
@@ -275,27 +297,25 @@ void SDLSystem::CalculateFramerate() {
     @brief Loads necessary game scenes.
 */
 void SDLSystem::LoadCommons() {
-    auto mainScene = new MainScene();
-    auto gameplayScene = new GamePlayScene();
-    auto firstBossScene = new FirstBossScene();
-    auto preMenuScene = new PreMenuScene();
-
+    // Instantiate and add multiple scenes to scene manager.
     auto endScene1 = new EndScene1();
-    auto endScene2 = new EndScene2();
-
     SceneManager::GetInstance()->AddScene(std::make_pair("EndScene1",
                                                          endScene1));
+    auto endScene2 = new EndScene2();
     SceneManager::GetInstance()->AddScene(std::make_pair("EndScene2",
                                                          endScene2));
+    auto preMenuScene = new PreMenuScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("Pre Menu",
                                                          preMenuScene));
+    auto mainScene = new MainScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("Main",
                                                          mainScene));
+    auto gameplayScene = new GamePlayScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay",
                                                          gameplayScene));
+    auto firstBossScene = new FirstBossScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene",
                                                          firstBossScene));
-
 }
 
 /**
@@ -305,9 +325,10 @@ void SDLSystem::LoadCommons() {
 */
 bool SDLSystem::FixFramerate() {
     m_currentFix = SDL_GetTicks();
-    float interval = m_currentFix - m_lastFix;
+    float fixInterval = m_currentFix - m_lastFix;
 
-    if (interval < update_rate_interval){
+    // Compare intervals to check the need to fix frame rate
+    if (fixInterval < update_rate_interval){
         return false;
     }
 

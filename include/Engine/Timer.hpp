@@ -6,15 +6,15 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
-class Timer{
-	public:
-		Timer();
-		void Update(float detectiontTime);
-		void Restart();
-		float GetTime();
+    class Timer{
+        public:
+            Timer();
+            void Update(float detectiontTime);
+            void Restart();
+            float GetTime();
 
-	private:
-	 	float time;
-};
+    	private:
+    	 	float time = 0.0;
+    };
 
 #endif

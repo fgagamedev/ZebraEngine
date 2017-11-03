@@ -32,8 +32,8 @@ public:
 
 private:
     void CreateAnimation();
-    int m_width_middle;
-    int m_height_middle;
+    int m_widthMiddle = 0;
+    int m_heightMiddle = 0;
     void CreateQuitButton();
 };
 

@@ -5,9 +5,16 @@
 #include "Components/UIText.hpp"
 #include "Customs/PlayerScript.hpp"
 
+const int vectorposition = 120;
+const int vectorXposition = -500;
+const int vectorYposition = -500;
+const int currentTentacleNumber = 4;
+
+
 FirstBossController *FirstBossController::m_instance = nullptr;
 
 FirstBossController *FirstBossController::GetInstance() {
+    // Checks if the first boss controller was instantiated, if not, instantiates it.
     if (!m_instance){
         m_instance = new FirstBossController();
     }
@@ -53,22 +60,26 @@ void FirstBossController::AddMap(GameObject *map) {
 void FirstBossController::PositPlayer(Vector newPosition) {
     m_player->SetPosition(newPosition);
 }
+
 void FirstBossController::PositMap(Vector newPosition) {
     m_map->SetPosition(newPosition);
 }
+
 void FirstBossController::PositBoss() {
-    m_boss->SetPosition(Vector(m_wPos, m_hPos));
+    m_boss->SetPosition(Vector(m_widthPosition, m_heightPosition));
 }
+
 void FirstBossController::PositAllTentacles() {
+    // Runs through the game objects vector, and sets each tentacle position.
     for (auto tentacle : m_tentacles) {
         Vector *position = m_player->GetPosition();
-        tentacle->SetPosition(Vector(-500, -500));
+        tentacle->SetPosition(Vector(vectorXposition, vectorYposition));
   }
 }
 
 void FirstBossController::PositTentacle(int index) {
     Vector *position = m_player->GetPosition();
-    m_tentacles[index]->SetPosition(Vector(position->m_x ,position->m_y -120));
+    m_tentacles[index]->SetPosition(Vector(position->m_x ,position->m_y - vectorposition));
 }
 
 // Methods of active.
@@ -89,7 +100,8 @@ void FirstBossController::ActivateInsideBossFx() {
 }
 
 void FirstBossController::ActivateTentacles() {
-   for (auto tentacle : m_tentacles) {
+    // Runs through the game objects vector, and clears each tentacle collision.
+    for (auto tentacle : m_tentacles) {
       tentacle->ClearCollisions();
       tentacle->active = true;
    }
@@ -130,12 +142,14 @@ void FirstBossController::DeactivateCreditsAnimation() {
 }
 
 void FirstBossController::DeactivateTentacles() {
+    // Deactivates each tentacle collision.
     for (auto tentacle : m_tentacles) {
         tentacle->active = false;
     }
 }
 
 void FirstBossController::DeactivateLifeBars() {
+    // Deactivates each lifebar position.
     for (auto lifeBar : m_lifeBars) {
         lifeBar->active = false;
     }
@@ -158,31 +172,34 @@ std::pair <int, int> FirstBossController::GetRandomPosition() {
 
 void FirstBossController::FirstAttackSurge() {
     cout << "FirstAttack" << endl;
-    if (m_actualTentacle == 4) {
-      m_actualTentacle = 1;
+    // Compares the number of the current tentacle.
+    if (m_currentTentacle == currentTentacleNumber) {
+        m_currentTentacle = 1;
     }
 
-    m_tentacles[m_actualTentacle]->ClearCollisions();
-    ActivateTentacle(m_actualTentacle);
-    PositTentacle(m_actualTentacle);
+    m_tentacles[m_currentTentacle]->ClearCollisions();
+    ActivateTentacle(m_currentTentacle);
+    PositTentacle(m_currentTentacle);
 
     auto firstBossAttackScript = (FirstBossAttackScript*)
-                                m_tentacles[m_actualTentacle]->
+                                m_tentacles[m_currentTentacle]->
                                 GetComponent("FirstBossAttackScript");
     //Perform attack.
     firstBossAttackScript->attack = true;
 
     //Shake camera.
-    firstBossAttackScript->shake = true;
-    m_actualTentacle++;
+
+    firstBossAttackScript->cameraShake = true;
+    m_currentTentacle++;
 }
 
 void FirstBossController::FirstAttackGone() {
+    // Sets each animation of the script.
     for (auto tentacle : m_tentacles) {
         auto firstBossAttackScript = (FirstBossAttackScript*)tentacle->
                                   GetComponent("FirstBossAttackScript");
         //Perform gone animation
-        firstBossAttackScript   -> goneAnimation = true;
+        firstBossAttackScript   -> m_goneAnimation = true;
   }
 }
 

@@ -1,41 +1,55 @@
+/**
+    @file HitScripr.hpp
+    @brief Responsible for organizing sound effects script.
+    @copyright MIT License.
+*/
+
 #ifndef __HIT_SCRIPT__
 #define __HIT_SCRIPT__
 
 #include "Components/Animator.hpp"
-#include "Engine/InputSystem.hpp"
 #include "Components/Script.hpp"
+
+#include "Engine/InputSystem.hpp"
 #include "Engine/GameObject.hpp"
 #include "Engine/SceneManager.hpp"
 #include "Engine/CameraSystem.hpp"
 #include "Engine/Timer.hpp"
+
 #include "Math/Vector.hpp"
 
 #include <string>
 
 class HitScript : public Script {
 
-public:
-  HitScript(GameObject *owner);
-  std::string GetComponentName() override { return "HitScript"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
+    public:
+
+        HitScript(GameObject *owner);
+
+        std::string GetComponentName() override {
+            return "HitScript";
+        };
+
+        void FixedComponentUpdate() override;
+
+        void Start() override;
 
 
-  bool hit = false;
-  int hitLevel = 0;
+    private:
 
+        bool m_hit = false;
 
-protected:
-  void ComponentUpdate() override;
-private:
-  void CreateAnimations();
-  InputSystem *input = nullptr;
-  Animator *animator = nullptr;
-  Vector *position = nullptr;
+        int m_hitLevel = 0;
 
-  Timer timerRecover;
+        void CreateAnimations();
 
+        InputSystem *m_input = nullptr;
 
+        Animator *m_animator = nullptr;
+
+        Vector *m_position = nullptr;
+
+        void ComponentUpdate() override;
 
 };
 

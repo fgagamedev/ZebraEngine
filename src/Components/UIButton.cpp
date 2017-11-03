@@ -26,9 +26,10 @@ void UIButton::Start() {
     @brief Checking if mouse is over button and clicked.
     @return Boolean.
 */
-bool UIButton::IsClicked() {    
-    if (IsOver() && InputSystem::GetInstance()->GetMouseButtonDown(M_INPUT_LEFT))
+bool UIButton::IsClicked() {
+    if (IsOver() && InputSystem::GetInstance()->GetMouseButtonDown(M_INPUT_LEFT)) {
         return true;
+    }
     return false;
   }
 
@@ -51,7 +52,8 @@ bool UIButton::IsOver() {
     if (mousePos.first > m_position->m_x &&
         mousePos.first < m_position->m_x + rendererWidth &&
         mousePos.second > m_position->m_y &&
-        mousePos.second < m_position->m_y + rendererHeight)
+        mousePos.second < m_position->m_y + rendererHeight) {
             return true;
+        }
     return false;
 }

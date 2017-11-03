@@ -28,27 +28,27 @@ public:
     void FixedComponentUpdate() override;
     void Start() override;
     void Activate() {
-        active = true;
+        m_active = true;
     }
 
 protected:
     void ComponentUpdate() override;
 
 private:
-    // Store if the script is active.
-    bool active = false;
+    // Store if the script is m_active.
+    bool m_active = false;
     // Store the time.
-    Timer time;
+    Timer m_time;
     void CreateAnimations();
     // Object for inputs in the central light script 1.
-    InputSystem *input = nullptr;
+    InputSystem *m_input = nullptr;
     // Object for the inputs from the game controller.
-    GameController* gamecontroller = nullptr;
+    GameController* m_gameController = nullptr;
     // Animator for the central light script 1.
-    Animator *animator = nullptr;
+    Animator *m_animator = nullptr;
     // Object that store positions in the game.
-    Vector *position = nullptr;
+    Vector *m_position = nullptr;
     // Not used attribute.
-    int play = 0;
+    int m_play = 0;
 };
 #endif

@@ -86,11 +86,11 @@ private:
   std::vector<GameObject *> m_lifeBars;
 
   //Positions
-  int m_wPos;
-  int m_hPos;
+  int m_widthPosition = 0;
+  int m_heightPosition = 0;
 
   // Variable count of tentacles released by boss attack.
-  int m_actualTentacle = 1;
+  int m_currentTentacle = 1;
   std::pair <int, int> randomPosition;
 
 };

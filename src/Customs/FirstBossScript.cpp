@@ -18,16 +18,20 @@ void FirstBossScript::Start() {
     CreateAnimations();
 
     // Positions the boss in the game's map.
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
-    input = InputSystem::GetInstance();
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_input = InputSystem::GetInstance();
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
 
+    /*
+    If map isn't null, set the zoom proportion and create a collider for the
+    first boss.
+    */
     if (map) {
         GetOwner()->SetZoomProportion(Vector(
                             map->originalWidth/GetOwner()->originalWidth,
                             map->originalHeight/GetOwner()->originalHeight));
-        firstBossCollider = new RectangleCollider(GetOwner(),
+        m_firstBossCollider = new RectangleCollider(GetOwner(),
                                                   Vector(0, 0),
                                                   GetOwner()->GetWidth(),
                                                   GetOwner()->GetHeight(), 0);
@@ -45,31 +49,48 @@ void FirstBossScript::CreateAnimations() {
 
     // Create animations for the first boss.
     auto firstBossAnimation = new Animation(GetOwner(),firstBossImage);
-    for (int i = 0; i < 8; i++) {
+    // Add 8 frames, changing the X position of the frame in crescent order.
+    const int numberNewFramesBossAnimation = 8;
+    for (int i = 0; i < numberNewFramesBossAnimation; i++) {
         firstBossAnimation->AddFrame(new Frame(i * 237,0, 237, 406));
     }
 
     auto firstBossJumpAnimation = new Animation(GetOwner(),firstBossJumpImage);
-    for (int i = 0; i < 5; i++) {
+
+    // Possible number of new frames created.
+    const int fiveNewFrames = 5;
+    const int eightNewFrames = 8;
+    // Add 5 frames, changing the X position of the frame in crescent order.
+    for (int i = 0; i < fiveNewFrames; i++) {
         firstBossJumpAnimation->AddFrame(new Frame(i * 236,0, 236, 406));
         firstBossJumpAnimation->AddFrame(new Frame(i * 236,0, 236, 406));
 
-        if (i == 4) {
-            for (int animMulti = 0 ; i < 8 ; i++) {
-                firstBossJumpAnimation->AddFrame(new Frame(i * 236,0, 236, 406));
-                firstBossJumpAnimation->AddFrame(new Frame(i * 236,0, 236, 406));
+        // Index of the last frame of the jump animation.
+        const int lastFrameJumpAnimation = 4;
+        // For the last iteration of the for, add more frames.
+        if (i == lastFrameJumpAnimation) {
+            /*
+            Add 4 frames, changing the X position of the frame in crescent
+            order.
+            */
+            for (int animMulti = 0; i < eightNewFrames; i++) {
+                firstBossJumpAnimation->AddFrame(new Frame(i * 236,0, 236,
+                                                           406));
+                firstBossJumpAnimation->AddFrame(new Frame(i * 236,0, 236,
+                                                           406));
             }
         }
     }
 
-    // Second Attack.
+    // Create a animation for the fall of the first boss.
     auto firstBossFallAnimation = new Animation(GetOwner(),firstBossJumpImage);
-    for (int i = 5; i > 0; i--) {
+    // Add 5 frames, changing the X position of the frame in decrescent order.
+    for (int i = fiveNewFrames; i > 0; i--) {
         firstBossFallAnimation->AddFrame(new Frame(i * 236, 0, 236, 406));
         firstBossFallAnimation->AddFrame(new Frame(i * 236, 0, 236, 406));
     }
 
-    // Creates the animator for the first boss.
+    // Creates the m_animator for the first boss.
     auto firstBossAnimator = new Animator(GetOwner());
     firstBossAnimator->AddAnimation("firstBossAnimation", firstBossAnimation);
     firstBossAnimator->AddAnimation("firstBossJumpAnimation",
@@ -82,15 +103,22 @@ void FirstBossScript::CreateAnimations() {
     @brief Decides what happens to the boss depending on the game's circumstances.
 */
 void FirstBossScript::ComponentUpdate() {
-
-    if (!SecondAttack && !SecondAttackFall) {
+    /*
+    Play the firstBossAnimation animation if isn't the second attack and the
+    second attack doesn't fall.
+    */
+    if (!m_secondAttack && !m_secondAttackFall) {
         //Idle animation
-        animator->PlayAnimation("firstBossAnimation");
+        m_animator->PlayAnimation("firstBossAnimation");
     }
 
-    if (input->GetKeyPressed(INPUT_N)) {
-        SecondAttack = true;
-        animator->PlayAnimation("firstBossJumpAnimation");
+    /*
+    If the INPUT_N key get pressed, start the second attack and play the
+    firstBossJumpAnimation animation.
+    */
+    if (m_input->GetKeyPressed(INPUT_N)) {
+        m_secondAttack = true;
+        m_animator->PlayAnimation("firstBossJumpAnimation");
     }
 }
 
@@ -98,32 +126,38 @@ void FirstBossScript::ComponentUpdate() {
     @brief Handles with the boss behavior depending on which attack is being shot.
 */
 void FirstBossScript::FixedComponentUpdate() {
-    if (FirstAttack) {
-        timerFirstAttackCooldown.Update(EngineGlobals::fixed_update_interval);
+    // If is the first attack, update the timer of the first attack cooldown.
+    if (m_firstAttack) {
+        m_timerFirstAttackCooldown.Update(EngineGlobals::fixed_update_interval);
     }
 
-    if (goneFirstAttack) {
-        timerFirstAttackGone.Update(EngineGlobals::fixed_update_interval);
+    // If the first attack has gone, update the timer of the first attack gone.
+    if (m_goneFirstAttack) {
+        m_timerFirstAttackGone.Update(EngineGlobals::fixed_update_interval);
     }
 
-    if (SecondAttack) {
-        timerSecondAttack.Update(EngineGlobals::fixed_update_interval);
+    // If is the second attack, update the timer of the second attack.
+    if (m_secondAttack) {
+        m_timerSecondAttack.Update(EngineGlobals::fixed_update_interval);
     }
 
-    if (SecondAttackFall) {
-        timerSecondAttackFall.Update(EngineGlobals::fixed_update_interval);
+    // If is the second attack fall, update the timer of the second attack fall.
+    if (m_secondAttackFall) {
+        m_timerSecondAttackFall.Update(EngineGlobals::fixed_update_interval);
     }
 
-    timerAttackCooldown.Update(EngineGlobals::fixed_update_interval);
+    // Update the timer of the cooldown of the attacks.
+    m_timerAttackCooldown.Update(EngineGlobals::fixed_update_interval);
 
     Attack();
 
-    if (shake) {
+    // If shake is true, shake the camera of the game.
+    if (m_cameraShake) {
         // CameraShake(intensity, duration in seconds)
         CameraSystem::GetInstance()->CameraShake(8,1,
                                 SceneManager::GetInstance()->GetCurrentScene());
         if (!CameraSystem::GetInstance()->IsShaking()) {
-            shake = false;
+            m_cameraShake = false;
         }
     }
 }
@@ -133,78 +167,118 @@ void FirstBossScript::FixedComponentUpdate() {
     happen, etc.
 */
 void FirstBossScript::Attack() {
+    // Check if the game object is active to start the attack.
     if (GetOwner()->active) {
-        // Rand first attack or second attack
-        if (timerAttackCooldown.GetTime() >= 9*1000) {
+        // Cooldown time between all attacks.
+        const int maxTimeAttackCooldown = 9000;
+        // If the cooldown has end, do a new attack.
+        if (m_timerAttackCooldown.GetTime() >= maxTimeAttackCooldown) {
             // Choose a new number
-            randNum = rand() % 2;
-            timerAttackCooldown.Restart();
-            cout << randNum << endl;
+            m_randomNumber = rand() % 2;
+            m_timerAttackCooldown.Restart();
+            cout << m_randomNumber << endl;
         }
 
-        if (randNum == 0 && SecondAttackFall == false) {
-            SecondAttack = true;
-            animator->PlayAnimation("firstBossJumpAnimation");
+        // Default number for the second attack.
+        const int secondAttackNumber = 0;
+        /*
+        Play the first boss's jump animation if is the second attack and it
+        doesn't has fall.
+        */
+        if (m_randomNumber == secondAttackNumber
+                        && m_secondAttackFall == false) {
+            m_secondAttack = true;
+            m_animator->PlayAnimation("firstBossJumpAnimation");
         }
 
-        if (randNum == 1) {
-            FirstAttack = true;
-            // First Attack
-            if (timerFirstAttackCooldown.GetTime() >= 2*1000
-                    && firstAttackCounter < 3) {
+        // Default number for the first attack.
+        const int firstAttackNumber = 1;
+        // Check if the current attack is the first.
+        if (m_randomNumber == firstAttackNumber) {
+            m_firstAttack = true;
+
+            // Max number of first attacks before new actions.
+            const int maxFirstAttackCounter = 3;
+            // Cooldown time for the first attack.
+            const int maxTimeFirstAttackCooldown = 2000;
+            /*
+            Check if the first attack isn't in the cooldown and hasn't been
+            used more than 3 times.
+            */
+            if (m_timerFirstAttackCooldown.GetTime() >= maxTimeFirstAttackCooldown
+                    && m_firstAttackCounter < maxFirstAttackCounter) {
                 FirstBossController::GetInstance()->FirstAttackSurge();
-                timerFirstAttackCooldown.Restart();
-                firstAttackCounter++;
+                // Restart the timer for the first attack and add to the counter.
+                m_timerFirstAttackCooldown.Restart();
+                m_firstAttackCounter++;
                 // Delay for next sord
             }
-            if (firstAttackCounter == 3) {
+            // If is the fourth first attack, set the first attack as gone.
+            if (m_firstAttackCounter == maxFirstAttackCounter) {
                 // Activate timer to gone tentacle
-                goneFirstAttack = true;
+                m_goneFirstAttack = true;
             }
 
-            // Wait 6 seconds to make attack gone
-            if (timerFirstAttackGone.GetTime() >= 2*1000) {
+            // Wait 2 seconds to make attack gone
+            if (m_timerFirstAttackGone.GetTime() >= maxTimeFirstAttackCooldown) {
                 FirstBossController::GetInstance()->FirstAttackGone();
 
-                firstAttackCounter = 0;
-                goneFirstAttack = false;
-                timerFirstAttackGone.Restart();
-                timerFirstAttackCooldown.Restart();
-                randNum = -1;
+                // Reset the first attack attributes.
+                m_firstAttackCounter = 0;
+                m_goneFirstAttack = false;
+                m_timerFirstAttackGone.Restart();
+                m_timerFirstAttackCooldown.Restart();
+                m_randomNumber = defaultRandomNumber;
             }
         }
 
-        if ((timerSecondAttack.GetTime() >= 0.5*1000) && SecondAttack) {
+        // Max time for the second attack.
+        const int maxTimeSecondAttack = 500;
+        // Check if the second attack time has ended.
+        if ((m_timerSecondAttack.GetTime() >= maxTimeSecondAttack)
+                    && m_secondAttack) {
+            // Check if the boss position is over the lower limit.
             if (GetOwner()->GetPosition()->m_y > -1900) {
                 Vector *newPosition = GetOwner()->GetPosition();
 
                 newPosition->m_y = newPosition->m_y - 90;
                 GetOwner()->SetPosition(*newPosition);
             } else {
-                SecondAttack = false;
-                SecondAttackFall = true;
-                timerSecondAttack.Restart();
+                m_secondAttack = false;
+                m_secondAttackFall = true;
+                m_timerSecondAttack.Restart();
             }
         }
 
-        if (timerSecondAttackFall.GetTime() >= 2*1000 && SecondAttackFall) {
+        // Time before the second attack fall.
+        const int timeSecondAttackFall = 2000;
+        // Check if it is time to end the fall of the second attack.
+        if (m_timerSecondAttackFall.GetTime() >= timeSecondAttackFall
+                    && m_secondAttackFall) {
             // Get player Position
-            player = SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
-            playerPosition.m_x = player->GetPosition()->m_x - 160;
-            playerPosition.m_y = player->GetPosition()->m_y - 450;
+            m_player = SceneManager::GetInstance()->GetCurrentScene()->
+                        GetGameObject("NakedMan");
+            m_playerPosition.m_x = m_player->GetPosition()->m_x - 160;
+            m_playerPosition.m_y = m_player->GetPosition()->m_y - 450;
             cout << "flag" << endl;
 
-            std::cout << playerPosition.m_x << "  " << playerPosition.m_y << std::endl;
+            std::cout << m_playerPosition.m_x << "  " << m_playerPosition.m_y << std::endl;
 
-            GetOwner()->m_position->m_x = playerPosition.m_x;
-            if (GetOwner()->m_position->m_y < playerPosition.m_y) {
+            // Set the horizontal position of the boss's fall.
+            GetOwner()->m_position->m_x = m_playerPosition.m_x;
+            /*
+            Check the vertical position of the boss's fall and change it
+            depending of the player's position besides play the fall animation.
+            */
+            if (GetOwner()->m_position->m_y < m_playerPosition.m_y) {
                 GetOwner()->m_position->m_y += 90;
-                shake = true;
-                animator->PlayAnimation("firstBossFallAnimation");
+                m_cameraShake = true;
+                m_animator->PlayAnimation("firstBossFallAnimation");
+            // Don't fall and don't shake the camera.
             } else {
-                SecondAttackFall = false;
-                shake = false;
-                randNum = -1;
+                m_secondAttackFall = false;
+                m_cameraShake = false;
+                m_randomNumber = defaultRandomNumber;
             }
         }
     }

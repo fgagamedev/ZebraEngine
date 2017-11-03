@@ -21,7 +21,7 @@ CreditsScript::CreditsScript(GameObject *owner) : Script(owner) {
 */
 void CreditsScript::Start() {
     position = GetOwner()->GetPosition();
-    GetOwner()->SetZoomProportion(Vector(0,0));
+    GetOwner()->SetZoomProportion(Vector(0, 0));
 }
 
 /**

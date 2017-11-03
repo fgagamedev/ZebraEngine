@@ -18,11 +18,13 @@ void UnbLogoScript::Start() {
     // Creates the logo animations.
     CreateAnimations();
     // Get the position and the animator of the logo
-    position = GetOwner()->GetPosition();
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_position = GetOwner()->GetPosition();
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
     // Get the inputs.
-    input = InputSystem::GetInstance();
-    gameController = input->GetGameController(0);
+    m_input = InputSystem::GetInstance();
+    // Index of the controller.
+    const int gameControllerIndex = 0;
+    m_gameController = m_input->GetGameController(gameControllerIndex);
     // Set the zoom of the logo.
     GetOwner()->SetZoomProportion(Vector(0,0));
 
@@ -35,18 +37,26 @@ void UnbLogoScript::CreateAnimations() {
     // Set the animation of the logo.
     auto unb_LogoSprite = new Image("assets/introunb.png", 0, 0, 5115, 512);
     auto unbAnimation = new Animation(GetOwner(), unb_LogoSprite);
-    for (int i = 0; i < 15; i++) {
-        // Change frames in the animation.
+
+    // Number of frames to add in the animation.
+    const int numberNewFrames = 15;
+    // Add 15 frames to the animation.
+    for (int i = 0; i < numberNewFrames; i++) {
+        // Change the horizontal position of the frames in the animation.
         unbAnimation->AddFrame(new Frame(i * 341, 0, 341, 256));
     }
-    for (int i = 0; i < 15; i++) {
-        // Change frames in the animation.
+
+    // Add 15 frames to the animation.
+    for (int i = 0; i < numberNewFrames; i++) {
+        // Change the horizontal position of the frames in the animation.
         unbAnimation->AddFrame(new Frame(i * 341, 256, 341, 256));
     }
 
     // Set the animator of the logo.
     auto unbAnimator = new Animator(GetOwner());
-    unbAnimation->SetFramesPerSecond(9);
+    // Number of frames to add per second.
+    const int numberFramesPerSecond = 9;
+    unbAnimation->SetFramesPerSecond(numberFramesPerSecond);
     unbAnimator->AddAnimation("UNB ANIMATION", unbAnimation);
 }
 
@@ -54,13 +64,17 @@ void UnbLogoScript::CreateAnimations() {
     @brief Handles with changes on the component.
 */
 void UnbLogoScript::ComponentUpdate() {
-    if (gameController) {
-        if (gameController->GetButtonDown(GC_INPUT_X)) {
+    // Check if the player is using a game controller.
+    if (m_gameController) {
+        // Check if the button GC_INPUT_X of the controller has been pressed.
+        if (m_gameController->GetButtonDown(GC_INPUT_X)) {
             // Change the scene during the logo presentation.
             SceneManager::GetInstance()->SetCurrentScene("Main");
         }
     }
-    if (input->GetKeyPressed(INPUT_RETURN)) {
+
+    // Check if the key INPUT_RETURN of the keyboard has been pressed.
+    if (m_input->GetKeyPressed(INPUT_RETURN)) {
         // Change the scene during the logo presentation.
         SceneManager::GetInstance()->SetCurrentScene("Main");
     }
@@ -72,11 +86,16 @@ void UnbLogoScript::ComponentUpdate() {
     after 100 seconds.
 */
 void UnbLogoScript::FixedComponentUpdate() {
-    time.Update(1);
+    // Time to be added to the timer.
+    const float addedTime = 1;
+    m_time.Update(addedTime);
 
-    animator->PlayAnimation("UNB ANIMATION");
+    m_animator->PlayAnimation("UNB ANIMATION");
 
-    if (time.GetTime()>=100) {
-        animator->StopAllAnimations();
+    // Time before stop all animations.
+    const float timeLimit = 100;
+    // Stop all the animations if the time is bigger than 100 miliseconds.
+    if (m_time.GetTime() >= timeLimit) {
+        m_animator->StopAllAnimations();
     }
 }
