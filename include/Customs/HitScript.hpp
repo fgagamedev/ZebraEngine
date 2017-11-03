@@ -22,37 +22,34 @@
 
 class HitScript : public Script {
 
-public:
+    public:
 
-    HitScript(GameObject *owner);
+        HitScript(GameObject *owner);
 
-    std::string GetComponentName() override {
-        return "HitScript";
-    };
+        std::string GetComponentName() override {
+            return "HitScript";
+        };
 
-    void FixedComponentUpdate() override;
+        void FixedComponentUpdate() override;
 
-    void Start() override;
+        void Start() override;
 
-    bool hit = false;
 
-    int hitLevel = 0;
+    private:
 
-private:
+        bool m_hit = false;
 
-    void CreateAnimations();
+        int m_hitLevel = 0;
 
-    InputSystem *input = nullptr;
+        void CreateAnimations();
 
-    Animator *animator = nullptr;
+        InputSystem *m_input = nullptr;
 
-    Vector *position = nullptr;
+        Animator *m_animator = nullptr;
 
-    Timer timerRecover;
+        Vector *m_position = nullptr;
 
-protected:
-
-    void ComponentUpdate() override;
+        void ComponentUpdate() override;
 
 };
 

@@ -34,12 +34,12 @@ void HitScript::Start() {
     CreateAnimations();
 
 
-    position = GetOwner()->GetPosition();
+    m_position = GetOwner()->GetPosition();
 
-    animator = (Animator *)GetOwner()->GetComponent("Animator");
+    m_animator = (Animator *)GetOwner()->GetComponent("Animator");
 
     // Get the inputs.
-    input = InputSystem::GetInstance();
+    m_input = InputSystem::GetInstance();
 
     GetOwner()->SetZoomProportion(Vector(0,0));
 
@@ -67,10 +67,10 @@ void HitScript::CreateAnimations(){
 */
 void HitScript::ComponentUpdate() {
 
-    if(hit){
-        switch(hitLevel){
+    if(m_hit){
+        switch(m_hitLevel){
             case 0: //No hit
-                hit = false;
+                m_hit = false;
                 break;
             case 1://Hit 1          
                 break;
@@ -83,8 +83,8 @@ void HitScript::ComponentUpdate() {
         //nothing to do.
     }
 
-    if(input->GetKeyDown(INPUT_I)){
-        hit = true;
+    if(m_input->GetKeyDown(INPUT_I)){
+        m_hit = true;
     } else {
         // nothing to do.
     }
@@ -93,7 +93,7 @@ void HitScript::ComponentUpdate() {
 
 void HitScript::FixedComponentUpdate() {
 
-  position->m_x = 0;
+  m_position->m_x = 0;
 
-  position->m_y = 0;
+  m_position->m_y = 0;
 }
